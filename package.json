@@ -37,7 +37,14 @@
       "allowToChangeInstallationDirectory": true
     },
     "mac": {
-      "target": ["zip"],
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
       "category": "public.app-category.finance"
     }
   }
