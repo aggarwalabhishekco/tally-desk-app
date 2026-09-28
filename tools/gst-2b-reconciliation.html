@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSTR-2B vs Books Reconciliation | Aggarwal Abhishek & Co.</title>
+    <meta name="description" content="Free tool to reconcile GSTR-2B against your purchase books. Upload your GSTR-2B Excel export and a filled Books template to get a detailed matched/mismatched ITC report. Entirely in your browser — nothing is uploaded.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="../assets/fuzzy-match.js"></script>
+    <script src="../assets/gst-recon-engine.js"></script>
+    <script src="../assets/lead-gate.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek & Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / GSTR-2B vs Books Reconciliation</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">GSTR-2B vs Books Reconciliation</h2>
+        <p class="section-subtitle">Upload your GSTR-2B export and your filled Books template to get a detailed matched / mismatched ITC report — entirely in your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek & Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">Input Tax Credit Reconciliation Engine</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Your GSTR-2B and Books files never leave your browser.</strong> Both files are read and matched entirely on your own device using JavaScript — the files themselves are never uploaded to any server, including ours. (A short contact form below is the one exception — see it for details.) This tool does not ask for, and will never ask for, your GST portal login or OTP. Covers regular B2B invoices and credit/debit notes (B2B-CDNR/B2B-DNR) from GSTR-2B; it does not cover amendments (B2BA/CDNRA/DNRA), rejected entries, ITC-reversal entries, ISD credits, or import of goods (IMPG) — check those sheets in your GSTR-2B separately.
+            </div>
+
+            <div class="tool-body">
+
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="GSTR-2B vs Books Reconciliation">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like professional help with your ITC reconciliation. <strong>Your GSTR-2B and Books files are never sent to us</strong> — they're read and matched entirely in your browser, exactly as described above. Only the contact details below leave your device, and only if you submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the GSTR-2B/Books files or figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Step 1 — Get Your Files Ready</div>
+                    <div class="tool-grid-2">
+                        <div>
+                            <p style="font-size:0.9rem; color:#334155; margin-bottom:10px;"><strong>A.</strong> Download your GSTR-2B for the period from the GST portal (Services → Returns → Returns Dashboard → GSTR-2B → Download Excel).</p>
+                            <a href="https://services.gst.gov.in/services/login" target="_blank" rel="noopener" class="btn-tool-gold" style="text-decoration:none; display:inline-flex; align-items:center;">🔐 Open GST Portal Login</a>
+                        </div>
+                        <div>
+                            <p style="font-size:0.9rem; color:#334155; margin-bottom:10px;"><strong>B.</strong> Download our Books template, fill one row per purchase invoice or credit/debit note from your accounting records, and save it.</p>
+                            <a href="../assets/templates/GST_Books_Template.xlsx" download class="btn-tool-outline" style="text-decoration:none; display:inline-flex; align-items:center; background:#002b49;">⬇️ Download Books Template (.xlsx)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Step 2 — Upload Both Files</div>
+                    <div class="tool-grid-2">
+                        <div>
+                            <label class="tool-form-label">GSTR-2B Excel Export</label>
+                            <div class="upload-zone" id="zone-2b">
+                                <div class="uz-icon">📄</div>
+                                <div class="uz-title">Click or drop your GSTR-2B .xlsx file</div>
+                                <div class="uz-sub">Downloaded from the GST portal, unedited</div>
+                                <div class="uz-filename" id="fname-2b"></div>
+                            </div>
+                            <input type="file" id="file-2b" accept=".xlsx,.xls" style="display:none;">
+                        </div>
+                        <div>
+                            <label class="tool-form-label">Filled Books Template</label>
+                            <div class="upload-zone" id="zone-books">
+                                <div class="uz-icon">📘</div>
+                                <div class="uz-title">Click or drop your filled Books .xlsx file</div>
+                                <div class="uz-sub">Based on the template downloaded above</div>
+                                <div class="uz-filename" id="fname-books"></div>
+                            </div>
+                            <input type="file" id="file-books" accept=".xlsx,.xls" style="display:none;">
+                        </div>
+                    </div>
+                    <div id="upload-status" style="margin-top:16px; font-size:0.85rem; color:#dc2626; font-weight:600;"></div>
+                    <div style="margin-top:18px;">
+                        <button id="btn-reconcile" class="btn-tool-gold" disabled style="opacity:0.5; cursor:not-allowed;">⚙️ Run Reconciliation</button>
+                    </div>
+                </div>
+
+                <div id="results-wrap" style="display:none;">
+                    <div class="tool-card">
+                        <div class="tool-card-title">
+                            Reconciliation Summary
+                            <div class="tool-controls">
+                                <button class="btn-tool-outline" id="btn-csv" style="background:#002b49;">⬇️ CSV</button>
+                                <button class="btn-tool-outline" id="btn-xlsx" style="background:#002b49;">📊 Excel Report</button>
+                                <button class="btn-tool-gold" id="btn-print">🖨️ PDF Report</button>
+                            </div>
+                        </div>
+                        <div class="widget-grid" id="summary-cards"></div>
+                    </div>
+
+                    <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49;">
+                        <div class="tool-card-title">💡 Smart Insights</div>
+                        <div id="smart-insights"></div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tabs-nav" id="tabs-nav"></div>
+                        <div id="tab-panels"></div>
+                    </div>
+
+                    <div class="disclaimer-box">
+                        <strong>Disclaimer:</strong> This is a self-help reconciliation aid, not a certified ITC eligibility opinion. Results depend entirely on the accuracy of the two files you upload. "Matched" means the taxable value and total tax are within a small tolerance (₹2 or 1%, whichever is larger) — always verify borderline cases before filing. ITC eligibility can also depend on factors this tool does not check (e.g. Section 16(2) conditions, blocked credits under Section 17(5), supplier's actual GSTR-3B filing status). Aggarwal Abhishek & Co. does not certify the accuracy of this output for your specific case — please have it reviewed before relying on it.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden PDF report shell, populated by buildPdfReport() -->
+    <div id="pdf-report">
+        <div id="pdf-report-content"></div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek & Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        // ==========================================================================
+        // File state
+        // ==========================================================================
+        let file2BData = null;   // { rows: [...], invoiceCount }
+        let fileBooksData = null; // { rows: [...] }
+        let lastResult = null;
+        let lastMeta = null;
+
+        // Manual match state — pairs the user has explicitly linked from the
+        // Only-in-2B / Only-in-Books buckets, plus the in-progress selection
+        // in the Unmatched & Manual Match workspace.
+        let manualMatches = [];      // [{ twoB, book }, ...]
+        let selectedTwoB = null;     // currently radio-selected Only-in-2B row
+        let selectedBook = null;     // currently radio-selected Only-in-Books row
+        let pickState = { twoB: { query: '' }, books: { query: '' } };
+
+        // Every row object gets a stable numeric id the first time it's
+        // touched by the manual-match UI, so a radio button / unlink button
+        // in the DOM can be traced back to the exact row object (rows never
+        // have a guaranteed-unique business key on their own).
+        let muidCounter = 1;
+        function getMuid(row) {
+            if (row.__muid === undefined) row.__muid = muidCounter++;
+            return row.__muid;
+        }
+
+        // Generic sortable/searchable table state, keyed by table id.
+        const tableStates = {};
+
+        function fmtMoney(n) {
+            return '₹' + Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function fmtDateShort(d) {
+            if (!d) return '—';
+            return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+
+        // ==========================================================================
+        // Header-row / column detection — works even if the portal shifts a
+        // column or adds a metadata row, since we match header TEXT, not position.
+        // ==========================================================================
+        const COLUMN_PATTERNS = {
+            gstin: /gstin.*supplier|supplier.*gstin|gstin\s*of\s*supplier/i,
+            name: /trade\/?legal name|supplier\s*name|legal\s*name|trade\s*name/i,
+            invNo: /invoice\s*(number|no\.?)|note\s*(number|no\.?)/i,
+            invType: /invoice\s*type|note\s*type/i,
+            invDate: /invoice\s*date|note\s*date/i,
+            taxable: /taxable\s*value/i,
+            igst: /integrated\s*tax/i,
+            cgst: /central\s*tax/i,
+            sgst: /state\/?ut\s*tax|state\s*tax/i,
+            cess: /cess/i,
+            itcAvail: /itc\s*availab/i,
+            itcReason: /reason/i
+        };
+        const BOOKS_COLUMN_PATTERNS = {
+            gstin: /gstin/i,
+            name: /supplier name/i,
+            docType: /document\s*type/i,
+            invNo: /invoice\s*number|document\s*number/i,
+            invDate: /invoice\s*date|document\s*date/i,
+            taxable: /taxable\s*value/i,
+            igst: /^igst/i,
+            cgst: /^cgst/i,
+            sgst: /^sgst/i,
+            cess: /^cess/i
+        };
+
+        // Scans the first `maxScan` rows of an array-of-arrays sheet for a row
+        // (or a PAIR of rows) that looks like a header — matches at least
+        // gstin + invNo patterns. The real GSTR-2B portal export uses a
+        // two-row merged header: parent labels like "GSTIN of supplier" sit
+        // on one row, while sub-labels like "Invoice number" sit on the row
+        // below, under a merged cell like "Invoice Details". So for each row
+        // we first try it alone, then try it merged with the row after it
+        // (sub-row value wins where present, else the parent row's value is
+        // used) before moving on.
+        function findHeaderRow(aoa, patterns, maxScan) {
+            maxScan = Math.min(maxScan || 25, aoa.length);
+            for (let r = 0; r < maxScan; r++) {
+                const row = aoa[r] || [];
+                const cols = mapColumns(row, patterns);
+                if (cols.gstin !== undefined && cols.invNo !== undefined) {
+                    return { headerRowIndex: r, cols, headerRow: row };
+                }
+
+                const nextRow = aoa[r + 1] || [];
+                if (nextRow.length) {
+                    const width = Math.max(row.length, nextRow.length);
+                    const merged = [];
+                    for (let i = 0; i < width; i++) {
+                        const subVal = nextRow[i];
+                        merged[i] = (subVal !== undefined && subVal !== null && subVal !== '') ? subVal : row[i];
+                    }
+                    const mergedCols = mapColumns(merged, patterns);
+                    if (mergedCols.gstin !== undefined && mergedCols.invNo !== undefined) {
+                        return { headerRowIndex: r + 1, cols: mergedCols, headerRow: merged };
+                    }
+                }
+            }
+            return null;
+        }
+
+        function mapColumns(headerRow, patterns) {
+            const cols = {};
+            headerRow.forEach((cell, i) => {
+                const text = String(cell || '').trim();
+                if (!text) return;
+                Object.keys(patterns).forEach(key => {
+                    if (cols[key] === undefined && patterns[key].test(text)) {
+                        cols[key] = i;
+                    }
+                });
+            });
+            return cols;
+        }
+
+        function rowsFromSheet(aoa, headerRowIndex, cols, extra) {
+            const out = [];
+            for (let r = headerRowIndex + 1; r < aoa.length; r++) {
+                const row = aoa[r] || [];
+                const gstin = row[cols.gstin];
+                const invNo = cols.invNo !== undefined ? row[cols.invNo] : '';
+                if (!gstin && !invNo) continue; // blank row
+                if (!gstin || !invNo) continue; // incomplete row, skip
+                const rec = {
+                    gstin: gstin,
+                    name: cols.name !== undefined ? row[cols.name] : '',
+                    invNo: invNo,
+                    invDate: gstParseDate(cols.invDate !== undefined ? row[cols.invDate] : null),
+                    taxable: gstParseAmount(cols.taxable !== undefined ? row[cols.taxable] : 0),
+                    igst: gstParseAmount(cols.igst !== undefined ? row[cols.igst] : 0),
+                    cgst: gstParseAmount(cols.cgst !== undefined ? row[cols.cgst] : 0),
+                    sgst: gstParseAmount(cols.sgst !== undefined ? row[cols.sgst] : 0),
+                    cess: gstParseAmount(cols.cess !== undefined ? row[cols.cess] : 0)
+                };
+                if (extra) Object.assign(rec, extra(row, cols));
+                out.push(rec);
+            }
+            return out;
+        }
+
+        function sheetToAoa(worksheet) {
+            return XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: true, defval: '' });
+        }
+
+        // Which tabs we read, matched by an ANCHORED (start-to-end) pattern on
+        // the trimmed sheet name — deliberately an allowlist, not a "scan
+        // everything" search. The real portal export also ships lookalike
+        // sheets with the exact same header shape as B2B — "B2B(Rejected)",
+        // "B2BA" (amendments), "B2B (ITC Reversal)" — that must NOT be read as
+        // ordinary invoices, since they represent rejected, amended or
+        // reversed credit, not available ITC. An anchored allowlist can't
+        // accidentally match those (the extra "(Rejected)"/"A"/"(ITC
+        // Reversal)" text fails the ^...$ anchor), whereas a loose "contains
+        // b2b" scan would. Debit notes sometimes come on their own "B2B-DNR"
+        // tab instead of being folded into B2B-CDNR, so both are read as Notes.
+        const SHEET_MATCHERS = [
+            { pattern: /^b2b$/i, type: 'Invoice' },
+            { pattern: /^b2b-?cdnr$/i, type: 'Note' },
+            { pattern: /^b2b-?dnr$/i, type: 'Note' }
+        ];
+
+        // Parses a GSTR-2B workbook. Handles the portal's two-row merged
+        // header (see findHeaderRow) and only reads the tabs matched above —
+        // amendment (B2BA/CDNRA/DNRA), rejected and ITC-reversal sheets are
+        // intentionally not included; see the notice banner on this page.
+        function parseGstr2B(workbook) {
+            const rows = [];
+            const sheetsRead = [];
+
+            workbook.SheetNames.forEach(name => {
+                const trimmed = name.trim();
+                const matcher = SHEET_MATCHERS.find(m => m.pattern.test(trimmed));
+                if (!matcher) return;
+
+                const aoa = sheetToAoa(workbook.Sheets[name]);
+                const found = findHeaderRow(aoa, COLUMN_PATTERNS, 40);
+                if (!found) return;
+
+                sheetsRead.push(name);
+                const parsed = rowsFromSheet(aoa, found.headerRowIndex, found.cols, (row, cols) => ({
+                    type: matcher.type,
+                    noteType: matcher.type === 'Note' ? (cols.invType !== undefined ? row[cols.invType] : '') : '',
+                    itcAvailable: cols.itcAvail !== undefined ? /^yes/i.test(String(row[cols.itcAvail] || '')) : true,
+                    itcReason: cols.itcReason !== undefined ? row[cols.itcReason] : ''
+                }));
+                rows.push(...parsed);
+            });
+
+            if (rows.length === 0) {
+                const sheetList = workbook.SheetNames.join(', ');
+                const readList = sheetsRead.length ? sheetsRead.join(', ') : 'none';
+                throw new Error(`Couldn't find any B2B invoice or credit/debit note rows in this file. Sheets found: ${sheetList}. Sheets recognized and checked for data: ${readList}. This can mean the period had no B2B/B2B-CDNR/B2B-DNR entries, or the file isn't the unedited GSTR-2B Excel export from the GST portal (Services → Returns → Returns Dashboard → GSTR-2B → Download Excel).`);
+            }
+            return rows;
+        }
+
+        function parseBooks(workbook) {
+            const sheetNames = workbook.SheetNames;
+            const sheetName = sheetNames.find(n => /^books$/i.test(n.trim())) || sheetNames[sheetNames.length - 1];
+            const aoa = sheetToAoa(workbook.Sheets[sheetName]);
+            const found = findHeaderRow(aoa, BOOKS_COLUMN_PATTERNS, 5);
+            if (!found) {
+                throw new Error("Couldn't find a readable header row in the Books file. Please use the downloadable template without renaming its columns.");
+            }
+            const rows = rowsFromSheet(aoa, found.headerRowIndex, found.cols, (row, cols) => {
+                const rawType = cols.docType !== undefined ? String(row[cols.docType] || '').trim() : '';
+                const isNote = /credit\s*note|debit\s*note/i.test(rawType);
+                return {
+                    type: isNote ? 'Note' : 'Invoice',
+                    noteType: isNote ? rawType : ''
+                };
+            });
+            if (rows.length === 0) {
+                throw new Error('No rows found in the Books file — make sure you filled at least one row below the example rows.');
+            }
+            return rows;
+        }
+
+        // ==========================================================================
+        // Upload zone wiring (shared behaviour for both zones)
+        // ==========================================================================
+        function wireUploadZone(zoneId, inputId, filenameId, onFile) {
+            const zone = document.getElementById(zoneId);
+            const input = document.getElementById(inputId);
+            const fname = document.getElementById(filenameId);
+
+            zone.addEventListener('click', () => input.click());
+            zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+            zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+            });
+            input.addEventListener('change', e => {
+                if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+            });
+
+            function handleFile(file) {
+                fname.textContent = '';
+                document.getElementById('upload-status').textContent = '';
+                const reader = new FileReader();
+                reader.onload = evt => {
+                    try {
+                        const data = new Uint8Array(evt.target.result);
+                        const workbook = XLSX.read(data, { type: 'array', cellDates: false });
+                        const rows = onFile(workbook);
+                        zone.classList.add('file-loaded');
+                        fname.textContent = `✓ ${file.name} (${rows.length} row${rows.length === 1 ? '' : 's'} read)`;
+                        checkReady();
+                    } catch (err) {
+                        zone.classList.remove('file-loaded');
+                        document.getElementById('upload-status').textContent = `${file.name}: ${err.message}`;
+                    }
+                };
+                reader.onerror = () => {
+                    document.getElementById('upload-status').textContent = `Could not read ${file.name}. Please try again.`;
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        }
+
+        function checkReady() {
+            const btn = document.getElementById('btn-reconcile');
+            if (file2BData && fileBooksData) {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            }
+        }
+
+        wireUploadZone('zone-2b', 'file-2b', 'fname-2b', workbook => {
+            const rows = parseGstr2B(workbook);
+            file2BData = { rows };
+            return rows;
+        });
+        wireUploadZone('zone-books', 'file-books', 'fname-books', workbook => {
+            const rows = parseBooks(workbook);
+            fileBooksData = { rows };
+            return rows;
+        });
+
+        // ==========================================================================
+        // Run reconciliation + render results
+        // ==========================================================================
+        document.getElementById('btn-reconcile').addEventListener('click', () => {
+            if (!file2BData || !fileBooksData) return;
+            const result = gstReconcile(file2BData.rows, fileBooksData.rows);
+            lastResult = result;
+            lastMeta = {
+                runAt: new Date(),
+                count2B: file2BData.rows.length,
+                countBooks: fileBooksData.rows.length
+            };
+            manualMatches = [];
+            selectedTwoB = null;
+            selectedBook = null;
+            pickState = { twoB: { query: '' }, books: { query: '' } };
+            renderResults(result);
+            document.getElementById('results-wrap').style.display = 'block';
+            document.getElementById('results-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        function taxSum(row) {
+            return (row.igst || 0) + (row.cgst || 0) + (row.sgst || 0) + (row.cess || 0);
+        }
+
+        function itcTotal(rows, side) {
+            // side: 'twoB' or 'book' for pairs, or omit for plain one-sided row arrays
+            return rows.reduce((acc, r) => acc + taxSum(side ? r[side] : r), 0);
+        }
+
+        function sumField(rows, side, field) {
+            return rows.reduce((acc, r) => acc + (r[side][field] || 0), 0);
+        }
+
+        function docTypeLabel(row) {
+            return row.type === 'Note' ? (row.noteType || 'Note') : 'Invoice';
+        }
+
+        // Rows still in Only-in-2B / Only-in-Books after manual matches are
+        // pulled out of those buckets (so nothing is ever double-counted
+        // between "unmatched" and "manually matched").
+        function unmatchedRemaining(res) {
+            return {
+                only2BRemaining: res.onlyIn2B.filter(r => !manualMatches.some(m => m.twoB === r)),
+                onlyBooksRemaining: res.onlyInBooks.filter(r => !manualMatches.some(m => m.book === r))
+            };
+        }
+
+        function emptyRow(colspan, text) {
+            return `<tr><td colspan="${colspan}" class="text-center" style="color:#94a3b8; padding:24px;">${text}</td></tr>`;
+        }
+
+        // Small colored pill for Invoice / Credit Note / Debit Note, used across every results table.
+        function typeBadge(row) {
+            if (row.type !== 'Note') return '<span class="score-badge badge-score-3">Invoice</span>';
+            const isCredit = /credit/i.test(row.noteType || '');
+            return `<span class="score-badge ${isCredit ? 'badge-score-2' : 'badge-score-4'}">${row.noteType || 'Note'}</span>`;
+        }
+
+        // ==========================================================================
+        // Generic sortable + searchable table component. Any results table
+        // (Vendor Summary, Matched, Variance, Probable, Manual Matches) is
+        // built from renderTableShell() (the markup) + wireTableUI() (the
+        // search box + click-to-sort headers + initial render), keyed by a
+        // unique table id, so search/sort behaviour lives in one place.
+        // ==========================================================================
+        function renderTableShell(id, columns, opts) {
+            opts = opts || {};
+            const searchHtml = opts.noSearch ? '' : `<div style="margin-bottom:10px;">
+                <input type="text" class="generic-table-search" id="search-${id}" placeholder="${opts.searchPlaceholder || 'Search...'}" style="width:100%; max-width:340px; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.85rem;">
+            </div>`;
+            const theadHtml = `<tr>${columns.map(c => `<th data-key="${c.key}" class="${c.align === 'right' ? 'text-right' : ''}${c.sortable === false ? '' : ' th-sortable'}" style="${c.sortable === false ? '' : 'cursor:pointer; user-select:none;'}">${c.label}<span class="sort-ind" data-key="${c.key}" style="margin-left:4px; font-size:0.7em; color:#0ea5e9;"></span></th>`).join('')}</tr>`;
+            return `<div id="wrap-${id}">${searchHtml}<div class="tool-table-container"><table class="tool-table"><thead>${theadHtml}</thead><tbody id="tbody-${id}"></tbody></table></div></div>`;
+        }
+
+        function wireTableUI(id, allRows, columns, opts) {
+            opts = opts || {};
+            tableStates[id] = {
+                allRows: allRows,
+                columns: columns,
+                search: '',
+                sortKey: opts.defaultSortKey || null,
+                sortDir: opts.defaultSortDir || 'asc',
+                searchFields: opts.searchFields || (() => []),
+                emptyText: opts.emptyText || 'No rows found.'
+            };
+            const searchInput = document.getElementById('search-' + id);
+            if (searchInput) {
+                searchInput.addEventListener('input', e => {
+                    tableStates[id].search = e.target.value;
+                    renderTableBody(id);
+                });
+            }
+            const wrap = document.getElementById('wrap-' + id);
+            if (wrap) {
+                wrap.querySelectorAll('th.th-sortable').forEach(th => {
+                    th.addEventListener('click', () => {
+                        const key = th.dataset.key;
+                        const st = tableStates[id];
+                        if (st.sortKey === key) {
+                            st.sortDir = st.sortDir === 'asc' ? 'desc' : 'asc';
+                        } else {
+                            st.sortKey = key;
+                            st.sortDir = 'asc';
+                        }
+                        renderTableBody(id);
+                    });
+                });
+            }
+            renderTableBody(id);
+        }
+
+        function applyTableFilters(id) {
+            const st = tableStates[id];
+            let rows = st.allRows.slice();
+            if (st.search) {
+                const q = st.search.toLowerCase();
+                rows = rows.filter(r => st.searchFields(r).some(v => String(v === undefined || v === null ? '' : v).toLowerCase().includes(q)));
+            }
+            if (st.sortKey) {
+                const col = st.columns.find(c => c.key === st.sortKey);
+                if (col && col.sortValue) {
+                    rows.sort((a, b) => {
+                        const av = col.sortValue(a);
+                        const bv = col.sortValue(b);
+                        if (av < bv) return st.sortDir === 'asc' ? -1 : 1;
+                        if (av > bv) return st.sortDir === 'asc' ? 1 : -1;
+                        return 0;
+                    });
+                }
+            }
+            return rows;
+        }
+
+        function renderTableBody(id) {
+            const st = tableStates[id];
+            if (!st) return;
+            const rows = applyTableFilters(id);
+            const tbody = document.getElementById('tbody-' + id);
+            if (!tbody) return;
+            tbody.innerHTML = rows.length
+                ? rows.map(r => `<tr>${st.columns.map(c => `<td class="${c.align === 'right' ? 'text-right' : ''}">${c.render(r)}</td>`).join('')}</tr>`).join('')
+                : emptyRow(st.columns.length, st.emptyText);
+            const wrap = document.getElementById('wrap-' + id);
+            if (wrap) {
+                wrap.querySelectorAll('.sort-ind').forEach(ind => {
+                    ind.textContent = ind.dataset.key === st.sortKey ? (st.sortDir === 'asc' ? '▲' : '▼') : '';
+                });
+            }
+        }
+
+        // ==========================================================================
+        // Vendor-wise (GSTIN-grouped) summary — rolls every bucket up per
+        // supplier, the way commercial GSTR-2B reconciliation tools do.
+        // ==========================================================================
+        function buildVendorSummary(res, manual) {
+            const map = new Map();
+            function ensure(gstin, name) {
+                if (!gstin) gstin = '(no GSTIN)';
+                if (!map.has(gstin)) {
+                    map.set(gstin, { gstin, name: name || '', matched: 0, variance: 0, probable: 0, manual: 0, only2b: 0, onlyBooks: 0, taxable2B: 0, taxableBooks: 0, tax2B: 0, taxBooks: 0 });
+                }
+                const v = map.get(gstin);
+                if (!v.name && name) v.name = name;
+                return v;
+            }
+            res.matched.forEach(p => {
+                const v = ensure(p.twoB.gstin, p.twoB.name);
+                v.matched++; v.taxable2B += p.twoB.taxable; v.taxableBooks += p.book.taxable; v.tax2B += taxSum(p.twoB); v.taxBooks += taxSum(p.book);
+            });
+            res.variance.forEach(p => {
+                const v = ensure(p.twoB.gstin, p.twoB.name);
+                v.variance++; v.taxable2B += p.twoB.taxable; v.taxableBooks += p.book.taxable; v.tax2B += taxSum(p.twoB); v.taxBooks += taxSum(p.book);
+            });
+            res.probable.forEach(p => {
+                const v = ensure(p.twoB.gstin, p.twoB.name);
+                v.probable++; v.taxable2B += p.twoB.taxable; v.taxableBooks += p.book.taxable; v.tax2B += taxSum(p.twoB); v.taxBooks += taxSum(p.book);
+            });
+            manual.forEach(p => {
+                const v = ensure(p.twoB.gstin, p.twoB.name || p.book.name);
+                v.manual++; v.taxable2B += p.twoB.taxable; v.taxableBooks += p.book.taxable; v.tax2B += taxSum(p.twoB); v.taxBooks += taxSum(p.book);
+            });
+            const { only2BRemaining, onlyBooksRemaining } = unmatchedRemaining(res);
+            only2BRemaining.forEach(r => {
+                const v = ensure(r.gstin, r.name);
+                v.only2b++; v.taxable2B += r.taxable; v.tax2B += taxSum(r);
+            });
+            onlyBooksRemaining.forEach(r => {
+                const v = ensure(r.gstin, r.name);
+                v.onlyBooks++; v.taxableBooks += r.taxable; v.taxBooks += taxSum(r);
+            });
+            return Array.from(map.values()).sort((a, b) => (b.tax2B + b.taxBooks) - (a.tax2B + a.taxBooks));
+        }
+
+        function vendorSummaryColumns() {
+            return [
+                { key: 'gstin', label: 'GSTIN', render: v => v.gstin, sortValue: v => v.gstin },
+                { key: 'name', label: 'Supplier', render: v => v.name || '—', sortValue: v => (v.name || '').toLowerCase() },
+                { key: 'matched', label: 'Matched', align: 'right', render: v => v.matched, sortValue: v => v.matched },
+                { key: 'variance', label: 'Variance', align: 'right', render: v => v.variance, sortValue: v => v.variance },
+                { key: 'probable', label: 'Probable', align: 'right', render: v => v.probable, sortValue: v => v.probable },
+                { key: 'manual', label: 'Manual', align: 'right', render: v => v.manual, sortValue: v => v.manual },
+                { key: 'only2b', label: 'Only 2B', align: 'right', render: v => v.only2b, sortValue: v => v.only2b },
+                { key: 'onlyBooks', label: 'Only Books', align: 'right', render: v => v.onlyBooks, sortValue: v => v.onlyBooks },
+                { key: 'taxable2B', label: 'Taxable (2B)', align: 'right', render: v => fmtMoney(v.taxable2B), sortValue: v => v.taxable2B },
+                { key: 'taxableBooks', label: 'Taxable (Books)', align: 'right', render: v => fmtMoney(v.taxableBooks), sortValue: v => v.taxableBooks },
+                { key: 'tax2B', label: 'Tax (2B)', align: 'right', render: v => fmtMoney(v.tax2B), sortValue: v => v.tax2B },
+                { key: 'taxBooks', label: 'Tax (Books)', align: 'right', render: v => fmtMoney(v.taxBooks), sortValue: v => v.taxBooks },
+                { key: 'diff', label: 'Net Diff.', align: 'right', render: v => fmtMoney(v.tax2B - v.taxBooks), sortValue: v => v.tax2B - v.taxBooks }
+            ];
+        }
+
+        function matchedColumns() {
+            return [
+                { key: 'type', label: 'Type', render: p => typeBadge(p.twoB), sortValue: p => docTypeLabel(p.twoB) },
+                { key: 'gstin', label: 'GSTIN', render: p => p.twoB.gstin, sortValue: p => p.twoB.gstin },
+                { key: 'name', label: 'Supplier', render: p => p.twoB.name || '—', sortValue: p => (p.twoB.name || '').toLowerCase() },
+                { key: 'invNo', label: 'Doc. No.', render: p => p.twoB.invNo, sortValue: p => p.twoB.invNo },
+                { key: 'date', label: 'Date', render: p => fmtDateShort(p.twoB.invDate), sortValue: p => p.twoB.invDate ? p.twoB.invDate.getTime() : 0 },
+                { key: 'taxable', label: 'Taxable Value', align: 'right', render: p => fmtMoney(p.twoB.taxable), sortValue: p => p.twoB.taxable },
+                { key: 'tax', label: 'Total Tax', align: 'right', render: p => fmtMoney(taxSum(p.twoB)), sortValue: p => taxSum(p.twoB) }
+            ];
+        }
+
+        function varianceColumns() {
+            return [
+                { key: 'type', label: 'Type', render: p => typeBadge(p.twoB), sortValue: p => docTypeLabel(p.twoB) },
+                { key: 'gstin', label: 'GSTIN', render: p => p.twoB.gstin, sortValue: p => p.twoB.gstin },
+                { key: 'invNo', label: 'Doc. No.', render: p => p.twoB.invNo, sortValue: p => p.twoB.invNo },
+                { key: 'taxable2b', label: 'Taxable (2B)', align: 'right', render: p => fmtMoney(p.twoB.taxable), sortValue: p => p.twoB.taxable },
+                { key: 'taxableBooks', label: 'Taxable (Books)', align: 'right', render: p => fmtMoney(p.book.taxable), sortValue: p => p.book.taxable },
+                { key: 'tax2b', label: 'Tax (2B)', align: 'right', render: p => fmtMoney(taxSum(p.twoB)), sortValue: p => taxSum(p.twoB) },
+                { key: 'taxBooks', label: 'Tax (Books)', align: 'right', render: p => fmtMoney(taxSum(p.book)), sortValue: p => taxSum(p.book) },
+                { key: 'diff', label: 'Tax Diff.', align: 'right', render: p => `<span style="color:#dc2626; font-weight:700;">${fmtMoney(taxSum(p.twoB) - taxSum(p.book))}</span>`, sortValue: p => taxSum(p.twoB) - taxSum(p.book) }
+            ];
+        }
+
+        function probableColumns() {
+            return [
+                { key: 'type', label: 'Type', render: p => typeBadge(p.twoB), sortValue: p => docTypeLabel(p.twoB) },
+                { key: 'gstin', label: 'GSTIN', render: p => p.twoB.gstin, sortValue: p => p.twoB.gstin },
+                { key: 'inv2b', label: '2B Doc. No.', render: p => p.twoB.invNo, sortValue: p => p.twoB.invNo },
+                { key: 'invBooks', label: 'Books Doc. No.', render: p => p.book.invNo, sortValue: p => p.book.invNo },
+                { key: 'date', label: 'Date', render: p => fmtDateShort(p.twoB.invDate), sortValue: p => p.twoB.invDate ? p.twoB.invDate.getTime() : 0 },
+                { key: 'taxable', label: 'Taxable Value', align: 'right', render: p => fmtMoney(p.twoB.taxable), sortValue: p => p.twoB.taxable }
+            ];
+        }
+
+        function manualMatchColumns() {
+            return [
+                { key: 'type', label: 'Type', render: p => typeBadge(p.twoB), sortValue: p => docTypeLabel(p.twoB) },
+                { key: 'gstin', label: 'GSTIN', render: p => p.twoB.gstin, sortValue: p => p.twoB.gstin },
+                { key: 'name', label: 'Supplier', render: p => p.twoB.name || p.book.name || '—', sortValue: p => (p.twoB.name || p.book.name || '').toLowerCase() },
+                { key: 'inv2b', label: '2B Doc. No.', render: p => p.twoB.invNo, sortValue: p => p.twoB.invNo },
+                { key: 'invBooks', label: 'Books Doc. No.', render: p => p.book.invNo, sortValue: p => p.book.invNo },
+                { key: 'taxable2b', label: 'Taxable (2B)', align: 'right', render: p => fmtMoney(p.twoB.taxable), sortValue: p => p.twoB.taxable },
+                { key: 'taxableBooks', label: 'Taxable (Books)', align: 'right', render: p => fmtMoney(p.book.taxable), sortValue: p => p.book.taxable },
+                { key: 'unlink', label: '', sortable: false, render: p => `<button type="button" class="btn-tool-outline btn-unlink-manual" data-muid2b="${getMuid(p.twoB)}" data-muid-book="${getMuid(p.book)}" style="padding:4px 10px; font-size:0.75rem; background:#dc2626; border-color:#dc2626; color:#fff;">Unlink</button>` }
+            ];
+        }
+
+        function mountVendorSummaryTable(res) {
+            const wrap = document.getElementById('vendor-summary-wrap');
+            if (!wrap) return;
+            const cols = vendorSummaryColumns();
+            wrap.innerHTML = renderTableShell('vendor-summary', cols, { searchPlaceholder: 'Search GSTIN or supplier name...' });
+            wireTableUI('vendor-summary', buildVendorSummary(res, manualMatches), cols, {
+                searchFields: v => [v.gstin, v.name],
+                defaultSortKey: 'tax2B', defaultSortDir: 'desc',
+                emptyText: 'No vendor data available.'
+            });
+        }
+
+        function mountMatchedTable(res) {
+            const wrap = document.getElementById('matched-wrap');
+            if (!wrap) return;
+            const cols = matchedColumns();
+            wrap.innerHTML = renderTableShell('matched', cols, { searchPlaceholder: 'Search GSTIN, supplier or doc. no...' });
+            wireTableUI('matched', res.matched, cols, { searchFields: p => [p.twoB.gstin, p.twoB.name, p.twoB.invNo], emptyText: 'No clean matches found.' });
+        }
+
+        function mountVarianceTable(res) {
+            const wrap = document.getElementById('variance-wrap');
+            if (!wrap) return;
+            const cols = varianceColumns();
+            wrap.innerHTML = renderTableShell('variance', cols, { searchPlaceholder: 'Search GSTIN or doc. no...' });
+            wireTableUI('variance', res.variance, cols, { searchFields: p => [p.twoB.gstin, p.twoB.name, p.twoB.invNo], emptyText: 'No amount variances found.' });
+        }
+
+        function mountProbableTable(res) {
+            const wrap = document.getElementById('probable-wrap');
+            if (!wrap) return;
+            const cols = probableColumns();
+            wrap.innerHTML = renderTableShell('probable', cols, { searchPlaceholder: 'Search GSTIN or doc. no...' });
+            wireTableUI('probable', res.probable, cols, { searchFields: p => [p.twoB.gstin, p.twoB.name, p.twoB.invNo, p.book.invNo], emptyText: 'No probable matches found.' });
+        }
+
+        // ==========================================================================
+        // Unmatched & Manual Match workspace — side-by-side Only-in-2B /
+        // Only-in-Books pick lists with single-select, a "Link Selected as
+        // Match" action, and the running list of manual matches with unlink.
+        // ==========================================================================
+        function unmatchedTabHtml() {
+            return `
+            <p style="font-size:0.8rem; color:#64748b; margin-bottom:14px;">These are 2B and Books entries that didn't auto-match on GSTIN, document type, date and amount. Select one row on each side that you know belong together (e.g. a typo'd invoice number) and click "Link Selected as Match" — it will then show up as Manually Matched, roll into the Vendor Summary, and be included in your exports.</p>
+            <div class="tool-grid-2" style="margin-bottom:16px; align-items:start;">
+                <div>
+                    <h4 style="margin-bottom:8px; font-size:0.95rem; color:#002b49;">Only in GSTR-2B</h4>
+                    <div id="pick-2b-wrap"></div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:8px; font-size:0.95rem; color:#002b49;">Only in Books</h4>
+                    <div id="pick-books-wrap"></div>
+                </div>
+            </div>
+            <div style="margin-bottom:22px; display:flex; align-items:center; flex-wrap:wrap; gap:10px;">
+                <button id="btn-link-manual" type="button" class="btn-tool-gold" disabled style="opacity:0.5; cursor:not-allowed;">🔗 Link Selected as Match</button>
+                <span style="font-size:0.8rem; color:#64748b;">Select one row from each side above.</span>
+            </div>
+            <div>
+                <h4 style="margin-bottom:8px; font-size:0.95rem; color:#002b49;">Manually Matched (<span id="manual-count">0</span>)</h4>
+                <div id="manual-table-wrap"></div>
+            </div>`;
+        }
+
+        function pickSearchMatch(r, q) {
+            q = q.toLowerCase();
+            return [r.gstin, r.name, r.invNo].some(v => String(v || '').toLowerCase().includes(q));
+        }
+
+        function renderPickList(wrapId, rows, selectedRow, searchState, showItc) {
+            const wrap = document.getElementById(wrapId);
+            if (!wrap) return;
+            const search = searchState.query || '';
+            const filtered = search ? rows.filter(r => pickSearchMatch(r, search)) : rows;
+            const searchHtml = `<input type="text" class="pick-search" data-wrap="${wrapId}" placeholder="Search GSTIN, name or doc. no..." value="${String(search).replace(/"/g, '&quot;')}" style="width:100%; padding:7px 10px; margin-bottom:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.82rem;">`;
+            const rowsHtml = filtered.length ? filtered.map(r => {
+                const uid = getMuid(r);
+                const checked = selectedRow === r;
+                const itcLine = showItc ? `<br><span style="color:${r.itcAvailable === false ? '#dc2626' : '#16a34a'};">${r.itcAvailable === false ? 'ITC not available: ' + (r.itcReason || 'see 2B') : 'ITC available'}</span>` : '';
+                return `<label class="pick-row" style="display:flex; align-items:flex-start; gap:8px; padding:8px 10px; border:1px solid ${checked ? '#0ea5e9' : '#e2e8f0'}; border-radius:6px; margin-bottom:6px; cursor:pointer; font-size:0.8rem; background:${checked ? '#f0f9ff' : '#fff'};">
+                    <input type="radio" data-uid="${uid}" data-wrap="${wrapId}" ${checked ? 'checked' : ''} style="flex-shrink:0; margin-top:3px;">
+                    <span style="flex:1;">
+                        <strong>${r.gstin}</strong> · ${r.name || '—'} · ${r.invNo}<br>
+                        <span style="color:#64748b;">${fmtDateShort(r.invDate)} · ${fmtMoney(r.taxable)} taxable</span>${itcLine}
+                    </span>
+                </label>`;
+            }).join('') : `<div style="color:#94a3b8; padding:16px; font-size:0.82rem;">${search ? 'No rows match your search.' : 'Nothing left to match here.'}</div>`;
+            wrap.innerHTML = searchHtml + `<div style="max-height:320px; overflow-y:auto;">${rowsHtml}</div>`;
+        }
+
+        function refreshUnmatchedTab() {
+            if (!lastResult) return;
+            const { only2BRemaining, onlyBooksRemaining } = unmatchedRemaining(lastResult);
+            renderPickList('pick-2b-wrap', only2BRemaining, selectedTwoB, pickState.twoB, true);
+            renderPickList('pick-books-wrap', onlyBooksRemaining, selectedBook, pickState.books, false);
+
+            const linkBtn = document.getElementById('btn-link-manual');
+            if (linkBtn) {
+                const ready = !!(selectedTwoB && selectedBook);
+                linkBtn.disabled = !ready;
+                linkBtn.style.opacity = ready ? '1' : '0.5';
+                linkBtn.style.cursor = ready ? 'pointer' : 'not-allowed';
+            }
+
+            const countEl = document.getElementById('manual-count');
+            if (countEl) countEl.textContent = manualMatches.length;
+
+            const manualWrap = document.getElementById('manual-table-wrap');
+            if (manualWrap) {
+                const cols = manualMatchColumns();
+                manualWrap.innerHTML = renderTableShell('manual-matches', cols, { searchPlaceholder: 'Search manual matches...' });
+                wireTableUI('manual-matches', manualMatches, cols, {
+                    searchFields: p => [p.twoB.gstin, p.twoB.name, p.twoB.invNo, p.book.invNo],
+                    emptyText: 'No manual matches yet — select one row from each side above and click "Link Selected as Match".'
+                });
+            }
+
+            const tabBtn = document.querySelector('.tab-btn[data-tab="unmatched"]');
+            if (tabBtn) tabBtn.textContent = `Unmatched & Manual Match (${only2BRemaining.length + onlyBooksRemaining.length})`;
+        }
+
+        function afterManualMatchChange() {
+            if (!lastResult) return;
+            renderSummaryCards(lastResult);
+            renderSmartInsights(lastResult);
+            refreshUnmatchedTab();
+            mountVendorSummaryTable(lastResult);
+        }
+
+        // Event delegation for the pick lists / link / unlink controls — set
+        // up once, since the pick-list and manual-match markup is rebuilt
+        // on every change.
+        document.addEventListener('change', e => {
+            if (e.target.matches('input[type="radio"][data-wrap="pick-2b-wrap"]')) {
+                const uid = Number(e.target.dataset.uid);
+                const { only2BRemaining } = unmatchedRemaining(lastResult);
+                selectedTwoB = only2BRemaining.find(r => getMuid(r) === uid) || null;
+                refreshUnmatchedTab();
+            } else if (e.target.matches('input[type="radio"][data-wrap="pick-books-wrap"]')) {
+                const uid = Number(e.target.dataset.uid);
+                const { onlyBooksRemaining } = unmatchedRemaining(lastResult);
+                selectedBook = onlyBooksRemaining.find(r => getMuid(r) === uid) || null;
+                refreshUnmatchedTab();
+            }
+        });
+        document.addEventListener('input', e => {
+            if (e.target.matches('.pick-search')) {
+                const wrapId = e.target.dataset.wrap;
+                if (wrapId === 'pick-2b-wrap') pickState.twoB.query = e.target.value;
+                else if (wrapId === 'pick-books-wrap') pickState.books.query = e.target.value;
+                refreshUnmatchedTab();
+            }
+        });
+        document.addEventListener('click', e => {
+            if (e.target.id === 'btn-link-manual' && !e.target.disabled) {
+                if (selectedTwoB && selectedBook) {
+                    manualMatches.push({ twoB: selectedTwoB, book: selectedBook });
+                    selectedTwoB = null;
+                    selectedBook = null;
+                    afterManualMatchChange();
+                }
+            } else if (e.target.classList.contains('btn-unlink-manual')) {
+                const muid2b = Number(e.target.dataset.muid2b);
+                const muidBook = Number(e.target.dataset.muidBook);
+                manualMatches = manualMatches.filter(m => !(getMuid(m.twoB) === muid2b && getMuid(m.book) === muidBook));
+                afterManualMatchChange();
+            }
+        });
+
+        // ==========================================================================
+        // Summary cards + tab layout
+        // ==========================================================================
+        function renderSummaryCards(res) {
+            const { only2BRemaining, onlyBooksRemaining } = unmatchedRemaining(res);
+            const matchedItc = itcTotal(res.matched, 'twoB');
+            const varianceItc2B = itcTotal(res.variance, 'twoB');
+            const varianceItcBooks = itcTotal(res.variance, 'book');
+            const probableItc = itcTotal(res.probable, 'twoB');
+            const manualItc = itcTotal(manualMatches, 'twoB');
+            const only2BItc = itcTotal(only2BRemaining);
+            const onlyBooksItc = itcTotal(onlyBooksRemaining);
+
+            const cards = [
+                ['Matched Invoices', res.matched.length, fmtMoney(matchedItc) + ' ITC', '#10b981'],
+                ['Amount Variance', res.variance.length, fmtMoney(varianceItc2B - varianceItcBooks) + ' net diff', '#f59e0b'],
+                ['Probable Matches', res.probable.length, fmtMoney(probableItc) + ' ITC — verify', '#0ea5e9'],
+                ['Manually Matched', manualMatches.length, fmtMoney(manualItc) + ' ITC linked', '#7c3aed'],
+                ['Only in GSTR-2B', only2BRemaining.length, fmtMoney(only2BItc) + ' ITC not in books', '#dc2626'],
+                ['Only in Books', onlyBooksRemaining.length, fmtMoney(onlyBooksItc) + ' ITC not in 2B', '#dc2626']
+            ];
+            document.getElementById('summary-cards').innerHTML = cards.map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+        }
+
+        // ==========================================================================
+        // Smart Insights — a rule-based (not live-AI) narrative summary that
+        // turns the reconciliation buckets into plain-language, prioritized
+        // observations. Deterministic and free to run (no API call).
+        // ==========================================================================
+        function buildSmartInsights(res) {
+            const { only2BRemaining, onlyBooksRemaining } = unmatchedRemaining(res);
+            const insights = [];
+
+            const onlyBooksItc = itcTotal(onlyBooksRemaining);
+            if (onlyBooksRemaining.length > 0) {
+                insights.push({
+                    level: 'critical',
+                    text: `${onlyBooksRemaining.length} invoice${onlyBooksRemaining.length === 1 ? '' : 's'} totaling ${fmtMoney(onlyBooksItc)} ITC ${onlyBooksRemaining.length === 1 ? 'is' : 'are'} claimed in your books but do${onlyBooksRemaining.length === 1 ? 'es' : ''} not appear in GSTR-2B at all. This ITC is not eligible under Section 16(2) until the supplier files their GSTR-1/IFF — follow up with these vendors before relying on this credit.`
+                });
+            }
+
+            const only2BItc = itcTotal(only2BRemaining);
+            if (only2BRemaining.length > 0) {
+                insights.push({
+                    level: 'warning',
+                    text: `${only2BRemaining.length} invoice${only2BRemaining.length === 1 ? '' : 's'} worth ${fmtMoney(only2BItc)} ITC appear${only2BRemaining.length === 1 ? 's' : ''} in GSTR-2B but not in your books yet. Check whether these are genuine purchases missed during data entry — claiming this ITC needs the entry to exist in your books first.`
+                });
+            }
+
+            if (res.variance.length > 0) {
+                const varianceItc2B = itcTotal(res.variance, 'twoB');
+                const varianceItcBooks = itcTotal(res.variance, 'book');
+                insights.push({
+                    level: 'warning',
+                    text: `${res.variance.length} matched invoice${res.variance.length === 1 ? '' : 's'} ${res.variance.length === 1 ? 'has' : 'have'} an amount mismatch beyond the tolerance (net difference ${fmtMoney(varianceItc2B - varianceItcBooks)}). Check the Variance tab — a common cause is a rounding difference, a partial credit note, or a data-entry typo in the taxable value or tax split.`
+                });
+            }
+
+            if (res.probable.length > 0) {
+                const fuzzyCount = res.probable.filter(p => p.matchType === 'fuzzy-invno').length;
+                insights.push({
+                    level: 'info',
+                    text: `${res.probable.length} invoice${res.probable.length === 1 ? '' : 's'} ${res.probable.length === 1 ? 'was' : 'were'} tentatively linked as a probable match because the document number differs slightly between GSTR-2B and books${fuzzyCount ? ` (${fuzzyCount} of these via fuzzy invoice-number matching, likely a typo)` : ''}. These are shown in the Probable Matches tab — please verify each one manually before treating it as reconciled.`
+                });
+            }
+
+            if (manualMatches.length > 0) {
+                insights.push({
+                    level: 'info',
+                    text: `${manualMatches.length} invoice${manualMatches.length === 1 ? '' : 's'} ${manualMatches.length === 1 ? 'was' : 'were'} manually linked by you in the Unmatched tab — these are included in the reconciled totals above.`
+                });
+            }
+
+            if (insights.length === 0) {
+                insights.push({ level: 'good', text: `Every invoice in GSTR-2B matches your books within tolerance, with no unexplained entries on either side. This period looks fully reconciled — you can proceed to claim the eligible ITC shown above.` });
+            } else if (!insights.some(i => i.level === 'critical')) {
+                insights.push({ level: 'good', text: `No invoices are claimed in your books without a corresponding GSTR-2B entry — the ineligible-ITC risk from this reconciliation is low.` });
+            }
+
+            return insights;
+        }
+
+        function renderSmartInsights(res) {
+            const insights = buildSmartInsights(res);
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        function renderResults(res) {
+            lastResult = res;
+            renderSummaryCards(res);
+            renderSmartInsights(res);
+
+            const { only2BRemaining, onlyBooksRemaining } = unmatchedRemaining(res);
+            const tabs = [
+                { id: 'vendor', label: 'Vendor Summary' },
+                { id: 'matched', label: `Matched (${res.matched.length})` },
+                { id: 'variance', label: `Variance (${res.variance.length})` },
+                { id: 'probable', label: `Probable (${res.probable.length})` },
+                { id: 'unmatched', label: `Unmatched & Manual Match (${only2BRemaining.length + onlyBooksRemaining.length})` }
+            ];
+            document.getElementById('tabs-nav').innerHTML = tabs.map((t, i) => `<button class="tab-btn${i === 0 ? ' active' : ''}" data-tab="${t.id}">${t.label}</button>`).join('');
+            document.getElementById('tab-panels').innerHTML = `
+                <div class="tab-panel active" id="panel-vendor"><div id="vendor-summary-wrap"></div></div>
+                <div class="tab-panel" id="panel-matched"><div id="matched-wrap"></div></div>
+                <div class="tab-panel" id="panel-variance"><div id="variance-wrap"></div></div>
+                <div class="tab-panel" id="panel-probable"><div id="probable-wrap"></div><p style="font-size:0.8rem; color:#64748b; margin-top:10px;">Matched by same GSTIN, same document type, same date and a close taxable value, but the document numbers don't line up exactly — likely a typo or formatting difference. Please verify manually.</p></div>
+                <div class="tab-panel" id="panel-unmatched">${unmatchedTabHtml()}</div>
+            `;
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+                });
+            });
+
+            mountVendorSummaryTable(res);
+            mountMatchedTable(res);
+            mountVarianceTable(res);
+            mountProbableTable(res);
+            refreshUnmatchedTab();
+        }
+
+        // ==========================================================================
+        // CSV export
+        // ==========================================================================
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+        document.getElementById('btn-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const { only2BRemaining, onlyBooksRemaining } = unmatchedRemaining(lastResult);
+            const lines = [['Status', 'Document Type', 'GSTIN', 'Supplier', '2B Doc. No.', 'Books Doc. No.', 'Date', 'Taxable Value (2B)', 'Taxable Value (Books)', 'Total Tax (2B)', 'Total Tax (Books)', 'Notes'].map(csvEscape).join(',')];
+            const push = (status, twoB, book, notes) => {
+                const taxB = twoB ? taxSum(twoB) : '';
+                const taxBk = book ? taxSum(book) : '';
+                const anchor = twoB || book;
+                lines.push([
+                    status, docTypeLabel(anchor), anchor.gstin, anchor.name || '',
+                    twoB ? twoB.invNo : '', book ? book.invNo : '',
+                    fmtDateShort(anchor.invDate),
+                    twoB ? twoB.taxable : '', book ? book.taxable : '',
+                    taxB, taxBk, notes || ''
+                ].map(csvEscape).join(','));
+            };
+            lastResult.matched.forEach(p => push('Matched', p.twoB, p.book, ''));
+            lastResult.variance.forEach(p => push('Variance', p.twoB, p.book, 'Amount mismatch beyond tolerance'));
+            lastResult.probable.forEach(p => push('Probable Match', p.twoB, p.book, 'Document numbers differ — verify manually'));
+            manualMatches.forEach(p => push('Manually Matched', p.twoB, p.book, 'Manually linked by user'));
+            only2BRemaining.forEach(r => push('Only in 2B', r, null, r.itcAvailable === false ? ('ITC not available: ' + (r.itcReason || '')) : ''));
+            onlyBooksRemaining.forEach(r => push('Only in Books', null, r, 'Not yet in GSTR-2B'));
+
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `GSTR-2B_Reconciliation_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // ==========================================================================
+        // Multi-sheet Excel export (Summary, Vendor-wise, and one sheet per
+        // bucket) — built client-side with the SheetJS library already
+        // loaded on this page.
+        // ==========================================================================
+        document.getElementById('btn-xlsx').addEventListener('click', () => {
+            if (!lastResult) return;
+            const res = lastResult;
+            const { only2BRemaining, onlyBooksRemaining } = unmatchedRemaining(res);
+            const vendorRows = buildVendorSummary(res, manualMatches);
+
+            const wb = XLSX.utils.book_new();
+
+            const summaryAoa = [
+                ['GSTR-2B vs Books Reconciliation — Summary'],
+                ['Generated', new Date().toLocaleString('en-IN')],
+                ['2B Entries', lastMeta.count2B],
+                ['Books Entries', lastMeta.countBooks],
+                [],
+                ['Bucket', 'Count', 'Taxable (2B)', 'Taxable (Books)', 'Tax (2B)', 'Tax (Books)'],
+                ['Matched', res.matched.length, sumField(res.matched, 'twoB', 'taxable'), sumField(res.matched, 'book', 'taxable'), itcTotal(res.matched, 'twoB'), itcTotal(res.matched, 'book')],
+                ['Variance', res.variance.length, sumField(res.variance, 'twoB', 'taxable'), sumField(res.variance, 'book', 'taxable'), itcTotal(res.variance, 'twoB'), itcTotal(res.variance, 'book')],
+                ['Probable', res.probable.length, sumField(res.probable, 'twoB', 'taxable'), sumField(res.probable, 'book', 'taxable'), itcTotal(res.probable, 'twoB'), itcTotal(res.probable, 'book')],
+                ['Manually Matched', manualMatches.length, sumField(manualMatches, 'twoB', 'taxable'), sumField(manualMatches, 'book', 'taxable'), itcTotal(manualMatches, 'twoB'), itcTotal(manualMatches, 'book')],
+                ['Only in 2B', only2BRemaining.length, only2BRemaining.reduce((a, r) => a + r.taxable, 0), '', itcTotal(only2BRemaining), ''],
+                ['Only in Books', onlyBooksRemaining.length, '', onlyBooksRemaining.reduce((a, r) => a + r.taxable, 0), '', itcTotal(onlyBooksRemaining)]
+            ];
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(summaryAoa), 'Summary');
+
+            const vendorAoa = [['GSTIN', 'Supplier', 'Matched', 'Variance', 'Probable', 'Manual', 'Only 2B', 'Only Books', 'Taxable (2B)', 'Taxable (Books)', 'Tax (2B)', 'Tax (Books)', 'Net Tax Diff.']];
+            vendorRows.forEach(v => vendorAoa.push([v.gstin, v.name, v.matched, v.variance, v.probable, v.manual, v.only2b, v.onlyBooks, v.taxable2B, v.taxableBooks, v.tax2B, v.taxBooks, v.tax2B - v.taxBooks]));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(vendorAoa), 'Vendor-wise');
+
+            const matchedAoa = [['Type', 'GSTIN', 'Supplier', 'Doc. No.', 'Date', 'Taxable Value', 'Total Tax']];
+            res.matched.forEach(p => matchedAoa.push([docTypeLabel(p.twoB), p.twoB.gstin, p.twoB.name, p.twoB.invNo, fmtDateShort(p.twoB.invDate), p.twoB.taxable, taxSum(p.twoB)]));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(matchedAoa), 'Matched');
+
+            const varianceAoa = [['Type', 'GSTIN', 'Doc. No.', 'Taxable (2B)', 'Taxable (Books)', 'Tax (2B)', 'Tax (Books)', 'Tax Diff.']];
+            res.variance.forEach(p => varianceAoa.push([docTypeLabel(p.twoB), p.twoB.gstin, p.twoB.invNo, p.twoB.taxable, p.book.taxable, taxSum(p.twoB), taxSum(p.book), taxSum(p.twoB) - taxSum(p.book)]));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(varianceAoa), 'Variance');
+
+            const probableAoa = [['Type', 'GSTIN', '2B Doc. No.', 'Books Doc. No.', 'Date', 'Taxable Value']];
+            res.probable.forEach(p => probableAoa.push([docTypeLabel(p.twoB), p.twoB.gstin, p.twoB.invNo, p.book.invNo, fmtDateShort(p.twoB.invDate), p.twoB.taxable]));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(probableAoa), 'Probable');
+
+            const manualAoa = [['Type', 'GSTIN', 'Supplier', '2B Doc. No.', 'Books Doc. No.', 'Taxable (2B)', 'Taxable (Books)']];
+            manualMatches.forEach(p => manualAoa.push([docTypeLabel(p.twoB), p.twoB.gstin, p.twoB.name || p.book.name, p.twoB.invNo, p.book.invNo, p.twoB.taxable, p.book.taxable]));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(manualAoa), 'Manual Matches');
+
+            const only2bAoa = [['Type', 'GSTIN', 'Supplier', 'Doc. No.', 'Date', 'Taxable Value', 'ITC Availability']];
+            only2BRemaining.forEach(r => only2bAoa.push([docTypeLabel(r), r.gstin, r.name, r.invNo, fmtDateShort(r.invDate), r.taxable, r.itcAvailable === false ? ('No — ' + (r.itcReason || '')) : 'Yes']));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(only2bAoa), 'Only in 2B');
+
+            const onlyBooksAoa = [['Type', 'GSTIN', 'Supplier', 'Doc. No.', 'Date', 'Taxable Value']];
+            onlyBooksRemaining.forEach(r => onlyBooksAoa.push([docTypeLabel(r), r.gstin, r.name, r.invNo, fmtDateShort(r.invDate), r.taxable]));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(onlyBooksAoa), 'Only in Books');
+
+            XLSX.writeFile(wb, `GSTR-2B_Reconciliation_${new Date().toISOString().slice(0,10)}.xlsx`);
+        });
+
+        // ==========================================================================
+        // PDF export (print-based, matches the shared .pdf-page layout)
+        // ==========================================================================
+        function buildPdfReport() {
+            if (!lastResult) return;
+            const res = lastResult;
+            const today = new Date();
+            const { only2BRemaining, onlyBooksRemaining } = unmatchedRemaining(res);
+            const matchedItc = itcTotal(res.matched, 'twoB');
+            const only2BItc = itcTotal(only2BRemaining);
+            const onlyBooksItc = itcTotal(onlyBooksRemaining);
+
+            const rowsHtml = (label, rows, mapper) => rows.length ? rows.map(mapper).join('') :
+                `<tr><td colspan="6" class="center">None</td></tr>`;
+
+            document.getElementById('pdf-report-content').innerHTML = `
+                <div class="pdf-report-shell">
+                    <div class="pdf-page pdf-cover">
+                        <div class="pdf-brand"><h1>Aggarwal Abhishek &amp; Co.</h1><p>Chartered Accountants</p></div>
+                        <div class="pdf-cover-title">
+                            <h2>GSTR-2B vs Books<br>Reconciliation Report</h2>
+                            <p>A self-assessment summary of Input Tax Credit matching between your GSTR-2B and purchase books, generated on ${fmtDateShort(today)}.</p>
+                        </div>
+                        <div class="pdf-meta-grid">
+                            <div class="pdf-meta"><span>2B Entries</span><strong>${lastMeta.count2B}</strong></div>
+                            <div class="pdf-meta"><span>Books Entries</span><strong>${lastMeta.countBooks}</strong></div>
+                            <div class="pdf-meta"><span>Matched</span><strong>${res.matched.length}</strong></div>
+                            <div class="pdf-meta"><span>Flagged</span><strong>${res.variance.length + only2BRemaining.length + onlyBooksRemaining.length}</strong></div>
+                        </div>
+                        <div class="pdf-footer"><span>Generated by the free Self-Assessment Suite at aggarwalabhishekco.com</span><span>${fmtDateShort(today)}</span></div>
+                    </div>
+
+                    <div class="pdf-page">
+                        <div class="pdf-section-title"><h2>Summary</h2><span>ITC Reconciliation</span></div>
+                        <div class="pdf-metric-grid" style="margin-bottom:16px;">
+                            <div class="pdf-metric"><div class="k">Matched</div><div class="v">${res.matched.length}</div><div class="s">${fmtMoney(matchedItc)} ITC</div></div>
+                            <div class="pdf-metric"><div class="k">Variance</div><div class="v">${res.variance.length}</div><div class="s">Amount mismatch</div></div>
+                            <div class="pdf-metric"><div class="k">Only in 2B</div><div class="v">${only2BRemaining.length}</div><div class="s">${fmtMoney(only2BItc)} ITC</div></div>
+                            <div class="pdf-metric"><div class="k">Only in Books</div><div class="v">${onlyBooksRemaining.length}</div><div class="s">${fmtMoney(onlyBooksItc)} ITC</div></div>
+                        </div>
+                        <div class="pdf-callout">Matched invoices are within tolerance (₹2 or 1%, whichever larger) on both taxable value and total tax.${manualMatches.length ? ` ${manualMatches.length} pair${manualMatches.length === 1 ? ' was' : 's were'} manually linked by the user and are excluded from the one-sided sections below.` : ''} Review the Variance, Probable Match and one-sided sections below before finalizing ITC claims for the period.</div>
+
+                        <div class="pdf-card" style="margin-top:14px;">
+                            <h3>Amount Variance (${res.variance.length})</h3>
+                            <table class="pdf-table"><thead><tr><th>GSTIN</th><th>Invoice No.</th><th>Tax (2B)</th><th>Tax (Books)</th><th>Diff.</th></tr></thead>
+                            <tbody>${rowsHtml('variance', res.variance.slice(0, 12), p => {
+                                const tax2b = p.twoB.igst + p.twoB.cgst + p.twoB.sgst + p.twoB.cess;
+                                const taxBk = p.book.igst + p.book.cgst + p.book.sgst + p.book.cess;
+                                return `<tr><td>${p.twoB.gstin}</td><td>${p.twoB.invNo}</td><td class="num">${fmtMoney(tax2b)}</td><td class="num">${fmtMoney(taxBk)}</td><td class="num">${fmtMoney(tax2b - taxBk)}</td></tr>`;
+                            })}</tbody></table>
+                            ${res.variance.length > 12 ? `<p class="pdf-note">+ ${res.variance.length - 12} more — see the full CSV export.</p>` : ''}
+                        </div>
+
+                        <div class="pdf-card">
+                            <h3>Only in GSTR-2B — Not Yet in Books (${only2BRemaining.length})</h3>
+                            <table class="pdf-table"><thead><tr><th>GSTIN</th><th>Invoice No.</th><th>Date</th><th>Taxable Value</th></tr></thead>
+                            <tbody>${rowsHtml('only2b', only2BRemaining.slice(0, 12), r => `<tr><td>${r.gstin}</td><td>${r.invNo}</td><td>${fmtDateShort(r.invDate)}</td><td class="num">${fmtMoney(r.taxable)}</td></tr>`)}</tbody></table>
+                            ${only2BRemaining.length > 12 ? `<p class="pdf-note">+ ${only2BRemaining.length - 12} more — see the full CSV/Excel export.</p>` : ''}
+                        </div>
+
+                        <div class="pdf-card">
+                            <h3>Only in Books — Not Yet in GSTR-2B (${onlyBooksRemaining.length})</h3>
+                            <table class="pdf-table"><thead><tr><th>GSTIN</th><th>Invoice No.</th><th>Date</th><th>Taxable Value</th></tr></thead>
+                            <tbody>${rowsHtml('onlybooks', onlyBooksRemaining.slice(0, 12), r => `<tr><td>${r.gstin}</td><td>${r.invNo}</td><td>${fmtDateShort(r.invDate)}</td><td class="num">${fmtMoney(r.taxable)}</td></tr>`)}</tbody></table>
+                            ${onlyBooksRemaining.length > 12 ? `<p class="pdf-note">+ ${onlyBooksRemaining.length - 12} more — see the full CSV/Excel export.</p>` : ''}
+                        </div>
+
+                        <div class="pdf-disclaimer" style="margin-top:10px;">This is a self-help reconciliation aid, not a certified ITC eligibility opinion. Matching is based on the two files provided and a stated tolerance; it does not evaluate Section 16(2) conditions, Section 17(5) blocked credits, or a supplier's GSTR-3B filing status. Please have this report reviewed by a qualified professional before relying on it. &copy; ${today.getFullYear()} Aggarwal Abhishek &amp; Co.</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('btn-print').addEventListener('click', () => {
+            buildPdfReport();
+            document.body.classList.add('printing-pdf-report');
+            window.print();
+        });
+        window.addEventListener('afterprint', () => {
+            document.body.classList.remove('printing-pdf-report');
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

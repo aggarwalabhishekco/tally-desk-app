@@ -1,0 +1,48 @@
+name: Build Tally Desk
+
+# Runs on GitHub's own free Windows/Mac machines -- you never need Node.js
+# or Electron installed on your own computer. Two ways to trigger it:
+#   1. Push anything to the "main" branch (e.g. after uploading/editing files
+#      in the GitHub web UI) -- builds automatically.
+#   2. Actions tab -> "Build Tally Desk" -> "Run workflow" button -- builds
+#      on demand without needing a code change.
+# Either way, the finished .exe and .zip show up as downloadable files on
+# that run's summary page under "Artifacts" a few minutes later.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            script: dist:win
+            artifact-name: TallyDesk-Windows
+            build-glob: dist/*.exe
+          - os: macos-latest
+            script: dist:mac
+            artifact-name: TallyDesk-Mac
+            build-glob: dist/*.zip
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run ${{ matrix.script }}
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact-name }}
+          path: ${{ matrix.build-glob }}
+          if-no-files-found: error

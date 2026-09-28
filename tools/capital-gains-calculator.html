@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital Gains Tax Calculator | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free Capital Gains Tax calculator for FY 2025-26 covering listed equity/mutual funds, property, gold, unlisted shares and debt funds — post-Budget 2024 rates, with the property indexation grandfathering option. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Capital Gains Tax Calculator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Capital Gains Tax Calculator</h2>
+        <p class="section-subtitle">Work out your short-term or long-term capital gains tax on equity, mutual funds, property, gold or unlisted shares — using post-Budget 2024 rates and holding-period rules. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">Capital Gains Tax Calculator — FY 2025-26 (AY 2026-27)</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Educational tool — not a filed computation.</strong> This reflects capital-gains rules as amended by the Finance (No. 2) Act, 2024 (effective for transfers from 23 July 2024): simplified 12-month/24-month holding periods, 20% STCG / 12.5% LTCG (no indexation) on listed equity, and 12.5% LTCG (no indexation) on other long-term assets — with the option to use 20% with indexation only for land/building bought before 23 July 2024. It does not cover every asset class (e.g. depreciable business assets, slump sale) or set-off/carry-forward of capital losses. Please have us verify your actual computation before filing.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Capital Gains Tax Calculator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help planning or filing around a capital gain. <strong>No transaction or financial data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the transaction figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Asset &amp; Transaction Details</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group" style="grid-column: 1 / -1;">
+                            <label class="tool-form-label">Type of Asset</label>
+                            <select class="tool-form-control" id="inp-asset-type">
+                                <option value="equity" selected>Listed Equity Shares / Equity Mutual Fund (STT paid)</option>
+                                <option value="property">Immovable Property (Land / Building)</option>
+                                <option value="debtmf">Debt Mutual Fund / Specified Fund (&gt;65% debt allocation, acquired on/after 1 Apr 2023)</option>
+                                <option value="other">Gold / Unlisted Shares / Other Capital Asset</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Purchase Date</label>
+                            <input type="date" class="tool-form-control" id="inp-buy-date" value="2022-01-15">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Sale Date</label>
+                            <input type="date" class="tool-form-control" id="inp-sell-date" value="2026-02-15">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Purchase Price / Cost of Acquisition (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-cost" value="1000000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group" id="group-improvement">
+                            <label class="tool-form-label">Cost of Improvement, if any (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-improvement" value="0" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Sale Price / Full Consideration (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-sale" value="1800000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Transfer Expenses — brokerage, stamp duty, etc. (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-expenses" value="0" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group" id="group-exemption">
+                            <label class="tool-form-label">Amount Reinvested under Sec 54 / 54F / 54EC, if any (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-exemption" value="0" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group" id="group-slab">
+                            <label class="tool-form-label">Your Marginal Income-Tax Slab (for STCG taxed at slab rate)</label>
+                            <select class="tool-form-control" id="inp-slab">
+                                <option value="0">0% (Nil slab)</option>
+                                <option value="0.05">5%</option>
+                                <option value="0.10">10%</option>
+                                <option value="0.15">15%</option>
+                                <option value="0.20">20%</option>
+                                <option value="0.25">25%</option>
+                                <option value="0.30" selected>30%</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Result
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;" disabled>📸 Get My Shareable Verdict Card</button>
+                        </div>
+                    </div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Download a shareable image of your result — nice for WhatsApp-ing to a friend or sharing on LinkedIn. No data is uploaded; the image is drawn entirely in your browser.</p>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Full Breakdown
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-cg-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="breakdown-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Documents Usually Needed</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">A general list — nothing here is saved or sent anywhere.</p>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not a filed computation. Holding period is calculated on a simple calendar basis and may differ slightly from the Income-tax Department's exact day-count method near a threshold date. It does not account for capital-loss set-off/carry-forward, multiple lots (FIFO), bonus/split adjustments, or every exemption (only Sections 54/54F/54EC reinvestment is modeled, as a simple deduction). Aggarwal Abhishek &amp; Co. does not certify these figures — please have us review your actual computation before filing.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        // Cost Inflation Index (base 2001-02 = 100). Published values; FY 2024-25
+        // (363) is the last CII published — indexation was withdrawn for
+        // transfers on/after 23 July 2024, so for the pre-23-Jul-2024 property
+        // grandfathering option we cap the "sale year" CII at FY 2024-25's value.
+        const CII = {
+            '2001-02': 100, '2002-03': 105, '2003-04': 109, '2004-05': 113, '2005-06': 117,
+            '2006-07': 122, '2007-08': 129, '2008-09': 137, '2009-10': 148, '2010-11': 167,
+            '2011-12': 184, '2012-13': 200, '2013-14': 220, '2014-15': 240, '2015-16': 254,
+            '2016-17': 264, '2017-18': 272, '2018-19': 280, '2019-20': 289, '2020-21': 301,
+            '2021-22': 317, '2022-23': 331, '2023-24': 348, '2024-25': 363
+        };
+        const LAST_CII_FY = '2024-25';
+        const BUDGET_2024_CUTOFF = new Date('2024-07-23');
+
+        function fyStringForDate(d) {
+            const y = d.getFullYear();
+            const m = d.getMonth(); // 0=Jan
+            const startYear = m >= 3 ? y : y - 1; // FY starts April (month index 3)
+            const endYearShort = String((startYear + 1) % 100).padStart(2, '0');
+            return `${startYear}-${endYearShort}`;
+        }
+        function ciiForDate(d) {
+            const fy = fyStringForDate(d);
+            if (CII[fy] !== undefined) return CII[fy];
+            const y = d.getFullYear();
+            if (y < 2001) return CII['2001-02'];
+            return CII[LAST_CII_FY]; // cap at last published value
+        }
+
+        function monthsBetween(d1, d2) {
+            return (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth()) + (d2.getDate() >= d1.getDate() ? 0 : -1);
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+
+        function updateFieldVisibility() {
+            const type = document.getElementById('inp-asset-type').value;
+            document.getElementById('group-improvement').style.display = (type === 'property' || type === 'other') ? '' : 'none';
+            document.getElementById('group-exemption').style.display = type === 'property' ? '' : 'none';
+        }
+
+        function render() {
+            updateFieldVisibility();
+            const type = document.getElementById('inp-asset-type').value;
+            const buyDate = new Date(document.getElementById('inp-buy-date').value);
+            const sellDate = new Date(document.getElementById('inp-sell-date').value);
+            const cost = Math.max(0, Number(document.getElementById('inp-cost').value) || 0);
+            const improvement = Math.max(0, Number(document.getElementById('inp-improvement').value) || 0);
+            const sale = Math.max(0, Number(document.getElementById('inp-sale').value) || 0);
+            const expenses = Math.max(0, Number(document.getElementById('inp-expenses').value) || 0);
+            const exemption = Math.max(0, Number(document.getElementById('inp-exemption').value) || 0);
+            const slabRate = Number(document.getElementById('inp-slab').value);
+
+            if (!(sellDate > buyDate) || sale <= 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#64748b; padding:10px;">Enter valid purchase/sale dates (sale after purchase) and a sale price to see results.</p>';
+                document.getElementById('breakdown-table-wrap').innerHTML = '';
+                document.getElementById('insights-card').style.display = 'none';
+                document.getElementById('btn-verdict-card').disabled = true;
+                lastResult = null;
+                return;
+            }
+            document.getElementById('btn-verdict-card').disabled = false;
+
+            const holdingMonths = monthsBetween(buyDate, sellDate);
+            const ltThresholdMonths = type === 'equity' ? 12 : 24;
+            const isDebtMf = type === 'debtmf';
+            const isLongTerm = !isDebtMf && holdingMonths >= ltThresholdMonths;
+
+            const rawGain = sale - expenses - cost - improvement;
+            const gain = type === 'property' ? Math.max(0, rawGain - exemption) : Math.max(rawGain, rawGain); // exemption only modeled for property; allow negative gain (loss) elsewhere
+            const gainForTax = type === 'property' ? gain : rawGain;
+
+            let taxDetails = { method: '', taxableGain: 0, tax: 0, altTax: null, altMethod: null, rate: 0 };
+
+            if (gainForTax <= 0) {
+                taxDetails = { method: 'No gain (loss or break-even) — no capital gains tax; a capital loss may be available to set off against other gains.', taxableGain: gainForTax, tax: 0, rate: 0 };
+            } else if (type === 'equity') {
+                if (isLongTerm) {
+                    const EXEMPT = 125000;
+                    const taxableGain = Math.max(0, gainForTax - EXEMPT);
+                    taxDetails = { method: 'Section 112A — LTCG on listed equity/equity MF (12.5%, ₹1,25,000/year exempt)', taxableGain, tax: taxableGain * 0.125, rate: 0.125 };
+                } else {
+                    taxDetails = { method: 'Section 111A — STCG on listed equity/equity MF (20%)', taxableGain: gainForTax, tax: gainForTax * 0.20, rate: 0.20 };
+                }
+            } else if (type === 'debtmf') {
+                taxDetails = { method: 'Specified Mutual Fund rule (Sec. 50AA) — always STCG, taxed at your slab rate regardless of holding period. This rule applies to funds with >65% debt/money-market allocation (narrowed from the earlier ≤35% equity test by Finance Act 2025) — a hybrid fund roughly 35–65% debt may instead qualify for normal capital-asset treatment (12/24-month holding test); check the fund’s actual allocation before assuming this rule applies', taxableGain: gainForTax, tax: gainForTax * slabRate, rate: slabRate };
+            } else if (type === 'property') {
+                if (isLongTerm) {
+                    const noIndexTax = gainForTax * 0.125;
+                    if (buyDate < BUDGET_2024_CUTOFF) {
+                        const buyCII = ciiForDate(buyDate);
+                        const saleCII = ciiForDate(sellDate); // internally capped at FY2024-25 value
+                        const indexedCost = (cost + improvement) * (saleCII / buyCII);
+                        const indexedGainRaw = sale - expenses - indexedCost - exemption;
+                        const indexedGain = Math.max(0, indexedGainRaw);
+                        const indexedTax = indexedGain * 0.20;
+                        if (indexedTax < noIndexTax) {
+                            taxDetails = { method: 'Section 112 — LTCG on property, 20% WITH indexation (lower of the two options; grandfathered as bought before 23 Jul 2024)', taxableGain: indexedGain, tax: indexedTax, rate: 0.20, altTax: noIndexTax, altMethod: '12.5% without indexation' };
+                        } else {
+                            taxDetails = { method: 'Section 112 — LTCG on property, 12.5% WITHOUT indexation (lower of the two options)', taxableGain: gainForTax, tax: noIndexTax, rate: 0.125, altTax: indexedTax, altMethod: '20% with indexation' };
+                        }
+                    } else {
+                        taxDetails = { method: 'Section 112 — LTCG on property, 12.5% without indexation (bought on/after 23 Jul 2024 — indexation option not available)', taxableGain: gainForTax, tax: noIndexTax, rate: 0.125 };
+                    }
+                } else {
+                    taxDetails = { method: 'STCG on property — taxed at your slab rate (held under 24 months)', taxableGain: gainForTax, tax: gainForTax * slabRate, rate: slabRate };
+                }
+            } else { // other: gold, unlisted shares, etc.
+                if (isLongTerm) {
+                    taxDetails = { method: 'Section 112 — LTCG on gold/unlisted shares/other assets, 12.5% without indexation', taxableGain: gainForTax, tax: gainForTax * 0.125, rate: 0.125 };
+                } else {
+                    taxDetails = { method: 'STCG on gold/unlisted shares/other assets — taxed at your slab rate', taxableGain: gainForTax, tax: gainForTax * slabRate, rate: slabRate };
+                }
+            }
+
+            const cess = taxDetails.tax * 0.04;
+            const totalTax = taxDetails.tax + cess;
+
+            lastResult = { type, buyDate, sellDate, holdingMonths, isLongTerm, cost, improvement, sale, expenses, exemption, rawGain, gain: gainForTax, taxDetails, cess, totalTax };
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['Capital Gain', fmtMoneyWhole(gainForTax), isLongTerm ? 'Long-Term' : 'Short-Term', gainForTax >= 0 ? '#002b49' : '#dc2626'],
+                ['Holding Period', `${holdingMonths} month${holdingMonths === 1 ? '' : 's'}`, `${(holdingMonths/12).toFixed(1)} years`, '#0ea5e9'],
+                ['Tax Rate Applied', (taxDetails.rate*100).toFixed(2).replace(/\.?0+$/,'') + '%', taxDetails.altTax !== undefined && taxDetails.altTax !== null ? 'Better of two options' : 'Applicable rate', '#f59e0b'],
+                ['Total Tax Payable', fmtMoneyWhole(totalTax), 'Including 4% cess', '#10b981']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights());
+            renderBreakdownTable();
+        }
+
+        function buildInsights() {
+            if (!lastResult) return [];
+            const r = lastResult;
+            const insights = [];
+
+            insights.push({ level: 'info', text: r.taxDetails.method });
+
+            if (r.taxDetails.altTax !== undefined && r.taxDetails.altTax !== null) {
+                insights.push({ level: 'good', text: `You've bought this before 23 July 2024, so you get to choose the lower of two options — this calculator picked the cheaper one for you (${fmtMoneyWhole(Math.min(r.taxDetails.tax, r.taxDetails.altTax))} vs ${fmtMoneyWhole(Math.max(r.taxDetails.tax, r.taxDetails.altTax))} under ${r.taxDetails.altMethod}).` });
+            }
+
+            if (r.gain <= 0) {
+                insights.push({ level: 'warning', text: 'This shows a capital loss (or break-even). Short-term capital losses can be set off against any capital gain; long-term capital losses can only be set off against long-term gains — and both can be carried forward up to 8 assessment years if reported in a return filed on time.' });
+            }
+
+            if (r.type === 'equity' && r.isLongTerm && r.gain > 125000) {
+                insights.push({ level: 'info', text: 'Only the amount above ₹1,25,000/year is taxed — if you\'re close to the threshold, timing a sale across two financial years could let you use the exemption twice.' });
+            }
+
+            if ((r.type === 'property' || r.type === 'other') && !r.isLongTerm) {
+                insights.push({ level: 'warning', text: 'Since this is short-term, the gain is simply added to your other income and taxed at your slab rate — the rate you selected is only an estimate; your actual marginal rate depends on your total income for the year.' });
+            }
+
+            if (r.type === 'property' && r.exemption > 0) {
+                insights.push({ level: 'good', text: `You've reduced your taxable gain by ${fmtMoneyWhole(r.exemption)} through reinvestment — make sure you meet the specific conditions and time limits under whichever section (54/54F/54EC) you're relying on, or the exemption can be reversed later.` });
+            }
+
+            insights.push({ level: 'info', text: 'This capital gain is taxed separately at the rates shown above and does not affect which regime (Old/New) you choose for your other slab-rate income.' });
+
+            return insights;
+        }
+
+        function renderBreakdownTable() {
+            const wrap = document.getElementById('breakdown-table-wrap');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rows = [
+                ['Sale Price / Full Consideration', fmtMoneyWhole(r.sale)],
+                ['Less: Transfer Expenses', fmtMoneyWhole(r.expenses)],
+                ['Less: Cost of Acquisition', fmtMoneyWhole(r.cost)],
+                ['Less: Cost of Improvement', fmtMoneyWhole(r.improvement)],
+            ];
+            if (r.type === 'property') rows.push(['Less: Sec 54/54F/54EC Exemption', fmtMoneyWhole(r.exemption)]);
+            rows.push(['Capital Gain (' + (r.isLongTerm ? 'Long-Term' : 'Short-Term') + ')', fmtMoneyWhole(r.gain)]);
+            rows.push(['Method Applied', r.taxDetails.method]);
+            rows.push(['Taxable Gain (after any exemption)', fmtMoneyWhole(r.taxDetails.taxableGain)]);
+            rows.push(['Tax at ' + (r.taxDetails.rate*100).toFixed(2).replace(/\.?0+$/,'') + '%', fmtMoneyWhole(r.taxDetails.tax)]);
+            rows.push(['Health &amp; Education Cess (4%)', fmtMoneyWhole(r.cess)]);
+            rows.push(['<strong>Total Tax Payable</strong>', `<strong>${fmtMoneyWhole(r.totalTax)}</strong>`]);
+            wrap.innerHTML = `<table class="tool-table">
+                <thead><tr><th>Component</th><th>Amount</th></tr></thead>
+                <tbody>${rows.map(([label, val]) => `<tr><td>${label}</td><td>${val}</td></tr>`).join('')}</tbody>
+            </table>`;
+        }
+
+        document.getElementById('btn-cg-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const r = lastResult;
+            const lines = [
+                ['Component', 'Amount'].map(csvEscape).join(','),
+                ['Asset Type', r.type].map(csvEscape).join(','),
+                ['Purchase Date', document.getElementById('inp-buy-date').value].map(csvEscape).join(','),
+                ['Sale Date', document.getElementById('inp-sell-date').value].map(csvEscape).join(','),
+                ['Holding Period (months)', r.holdingMonths].map(csvEscape).join(','),
+                ['Classification', r.isLongTerm ? 'Long-Term' : 'Short-Term'].map(csvEscape).join(','),
+                ['Sale Price', r.sale].map(csvEscape).join(','),
+                ['Transfer Expenses', r.expenses].map(csvEscape).join(','),
+                ['Cost of Acquisition', r.cost].map(csvEscape).join(','),
+                ['Cost of Improvement', r.improvement].map(csvEscape).join(','),
+                ['Exemption (Sec 54/54F/54EC)', r.exemption].map(csvEscape).join(','),
+                ['Capital Gain', r.gain.toFixed(2)].map(csvEscape).join(','),
+                ['Method', r.taxDetails.method].map(csvEscape).join(','),
+                ['Tax Rate', (r.taxDetails.rate*100) + '%'].map(csvEscape).join(','),
+                ['Tax', r.taxDetails.tax.toFixed(2)].map(csvEscape).join(','),
+                ['Cess (4%)', r.cess.toFixed(2)].map(csvEscape).join(','),
+                ['Total Tax Payable', r.totalTax.toFixed(2)].map(csvEscape).join(',')
+            ];
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Capital_Gains_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        const DOC_CHECKLIST_ITEMS = [
+            'Purchase deed / contract note / mutual fund statement showing the acquisition date and cost',
+            'Sale deed / contract note showing the sale date and consideration',
+            'Broker/AMC capital gains statement (for equity and mutual funds)',
+            'Proof of cost of improvement, if claimed (bills, approvals)',
+            'Proof of transfer expenses (brokerage note, stamp duty receipt, legal fees)',
+            'Investment proof for Section 54/54F (new property) or 54EC (capital gains bonds), if claiming exemption',
+            'Form 26AS / AIS to cross-check TDS deducted on the sale (e.g. Section 194-IA on property)'
+        ];
+        function renderDocChecklist() {
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = DOC_CHECKLIST_ITEMS.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            DOC_CHECKLIST_ITEMS.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        ['inp-asset-type', 'inp-buy-date', 'inp-sell-date', 'inp-cost', 'inp-improvement', 'inp-sale', 'inp-expenses', 'inp-exemption', 'inp-slab'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => {
+            if (!lastResult) return null;
+            const r = lastResult;
+            const typeLabels = { equity: 'Equity/MF', property: 'Property', debtmf: 'Debt MF', other: 'Gold/Other Asset' };
+            return {
+                eyebrow: `My ${typeLabels[r.type] || ''} Capital Gains Verdict`,
+                headline: r.isLongTerm ? 'Long-Term Gain' : 'Short-Term Gain',
+                resultLine: fmtMoneyWhole(r.totalTax),
+                resultSub: `total tax on a ${fmtMoneyWhole(r.gain)} gain, held ${r.holdingMonths} months`,
+                footerNote: 'Estimate only — not a filed computation.',
+                toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+            };
+        }, 'My_Capital_Gains_Verdict');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDocChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

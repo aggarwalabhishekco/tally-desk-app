@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax &amp; GST Myths vs Facts | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="8 common Indian tax and GST myths, busted — flip each card to see the real answer. Free, no sign-up.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <style>
+        .myth-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:22px; margin-top:20px; }
+        .myth-flip { perspective: 1200px; height: 260px; cursor: pointer; }
+        .myth-flip-inner { position:relative; width:100%; height:100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .myth-flip.flipped .myth-flip-inner { transform: rotateY(180deg); }
+        .myth-face { position:absolute; inset:0; backface-visibility:hidden; border-radius:12px; padding:22px; display:flex; flex-direction:column; justify-content:center; box-shadow: 0 6px 18px rgba(0,43,73,0.12); }
+        .myth-front { background: linear-gradient(155deg, #002b49, #00385e); color:#fff; }
+        .myth-back { background:#f0fdf4; border:1px solid #10b981; transform: rotateY(180deg); }
+        .myth-tag { font-size:0.75rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:10px; }
+        .myth-front .myth-tag { color:#d4af37; }
+        .myth-back .myth-tag { color:#047857; }
+        .myth-text { font-family:'Lora', serif; font-size:1.05rem; line-height:1.45; }
+        .myth-back .myth-text { font-family:'Inter', sans-serif; font-size:0.92rem; color:#1e293b; }
+        .myth-hint { position:absolute; bottom:14px; right:18px; font-size:0.75rem; opacity:0.7; }
+        .myth-front .myth-hint { color:#c7d2dd; }
+        .myth-back .myth-hint { color:#64748b; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Tax &amp; GST Myths vs Facts</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Tax &amp; GST Myths vs Facts</h2>
+        <p class="section-subtitle">8 things people commonly believe about Indian tax and GST — click a card to flip it and see the real answer.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">Myth-Busting, One Flip at a Time</div>
+                </div>
+            </div>
+
+            <div class="tool-body">
+                <div class="myth-grid" id="myth-grid"></div>
+
+                <div class="disclaimer-box" style="margin-top:30px;">
+                    <strong>Please note:</strong> These are general principles for common situations, not a substitute for advice on your specific facts — tax and GST law has exceptions, and your situation may be one of them. If any of these surprised you, that's exactly the kind of thing worth a quick conversation — <a href="../contact.html" style="color:#002b49; font-weight:700;">get in touch with us</a>.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This content is provided for general informational and educational purposes only and does not constitute tax, legal or professional advice.</p>
+    </footer>
+
+    <script>
+        const MYTHS = [
+            {
+                myth: 'If I don\'t file my ITR, no one will notice a little under-reported income.',
+                fact: 'The department cross-checks your PAN against Form 26AS, your Annual Information Statement (AIS), bank interest, high-value transactions and TDS records — mismatches routinely trigger automated notices.'
+            },
+            {
+                myth: 'Cash transactions are basically untraceable.',
+                fact: 'Banks report large cash deposits/withdrawals (e.g. ₹10 lakh+ in a year in a savings account) to the tax department under the Statement of Financial Transactions (SFT) — it\'s far more visible than people assume.'
+            },
+            {
+                myth: 'My employer already deducted TDS, so I don\'t need to file a return.',
+                fact: 'TDS being deducted doesn\'t exempt you from filing — you may still need to file to claim a refund, report other income, or carry forward a loss.'
+            },
+            {
+                myth: 'GST registration is only for "big" businesses.',
+                fact: 'Registration is mandatory once turnover crosses ₹20 lakh for services (₹10 lakh in special-category states) or ₹40 lakh for goods in most states — plenty of small businesses cross this without realizing it.'
+            },
+            {
+                myth: 'The New Tax Regime is always better because the rates are lower.',
+                fact: 'Lower slab rates don\'t automatically mean lower tax — if your HRA, 80C, or home loan interest deductions are large, the Old Regime can still work out cheaper. It genuinely depends on your numbers.'
+            },
+            {
+                myth: 'Gifts from family are always tax-free, no matter the amount.',
+                fact: 'Gifts from "specified relatives" (spouse, parents, siblings, etc.) are tax-free at any amount — but from anyone else, over ₹50,000 in a year becomes taxable in the recipient\'s hands.'
+            },
+            {
+                myth: 'Once I\'ve filed my ITR, the matter is closed forever.',
+                fact: 'The department can reopen an assessment for several years afterward if under-reported income comes to light later — filing isn\'t automatically the final word.'
+            },
+            {
+                myth: 'I\'m "just a freelancer," so GST rules don\'t really apply to me.',
+                fact: 'GST law doesn\'t care what you call yourself — if your services turnover crosses the threshold, registration and GST collection apply regardless of the "freelancer" label.'
+            }
+        ];
+
+        function render() {
+            const grid = document.getElementById('myth-grid');
+            grid.innerHTML = MYTHS.map((m, i) => `
+                <div class="myth-flip" id="myth-${i}">
+                    <div class="myth-flip-inner">
+                        <div class="myth-face myth-front">
+                            <div class="myth-tag">Myth #${i + 1}</div>
+                            <div class="myth-text">${m.myth}</div>
+                            <div class="myth-hint">Click to reveal →</div>
+                        </div>
+                        <div class="myth-face myth-back">
+                            <div class="myth-tag">✅ Fact</div>
+                            <div class="myth-text">${m.fact}</div>
+                            <div class="myth-hint">← Click to flip back</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            MYTHS.forEach((_, i) => {
+                document.getElementById(`myth-${i}`).addEventListener('click', function () {
+                    this.classList.toggle('flipped');
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', render);
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

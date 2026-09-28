@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tally Desk — Aggarwal Abhishek & Co.</title>
+<style>
+  :root {
+    --navy-900:#001a2e; --navy-800:#002b49; --navy-700:#0a3d63;
+    --gold-500:#d4af37; --gold-600:#b89528;
+    --ink:#1a1a1a; --ink-soft:#5b6773; --paper:#f7f8fa; --line:#e2e6ea;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, "Segoe UI", Inter, Arial, sans-serif; background: var(--paper); color: var(--ink); }
+  #app { display:grid; grid-template-columns: 260px 1fr 320px; grid-template-rows: 52px 1fr; height:100vh; }
+
+  header { grid-column: 1 / 4; background: var(--navy-900); color:#fff; display:flex; align-items:center; padding:0 16px; gap:14px; }
+  header .title { font-weight:700; font-size:0.95rem; }
+  header .spacer { flex:1; }
+  .status-pill { display:flex; align-items:center; gap:6px; font-size:0.8rem; padding:5px 12px; border-radius:999px; background: rgba(255,255,255,0.08); }
+  .status-dot { width:8px; height:8px; border-radius:50%; background:#e05555; }
+  .status-dot.ok { background:#3cbf6e; }
+  header button { background: var(--gold-500); color: var(--navy-900); border:none; border-radius:6px; padding:6px 12px; font-weight:700; font-size:0.8rem; cursor:pointer; }
+  header button.ghost { background: transparent; color:#fff; border:1px solid rgba(255,255,255,0.3); }
+
+  nav.sidebar { background:#fff; border-right:1px solid var(--line); overflow-y:auto; padding:10px 0; }
+  nav.sidebar .cat { padding:10px 16px 4px; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color: var(--ink-soft); font-weight:700; }
+  nav.sidebar a { display:block; padding:8px 16px; font-size:0.85rem; color: var(--ink); text-decoration:none; border-left:3px solid transparent; }
+  nav.sidebar a:hover { background: var(--paper); }
+  nav.sidebar a.active { border-left-color: var(--gold-500); background: var(--paper); font-weight:600; }
+  nav.sidebar a .badge { display:inline-block; margin-left:6px; font-size:0.65rem; background:#e7f6ec; color:#1f7a43; border-radius:4px; padding:1px 5px; }
+
+  main { position:relative; background:#fff; }
+  main webview { width:100%; height:100%; border:none; }
+  main .placeholder { display:flex; align-items:center; justify-content:center; height:100%; color: var(--ink-soft); font-size:0.9rem; }
+
+  aside.tally-panel { background:#fbfbfc; border-left:1px solid var(--line); overflow-y:auto; padding:16px; font-size:0.85rem; }
+  aside.tally-panel h3 { margin:0 0 6px; font-size:0.85rem; }
+  aside.tally-panel .muted { color: var(--ink-soft); font-size:0.78rem; }
+  .tb-row { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dashed var(--line); }
+  .tb-row .v { font-variant-numeric: tabular-nums; }
+  .fill-btn { width:100%; margin-top:12px; background: var(--navy-800); color:#fff; border:none; border-radius:6px; padding:9px; font-weight:600; font-size:0.82rem; cursor:pointer; }
+  .fill-btn:disabled { background:#c6cdd4; cursor:not-allowed; }
+  .note-box { background:#fff7e6; border:1px solid #f0d999; border-radius:6px; padding:10px; font-size:0.78rem; color:#6b5300; margin-top:10px; }
+
+  /* Settings modal */
+  .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; z-index:50; }
+  .modal { background:#fff; border-radius:10px; width:460px; max-width:90vw; padding:22px; }
+  .modal h2 { margin:0 0 14px; font-size:1.05rem; }
+  .modal label { display:block; font-size:0.78rem; font-weight:600; margin:12px 0 4px; }
+  .modal input[type=text], .modal input[type=number], .modal select { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:6px; font-size:0.85rem; }
+  .modal .radio-row { display:flex; gap:16px; font-size:0.85rem; }
+  .modal .actions { display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
+  .modal .actions button { padding:8px 16px; border-radius:6px; border:none; font-weight:600; cursor:pointer; }
+  .modal .actions .save { background: var(--gold-500); color: var(--navy-900); }
+  .modal .actions .cancel { background: var(--paper); color: var(--ink); }
+  .hint { font-size:0.72rem; color: var(--ink-soft); margin-top:3px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="title">Tally Desk — Aggarwal Abhishek &amp; Co.</div>
+    <div class="spacer"></div>
+    <div class="status-pill"><span id="statusDot" class="status-dot"></span><span id="statusText">Connecting…</span></div>
+    <button id="syncNowBtn" class="ghost">Sync now</button>
+    <button id="settingsBtn">Settings</button>
+  </header>
+
+  <nav class="sidebar" id="sidebar"></nav>
+
+  <main>
+    <div class="placeholder" id="placeholder">Choose a tool from the left to get started.</div>
+    <webview id="toolFrame" style="display:none"></webview>
+  </main>
+
+  <aside class="tally-panel" id="tallyPanel">
+    <h3>Live Tally data</h3>
+    <div class="muted" id="companyLine">Not connected yet.</div>
+    <div id="tbList" style="margin-top:10px;"></div>
+    <button class="fill-btn" id="fillBtn" disabled>Open a tool to auto-fill</button>
+    <div id="noteBox"></div>
+  </aside>
+</div>
+
+<div class="modal-backdrop" id="settingsModal" style="display:none">
+  <div class="modal">
+    <h2>Tally connection settings</h2>
+
+    <label>How is Tally reachable?</label>
+    <div class="radio-row">
+      <label style="display:flex;align-items:center;gap:6px;font-weight:400;"><input type="radio" name="syncMode" value="direct"> Direct (same PC / LAN / whitelisted IP)</label>
+      <label style="display:flex;align-items:center;gap:6px;font-weight:400;"><input type="radio" name="syncMode" value="folder"> Cloud folder sync</label>
+    </div>
+
+    <div id="directFields">
+      <label>Tally host / IP</label>
+      <input type="text" id="fHost" placeholder="127.0.0.1">
+      <div class="hint">Use 127.0.0.1 if Tally runs on this PC. For Tally on a cloud/RDP server, use the server's IP or hostname — only works if your cloud provider has opened/whitelisted port 9000 for you.</div>
+      <label>Port</label>
+      <input type="number" id="fPort" placeholder="9000">
+    </div>
+
+    <div id="folderFields" style="display:none">
+      <label>Synced folder (local copy)</label>
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="fFolder" placeholder="C:\Users\you\Google Drive\TallySync" style="flex:1">
+        <button type="button" id="browseFolderBtn" style="padding:0 12px;border-radius:6px;border:1px solid var(--line);background:#fff;cursor:pointer;">Browse…</button>
+      </div>
+      <div class="hint">Point this at the local copy of the Google Drive / OneDrive / Dropbox folder that the cloud-agent script (installed on the Tally-on-Cloud server) writes into. See tally-cloud-agent/README inside the app folder for the one-time server-side setup.</div>
+    </div>
+
+    <label>Company name (optional — leave blank to use the first company Tally reports)</label>
+    <input type="text" id="fCompany" placeholder="Your Company Pvt Ltd">
+
+    <label>Sync every (seconds)</label>
+    <input type="number" id="fInterval" placeholder="30">
+
+    <div class="actions">
+      <button class="cancel" id="cancelSettings">Cancel</button>
+      <button class="save" id="saveSettings">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="tools-config.js"></script>
+<script src="shell.js"></script>
+</body>
+</html>

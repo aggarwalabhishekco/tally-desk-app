@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old vs New Tax Regime Calculator (FY 2025-26) | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free Old vs New Income Tax Regime calculator for FY 2025-26 (AY 2026-27). Compare your tax liability under both regimes and see which one saves you more. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Old vs New Tax Regime Calculator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Old vs New Tax Regime Calculator</h2>
+        <p class="section-subtitle">Enter your income and deductions once to see your tax liability under both regimes side by side for FY 2025-26 (AY 2026-27) — and which one actually saves you money. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">Old vs New Income Tax Regime Comparison — FY 2025-26 (AY 2026-27)</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Educational tool — not a tax return.</strong> This uses the individual income-tax slabs, standard deduction and Section 87A rebate applicable for FY 2025-26 (AY 2026-27) as per the Finance Act, 2025. It assumes salary/other-source income taxed at slab rates and does not cover special-rate income (capital gains, lottery, etc.), surcharge marginal relief nuances, or every possible deduction. Please confirm your final numbers with us before filing.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Old vs New Tax Regime Calculator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help planning your taxes or filing your return. <strong>No income or financial data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the income figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Income &amp; Profile</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Annual Gross Income (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-gross" value="1200000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Age Category (affects Old Regime slabs only)</label>
+                            <select class="tool-form-control" id="inp-age">
+                                <option value="below60" selected>Below 60 years</option>
+                                <option value="senior">60 to 80 years (Senior Citizen)</option>
+                                <option value="supersenior">Above 80 years (Super Senior Citizen)</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Is this salary/pension income?</label>
+                            <select class="tool-form-control" id="inp-is-salary">
+                                <option value="yes" selected>Yes — eligible for standard deduction</option>
+                                <option value="no">No — other income, no standard deduction</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Employer's NPS Contribution — 80CCD(2), optional (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-nps-employer" value="0" min="0" step="1000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Deductions Available Only Under the Old Regime
+                        <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">These reduce your Old Regime tax only — the New Regime does not allow them (except 80CCD(2) above)</span>
+                    </div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Section 80C (PF, ELSS, LIC, PPF, tuition, home loan principal — cap ₹1,50,000)</label>
+                            <input type="number" class="tool-form-control" id="inp-80c" value="150000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Section 80D — Health Insurance Premium (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-80d" value="25000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Section 80CCD(1B) — Additional NPS, self (cap ₹50,000)</label>
+                            <input type="number" class="tool-form-control" id="inp-80ccd1b" value="0" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Home Loan Interest — self-occupied, Sec 24(b) (cap ₹2,00,000)</label>
+                            <input type="number" class="tool-form-control" id="inp-homeloan" value="0" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">HRA Exemption Amount, if applicable (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-hra" value="0" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Other Deductions — 80E, 80G, 80TTA etc. (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-other" value="0" min="0" step="1000">
+                        </div>
+                    </div>
+                    <p style="font-size:0.82rem; color:#64748b; margin-top:8px;">Not sure of your exact HRA exemption? Use our <a href="hra-calculator.html" style="color:#002b49; font-weight:700;">HRA Exemption Calculator</a> first, then bring that figure back here.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Comparison
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;" disabled>📸 Get My Shareable Verdict Card</button>
+                        </div>
+                    </div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Download a shareable image of your result — nice for WhatsApp-ing to a friend or sharing on LinkedIn. No data is uploaded; the image is drawn entirely in your browser.</p>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Full Breakdown
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-regime-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="breakdown-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Documents Usually Needed to Decide &amp; File</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">A general list — nothing here is saved or sent anywhere.</p>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not a filed tax return or tax advice. Calculations use FY 2025-26 (AY 2026-27) slab rates, the Section 87A rebate (including marginal relief) and a simplified surcharge, and assume income taxed at normal slab rates only. It does not account for capital gains, presumptive income, Chapter VI-A caps you may have already used elsewhere, or your specific eligibility to switch regimes (business-income taxpayers face restrictions under Section 115BAC that salaried taxpayers do not). Aggarwal Abhishek &amp; Co. does not certify these figures — please have us review your actual computation before filing or before locking in a regime choice.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        // ---- New Regime slabs, FY 2025-26 (AY 2026-27), Finance Act 2025 ----
+        // Same slabs for all ages under the New Regime.
+        const NEW_REGIME_SLABS = [
+            { upto: 400000, rate: 0 },
+            { upto: 800000, rate: 0.05 },
+            { upto: 1200000, rate: 0.10 },
+            { upto: 1600000, rate: 0.15 },
+            { upto: 2000000, rate: 0.20 },
+            { upto: 2400000, rate: 0.25 },
+            { upto: Infinity, rate: 0.30 }
+        ];
+        const NEW_REGIME_STD_DEDUCTION = 75000;
+        const NEW_REGIME_REBATE_LIMIT = 1200000; // taxable income up to which 87A rebate makes tax nil
+        const NEW_REGIME_REBATE_MAX = 60000;
+
+        // ---- Old Regime slabs (unchanged for several years) ----
+        const OLD_REGIME_SLABS = {
+            below60: [
+                { upto: 250000, rate: 0 },
+                { upto: 500000, rate: 0.05 },
+                { upto: 1000000, rate: 0.20 },
+                { upto: Infinity, rate: 0.30 }
+            ],
+            senior: [
+                { upto: 300000, rate: 0 },
+                { upto: 500000, rate: 0.05 },
+                { upto: 1000000, rate: 0.20 },
+                { upto: Infinity, rate: 0.30 }
+            ],
+            supersenior: [
+                { upto: 500000, rate: 0 },
+                { upto: 1000000, rate: 0.20 },
+                { upto: Infinity, rate: 0.30 }
+            ]
+        };
+        const OLD_REGIME_STD_DEDUCTION = 50000;
+        const OLD_REGIME_REBATE_LIMIT = 500000;
+        const OLD_REGIME_REBATE_MAX = 12500;
+
+        function slabTax(taxableIncome, slabs) {
+            let tax = 0, lastCap = 0;
+            for (const slab of slabs) {
+                if (taxableIncome > lastCap) {
+                    const chunk = Math.min(taxableIncome, slab.upto) - lastCap;
+                    tax += chunk * slab.rate;
+                }
+                lastCap = slab.upto;
+                if (taxableIncome <= slab.upto) break;
+            }
+            return tax;
+        }
+
+        // Rebate u/s 87A with a simple marginal-relief taper: if taxable income
+        // slightly exceeds the rebate limit, tax is capped at (income - limit)
+        // so a small increase in income can't cost more than that increase.
+        function applyRebateAndMarginalRelief(taxableIncome, taxBeforeRebate, limit, maxRebate) {
+            if (taxableIncome <= limit) {
+                return Math.max(0, taxBeforeRebate - Math.min(taxBeforeRebate, maxRebate));
+            }
+            const excess = taxableIncome - limit;
+            if (taxBeforeRebate > excess) {
+                return excess; // marginal relief: tax never exceeds the income crossing the limit
+            }
+            return taxBeforeRebate;
+        }
+
+        // Simplified surcharge (no marginal relief on surcharge itself — flagged in disclaimer).
+        // The 25% surcharge cap above ₹2 crore (Budget 2023) applies only to the New Regime.
+        // Under the Old Regime, slab income above ₹5 crore still attracts 37% surcharge.
+        function surchargeRate(taxableIncome, isOldRegime) {
+            if (taxableIncome > 20000000) return isOldRegime ? 0.37 : 0.25;
+            if (taxableIncome > 10000000) return 0.15;
+            if (taxableIncome > 5000000) return 0.10;
+            return 0;
+        }
+
+        function computeRegime(taxableIncomeBeforeRebate, slabs, rebateLimit, rebateMax, isOldRegime) {
+            const taxBeforeRebate = slabTax(taxableIncomeBeforeRebate, slabs);
+            const taxAfterRebate = applyRebateAndMarginalRelief(taxableIncomeBeforeRebate, taxBeforeRebate, rebateLimit, rebateMax);
+            const surchargePct = surchargeRate(taxableIncomeBeforeRebate, isOldRegime);
+            const surcharge = taxAfterRebate * surchargePct;
+            const cess = (taxAfterRebate + surcharge) * 0.04;
+            const totalTax = taxAfterRebate + surcharge + cess;
+            return { taxableIncome: taxableIncomeBeforeRebate, taxBeforeRebate, taxAfterRebate, surchargePct, surcharge, cess, totalTax };
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+
+        function render() {
+            const gross = Math.max(0, Number(document.getElementById('inp-gross').value) || 0);
+            const age = document.getElementById('inp-age').value;
+            const isSalary = document.getElementById('inp-is-salary').value === 'yes';
+            const npsEmployer = Math.max(0, Number(document.getElementById('inp-nps-employer').value) || 0);
+            const c80c = Math.min(150000, Math.max(0, Number(document.getElementById('inp-80c').value) || 0));
+            const c80d = Math.max(0, Number(document.getElementById('inp-80d').value) || 0);
+            const c80ccd1b = Math.min(50000, Math.max(0, Number(document.getElementById('inp-80ccd1b').value) || 0));
+            const homeLoan = Math.min(200000, Math.max(0, Number(document.getElementById('inp-homeloan').value) || 0));
+            const hra = Math.max(0, Number(document.getElementById('inp-hra').value) || 0);
+            const other = Math.max(0, Number(document.getElementById('inp-other').value) || 0);
+
+            if (gross <= 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#64748b; padding:10px;">Enter your annual gross income to see the comparison.</p>';
+                document.getElementById('breakdown-table-wrap').innerHTML = '';
+                document.getElementById('insights-card').style.display = 'none';
+                document.getElementById('btn-verdict-card').disabled = true;
+                lastResult = null;
+                return;
+            }
+            document.getElementById('btn-verdict-card').disabled = false;
+
+            // New Regime: standard deduction + 80CCD(2) employer NPS only.
+            const newStdDed = isSalary ? NEW_REGIME_STD_DEDUCTION : 0;
+            const newTaxable = Math.max(0, gross - newStdDed - npsEmployer);
+            const newResult = computeRegime(newTaxable, NEW_REGIME_SLABS, NEW_REGIME_REBATE_LIMIT, NEW_REGIME_REBATE_MAX, false);
+
+            // Old Regime: standard deduction + all Chapter VI-A deductions + HRA + home loan interest.
+            const oldStdDed = isSalary ? OLD_REGIME_STD_DEDUCTION : 0;
+            const oldDeductions = oldStdDed + npsEmployer + c80c + c80d + c80ccd1b + homeLoan + hra + other;
+            const oldTaxable = Math.max(0, gross - oldDeductions);
+            const oldResult = computeRegime(oldTaxable, OLD_REGIME_SLABS[age], OLD_REGIME_REBATE_LIMIT, OLD_REGIME_REBATE_MAX, true);
+
+            lastResult = { gross, age, isSalary, npsEmployer, c80c, c80d, c80ccd1b, homeLoan, hra, other, newResult, oldResult, newStdDed, oldStdDed, oldDeductions };
+
+            const diff = oldResult.totalTax - newResult.totalTax; // positive => new regime cheaper
+            const better = diff > 0 ? 'new' : (diff < 0 ? 'old' : 'either');
+            const betterLabel = better === 'new' ? 'New Regime' : (better === 'old' ? 'Old Regime' : 'Either regime');
+            const savings = Math.abs(diff);
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['New Regime — Total Tax', fmtMoneyWhole(newResult.totalTax), `Taxable income: ${fmtMoneyWhole(newResult.taxableIncome)}`, better === 'new' ? '#10b981' : '#64748b'],
+                ['Old Regime — Total Tax', fmtMoneyWhole(oldResult.totalTax), `Taxable income: ${fmtMoneyWhole(oldResult.taxableIncome)}`, better === 'old' ? '#10b981' : '#64748b'],
+                ['Recommended', betterLabel, savings > 0 ? `Saves ${fmtMoneyWhole(savings)}/year` : 'Tax is identical either way', '#002b49'],
+                ['Annual Savings', fmtMoneyWhole(savings), savings > 0 ? `${(savings / 12).toFixed(0) > 0 ? '≈ ' + fmtMoneyWhole(savings/12) + '/month' : ''}` : 'No difference', '#d4af37']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights());
+            renderBreakdownTable();
+        }
+
+        function buildInsights() {
+            if (!lastResult) return [];
+            const insights = [];
+            const { gross, oldDeductions, newResult, oldResult, hra, homeLoan, c80c } = lastResult;
+            const diff = oldResult.totalTax - newResult.totalTax;
+
+            if (Math.abs(diff) < 500) {
+                insights.push({ level: 'info', text: 'Both regimes work out almost the same for you right now. Since the New Regime is simpler (no proof collection, no investment lock-in), it may still be the easier practical choice.' });
+            } else if (diff > 0) {
+                insights.push({ level: 'good', text: `The New Regime saves you ${fmtMoneyWhole(diff)} a year compared to the Old Regime, based on the deductions you've entered.` });
+                if (oldDeductions > 250000) {
+                    insights.push({ level: 'info', text: `You're claiming ${fmtMoneyWhole(oldDeductions)} of deductions under the Old Regime, yet the New Regime still comes out ahead — its lower slab rates are outweighing your deductions.` });
+                }
+            } else {
+                insights.push({ level: 'good', text: `The Old Regime saves you ${fmtMoneyWhole(-diff)} a year compared to the New Regime, mainly because of the deductions and exemptions you're claiming.` });
+                if (hra === 0 && homeLoan === 0 && c80c < 100000) {
+                    insights.push({ level: 'warning', text: 'This gap looks like it could grow further — if you have HRA, home loan interest, or more 80C room you haven\'t entered yet, add it in for a more complete picture.' });
+                }
+            }
+
+            if (gross > 1200000 && gross <= 1300000 && newResult.taxableIncome > 1200000) {
+                insights.push({ level: 'info', text: 'You are just above the ₹12,00,000 New Regime rebate threshold — marginal relief limits how much extra tax you pay for crossing it, but a small reduction in taxable income (e.g. more employer NPS contribution) could bring you back under the rebate limit entirely.' });
+            }
+
+            if (lastResult.isSalary === false) {
+                insights.push({ level: 'warning', text: 'Non-salaried taxpayers with business/professional income face restrictions on switching between regimes each year (Form 10-IEA applies) — this differs from salaried taxpayers, who can choose freely every year.' });
+            }
+
+            insights.push({ level: 'info', text: 'This comparison assumes all your income is taxed at slab rates. If you also have capital gains or other special-rate income, those are taxed separately at their own rates under both regimes and are not included here.' });
+
+            return insights;
+        }
+
+        function slabRowsHtml(slabs, label) {
+            return slabs.map(s => `${label} slab: up to ${s.upto === Infinity ? '∞' : fmtMoneyWhole(s.upto)} @ ${(s.rate*100).toFixed(0)}%`).join('<br>');
+        }
+
+        function renderBreakdownTable() {
+            const wrap = document.getElementById('breakdown-table-wrap');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rows = [
+                ['Gross Income', fmtMoneyWhole(r.gross), fmtMoneyWhole(r.gross)],
+                ['Standard Deduction', fmtMoneyWhole(r.newStdDed), fmtMoneyWhole(r.oldStdDed)],
+                ['Employer NPS — 80CCD(2)', fmtMoneyWhole(r.npsEmployer), fmtMoneyWhole(r.npsEmployer)],
+                ['Section 80C', '—', fmtMoneyWhole(r.c80c)],
+                ['Section 80D', '—', fmtMoneyWhole(r.c80d)],
+                ['Section 80CCD(1B) — NPS', '—', fmtMoneyWhole(r.c80ccd1b)],
+                ['Home Loan Interest — 24(b)', '—', fmtMoneyWhole(r.homeLoan)],
+                ['HRA Exemption', '—', fmtMoneyWhole(r.hra)],
+                ['Other Deductions', '—', fmtMoneyWhole(r.other)],
+                ['Taxable Income', fmtMoneyWhole(r.newResult.taxableIncome), fmtMoneyWhole(r.oldResult.taxableIncome)],
+                ['Tax Before Rebate', fmtMoneyWhole(r.newResult.taxBeforeRebate), fmtMoneyWhole(r.oldResult.taxBeforeRebate)],
+                ['Tax After Sec 87A Rebate', fmtMoneyWhole(r.newResult.taxAfterRebate), fmtMoneyWhole(r.oldResult.taxAfterRebate)],
+                ['Surcharge', fmtMoneyWhole(r.newResult.surcharge), fmtMoneyWhole(r.oldResult.surcharge)],
+                ['Health &amp; Education Cess (4%)', fmtMoneyWhole(r.newResult.cess), fmtMoneyWhole(r.oldResult.cess)],
+                ['Total Tax Payable', `<strong>${fmtMoneyWhole(r.newResult.totalTax)}</strong>`, `<strong>${fmtMoneyWhole(r.oldResult.totalTax)}</strong>`]
+            ];
+            wrap.innerHTML = `<table class="tool-table">
+                <thead><tr><th>Component</th><th>New Regime</th><th>Old Regime</th></tr></thead>
+                <tbody>${rows.map(([label, n, o]) => `<tr><td>${label}</td><td>${n}</td><td>${o}</td></tr>`).join('')}</tbody>
+            </table>`;
+        }
+
+        document.getElementById('btn-regime-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const r = lastResult;
+            const lines = [
+                ['Component', 'New Regime', 'Old Regime'].map(csvEscape).join(','),
+                ['Gross Income', r.gross, r.gross].map(csvEscape).join(','),
+                ['Standard Deduction', r.newStdDed, r.oldStdDed].map(csvEscape).join(','),
+                ['Employer NPS 80CCD(2)', r.npsEmployer, r.npsEmployer].map(csvEscape).join(','),
+                ['Section 80C', 0, r.c80c].map(csvEscape).join(','),
+                ['Section 80D', 0, r.c80d].map(csvEscape).join(','),
+                ['Section 80CCD(1B)', 0, r.c80ccd1b].map(csvEscape).join(','),
+                ['Home Loan Interest 24(b)', 0, r.homeLoan].map(csvEscape).join(','),
+                ['HRA Exemption', 0, r.hra].map(csvEscape).join(','),
+                ['Other Deductions', 0, r.other].map(csvEscape).join(','),
+                ['Taxable Income', r.newResult.taxableIncome.toFixed(2), r.oldResult.taxableIncome.toFixed(2)].map(csvEscape).join(','),
+                ['Tax Before Rebate', r.newResult.taxBeforeRebate.toFixed(2), r.oldResult.taxBeforeRebate.toFixed(2)].map(csvEscape).join(','),
+                ['Tax After 87A Rebate', r.newResult.taxAfterRebate.toFixed(2), r.oldResult.taxAfterRebate.toFixed(2)].map(csvEscape).join(','),
+                ['Surcharge', r.newResult.surcharge.toFixed(2), r.oldResult.surcharge.toFixed(2)].map(csvEscape).join(','),
+                ['Cess (4%)', r.newResult.cess.toFixed(2), r.oldResult.cess.toFixed(2)].map(csvEscape).join(','),
+                ['Total Tax Payable', r.newResult.totalTax.toFixed(2), r.oldResult.totalTax.toFixed(2)].map(csvEscape).join(',')
+            ];
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Tax_Regime_Comparison_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        const DOC_CHECKLIST_ITEMS = [
+            'Form 16 from your employer (Part A and Part B)',
+            'Salary slips for the financial year',
+            'Interest certificates from banks/post office (savings + FDs)',
+            'Home loan interest certificate, if claiming Section 24(b) or 80EEA',
+            'Investment proofs for Section 80C (PF, ELSS, PPF, LIC, tuition fee receipts, etc.)',
+            'Health insurance premium receipts for Section 80D',
+            'Rent receipts and landlord PAN (if rent exceeds ₹1,00,000/year), for HRA',
+            'Capital gains statements from your broker/mutual fund, if applicable (taxed separately from this comparison)',
+            'Form 26AS / AIS / TIS downloaded from the income-tax portal, to cross-check TDS credit',
+            'Last year\'s filed ITR, for reference'
+        ];
+        function renderDocChecklist() {
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = DOC_CHECKLIST_ITEMS.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            DOC_CHECKLIST_ITEMS.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        ['inp-gross', 'inp-age', 'inp-is-salary', 'inp-nps-employer', 'inp-80c', 'inp-80d', 'inp-80ccd1b', 'inp-homeloan', 'inp-hra', 'inp-other'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => {
+            if (!lastResult) return null;
+            const r = lastResult;
+            const diff = r.oldResult.totalTax - r.newResult.totalTax;
+            const better = diff >= 0 ? 'New Regime' : 'Old Regime';
+            const savings = Math.abs(diff);
+            return {
+                eyebrow: 'My FY 2025-26 Tax Verdict',
+                headline: `${better} Wins`,
+                resultLine: fmtMoneyWhole(savings),
+                resultSub: savings > 0 ? 'saved per year vs. the other regime' : 'Tax is identical either way',
+                footerNote: 'Estimate only — not a filed computation.',
+                toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+            };
+        }, 'My_Tax_Regime_Verdict');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDocChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

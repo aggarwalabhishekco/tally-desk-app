@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan &amp; EMI Calculator | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free loan EMI calculator with a full year-wise and month-wise amortization schedule, prepayment impact and CSV export. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Loan &amp; EMI Calculator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Loan &amp; EMI Calculator</h2>
+        <p class="section-subtitle">Work out your monthly EMI, total interest and a full amortization schedule — including the effect of an optional prepayment. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">Loan EMI &amp; Amortization Calculator</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Educational tool — not a sanction or offer.</strong> This calculates EMI using the standard reducing-balance formula from the numbers you enter. Your actual lender's EMI can differ slightly due to day-count conventions, processing fees, insurance add-ons or rounding. Always confirm the final figure from your loan sanction letter.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Loan & EMI Calculator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help planning a loan or its tax treatment. <strong>No loan or financial data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the loan figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Loan Details</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Loan Amount (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-principal" value="2500000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Interest Rate (% p.a.)</label>
+                            <input type="number" class="tool-form-control" id="inp-rate" value="9" min="0" step="0.05">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Tenure</label>
+                            <input type="number" class="tool-form-control" id="inp-tenure" value="20" min="1" step="1">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Tenure Unit</label>
+                            <select class="tool-form-control" id="inp-tenure-unit">
+                                <option value="years" selected>Years</option>
+                                <option value="months">Months</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Loan Start Month</label>
+                            <input type="month" class="tool-form-control" id="inp-start">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Processing Fee (%, optional)</label>
+                            <input type="number" class="tool-form-control" id="inp-fee" value="0" min="0" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Optional — Extra Yearly Prepayment
+                        <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">See how a lump-sum prepayment each year shortens your tenure</span>
+                    </div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Extra Prepayment (₹ per year, optional)</label>
+                            <input type="number" class="tool-form-control" id="inp-prepay" value="0" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Prepayment Applied In</label>
+                            <select class="tool-form-control" id="inp-prepay-month">
+                                <option value="3">April (start of FY)</option>
+                                <option value="12" selected>March (end of FY)</option>
+                                <option value="0">Same month as loan start, every year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Summary</div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card" id="prepay-savings-card" style="display:none;">
+                    <div class="tool-card-title">Impact of Your Prepayment</div>
+                    <div class="widget-grid" id="prepay-cards"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Amortization Schedule
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-toggle-monthly" style="background:#002b49;">📅 Show Month-wise</button>
+                            <button class="btn-tool-outline" id="btn-emi-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="schedule-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Documents Usually Needed for a Loan Application</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">A general list — your lender's exact requirements vary by loan type and applicant category. Nothing here is saved or sent anywhere.</p>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not a loan sanction, offer or advice. EMI, interest and prepayment figures are computed using the standard reducing-balance method and may differ from your actual lender's calculation due to day-count conventions, fees, insurance, or rate resets (for floating-rate loans). Aggarwal Abhishek &amp; Co. does not certify these figures for your specific case — please verify against your loan sanction letter before relying on them.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoney(n) {
+            return '₹' + Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function monthLabel(m) { return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m]; }
+
+        // Standard reducing-balance EMI formula.
+        function calcEmi(principal, annualRatePct, months) {
+            const r = (annualRatePct / 12) / 100;
+            if (r === 0) return principal / months;
+            const pow = Math.pow(1 + r, months);
+            return principal * r * pow / (pow - 1);
+        }
+
+        // Builds a full month-by-month amortization schedule. `prepayAmount`
+        // (if > 0) is applied once a year in `prepayMonthIndex` (0 = same
+        // calendar month as the loan's start month, 3 = April, 12 = March —
+        // matches the <select> above) directly against principal, which
+        // shortens the tenure; the EMI itself stays fixed (typical for most
+        // Indian lenders on a prepayment, rather than the EMI being reduced).
+        function buildSchedule(principal, annualRatePct, months, startYear, startMonthIdx, prepayAmount, prepayMonthIndex) {
+            const emi = calcEmi(principal, annualRatePct, months);
+            const r = (annualRatePct / 12) / 100;
+            let balance = principal;
+            const rows = [];
+            let m = 0;
+            let curYear = startYear, curMonthIdx = startMonthIdx;
+            while (balance > 0.5 && m < 1200) { // hard safety cap
+                m++;
+                const openingBalance = balance;
+                const interest = balance * r;
+                let principalComponent = emi - interest;
+                if (principalComponent > balance) principalComponent = balance;
+                let actualEmi = principalComponent + interest;
+                balance -= principalComponent;
+
+                let prepayThisMonth = 0;
+                const isPrepayMonth = prepayAmount > 0 && (
+                    (prepayMonthIndex === 0 && curMonthIdx === startMonthIdx && m > 1) ||
+                    (prepayMonthIndex !== 0 && curMonthIdx === (prepayMonthIndex % 12))
+                );
+                if (isPrepayMonth && balance > 0) {
+                    prepayThisMonth = Math.min(prepayAmount, balance);
+                    balance -= prepayThisMonth;
+                }
+
+                rows.push({
+                    month: m, year: curYear, monthIdx: curMonthIdx,
+                    openingBalance, emi: actualEmi, principal: principalComponent,
+                    interest, prepay: prepayThisMonth, closingBalance: balance
+                });
+
+                curMonthIdx++;
+                if (curMonthIdx > 11) { curMonthIdx = 0; curYear++; }
+            }
+            return { emi, rows };
+        }
+
+        function yearWiseFromMonthly(rows) {
+            const map = new Map();
+            rows.forEach(r => {
+                // Financial-year label (Apr–Mar), standard for Indian loans/tax purposes
+                const fyStart = r.monthIdx >= 3 ? r.year : r.year - 1;
+                const label = `FY ${fyStart}-${String(fyStart + 1).slice(-2)}`;
+                if (!map.has(label)) map.set(label, { label, principal: 0, interest: 0, prepay: 0, emiPaid: 0, closingBalance: r.closingBalance });
+                const y = map.get(label);
+                y.principal += r.principal;
+                y.interest += r.interest;
+                y.prepay += r.prepay;
+                y.emiPaid += r.emi;
+                y.closingBalance = r.closingBalance;
+            });
+            return Array.from(map.values());
+        }
+
+        let lastSchedule = null;
+        let showMonthly = false;
+
+        function renderScheduleTable() {
+            const wrap = document.getElementById('schedule-table-wrap');
+            if (!lastSchedule) { wrap.innerHTML = ''; return; }
+            if (!showMonthly) {
+                const yearRows = yearWiseFromMonthly(lastSchedule.rows);
+                wrap.innerHTML = `<div class="tool-table-container"><table class="tool-table">
+                    <thead><tr><th>Financial Year</th><th class="text-right">Principal Paid</th><th class="text-right">Interest Paid</th><th class="text-right">Prepayment</th><th class="text-right">Closing Balance</th></tr></thead>
+                    <tbody>${yearRows.map(y => `<tr>
+                        <td>${y.label}</td>
+                        <td class="text-right">${fmtMoneyWhole(y.principal)}</td>
+                        <td class="text-right">${fmtMoneyWhole(y.interest)}</td>
+                        <td class="text-right">${y.prepay ? fmtMoneyWhole(y.prepay) : '—'}</td>
+                        <td class="text-right">${fmtMoneyWhole(Math.max(0, y.closingBalance))}</td>
+                    </tr>`).join('')}</tbody>
+                </table></div>`;
+            } else {
+                wrap.innerHTML = `<div class="tool-table-container"><table class="tool-table">
+                    <thead><tr><th>#</th><th>Month</th><th class="text-right">Opening Balance</th><th class="text-right">EMI</th><th class="text-right">Principal</th><th class="text-right">Interest</th><th class="text-right">Prepayment</th><th class="text-right">Closing Balance</th></tr></thead>
+                    <tbody>${lastSchedule.rows.map(r => `<tr>
+                        <td>${r.month}</td><td>${monthLabel(r.monthIdx)} ${r.year}</td>
+                        <td class="text-right">${fmtMoneyWhole(r.openingBalance)}</td>
+                        <td class="text-right">${fmtMoneyWhole(r.emi)}</td>
+                        <td class="text-right">${fmtMoneyWhole(r.principal)}</td>
+                        <td class="text-right">${fmtMoneyWhole(r.interest)}</td>
+                        <td class="text-right">${r.prepay ? fmtMoneyWhole(r.prepay) : '—'}</td>
+                        <td class="text-right">${fmtMoneyWhole(Math.max(0, r.closingBalance))}</td>
+                    </tr>`).join('')}</tbody>
+                </table></div>`;
+            }
+        }
+
+        // ==========================================================================
+        // Smart Insights — a rule-based (not live-AI) narrative that turns the
+        // computed schedule into plain-language observations. Deterministic,
+        // free to run, no data leaves the browser.
+        // ==========================================================================
+        function buildEmiInsights(principal, rate, months, totalInterest, prepayAmount, baseline, schedule) {
+            const insights = [];
+            const interestPct = principal > 0 ? (totalInterest / principal) * 100 : 0;
+
+            if (interestPct >= 100) {
+                insights.push({
+                    level: 'warning',
+                    text: `Over the life of this loan you'll pay ${fmtMoneyWhole(totalInterest)} in interest — ${interestPct.toFixed(0)}% of the ${fmtMoneyWhole(principal)} borrowed. This is typical for a longer-tenure loan at this rate, but it's worth seeing clearly: for every ₹1 borrowed, you'll end up paying back roughly ₹${(1 + interestPct / 100).toFixed(2)}.`
+                });
+            } else {
+                insights.push({
+                    level: 'good',
+                    text: `Total interest (${fmtMoneyWhole(totalInterest)}) is ${interestPct.toFixed(0)}% of the principal — a relatively contained interest burden for this loan's rate and tenure.`
+                });
+            }
+
+            if (rate >= 12) {
+                insights.push({
+                    level: 'warning',
+                    text: `${rate}% is on the higher side for most secured loan categories (home/auto loans in India are typically 8–11%). If this is a personal or business loan, it may still be reasonable — but if a lower-rate option or balance transfer is available, it's worth comparing the total interest saved against any transfer/foreclosure charges.`
+                });
+            }
+
+            if (prepayAmount > 0) {
+                const baselineInterest = baseline.rows.reduce((a, r) => a + r.interest, 0);
+                const interestSaved = Math.max(0, baselineInterest - totalInterest);
+                const monthsSaved = baseline.rows.length - schedule.rows.length;
+                const savedPct = baselineInterest > 0 ? (interestSaved / baselineInterest) * 100 : 0;
+                insights.push({
+                    level: 'good',
+                    text: `Prepaying ${fmtMoneyWhole(prepayAmount)} a year cuts your total interest by ${fmtMoneyWhole(interestSaved)} (${savedPct.toFixed(0)}% less) and pays the loan off ${monthsSaved} month${monthsSaved === 1 ? '' : 's'} earlier. Prepaying earlier in the tenure (when the outstanding balance and interest component are highest) saves more than the same amount prepaid later.`
+                });
+            } else if (months > 60) {
+                // Illustrative "what if" — one extra EMI-equivalent prepaid
+                // each year, purely to show the shape of the opportunity.
+                // This does not change any input or stored state.
+                const hypotheticalPrepay = Math.round(schedule.emi);
+                const hypoSchedule = buildSchedule(principal, rate, months, new Date().getFullYear(), 0, hypotheticalPrepay, 12);
+                const hypoInterest = hypoSchedule.rows.reduce((a, r) => a + r.interest, 0);
+                const hypoSaved = Math.max(0, totalInterest - hypoInterest);
+                const hypoMonthsSaved = schedule.rows.length - hypoSchedule.rows.length;
+                if (hypoSaved > 0) {
+                    insights.push({
+                        level: 'info',
+                        text: `No prepayment is set. As a rough illustration: prepaying just one extra EMI (${fmtMoneyWhole(hypotheticalPrepay)}) once a year could save around ${fmtMoneyWhole(hypoSaved)} in interest and close the loan ~${hypoMonthsSaved} month${hypoMonthsSaved === 1 ? '' : 's'} sooner. Try the prepayment field above to model your own amount.`
+                    });
+                }
+            }
+
+            return insights;
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        function render() {
+            const principal = Math.max(0, Number(document.getElementById('inp-principal').value) || 0);
+            const rate = Math.max(0, Number(document.getElementById('inp-rate').value) || 0);
+            const tenureVal = Math.max(1, Number(document.getElementById('inp-tenure').value) || 1);
+            const tenureUnit = document.getElementById('inp-tenure-unit').value;
+            const months = tenureUnit === 'years' ? Math.round(tenureVal * 12) : Math.round(tenureVal);
+            const feePct = Math.max(0, Number(document.getElementById('inp-fee').value) || 0);
+            const prepayAmount = Math.max(0, Number(document.getElementById('inp-prepay').value) || 0);
+            const prepayMonthIndex = Number(document.getElementById('inp-prepay-month').value);
+
+            const startInput = document.getElementById('inp-start').value; // "YYYY-MM"
+            let startYear, startMonthIdx;
+            if (startInput) {
+                const [y, m] = startInput.split('-').map(Number);
+                startYear = y; startMonthIdx = m - 1;
+            } else {
+                const now = new Date();
+                startYear = now.getFullYear(); startMonthIdx = now.getMonth();
+            }
+
+            if (principal <= 0 || months <= 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#64748b; padding:10px;">Enter a loan amount and tenure to see results.</p>';
+                document.getElementById('schedule-table-wrap').innerHTML = '';
+                document.getElementById('insights-card').style.display = 'none';
+                lastSchedule = null;
+                return;
+            }
+
+            // No-prepayment baseline (for EMI, total-without-prepay comparisons)
+            const baseline = buildSchedule(principal, rate, months, startYear, startMonthIdx, 0, prepayMonthIndex);
+            const schedule = prepayAmount > 0
+                ? buildSchedule(principal, rate, months, startYear, startMonthIdx, prepayAmount, prepayMonthIndex)
+                : baseline;
+            lastSchedule = schedule;
+
+            const totalInterest = schedule.rows.reduce((a, r) => a + r.interest, 0);
+            const totalPrepay = schedule.rows.reduce((a, r) => a + r.prepay, 0);
+            const totalPayment = schedule.rows.reduce((a, r) => a + r.emi, 0) + totalPrepay;
+            const processingFee = principal * feePct / 100;
+            const actualMonths = schedule.rows.length;
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['Monthly EMI', fmtMoneyWhole(schedule.emi), 'Fixed, reducing-balance method', '#0ea5e9'],
+                ['Total Interest Payable', fmtMoneyWhole(totalInterest), `Over ${actualMonths} month${actualMonths === 1 ? '' : 's'}`, '#f59e0b'],
+                ['Total Payment', fmtMoneyWhole(totalPayment + processingFee), 'Principal + interest' + (processingFee ? ' + processing fee' : ''), '#002b49'],
+                ['Loan Amount', fmtMoneyWhole(principal), processingFee ? `+ ${fmtMoneyWhole(processingFee)} processing fee` : 'Principal borrowed', '#10b981']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            const prepayCard = document.getElementById('prepay-savings-card');
+            if (prepayAmount > 0) {
+                const baselineInterest = baseline.rows.reduce((a, r) => a + r.interest, 0);
+                const interestSaved = baselineInterest - totalInterest;
+                const monthsSaved = baseline.rows.length - schedule.rows.length;
+                prepayCard.style.display = 'block';
+                document.getElementById('prepay-cards').innerHTML = [
+                    ['Interest Saved', fmtMoneyWhole(Math.max(0, interestSaved)), 'Versus no prepayment', '#10b981'],
+                    ['Tenure Shortened By', `${monthsSaved} month${monthsSaved === 1 ? '' : 's'}`, `${Math.floor(monthsSaved / 12)}y ${monthsSaved % 12}m earlier payoff`, '#0ea5e9'],
+                    ['Total Prepaid', fmtMoneyWhole(totalPrepay), 'Across the loan tenure', '#7c3aed']
+                ].map(([label, val, sub, color]) => `
+                    <div class="metric-card" style="border-top-color:${color};">
+                        <div class="label">${label}</div>
+                        <div class="value">${val}</div>
+                        <div class="subtext" style="color:${color};">${sub}</div>
+                    </div>
+                `).join('');
+            } else {
+                prepayCard.style.display = 'none';
+            }
+
+            renderSmartInsights(buildEmiInsights(principal, rate, months, totalInterest, prepayAmount, baseline, schedule));
+            renderScheduleTable();
+        }
+
+        document.getElementById('btn-toggle-monthly').addEventListener('click', () => {
+            showMonthly = !showMonthly;
+            document.getElementById('btn-toggle-monthly').textContent = showMonthly ? '📅 Show Year-wise' : '📅 Show Month-wise';
+            renderScheduleTable();
+        });
+
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+        document.getElementById('btn-emi-csv').addEventListener('click', () => {
+            if (!lastSchedule) return;
+            const lines = [['Month #', 'Month', 'Year', 'Opening Balance', 'EMI', 'Principal', 'Interest', 'Prepayment', 'Closing Balance'].map(csvEscape).join(',')];
+            lastSchedule.rows.forEach(r => {
+                lines.push([r.month, monthLabel(r.monthIdx), r.year, r.openingBalance.toFixed(2), r.emi.toFixed(2), r.principal.toFixed(2), r.interest.toFixed(2), r.prepay.toFixed(2), Math.max(0, r.closingBalance).toFixed(2)].map(csvEscape).join(','));
+            });
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `EMI_Amortization_Schedule_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        const DOC_CHECKLIST_ITEMS = [
+            'Identity proof (PAN mandatory; Aadhaar/passport/voter ID/driving licence)',
+            'Address proof (Aadhaar/utility bill/passport/rent agreement)',
+            'Last 6 months\' bank statements of the primary account',
+            'Income proof — salaried: last 3 months\' salary slips + Form 16 / last 2 years\' ITR',
+            'Income proof — self-employed/business: last 2–3 years\' ITR with computation, audited financials (if applicable) and GST returns',
+            'Passport-size photographs',
+            'Property documents (for a secured/home loan): sale agreement, title deed, approved building plan, NOC/allotment letter',
+            'Existing loan statements, if any, for the last 6–12 months',
+            'Business registration proof (for a business loan): GST certificate, Udyam/MSME registration, partnership deed or MOA/AOA as applicable',
+            'Co-applicant/guarantor documents, if a co-applicant or guarantor is being added'
+        ];
+        function renderDocChecklist() {
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = DOC_CHECKLIST_ITEMS.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            DOC_CHECKLIST_ITEMS.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        ['inp-principal', 'inp-rate', 'inp-tenure', 'inp-tenure-unit', 'inp-start', 'inp-fee', 'inp-prepay', 'inp-prepay-month'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            document.getElementById('inp-start').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+            renderDocChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

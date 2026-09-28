@@ -1,0 +1,44 @@
+{
+  "name": "aggarwal-abhishek-tally-desk",
+  "productName": "Aggarwal Abhishek & Co. - Tally Desk",
+  "version": "1.0.0",
+  "description": "Desktop app bundling the Aggarwal Abhishek & Co. financial tools with live Tally data sync.",
+  "main": "src/main.js",
+  "author": "Aggarwal Abhishek & Co.",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win --publish never",
+    "dist:mac": "electron-builder --mac zip --publish never",
+    "dist:all": "electron-builder --win --mac zip --publish never"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.aggarwalabhishekco.tallydesk",
+    "productName": "Tally Desk",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "tools/**/*",
+      "assets/**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,readme.md}"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallDirectory": true
+    },
+    "mac": {
+      "target": ["zip"],
+      "category": "public.app-category.finance"
+    }
+  }
+}

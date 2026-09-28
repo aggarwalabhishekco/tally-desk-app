@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Tools | Aggarwal Abhishek & Co.</title>
+    <meta name="description" content="Free financial self-assessment tools from Aggarwal Abhishek & Co., Chartered Accountants — for educational use, no sign-up required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <style>
+        .tool-category-header { margin-bottom: 26px; }
+        .tool-category-header .tcat-eyebrow {
+            display: block; font-family: var(--font-body); font-size: 0.78rem; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-600); margin-bottom: 8px;
+        }
+        .tool-category-header h2 {
+            font-family: var(--font-heading); font-size: 1.6rem; font-weight: 600; color: var(--navy-800);
+            margin-bottom: 8px; position: relative; padding-bottom: 12px;
+        }
+        .tool-category-header h2::after {
+            content: ''; position: absolute; left: 0; bottom: 0; width: 48px; height: 3px;
+            background-color: var(--gold-500); border-radius: 2px;
+        }
+        .tool-category-header p { color: var(--ink-soft); font-size: 1rem; max-width: 720px; margin: 0; }
+        .tool-category-block { margin-bottom: 50px; }
+        .tool-category-block:last-of-type { margin-bottom: 30px; }
+        .tool-category-block.tcb-hidden { display: none; }
+
+        .module-filter-bar {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
+            background: #fff; border: 1px solid var(--line); border-radius: 12px;
+            padding: 18px 22px; margin: 0 0 40px 0; box-shadow: var(--shadow-sm);
+        }
+        .module-filter-bar label {
+            font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; color: var(--navy-800);
+            white-space: nowrap;
+        }
+        .module-filter-bar select {
+            flex: 1; min-width: 220px; max-width: 420px; font-family: var(--font-body); font-size: 0.95rem;
+            padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper);
+            color: var(--ink); cursor: pointer;
+        }
+        .module-filter-bar select:focus { outline: 2px solid var(--gold-500); outline-offset: 1px; }
+        .module-filter-count { font-size: 0.85rem; color: var(--ink-soft); white-space: nowrap; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek & Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / Free Tools</div>
+
+    <!-- Hero Section -->
+    <section class="hero hero-compact">
+        <h2>Free Tools</h2>
+        <p>18 self-assessment tools from Aggarwal Abhishek & Co. — free to use, no sign-up required. Educational aids to help you organize your own thinking, not a substitute for professional advice.</p>
+    </section>
+
+    <section id="tools-catalog">
+
+        <div class="module-filter-bar">
+            <label for="module-filter">Choose your module:</label>
+            <select id="module-filter">
+                <option value="all">All Modules (18 tools)</option>
+                <option value="income-tax">Income Tax &amp; TDS</option>
+                <option value="gst">GST Compliance</option>
+                <option value="startup">Startup &amp; Business Health</option>
+                <option value="financial-audit">Financial Planning &amp; Audit</option>
+                <option value="roc">ROC Compliance</option>
+                <option value="fun">Just for Fun</option>
+            </select>
+            <span class="module-filter-count" id="module-filter-count"></span>
+        </div>
+
+        <div class="tool-category-block" data-cat="income-tax">
+        <div class="tool-category-header">
+            <span class="tcat-eyebrow">Category</span>
+            <h2>Income Tax &amp; TDS</h2>
+            <p>Regime comparison, TDS rates, HRA exemption and capital gains — for FY 2025-26 / Income Tax Act, 2025.</p>
+        </div>
+        <div class="tool-catalog-grid">
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#tax-doc"></use></svg></div></div>
+                    <span class="tcc-tag">Income Tax</span>
+                    <h3>Old vs New Tax Regime Calculator</h3>
+                    <p>Enter your income and deductions once to see your tax liability under both regimes side by side for FY 2025-26 (AY 2026-27) — and which one actually saves you money, with a full breakdown and CSV export.</p>
+                    <a href="tax-regime-calculator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#clipboard-check"></use></svg></div></div>
+                    <span class="tcc-tag">TDS Compliance</span>
+                    <h3>TDS Rate &amp; Calculation Finder</h3>
+                    <p>Pick the nature of payment to see the applicable TDS section, threshold and rate for FY 2025-26, and calculate the exact TDS to deduct on a specific payment — with PAN and no-PAN rates, and Income Tax Act, 2025 references.</p>
+                    <a href="tds-calculator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#building"></use></svg></div></div>
+                    <span class="tcc-tag">Income Tax</span>
+                    <h3>HRA Exemption Calculator</h3>
+                    <p>Work out exactly how much of your House Rent Allowance is tax-exempt under Section 10(13A) — or your Section 80GG deduction if you don't receive HRA at all.</p>
+                    <a href="hra-calculator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#chart-line"></use></svg></div></div>
+                    <span class="tcc-tag">Capital Gains</span>
+                    <h3>Capital Gains Tax Calculator</h3>
+                    <p>Work out short-term or long-term capital gains tax on equity, mutual funds, property, gold or unlisted shares — using post-Budget 2024 rates and holding-period rules.</p>
+                    <a href="capital-gains-calculator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="tool-category-block" data-cat="gst">
+        <div class="tool-category-header">
+            <span class="tcat-eyebrow">Category</span>
+            <h2>GST Compliance</h2>
+            <p>Due dates, filing checklists and ITC reconciliation for regular, QRMP and composition taxpayers.</p>
+        </div>
+        <div class="tool-catalog-grid">
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#calendar-clock"></use></svg></div></div>
+                    <span class="tcc-tag">GST Compliance</span>
+                    <h3>GST Due-Date Tracker</h3>
+                    <p>Enter your filing profile (monthly, QRMP or composition) and state to see your next GSTR-1, GSTR-3B, CMP-08 and annual return deadlines, plus a pre-filing checklist. No login, no data ever leaves your browser.</p>
+                    <a href="gst-due-date-tracker.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#refresh"></use></svg></div></div>
+                    <span class="tcc-tag">GST Compliance</span>
+                    <h3>GSTR-2B vs Books Reconciliation</h3>
+                    <p>Upload your GSTR-2B Excel export and a filled Books template to get a detailed matched / mismatched Input Tax Credit report, with CSV and PDF export. Entirely processed in your browser — nothing is uploaded.</p>
+                    <a href="gst-2b-reconciliation.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="tool-category-block" data-cat="startup">
+        <div class="tool-category-header">
+            <span class="tcat-eyebrow">Category</span>
+            <h2>Startup &amp; Business Health</h2>
+            <p>The numbers behind unit economics, runway, hiring costs, fundraising dilution and cash-flow planning — built for founders running a growing business.</p>
+        </div>
+        <div class="tool-catalog-grid">
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#rocket"></use></svg></div></div>
+                    <span class="tcc-tag">Startup Suite</span>
+                    <h3>Unit Economics Calculator</h3>
+                    <p>Work out your Customer Acquisition Cost (CAC), Customer Lifetime Value (LTV), the LTV:CAC ratio and your CAC payback period — the three numbers investors ask for first.</p>
+                    <a href="unit-economics-calculator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#clock"></use></svg></div></div>
+                    <span class="tcc-tag">Startup Suite</span>
+                    <h3>Break-Even &amp; Cash Runway Calculator</h3>
+                    <p>Find your break-even units/revenue, contribution margin, monthly net burn and exactly how many months of cash you have left.</p>
+                    <a href="breakeven-runway-calculator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#briefcase"></use></svg></div></div>
+                    <span class="tcc-tag">Startup Suite</span>
+                    <h3>Monthly MIS Report Generator</h3>
+                    <p>Enter a few months of revenue and expenses to get a one-page MIS: margin trends, an expense breakdown, growth flags, and a printable PDF report.</p>
+                    <a href="monthly-mis-report-generator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#handshake"></use></svg></div></div>
+                    <span class="tcc-tag">Startup Suite</span>
+                    <h3>First-Hire Compliance &amp; Cost Calculator</h3>
+                    <p>See the true monthly cost to company (PF, ESI, gratuity provision) of hiring your first employee, and the registrations that hire triggers.</p>
+                    <a href="first-hire-cost-calculator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#scale"></use></svg></div></div>
+                    <span class="tcc-tag">Startup Suite</span>
+                    <h3>Valuation &amp; Dilution Simulator</h3>
+                    <p>Model how your founder equity dilutes across up to 3 funding rounds — including the ESOP pool top-up most founders don't see coming.</p>
+                    <a href="valuation-dilution-simulator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#building-plus"></use></svg></div></div>
+                    <span class="tcc-tag">Startup Suite</span>
+                    <h3>GST &amp; Advance Tax Cash-Flow Forecaster</h3>
+                    <p>Project your monthly GST outflow and quarterly advance tax instalments for the next 12 months, based on your expected revenue growth.</p>
+                    <a href="gst-tax-cashflow-forecaster.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="tool-category-block" data-cat="financial-audit">
+        <div class="tool-category-header">
+            <span class="tcat-eyebrow">Category</span>
+            <h2>Financial Planning &amp; Audit</h2>
+            <p>Company financial health, loan planning, and getting audit-ready.</p>
+        </div>
+        <div class="tool-catalog-grid">
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#bar-chart"></use></svg></div></div>
+                    <span class="tcc-tag">Financial Screening</span>
+                    <h3>Financial Health Screener</h3>
+                    <p>Enter a company's income statement, balance sheet and cash flow figures to get a transparent, weighted ratio analysis against configurable industry benchmarks — plus a mandatory qualitative due-diligence checklist and a downloadable PDF report.</p>
+                    <a href="financial-health-screener.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#folder-search"></use></svg></div></div>
+                    <span class="tcc-tag">Audit</span>
+                    <h3>Audit Document Checklist</h3>
+                    <p>Upload your Tally Trial Balance (and, ideally, Day Book) Excel export to get a primary audit document requirement list tailored to your actual ledgers, plus transaction-level flags. Never upload raw Tally data or your login/Vault password.</p>
+                    <a href="audit-document-checklist.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#credit-card"></use></svg></div></div>
+                    <span class="tcc-tag">Financial Planning</span>
+                    <h3>Loan &amp; EMI Calculator</h3>
+                    <p>Work out your monthly EMI, total interest and a full year-wise or month-wise amortization schedule — including the effect of an optional yearly prepayment, with CSV export.</p>
+                    <a href="emi-calculator.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="tool-category-block" data-cat="roc">
+        <div class="tool-category-header">
+            <span class="tcat-eyebrow">Category</span>
+            <h2>ROC Compliance</h2>
+            <p>Annual filings and statutory registers for companies, OPCs, LLPs and Section 8 companies.</p>
+        </div>
+        <div class="tool-catalog-grid">
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#clipboard-check"></use></svg></div></div>
+                    <span class="tcc-tag">ROC Compliance</span>
+                    <h3>ROC Compliance Checklist</h3>
+                    <p>Pick Private Limited, OPC, LLP or Section 8 to get that entity's annual ROC/MCA due dates, an event-based compliance checklist, and the statutory registers you're expected to maintain.</p>
+                    <a href="roc-compliance-checklist.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="tool-category-block" data-cat="fun">
+        <div class="tool-category-header">
+            <span class="tcat-eyebrow">Category</span>
+            <h2>Just for Fun</h2>
+            <p>No sign-up, no lead form — just a bit of tax trivia to share.</p>
+        </div>
+        <div class="tool-catalog-grid">
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#target"></use></svg></div></div>
+                    <span class="tcc-tag">Just for Fun</span>
+                    <h3>Tax Trivia Quiz</h3>
+                    <p>8 quick questions pulled fresh from a growing pool each time, to find your Tax IQ — no sign-up, just for fun, with a shareable score card at the end.</p>
+                    <a href="tax-trivia-quiz.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+
+            <div class="tool-catalog-card">
+                <div class="tcc-body">
+                    <div class="tcc-icon"><div class="icon-badge"><svg class="icon"><use href="../assets/icons.svg#discuss"></use></svg></div></div>
+                    <span class="tcc-tag">Just for Fun</span>
+                    <h3>Tax &amp; GST Myths vs Facts</h3>
+                    <p>8 common myths about Indian tax and GST — click a card to flip it and see the real answer.</p>
+                    <a href="tax-myths-vs-facts.html" class="btn-tcc">Open Tool →</a>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="disclaimer-box" style="margin-top:30px;">
+            <strong>Please note:</strong> These tools are provided free of charge for general informational and educational purposes only. They do not constitute investment, legal, tax, audit or other professional advice, and no advisor-client relationship is created by using them. Figures you enter and results generated are not certified by Aggarwal Abhishek & Co. For advice specific to your situation, please <a href="../contact.html" style="color:#002b49; font-weight:700;">get in touch with us</a>.
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek & Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">The free tools on this site are provided for general informational and educational purposes only and do not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by their use. Figures entered and generated are not certified by Aggarwal Abhishek & Co.</p>
+    </footer>
+
+    <script src="../assets/easter-egg.js"></script>
+    <script>
+        (function () {
+            const select = document.getElementById('module-filter');
+            const countEl = document.getElementById('module-filter-count');
+            const blocks = Array.from(document.querySelectorAll('.tool-category-block'));
+
+            function toolCount(block) {
+                return block.querySelectorAll('.tool-catalog-card').length;
+            }
+
+            function applyFilter(cat, opts) {
+                opts = opts || {};
+                let shown = 0;
+                blocks.forEach(block => {
+                    const match = cat === 'all' || block.dataset.cat === cat;
+                    block.classList.toggle('tcb-hidden', !match);
+                    if (match) shown += toolCount(block);
+                });
+                countEl.textContent = cat === 'all'
+                    ? `Showing all ${shown} tools`
+                    : `Showing ${shown} tool${shown === 1 ? '' : 's'} in this module`;
+                if (opts.scroll && cat !== 'all') {
+                    document.getElementById('tools-catalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            select.addEventListener('change', () => {
+                applyFilter(select.value, { scroll: true });
+                const url = new URL(window.location);
+                if (select.value === 'all') url.searchParams.delete('module');
+                else url.searchParams.set('module', select.value);
+                history.replaceState(null, '', url);
+            });
+
+            // Deep-link support: ?module=gst pre-selects and filters on load.
+            const params = new URLSearchParams(window.location.search);
+            const initial = params.get('module');
+            const validCats = blocks.map(b => b.dataset.cat);
+            if (initial && validCats.includes(initial)) {
+                select.value = initial;
+                applyFilter(initial);
+            } else {
+                applyFilter('all');
+            }
+        })();
+    </script>
+</body>
+</html>

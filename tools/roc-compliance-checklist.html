@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROC Compliance Checklist | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free interactive ROC/MCA compliance checklist and due-date calculator for Private Limited Companies, OPCs, LLPs and Section 8 Companies. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / ROC Compliance Checklist</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">ROC Compliance Checklist</h2>
+        <p class="section-subtitle">Pick your entity type and financial year to get its annual ROC/MCA filing due dates, an event-based compliance checklist, and the statutory registers you're expected to maintain. No password required.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">ROC / MCA Annual Compliance Checklist &amp; Due-Date Calculator</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Educational tool — not advice.</strong> Due dates and thresholds below follow the standard Companies Act 2013 / LLP Act 2008 rules as of this tool's last update, and can be extended or changed by MCA circular or amendment (this happens periodically, especially AOC-4/MGT-7 due dates). Always cross-check on the <a href="https://www.mca.gov.in" target="_blank" rel="noopener" style="color:#78350f; font-weight:800; text-decoration:underline;">MCA portal</a> or with your company secretary/CA before relying on them. This is not an exhaustive list of every possible ROC form — only the recurring annual ones and the most common event-based ones.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="ROC Compliance Checklist">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help with your annual ROC compliance. <strong>No company data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the company details you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Entity Profile</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Entity Type</label>
+                            <select class="tool-form-control" id="inp-entity">
+                                <option value="pvt" selected>Private Limited Company</option>
+                                <option value="opc">One Person Company (OPC)</option>
+                                <option value="llp">Limited Liability Partnership (LLP)</option>
+                                <option value="sec8">Section 8 Company (Non-profit)</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group" id="group-small">
+                            <label class="tool-form-label">Is it a "Small Company"?</label>
+                            <select class="tool-form-control" id="inp-small">
+                                <option value="no">No</option>
+                                <option value="yes">Yes — paid-up capital ≤ ₹4 crore and turnover ≤ ₹40 crore</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Financial Year End</label>
+                            <input type="date" class="tool-form-control" id="inp-fyend">
+                        </div>
+                        <div class="tool-form-group" id="group-agm">
+                            <label class="tool-form-label">AGM Date (actual or planned)</label>
+                            <input type="date" class="tool-form-control" id="inp-agm">
+                        </div>
+                        <div class="tool-form-group" id="group-directors">
+                            <label class="tool-form-label">Number of Directors</label>
+                            <input type="number" class="tool-form-control" id="inp-directors" value="2" min="1" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Key Due Dates
+                        <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">For the financial year and AGM date entered above</span>
+                    </div>
+                    <div class="widget-grid" id="due-date-cards"></div>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49;">
+                    <div class="tool-card-title">💡 Smart Insights — Priority Actions</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Annual Filing Checklist</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">Tick items off as you complete them. Nothing here is saved or sent anywhere; it resets when you leave the page.</p>
+                    <ul class="tool-checklist" id="annual-checklist"></ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Board Meetings &amp; Governance</div>
+                    <ul class="tool-checklist" id="governance-checklist"></ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Statutory Registers &amp; Records to Maintain</div>
+                    <ul class="tool-checklist" id="registers-checklist"></ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Event-Based Compliances</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">These only apply when the underlying event actually happens — not every year.</p>
+                    <ul class="tool-checklist" id="event-checklist"></ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Other Compliances to Remember</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">Not ROC filings, but usually due around the same time — easy to miss.</p>
+                    <ul class="tool-checklist" id="other-checklist"></ul>
+                    <div style="margin-top:14px;">
+                        <a href="gst-due-date-tracker.html" class="btn-tool-outline" style="text-decoration:none; display:inline-flex; align-items:center; background:#002b49;">📅 Check GST Due Dates Too</a>
+                    </div>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This checklist provides general guidance only and is not a substitute for professional advice. It does not cover every ROC form applicable to every company (e.g. XBRL applicability, CSR-2, secretarial audit for listed/large companies, foreign-subsidiary specific filings, or first-year incorporation timelines) and due dates are subject to change by MCA notification. Aggarwal Abhishek &amp; Co. does not certify this checklist's completeness or accuracy for your specific case — please have your compliance calendar reviewed by a qualified professional.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtDate(d) {
+            return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+        function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+        function addMonths(d, n) { const r = new Date(d); r.setMonth(r.getMonth() + n); return r; }
+        function daysBetween(from, to) {
+            const ms = 24 * 60 * 60 * 1000;
+            const a = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+            const b = new Date(to.getFullYear(), to.getMonth(), to.getDate());
+            return Math.round((b - a) / ms);
+        }
+        function stripTime(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+        function urgencyColor(days) {
+            if (days <= 7) return '#ef4444';
+            if (days <= 30) return '#f59e0b';
+            return '#10b981';
+        }
+        // Next half-yearly MSME-1 deadline: 30-Apr (for Oct–Mar half) or 31-Oct (for Apr–Sep half).
+        function nextMsme1(from) {
+            const f = stripTime(from);
+            const year = f.getFullYear();
+            const candidates = [new Date(year, 3, 30), new Date(year, 9, 31), new Date(year + 1, 3, 30)];
+            return candidates.find(c => c >= f);
+        }
+        // Next 30-June deadline — used for the annual DPT-3 deadline.
+        function nextJune30(from) {
+            const f = stripTime(from);
+            let year = f.getFullYear();
+            let candidate = new Date(year, 5, 30);
+            if (candidate < f) candidate = new Date(year + 1, 5, 30);
+            return candidate;
+        }
+
+        function dueCardHtml(title, dueDate, note, today) {
+            const days = daysBetween(today, dueDate);
+            const color = urgencyColor(days);
+            const daysText = days < 0 ? `${Math.abs(days)} day${Math.abs(days) === 1 ? '' : 's'} overdue` : days === 0 ? 'Due today' : days === 1 ? 'Due tomorrow' : `${days} days left`;
+            return `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${title}</div>
+                    <div class="value" style="font-size:1.25rem;">${fmtDate(dueDate)}</div>
+                    <div class="subtext" style="color:${color};">${daysText}</div>
+                    ${note ? `<div style="font-size:0.72rem; color:#64748b; margin-top:6px;">${note}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderChecklistInto(elId, items) {
+            const ul = document.getElementById(elId);
+            ul.innerHTML = items.map((text, i) => `
+                <li id="${elId}-item-${i}">
+                    <input type="checkbox" id="${elId}-${i}">
+                    <label for="${elId}-${i}">${text}</label>
+                </li>
+            `).join('');
+            items.forEach((_, i) => {
+                document.getElementById(`${elId}-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`${elId}-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        const REGISTERS_COMMON_COMPANY = [
+            'Register of Members (MGT-1)',
+            'Register of Directors and Key Managerial Personnel (MGT-13/MBP-1 related)',
+            'Register of Directors\' Shareholding',
+            'Register of Charges (CHG-7)',
+            'Register of Contracts with Related Parties (MBP-4)',
+            'Minutes Books — Board Meetings and General Meetings',
+            'Books of Account and financial statements for at least 8 years',
+            'Register of Loans, Guarantees, Securities and Investments (MBP-2)'
+        ];
+        const REGISTERS_LLP = [
+            'Register of Partners',
+            'Minutes/records of partner meetings and decisions',
+            'Books of Account (cash basis or accrual, as adopted) for at least 8 years',
+            'LLP Agreement and every supplementary agreement, duly stamped and filed (Form 3)'
+        ];
+
+        // Pushes both the rendered card HTML (plan.dueCards, unchanged
+        // behavior) and the structured {title, dueDate} data (plan.dueItems,
+        // used by Smart Insights to find the most urgent upcoming filing).
+        function pushDue(plan, title, dueDate, note, today) {
+            plan.dueCards.push(dueCardHtml(title, dueDate, note, today));
+            plan.dueItems.push({ title, dueDate });
+        }
+
+        function buildPlan(entity, small, fyEnd, agmDate, directors, today) {
+            const plan = { dueCards: [], dueItems: [], annual: [], governance: [], registers: [], events: [], other: [] };
+
+            plan.annual.push('DIR-3 KYC is no longer an annual filing. From 31 March 2026 (Companies (Appointment and Qualification of Directors) Amendment Rules, 2025), it is due once every 3 financial years by 30 June, with the specific due year anchored to when each individual’s DIN was allotted — not the same date for everyone, so check each director/designated partner’s own cycle individually rather than assuming 30 September.');
+
+            if (entity === 'pvt' || entity === 'sec8') {
+                pushDue(plan, 'AGM', agmDate, 'Must be held within 6 months of financial year end (9 months for the first AGM)', today);
+                const aoc4Due = addDays(agmDate, 30);
+                pushDue(plan, 'AOC-4 (Financial Statements)', aoc4Due, 'Within 30 days of the AGM', today);
+                const mgtForm = small === 'yes' || entity === 'sec8' ? 'MGT-7A' : 'MGT-7';
+                const mgtDue = addDays(agmDate, 60);
+                pushDue(plan, `${mgtForm} (Annual Return)`, mgtDue, 'Within 60 days of the AGM' + (mgtForm === 'MGT-7A' ? ' — abridged form for small companies/Section 8' : ''), today);
+                const dpt3Due = nextJune30(today);
+                pushDue(plan, 'DPT-3', dpt3Due, 'Annual return of deposits / exempted deposits, even if NIL', today);
+
+                plan.annual.push(`File ${mgtForm} (Annual Return) within 60 days of the AGM`);
+                plan.annual.push('File AOC-4 (Financial Statements, and AOC-4 XBRL if applicable) within 30 days of the AGM');
+                plan.annual.push('File DPT-3 (Return of Deposits) by 30 June, even if NIL');
+                plan.annual.push('File ADT-1 within 15 days of the AGM, in years the auditor is appointed/re-appointed');
+                plan.annual.push('Check CSR-2 applicability (CSR spend/committee thresholds) — filed after AOC-4, per that year\'s MCA due date');
+                plan.annual.push('Check MSME-1 applicability (outstanding dues to micro/small suppliers beyond 45 days) — half-yearly, by 30 April and 31 October');
+
+                const msme1 = nextMsme1(today);
+                pushDue(plan, 'MSME-1 (if applicable)', msme1, 'Half-yearly return of outstanding MSME dues beyond 45 days', today);
+
+                const meetingCount = (entity === 'sec8' || small === 'yes') ? 'at least 2 board meetings a year' : 'at least 4 board meetings a year, with a gap of not more than 120 days between two consecutive meetings';
+                plan.governance.push(`Hold ${meetingCount}`);
+                plan.governance.push('Circulate notice and draft minutes for every board meeting within the prescribed timelines');
+                plan.governance.push('Hold the Annual General Meeting within 6 months of financial year end');
+                plan.governance.push('Maintain attendance registers for board meetings and the AGM');
+                if (directors >= 1) plan.governance.push('Confirm at least one director has stayed in India for 182+ days during the financial year (Sec. 149(3))');
+
+                plan.registers = REGISTERS_COMMON_COMPANY.slice();
+
+                plan.events.push('INC-20A — Declaration of Commencement of Business, within 180 days of incorporation (one-time, first year only)');
+                plan.events.push('ADT-1 — Auditor appointment/re-appointment (every 5 years, or on casual vacancy)');
+                plan.events.push('DIR-12 — Any change in directors (appointment, resignation, change in designation)');
+                plan.events.push('PAS-3 — Return of allotment, on any fresh issue of shares');
+                plan.events.push('SH-7 — On alteration of share capital');
+                plan.events.push('CHG-1 / CHG-4 — On creation, modification or satisfaction of a charge (loan security)');
+                plan.events.push('MGT-14 — On passing certain board/special resolutions (e.g. approval of financial statements, borrowing beyond limits)');
+                plan.events.push('INC-22 — On change of registered office address');
+            }
+
+            if (entity === 'opc') {
+                const aoc4Due = addDays(fyEnd, 180);
+                pushDue(plan, 'AOC-4 (Financial Statements)', aoc4Due, 'Within 180 days of financial year end — OPCs don\'t hold an AGM', today);
+                const mgt7aDue = addDays(fyEnd, 60);
+                pushDue(plan, 'MGT-7A (Annual Return)', mgt7aDue, 'Within 60 days of financial year end', today);
+                const dpt3Due = nextJune30(today);
+                pushDue(plan, 'DPT-3', dpt3Due, 'Annual return of deposits / exempted deposits, even if NIL', today);
+
+                plan.annual.push('File AOC-4 (Financial Statements) within 180 days of financial year end');
+                plan.annual.push('File MGT-7A (Annual Return) within 60 days of financial year end');
+                plan.annual.push('File DPT-3 (Return of Deposits) by 30 June, even if NIL');
+                plan.annual.push('File ADT-1 within 15 days of the auditor\'s appointment/re-appointment');
+
+                plan.governance.push(directors <= 1
+                    ? 'A sole-director OPC is exempt from the minimum board meeting requirement, but should still record key decisions in writing'
+                    : 'Hold at least 1 board meeting in each half of the calendar year, with a gap of at least 90 days between them');
+                plan.governance.push('No AGM is required for an OPC');
+                plan.governance.push('Maintain a nominee for the sole member (Form INC-3), and update it if the nominee changes');
+
+                plan.registers = REGISTERS_COMMON_COMPANY.slice();
+
+                plan.events.push('INC-20A — Declaration of Commencement of Business, within 180 days of incorporation (one-time, first year only)');
+                plan.events.push('INC-4 — On change of nominee, or the nominee\'s consent withdrawal');
+                plan.events.push('INC-6 — On conversion from OPC to a private/public company (mandatory once paid-up capital/turnover thresholds are crossed)');
+                plan.events.push('DIR-12 — On change of the sole director');
+                plan.events.push('CHG-1 / CHG-4 — On creation, modification or satisfaction of a charge (loan security)');
+            }
+
+            if (entity === 'llp') {
+                const form11Due = addDays(fyEnd, 60);
+                pushDue(plan, 'Form 11 (Annual Return)', form11Due, 'Within 60 days of financial year end', today);
+                const form8Due = addDays(addMonths(fyEnd, 6), 30);
+                pushDue(plan, 'Form 8 (Statement of Account & Solvency)', form8Due, 'Within 30 days of completing 6 months from financial year end', today);
+
+                plan.annual.push('File Form 11 (Annual Return) within 60 days of financial year end, even if the LLP had no activity');
+                plan.annual.push('File Form 8 (Statement of Account & Solvency) within 30 days of completing 6 months from financial year end');
+                plan.annual.push('AOC-4, MGT-7/7A and DPT-3 are company forms and do not apply to an LLP');
+
+                plan.governance.push('Hold and record partner meetings as required by the LLP Agreement');
+                plan.governance.push('Ensure the LLP Agreement (and any supplementary agreement) is current, signed and stamped');
+                plan.governance.push('Confirm the minimum of 2 designated partners is maintained at all times, with at least one resident in India');
+
+                plan.registers = REGISTERS_LLP.slice();
+
+                plan.events.push('Form 3 — On execution of the LLP Agreement or any change to it (including change in profit-sharing ratio)');
+                plan.events.push('Form 4 — On appointment, resignation or change of a partner/designated partner');
+                plan.events.push('Form 15 — On change of registered office address');
+                plan.events.push('Form 5 — On change of the LLP\'s name');
+                plan.events.push('Form 24 — For striking off the LLP\'s name (if winding up)');
+            }
+
+            plan.other = [
+                'File Income Tax Return by the applicable due date (31 July for non-audit cases, 31 October where a tax audit applies, 30 November where transfer pricing applies)',
+                'Complete statutory/tax audit (where applicable) well before the ITR due date, not at the deadline',
+                'File quarterly TDS returns (Form 24Q/26Q/27Q) within the prescribed timelines',
+                'Reconcile GST returns (GSTR-1/3B/2B) for the year — see our GST Due-Date Tracker and GSTR-2B Reconciliation tools',
+                'Renew or review professional tax, shops & establishment, and other state-specific registrations as applicable',
+                'Review FLA return applicability (RBI) if the entity has foreign investment or overseas assets — due by 15 July every year'
+            ];
+
+            return plan;
+        }
+
+        // ==========================================================================
+        // Smart Insights — a rule-based (not live-AI) narrative that turns the
+        // full due-date list into a short, prioritized set of observations.
+        // Deterministic, free to run, no data leaves the browser.
+        // ==========================================================================
+        function buildRocInsights(plan, entity, today) {
+            const insights = [];
+            const withDays = plan.dueItems
+                .map(it => ({ ...it, days: daysBetween(today, it.dueDate) }))
+                .sort((a, b) => a.days - b.days);
+
+            const overdue = withDays.filter(it => it.days < 0);
+            const dueSoon = withDays.filter(it => it.days >= 0 && it.days <= 7);
+            const dueThisMonth = withDays.filter(it => it.days > 7 && it.days <= 30);
+
+            if (overdue.length > 0) {
+                insights.push({
+                    level: 'critical',
+                    text: `${overdue.length} filing${overdue.length === 1 ? ' is' : 's are'} already past due based on the dates entered: ${overdue.map(it => `${it.title} (${Math.abs(it.days)} day${Math.abs(it.days) === 1 ? '' : 's'} overdue)`).join(', ')}. These likely attract late fees/additional fees under Section 403 — file as soon as possible to stop the per-day fee from accumulating further.`
+                });
+            }
+
+            if (dueSoon.length > 0) {
+                insights.push({
+                    level: 'critical',
+                    text: `${dueSoon.length} filing${dueSoon.length === 1 ? '' : 's'} ${dueSoon.length === 1 ? 'is' : 'are'} due within the next week: ${dueSoon.map(it => `${it.title} (${it.days === 0 ? 'today' : it.days + 'd'})`).join(', ')}. Treat ${dueSoon.length === 1 ? 'this' : 'these'} as this week's top priority.`
+                });
+            } else if (dueThisMonth.length > 0) {
+                insights.push({
+                    level: 'warning',
+                    text: `${dueThisMonth.length} filing${dueThisMonth.length === 1 ? '' : 's'} ${dueThisMonth.length === 1 ? 'is' : 'are'} due within 30 days: ${dueThisMonth.map(it => `${it.title} (${it.days}d)`).join(', ')}. Start gathering documents now so it isn't a last-minute scramble.`
+                });
+            }
+
+            if (entity === 'llp') {
+                insights.push({
+                    level: 'info',
+                    text: `As an LLP, you only have two recurring ROC filings — Form 11 and Form 8 — and no AGM, AOC-4 or CSR-2 requirement. The bigger year-round risk for LLPs is usually on the income-tax/GST side (see "Other Compliances" below), not the ROC calendar.`
+                });
+            } else if (entity === 'opc') {
+                insights.push({
+                    level: 'info',
+                    text: `OPCs skip the AGM entirely, so AOC-4 and MGT-7A are calculated straight from the financial year end rather than an AGM date — double-check the financial year end entered above is accurate, since it drives every due date shown.`
+                });
+            }
+
+            if (withDays.length && insights.every(i => i.level !== 'critical')) {
+                const next = withDays[0];
+                insights.push({
+                    level: 'good',
+                    text: `Nothing is overdue or due within a week. Your next filing is ${next.title} on ${fmtDate(next.dueDate)} (${next.days} day${next.days === 1 ? '' : 's'} away) — a reasonable amount of runway to prepare.`
+                });
+            }
+
+            return insights;
+        }
+
+        function renderSmartInsights(insights) {
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        function render() {
+            const entity = document.getElementById('inp-entity').value;
+            const small = document.getElementById('inp-small').value;
+            const directors = Math.max(1, Number(document.getElementById('inp-directors').value) || 1);
+            const today = new Date();
+
+            let fyEnd = document.getElementById('inp-fyend').value ? new Date(document.getElementById('inp-fyend').value) : null;
+            let agmDate = document.getElementById('inp-agm').value ? new Date(document.getElementById('inp-agm').value) : null;
+            if (!fyEnd) { fyEnd = new Date(today.getFullYear() - (today.getMonth() < 3 ? 1 : 0), 2, 31); }
+            if (!agmDate) { agmDate = addMonths(fyEnd, 6); }
+
+            // Show/hide fields that don't apply to every entity type
+            const needsAgm = entity === 'pvt' || entity === 'sec8';
+            document.getElementById('group-agm').style.display = needsAgm ? 'block' : 'none';
+            document.getElementById('group-small').style.display = (entity === 'pvt') ? 'block' : 'none';
+            document.getElementById('group-directors').style.display = (entity === 'opc' || entity === 'pvt' || entity === 'sec8') ? 'block' : 'none';
+
+            const plan = buildPlan(entity, entity === 'sec8' ? 'yes' : small, fyEnd, agmDate, directors, today);
+
+            document.getElementById('due-date-cards').innerHTML = plan.dueCards.join('');
+            renderSmartInsights(buildRocInsights(plan, entity, today));
+            renderChecklistInto('annual-checklist', plan.annual);
+            renderChecklistInto('governance-checklist', plan.governance);
+            renderChecklistInto('registers-checklist', plan.registers);
+            renderChecklistInto('event-checklist', plan.events);
+            renderChecklistInto('other-checklist', plan.other);
+        }
+
+        ['inp-entity', 'inp-small', 'inp-fyend', 'inp-agm', 'inp-directors'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const today = new Date();
+            const defaultFyEnd = new Date(today.getMonth() < 3 ? today.getFullYear() - 1 : today.getFullYear(), 2, 31);
+            document.getElementById('inp-fyend').value = defaultFyEnd.toISOString().slice(0, 10);
+            document.getElementById('inp-agm').value = addMonths(defaultFyEnd, 6).toISOString().slice(0, 10);
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

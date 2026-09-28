@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST &amp; Advance Tax Cash-Flow Forecaster | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free 12-month GST and Advance Tax cash-flow forecaster for startups — project your monthly GST outflow and quarterly advance tax instalments based on your expected revenue growth. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / GST &amp; Advance Tax Cash-Flow Forecaster</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">GST &amp; Advance Tax Cash-Flow Forecaster</h2>
+        <p class="section-subtitle">Project your monthly GST outflow and quarterly advance tax instalments for the next 12 months, based on your expected revenue growth — so cash for tax is set aside before it's spent on something else. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Startup Suite</span>
+                    </h3>
+                    <div class="sub-caption">GST &amp; Advance Tax Cash-Flow Forecaster</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Planning aid, not a filed computation.</strong> GST payable is estimated as Output GST minus an assumed Input Tax Credit percentage you provide — your actual ITC depends on real purchases and supplier compliance. Advance tax instalments follow the statutory cumulative schedule (15% by 15 June, 45% by 15 September, 75% by 15 December, 100% by 15 March of the estimated annual tax liability) — this schedule carries over unchanged under the Income Tax Act, 2025 (effective 1 April 2026), which replaced the erstwhile Section 211 with renumbered provisions.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="GST & Advance Tax Cash-Flow Forecaster">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help with GST filing or advance tax planning. <strong>No revenue data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the revenue figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Forecast Inputs</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Current Monthly Revenue, excl. GST (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-revenue" value="1000000" min="0" step="10000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Expected Monthly Revenue Growth (%)</label>
+                            <input type="number" class="tool-form-control" id="inp-growth" value="5" min="-50" max="100" step="0.5">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Applicable GST Rate (%)</label>
+                            <select class="tool-form-control" id="inp-gst-rate">
+                                <option value="5">5%</option>
+                                <option value="12">12%</option>
+                                <option value="18" selected>18%</option>
+                                <option value="28">28%</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Estimated Input Tax Credit, as % of Output GST</label>
+                            <input type="number" class="tool-form-control" id="inp-itc-pct" value="40" min="0" max="100" step="1">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Net Profit Margin, before tax (%)</label>
+                            <input type="number" class="tool-form-control" id="inp-margin" value="15" min="-100" max="100" step="1">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Effective Income-Tax Rate on Profit (%)</label>
+                            <input type="number" class="tool-form-control" id="inp-tax-rate" value="26" min="0" max="45" step="0.5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Result
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;" disabled>📸 Get My Shareable Verdict Card</button>
+                        </div>
+                    </div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Download a shareable image of your result. No data is uploaded; the image is drawn entirely in your browser.</p>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Advance Tax Instalment Schedule</div>
+                    <div id="advance-tax-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        12-Month GST &amp; Revenue Forecast
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-cf-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="monthly-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">How to Use This Forecast</div>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not a filed computation. It assumes a constant month-on-month growth rate, a constant GST rate and ITC ratio, and a constant profit margin — real businesses see all of these fluctuate. Advance tax is normally not required if your total estimated tax liability for the year is under ₹10,000 — this ₹10,000 threshold applies to everyone, including those on the presumptive taxation scheme under Section 44AD/44ADA. The only difference for presumptive taxpayers is timing, not a higher exemption: instead of four instalments, they can pay their entire advance tax in a single instalment by 15 March. GST due dates shown assume monthly regular filing; QRMP filers pay tax monthly but file returns quarterly, on a slightly different cadence. Section references (234B, 234C) are the well-known Income-tax Act, 1961 numbers; the Income-tax Act, 2025 (effective 1 April 2026) has renumbered many provisions, so confirm the corresponding current section number before citing it formally — the underlying interest rules and rates are unchanged. Aggarwal Abhishek &amp; Co. does not certify these figures — please have us review your actual numbers before setting aside or remitting any amount.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+        const MONTH_NAMES = ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6', 'Month 7', 'Month 8', 'Month 9', 'Month 10', 'Month 11', 'Month 12'];
+
+        function render() {
+            const revenue0 = Math.max(0, Number(document.getElementById('inp-revenue').value) || 0);
+            const growthPct = Number(document.getElementById('inp-growth').value) || 0;
+            const gstRate = Number(document.getElementById('inp-gst-rate').value) || 0;
+            const itcPct = Math.min(100, Math.max(0, Number(document.getElementById('inp-itc-pct').value) || 0));
+            const marginPct = Number(document.getElementById('inp-margin').value) || 0;
+            const taxRatePct = Math.min(45, Math.max(0, Number(document.getElementById('inp-tax-rate').value) || 0));
+
+            if (revenue0 <= 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#64748b; padding:10px;">Enter a positive current monthly revenue to see a forecast.</p>';
+                document.getElementById('monthly-table-wrap').innerHTML = '';
+                document.getElementById('advance-tax-table-wrap').innerHTML = '';
+                document.getElementById('insights-card').style.display = 'none';
+                document.getElementById('btn-verdict-card').disabled = true;
+                lastResult = null;
+                return;
+            }
+            document.getElementById('btn-verdict-card').disabled = false;
+
+            const months = [];
+            let revenue = revenue0;
+            let totalRevenue = 0, totalGST = 0, totalProfit = 0;
+            for (let i = 0; i < 12; i++) {
+                if (i > 0) revenue = revenue * (1 + growthPct / 100);
+                const outputGST = revenue * (gstRate / 100);
+                const netGST = outputGST * (1 - itcPct / 100);
+                const profit = revenue * (marginPct / 100);
+                totalRevenue += revenue;
+                totalGST += netGST;
+                totalProfit += profit;
+                months.push({ month: MONTH_NAMES[i], revenue, outputGST, netGST, profit });
+            }
+
+            const annualTax = Math.max(0, totalProfit) * (taxRatePct / 100);
+            const installments = [
+                { due: '15 June', cumulativePct: 15, label: 'Q1 Instalment' },
+                { due: '15 September', cumulativePct: 45, label: 'Q2 Instalment' },
+                { due: '15 December', cumulativePct: 75, label: 'Q3 Instalment' },
+                { due: '15 March', cumulativePct: 100, label: 'Q4 (Final) Instalment' }
+            ];
+            let prevCumulative = 0;
+            installments.forEach(inst => {
+                const cumulativeAmount = annualTax * (inst.cumulativePct / 100);
+                inst.amount = cumulativeAmount - prevCumulative;
+                inst.cumulativeAmount = cumulativeAmount;
+                prevCumulative = cumulativeAmount;
+            });
+
+            const avgMonthlyGST = totalGST / 12;
+            const totalCashToSetAside = totalGST + annualTax;
+
+            lastResult = { months, totalRevenue, totalGST, totalProfit, annualTax, installments, avgMonthlyGST, totalCashToSetAside, gstRate, itcPct, taxRatePct };
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['Forecasted 12-Month Revenue', fmtMoneyWhole(totalRevenue), `at ${growthPct}% monthly growth`, '#002b49'],
+                ['Total GST Outflow (12 months)', fmtMoneyWhole(totalGST), `avg ${fmtMoneyWhole(avgMonthlyGST)}/month`, '#0ea5e9'],
+                ['Estimated Annual Tax Liability', fmtMoneyWhole(annualTax), `at ${taxRatePct}% on profit`, '#f59e0b'],
+                ['Total Cash to Set Aside', fmtMoneyWhole(totalCashToSetAside), 'GST + Advance Tax combined', '#dc2626']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights());
+            renderAdvanceTaxTable();
+            renderMonthlyTable();
+        }
+
+        function buildInsights() {
+            if (!lastResult) return [];
+            const r = lastResult;
+            const insights = [];
+
+            insights.push({ level: 'info', text: `On this forecast, you'll need to set aside roughly ${fmtMoneyWhole(r.totalCashToSetAside)} over the next 12 months for GST and advance tax combined — about ${fmtMoneyWhole(r.totalCashToSetAside/12)}/month on average if you smooth it out, though the real due dates are lumpier (GST monthly, tax quarterly).` });
+
+            if (r.annualTax > 0 && r.annualTax < 10000) {
+                insights.push({ level: 'good', text: 'Your estimated annual tax liability is under ₹10,000 — advance tax generally isn\'t required in this case (subject to how the rest of your income is taxed).' });
+            } else if (r.annualTax >= 10000) {
+                insights.push({ level: 'warning', text: `Since your estimated annual tax liability (${fmtMoneyWhole(r.annualTax)}) is above ₹10,000, advance tax instalments apply — missing an instalment or underpaying it can attract interest under Sections 234B and 234C.` });
+            }
+
+            if (r.itcPct < 20) {
+                insights.push({ level: 'info', text: `You've assumed a relatively low ITC offset (${r.itcPct}% of output GST) — if your actual purchases/expenses carry more GST than this, your real cash GST outflow could be meaningfully lower. Worth reconciling against your GSTR-2B regularly.` });
+            }
+
+            if (r.months[11].revenue / r.months[0].revenue > 1.5) {
+                insights.push({ level: 'warning', text: 'This growth rate compounds fast — your Month 12 GST/tax outflow will be noticeably higher in absolute terms than Month 1\'s, even at a constant rate and margin. Make sure your cash-flow plan accounts for that step-up, not just the average.' });
+            }
+
+            insights.push({ level: 'info', text: 'If your turnover is expected to stay under ₹5 crore, the QRMP scheme lets you pay GST monthly (via a simple challan) while filing returns only quarterly — useful for cutting down on filing frequency without changing your cash-flow rhythm.' });
+
+            return insights;
+        }
+
+        function renderAdvanceTaxTable() {
+            const wrap = document.getElementById('advance-tax-table-wrap');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rows = r.installments.map(inst => `<tr><td>${inst.label}</td><td>${inst.due}</td><td>${inst.cumulativePct}% of annual tax</td><td>${fmtMoneyWhole(inst.amount)}</td><td>${fmtMoneyWhole(inst.cumulativeAmount)}</td></tr>`).join('');
+            wrap.innerHTML = `<table class="tool-table">
+                <thead><tr><th>Instalment</th><th>Due Date</th><th>Cumulative Requirement</th><th>Amount Due This Instalment</th><th>Cumulative Paid</th></tr></thead>
+                <tbody>${rows}</tbody>
+            </table>`;
+        }
+
+        function renderMonthlyTable() {
+            const wrap = document.getElementById('monthly-table-wrap');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rows = r.months.map(m => `<tr><td>${m.month}</td><td>${fmtMoneyWhole(m.revenue)}</td><td>${fmtMoneyWhole(m.outputGST)}</td><td>${fmtMoneyWhole(m.netGST)}</td><td>${fmtMoneyWhole(m.profit)}</td></tr>`).join('');
+            wrap.innerHTML = `<div class="tool-table-container"><table class="tool-table">
+                <thead><tr><th>Month</th><th>Forecasted Revenue</th><th>Output GST</th><th>Net GST Payable</th><th>Forecasted Profit</th></tr></thead>
+                <tbody>${rows}</tbody>
+            </table></div>`;
+        }
+
+        document.getElementById('btn-cf-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const r = lastResult;
+            const lines = [['Month', 'Revenue', 'Output GST', 'Net GST Payable', 'Profit'].map(csvEscape).join(',')];
+            r.months.forEach(m => {
+                lines.push([m.month, m.revenue.toFixed(2), m.outputGST.toFixed(2), m.netGST.toFixed(2), m.profit.toFixed(2)].map(csvEscape).join(','));
+            });
+            lines.push([]);
+            lines.push(['Instalment', 'Due Date', 'Cumulative %', 'Amount Due', 'Cumulative Paid'].map(csvEscape).join(','));
+            r.installments.forEach(inst => {
+                lines.push([inst.label, inst.due, inst.cumulativePct, inst.amount.toFixed(2), inst.cumulativeAmount.toFixed(2)].map(csvEscape).join(','));
+            });
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `GST_Tax_Cashflow_Forecast_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        const HOW_TO_USE_ITEMS = [
+            'Set aside GST cash monthly (usually due by the 20th for regular monthly filers) — it\'s collected from customers on your behalf, not really "your" money to begin with.',
+            'Advance tax follows a cumulative schedule: 15% by 15 June, 45% by 15 September, 75% by 15 December, and 100% by 15 March.',
+            'Re-forecast whenever your actual growth rate meaningfully diverges from plan — a forecast six months stale can be dangerously optimistic (or pessimistic).',
+            'Reconcile your assumed ITC % against your actual GSTR-2B periodically — a mismatch here is one of the most common causes of GST cash-flow surprises.',
+            'If this is your first year of advance tax, remember interest under Sections 234B/234C can apply if instalments are missed or underpaid — better to slightly overpay than fall short.'
+        ];
+        function renderDocChecklist() {
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = HOW_TO_USE_ITEMS.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            HOW_TO_USE_ITEMS.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        ['inp-revenue', 'inp-growth', 'inp-gst-rate', 'inp-itc-pct', 'inp-margin', 'inp-tax-rate'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => {
+            if (!lastResult) return null;
+            const r = lastResult;
+            return {
+                eyebrow: 'My 12-Month Cash-Flow Forecast',
+                headline: fmtMoneyWhole(r.totalCashToSetAside),
+                resultLine: 'to set aside for GST + Advance Tax',
+                resultSub: `Over the next 12 months, on forecasted revenue of ${fmtMoneyWhole(r.totalRevenue)}`,
+                footerNote: 'Estimate only — based on figures entered by the user.',
+                toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+            };
+        }, 'My_GST_Tax_Cashflow_Forecast');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDocChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

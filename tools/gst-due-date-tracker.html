@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Due-Date Tracker | Aggarwal Abhishek & Co.</title>
+    <meta name="description" content="Free GST return due-date tracker for GSTR-1, GSTR-3B, CMP-08, GSTR-9/9C and GSTR-4. Find your next filing deadline and a pre-filing checklist. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek & Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / GST Due-Date Tracker</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">GST Due-Date Tracker</h2>
+        <p class="section-subtitle">Find your next GST filing deadlines and a pre-filing checklist — no password, and no GST or financial data ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek & Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">GST Filing Due-Date Calculator & Checklist</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Educational tool — not advice.</strong> Due dates below follow the standard rules as of this tool's last update and may be extended or changed by government notification (this happens periodically). Always cross-check on the <a href="https://www.gst.gov.in" target="_blank" rel="noopener" style="color:#78350f; font-weight:800; text-decoration:underline;">GST portal</a> or with your tax consultant before relying on them. This tool never asks for or stores your GST login credentials.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="GST Due-Date Tracker">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help with your filings. <strong>No GST or financial data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the figures or files you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Your Filing Profile</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Registration Type</label>
+                            <select class="tool-form-control" id="inp-profile">
+                                <option value="monthly">Regular — Monthly Filer</option>
+                                <option value="qrmp">Regular — QRMP (Quarterly) Filer</option>
+                                <option value="composition">Composition Scheme</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group" id="state-group">
+                            <label class="tool-form-label">State / UT (for QRMP GSTR-3B due date)</label>
+                            <select class="tool-form-control" id="inp-state">
+                                <optgroup label="Category X — due 22nd">
+                                    <option>Chhattisgarh</option><option>Madhya Pradesh</option><option>Gujarat</option>
+                                    <option>Maharashtra</option><option>Karnataka</option><option>Goa</option>
+                                    <option>Kerala</option><option>Tamil Nadu</option><option>Telangana</option>
+                                    <option>Andhra Pradesh</option><option>Daman and Diu</option>
+                                    <option>Dadra and Nagar Haveli</option><option>Puducherry</option>
+                                    <option>Andaman and Nicobar Islands</option><option>Lakshadweep</option>
+                                </optgroup>
+                                <optgroup label="Category Y — due 24th">
+                                    <option selected>Haryana</option><option>Himachal Pradesh</option><option>Punjab</option>
+                                    <option>Uttarakhand</option><option>Rajasthan</option><option>Uttar Pradesh</option>
+                                    <option>Bihar</option><option>Sikkim</option><option>Arunachal Pradesh</option>
+                                    <option>Nagaland</option><option>Manipur</option><option>Mizoram</option>
+                                    <option>Tripura</option><option>Meghalaya</option><option>Assam</option>
+                                    <option>West Bengal</option><option>Jharkhand</option><option>Odisha</option>
+                                    <option>Jammu and Kashmir</option><option>Ladakh</option><option>Chandigarh</option>
+                                    <option>Delhi</option><option>Other / Union Territory</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Upcoming Deadlines
+                        <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">Based on today's date on this device</span>
+                    </div>
+                    <div class="widget-grid" id="due-date-cards"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Annual Filings</div>
+                    <div class="widget-grid" id="annual-date-cards"></div>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Pre-Filing Checklist</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">A general checklist — tick items off as you go. Nothing here is saved or sent anywhere; it resets when you leave the page.</p>
+                    <ul class="tool-checklist" id="checklist"></ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">File Your Return</div>
+                    <p style="font-size:0.9rem; color:#334155; margin-bottom:14px;">When you're ready, file directly on the official GST portal — this tool never collects your login details.</p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <a href="https://www.gst.gov.in" target="_blank" rel="noopener" class="btn-tool-gold" style="text-decoration:none; display:inline-flex; align-items:center;">🔗 Open GST Portal</a>
+                        <a href="https://services.gst.gov.in/services/login" target="_blank" rel="noopener" class="btn-tool-outline" style="text-decoration:none; display:inline-flex; align-items:center; background:#002b49;">🔐 Go to Return Filing Login</a>
+                        <a href="gst-2b-reconciliation.html" class="btn-tool-outline" style="text-decoration:none; display:inline-flex; align-items:center; background:#002b49;">🔄 Reconcile GSTR-2B First</a>
+                    </div>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This tool provides general due-date guidance only and is not a substitute for professional advice. Due dates, category groupings and applicability thresholds are subject to change by CBIC/GST Council notification. Aggarwal Abhishek & Co. does not certify the accuracy of these dates for your specific case — please verify before filing.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek & Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        // ---------- Date helpers ----------
+        function fmtDate(d) {
+            return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+        function daysBetween(from, to) {
+            const ms = 24 * 60 * 60 * 1000;
+            const a = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+            const b = new Date(to.getFullYear(), to.getMonth(), to.getDate());
+            return Math.round((b - a) / ms);
+        }
+        // Next date with day-of-month `day`, in one of `months` (0-11), on/after `from`.
+        // Rolls forward across months/years as needed. Handles months shorter than `day`
+        // by clamping to that month's last day.
+        function nextOccurrence(from, months, day) {
+            let best = null;
+            for (let yearOffset = 0; yearOffset <= 1; yearOffset++) {
+                for (const m of months) {
+                    const year = from.getFullYear() + yearOffset;
+                    const lastDay = new Date(year, m + 1, 0).getDate();
+                    const candidate = new Date(year, m, Math.min(day, lastDay));
+                    if (candidate >= stripTime(from)) {
+                        if (!best || candidate < best) best = candidate;
+                    }
+                }
+            }
+            return best;
+        }
+        function stripTime(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+        function monthLabel(m) { return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m]; }
+
+        // Financial-year label covered by an annual return due on 31 Dec of `dueDate`'s year
+        function fyLabelForDecDue(dueDate) {
+            const dueYear = dueDate.getFullYear();
+            const fyStart = dueYear - 1;
+            return `FY ${fyStart}-${String(dueYear).slice(-2)}`;
+        }
+        function fyLabelForJunDue(dueDate) {
+            // GSTR-4 due 30 Jun (moved from 30 Apr per GST Council's 53rd meeting,
+            // effective FY 2024-25 onward), covering FY ending the previous 31 Mar
+            const dueYear = dueDate.getFullYear();
+            const fyStart = dueYear - 1;
+            return `FY ${fyStart}-${String(dueYear).slice(-2)}`;
+        }
+
+        const CATEGORY_X = new Set(['Chhattisgarh','Madhya Pradesh','Gujarat','Maharashtra','Karnataka','Goa','Kerala','Tamil Nadu','Telangana','Andhra Pradesh','Daman and Diu','Dadra and Nagar Haveli','Puducherry','Andaman and Nicobar Islands','Lakshadweep']);
+
+        function urgencyColor(days) {
+            if (days <= 3) return '#ef4444';
+            if (days <= 10) return '#f59e0b';
+            return '#10b981';
+        }
+
+        function dueCardHtml(title, dueDate, note, today) {
+            const days = daysBetween(today, dueDate);
+            const color = urgencyColor(days);
+            const daysText = days === 0 ? 'Due today' : days === 1 ? 'Due tomorrow' : `${days} days left`;
+            return `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${title}</div>
+                    <div class="value" style="font-size:1.3rem;">${fmtDate(dueDate)}</div>
+                    <div class="subtext" style="color:${color};">${daysText}</div>
+                    ${note ? `<div style="font-size:0.72rem; color:#64748b; margin-top:6px;">${note}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function render() {
+            const today = new Date();
+            const profile = document.getElementById('inp-profile').value;
+            const stateGroup = document.getElementById('state-group');
+            stateGroup.style.display = profile === 'qrmp' ? 'block' : 'none';
+            const state = document.getElementById('inp-state').value;
+            const isCategoryX = CATEGORY_X.has(state);
+
+            const cards = [];
+            const items = []; // structured {title, dueDate} for Smart Insights, alongside the rendered cards
+
+            function addCard(target, title, dueDate, note) {
+                target.push(dueCardHtml(title, dueDate, note, today));
+                items.push({ title, dueDate });
+            }
+
+            if (profile === 'monthly') {
+                addCard(cards, 'GSTR-1 (Outward Supplies)', nextOccurrence(today, [0,1,2,3,4,5,6,7,8,9,10,11], 11), 'Monthly, due 11th of following month');
+                addCard(cards, 'GSTR-3B (Summary Return)', nextOccurrence(today, [0,1,2,3,4,5,6,7,8,9,10,11], 20), 'Monthly, due 20th of following month');
+            } else if (profile === 'qrmp') {
+                addCard(cards, 'IFF (Optional, Month 1 & 2)', nextOccurrence(today, [0,1,2,3,4,5,6,7,8,9,10,11], 13), 'Optional Invoice Furnishing Facility, due 13th of following month (for the first two months of the quarter only)');
+                addCard(cards, 'GSTR-1 (Quarterly)', nextOccurrence(today, [0,3,6,9], 13), 'Due 13th of the month after quarter-end');
+                addCard(cards, 'GSTR-3B (Quarterly)', nextOccurrence(today, [0,3,6,9], isCategoryX ? 22 : 24), `Due ${isCategoryX ? '22nd' : '24th'} of the month after quarter-end (${isCategoryX ? 'Category X' : 'Category Y'} state)`);
+            } else if (profile === 'composition') {
+                addCard(cards, 'CMP-08 (Quarterly Statement-cum-Challan)', nextOccurrence(today, [0,3,6,9], 18), 'Due 18th of the month after quarter-end');
+            }
+
+            document.getElementById('due-date-cards').innerHTML = cards.join('');
+
+            // Annual filings
+            const annualCards = [];
+            if (profile !== 'composition') {
+                const gstr9Due = nextOccurrence(today, [11], 31);
+                addCard(annualCards, `GSTR-9 / 9C — ${fyLabelForDecDue(gstr9Due)}`, gstr9Due, 'Annual Return / Reconciliation Statement. GSTR-9C applies above the prescribed turnover threshold — confirm applicability for your case.');
+            } else {
+                const gstr4Due = nextOccurrence(today, [5], 30);
+                addCard(annualCards, `GSTR-4 — ${fyLabelForJunDue(gstr4Due)}`, gstr4Due, 'Composition scheme annual return (due date moved from 30 Apr to 30 Jun, effective FY 2024-25 onward)');
+            }
+            document.getElementById('annual-date-cards').innerHTML = annualCards.join('');
+
+            renderSmartInsights(buildGstDateInsights(items, profile, today));
+        }
+
+        // ==========================================================================
+        // Smart Insights — a rule-based (not live-AI) narrative that turns the
+        // due-date list into a short, prioritized observation. Deterministic,
+        // free to run, no data leaves the browser.
+        // ==========================================================================
+        function buildGstDateInsights(items, profile, today) {
+            const withDays = items
+                .map(it => ({ ...it, days: daysBetween(today, it.dueDate) }))
+                .sort((a, b) => a.days - b.days);
+            if (!withDays.length) return [];
+
+            const insights = [];
+            const dueSoon = withDays.filter(it => it.days <= 3);
+            const dueThisMonth = withDays.filter(it => it.days > 3 && it.days <= 10);
+
+            if (dueSoon.length > 0) {
+                insights.push({
+                    level: 'critical',
+                    text: `${dueSoon.length === 1 ? dueSoon[0].title + ' is' : dueSoon.map(i => i.title).join(' and ') + ' are'} due within 3 days (${dueSoon.map(i => i.days === 0 ? 'today' : i.days + 'd').join(', ')}). Make sure funds are set aside for the tax payment and the return is ready to file now — interest under Section 50 starts accruing from the day after the due date.`
+                });
+            } else if (dueThisMonth.length > 0) {
+                insights.push({
+                    level: 'warning',
+                    text: `Your next filing (${dueThisMonth[0].title}) is due in ${dueThisMonth[0].days} days. Start the pre-filing checklist below now so reconciliation issues don't surface at the last minute.`
+                });
+            } else {
+                insights.push({
+                    level: 'good',
+                    text: `Nothing is due within the next 10 days. Your next filing is ${withDays[0].title}, ${withDays[0].days} days away — a good time to reconcile GSTR-2B against books ahead of the deadline rather than close to it.`
+                });
+            }
+
+            if (profile === 'qrmp') {
+                insights.push({
+                    level: 'info',
+                    text: `Under QRMP, GSTR-1/3B are filed quarterly, but tax for the first two months of the quarter is still due monthly via PMT-06 (by the 25th) even though no return is filed those months — a common oversight that attracts interest even when nothing was technically "due" to file.`
+                });
+            }
+
+            return insights;
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        // ---------- Checklist ----------
+        const CHECKLIST_ITEMS = [
+            'Reconcile purchase register (books) against GSTR-2B before claiming ITC',
+            'Confirm all sales invoices for the period are recorded and, where applicable, e-invoiced',
+            'Check for any Reverse Charge Mechanism (RCM) liability for the period',
+            'Verify the previous period\'s return was successfully filed (a pending prior return can block the current one)',
+            'Review credit/debit notes issued or received during the period',
+            'Set aside funds for tax payment before the due date to avoid interest',
+            'Cross-check GSTR-1 and GSTR-3B figures for the same period tally',
+            'Keep a signed/approved copy of the return summary for your records'
+        ];
+        function renderChecklist() {
+            const ul = document.getElementById('checklist');
+            ul.innerHTML = CHECKLIST_ITEMS.map((text, i) => `
+                <li id="chk-item-${i}">
+                    <input type="checkbox" id="chk-${i}">
+                    <label for="chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            CHECKLIST_ITEMS.forEach((_, i) => {
+                document.getElementById(`chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        document.getElementById('inp-profile').addEventListener('change', render);
+        document.getElementById('inp-state').addEventListener('change', render);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

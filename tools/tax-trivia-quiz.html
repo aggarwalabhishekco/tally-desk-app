@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Trivia Quiz — Test Your Tax IQ | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="A fresh set of 8 questions from a growing pool of Indian tax and GST trivia, shuffled every time. See your Tax IQ score and share it — free, no sign-up, just for fun.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Tax Trivia Quiz</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Tax Trivia Quiz</h2>
+        <p class="section-subtitle">8 questions pulled fresh from a growing pool each time you play, in a shuffled order — no sign-up, no email, just for fun (and hopefully you'll pick up something useful along the way). Beat your score by playing again — the questions won't repeat the same way twice.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">Just-for-fun Tax &amp; GST Trivia</div>
+                </div>
+            </div>
+
+            <div class="tool-body">
+                <div class="tool-card" id="quiz-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                        <span id="quiz-progress" style="font-weight:700; color:#002b49;">Question 1 of 8</span>
+                        <span id="quiz-score-live" style="font-weight:700; color:#d4af37;">Score: 0</span>
+                    </div>
+                    <div style="background:#e2e8f0; border-radius:6px; height:8px; margin-bottom:24px; overflow:hidden;">
+                        <div id="quiz-progress-bar" style="background:#002b49; height:100%; width:12.5%; transition:width 0.3s;"></div>
+                    </div>
+                    <h3 id="quiz-question" style="font-family:'Lora',serif; color:#002b49; margin-bottom:20px;"></h3>
+                    <div id="quiz-options" style="display:grid; gap:12px;"></div>
+                    <div id="quiz-explanation" style="display:none; margin-top:18px; padding:14px 16px; border-radius:8px; background:#f0f9ff; border-left:3px solid #0369a1; font-size:0.92rem; color:#1e293b;"></div>
+                    <div style="text-align:right; margin-top:20px;">
+                        <button class="btn-tool-gold" id="btn-quiz-next" style="display:none;">Next Question →</button>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="quiz-result-card" style="display:none; text-align:center;">
+                    <h3 style="font-family:'Lora',serif; color:#002b49; font-size:1.6rem;">Your Tax IQ</h3>
+                    <div style="font-size:3.5rem; font-weight:800; color:#d4af37; margin:10px 0;" id="quiz-final-score">0 / 8</div>
+                    <p id="quiz-verdict-line" style="color:#475569; font-size:1.05rem; margin-bottom:24px;"></p>
+                    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                        <button class="btn-tool-outline" id="btn-quiz-retry" style="background:#002b49;">🔄 Try Again</button>
+                        <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;">📸 Share My Score</button>
+                        <a href="tax-regime-calculator.html" class="btn-tool-gold">Get Your Real Tax Numbers →</a>
+                    </div>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Just for fun:</strong> This quiz is a bit of light trivia, not tax advice — for your actual numbers, use our <a href="tax-regime-calculator.html" style="color:#002b49; font-weight:700;">Tax Regime Calculator</a> or the rest of our <a href="index.html" style="color:#002b49; font-weight:700;">free tools</a>.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This quiz is provided for general entertainment and educational purposes only and does not constitute tax advice.</p>
+    </footer>
+
+    <script>
+        const QUESTIONS = [
+            {
+                q: 'What does "TDS" stand for?',
+                options: ['Tax Deducted at Source', 'Total Deduction Scheme', 'Tax Delay Surcharge', 'Transaction Data System'],
+                correct: 0,
+                explain: 'TDS = Tax Deducted at Source — the payer deducts tax before paying you, and deposits it with the government on your behalf.'
+            },
+            {
+                q: 'Under the new Income Tax Act, 2025, almost all non-salary TDS provisions are now consolidated into which single section?',
+                options: ['Section 80C', 'Section 393', 'Section 194', 'Section 10'],
+                correct: 1,
+                explain: 'Section 393 of the Income Tax Act, 2025 (effective FY 2026-27) consolidates what used to be spread across 194A, 194C, 194H, 194J and more.'
+            },
+            {
+                q: 'What is the standard deduction for salaried taxpayers under the New Tax Regime for FY 2025-26?',
+                options: ['₹50,000', '₹40,000', '₹75,000', '₹1,00,000'],
+                correct: 2,
+                explain: '₹75,000 under the New Regime (vs. ₹50,000 under the Old Regime) for FY 2025-26.'
+            },
+            {
+                q: 'Up to what annual taxable income is tax effectively NIL under the New Regime (thanks to the Section 87A rebate) for FY 2025-26?',
+                options: ['₹5,00,000', '₹7,00,000', '₹15,00,000', '₹12,00,000'],
+                correct: 3,
+                explain: 'Taxable income up to ₹12,00,000 attracts a full rebate under the New Regime, bringing tax to nil (with marginal relief just above it).'
+            },
+            {
+                q: 'What does the "GST" in GST stand for?',
+                options: ['General Sales Tax', 'Goods and Services Tax', 'Government Service Tax', 'Gross Supply Tax'],
+                correct: 1,
+                explain: 'Goods and Services Tax — India\'s unified indirect tax that replaced VAT, service tax, excise and several other levies.'
+            },
+            {
+                q: 'What is the Long-Term Capital Gains (LTCG) tax rate on listed equity shares/equity mutual funds above the exemption limit, post-Budget 2024?',
+                options: ['10%', '12.5%', '15%', '20%'],
+                correct: 1,
+                explain: '12.5% (up from 10%), with the exemption threshold also raised to ₹1,25,000/year.'
+            },
+            {
+                q: 'Gifts from which of these are tax-free at ANY amount under the Income-tax law?',
+                options: ['Any close friend', 'Your spouse or parents', 'A random stranger', 'Your employer, as a bonus'],
+                correct: 1,
+                explain: 'Gifts from "specified relatives" (spouse, parents, siblings, etc.) are tax-free regardless of amount. From anyone else, over ₹50,000/year becomes taxable.'
+            },
+            {
+                q: 'For how many assessment years can a long-term capital loss generally be carried forward?',
+                options: ['2 years', '4 years', '8 years', 'Forever'],
+                correct: 2,
+                explain: 'Up to 8 assessment years — but only if the loss is reported in a return filed on or before the due date.'
+            },
+            {
+                q: 'Which ITR form does a salaried individual with only salary, one house property and interest income (no capital gains or business income) normally use?',
+                options: ['ITR-3', 'ITR-1 (Sahaj)', 'ITR-4', 'ITR-2'],
+                correct: 1,
+                explain: 'ITR-1 (Sahaj) — the simplest form, for exactly this kind of straightforward income profile.'
+            },
+            {
+                q: 'What does GSTR-1 report?',
+                options: ['Only tax paid', 'Outward supplies (sales)', 'An annual summary only', 'Only purchases'],
+                correct: 1,
+                explain: 'GSTR-1 is where you report your outward supplies (sales) for the period — it feeds the recipient\'s GSTR-2B.'
+            },
+            {
+                q: 'What is the GST registration threshold for a service provider in most states (not a special-category state)?',
+                options: ['₹10 lakh', '₹1 crore', '₹40 lakh', '₹20 lakh'],
+                correct: 3,
+                explain: '₹20 lakh in most states for services (₹10 lakh in special-category states; ₹40 lakh applies to goods instead).'
+            },
+            {
+                q: 'What does "PAN" stand for?',
+                options: ['Personal Assessment Number', 'Permanent Account Number', 'Provisional Account Number', 'Payment Authorization Number'],
+                correct: 1,
+                explain: 'Permanent Account Number — your unique 10-character identifier for anything tax-related in India.'
+            },
+            {
+                q: 'Under which section can you claim a deduction for health insurance premium?',
+                options: ['Section 80C', 'Section 80E', 'Section 80D', 'Section 80G'],
+                correct: 2,
+                explain: 'Section 80D — separate from the Section 80C basket, with its own limits for self/family and parents.'
+            },
+            {
+                q: 'What do Form 26AS and the Annual Information Statement (AIS) let you check?',
+                options: ['Your passport application status', 'TDS credited against your PAN and other reported financial data', 'Your bank loan eligibility', 'Your GST registration status'],
+                correct: 1,
+                explain: 'They show TDS/TCS credited to your PAN, along with other financial transactions reported to the department — always worth reconciling before filing.'
+            },
+            {
+                q: 'The GST Composition Scheme is mainly meant for:',
+                options: ['Exporters only', 'E-commerce operators only', 'Small taxpayers paying a fixed, lower rate instead of regular GST', 'Non-residents only'],
+                correct: 2,
+                explain: 'It lets small taxpayers (below a turnover threshold) pay a flat, lower rate with simplified compliance, in exchange for giving up input tax credit.'
+            },
+            {
+                q: 'What is a "belated return"?',
+                options: ['An ITR for a deceased person only', 'A GST return filed late', 'An ITR filed after the original due date but within the law\'s extended deadline', 'An ITR that was rejected by the department'],
+                correct: 2,
+                explain: 'A belated return is simply one filed after the original due date but before the final cutoff the law allows — usually with a late fee under Section 234F.'
+            },
+            {
+                q: 'What does "HUF" stand for in Indian tax law?',
+                options: ['Home Use Finance', 'High Utility Fund', 'Hindu Undivided Family', 'Household Unified Filing'],
+                correct: 2,
+                explain: 'Hindu Undivided Family — a distinct taxable entity under Indian law, often used in family tax planning.'
+            },
+            {
+                q: 'Roughly how much is the late fee under Section 234F for filing your ITR after the due date, if your total income is above ₹5 lakh?',
+                options: ['No fee at all', 'Up to ₹5,000', 'A flat ₹50,000', 'Up to ₹25,000'],
+                correct: 1,
+                explain: 'Up to ₹5,000 (capped at ₹1,000 if your total income is ₹5 lakh or below).'
+            },
+            {
+                q: 'Which of these is generally NOT allowed as a deduction under the New Tax Regime?',
+                options: ['Standard deduction on salary', 'Employer\'s NPS contribution (80CCD(2))', 'Section 80C investments (PF, ELSS, life insurance, etc.)', 'None — all of these are allowed'],
+                correct: 2,
+                explain: 'Section 80C is an Old Regime deduction — the New Regime strips most Chapter VI-A deductions, keeping mainly the standard deduction and employer NPS contribution.'
+            },
+            {
+                q: "What is the \"Assessment Year\" (AY)?",
+                options: ["The same as the Financial Year", "The year following the Financial Year, in which that year's income is assessed", "The year before the Financial Year", "Whichever year the taxpayer picks"],
+                correct: 1,
+                explain: "The AY is the year right after the Financial Year — e.g. income earned in FY 2025-26 is assessed in AY 2026-27."
+            },
+            {
+                q: "What does \"TAN\" stand for?",
+                options: ["Tax Account Number", "Tax Deduction and Collection Account Number", "Total Assessment Number", "Taxpayer Authorization Number"],
+                correct: 1,
+                explain: "TAN = Tax Deduction and Collection Account Number — required by anyone who deducts or collects tax at source."
+            },
+            {
+                q: "Who is generally required to obtain a TAN?",
+                options: ["Only companies", "Anyone required to deduct or collect tax at source", "Only government departments", "Only banks"],
+                correct: 1,
+                explain: "Any deductor/collector of tax at source needs a TAN, regardless of the type of entity."
+            },
+            {
+                q: "The Income-tax Act that governed India's direct taxes before the Income Tax Act, 2025 took over was enacted in which year?",
+                options: ["1922", "1961", "1956", "1991"],
+                correct: 1,
+                explain: "The Income-tax Act, 1961 governed direct taxes for over six decades before being replaced by the Income Tax Act, 2025."
+            },
+            {
+                q: "Which authority administers direct taxes (like income tax) in India?",
+                options: ["RBI", "CBDT (Central Board of Direct Taxes)", "SEBI", "CBIC"],
+                correct: 1,
+                explain: "The CBDT, under the Ministry of Finance, administers direct taxes; CBIC handles indirect taxes like GST and customs."
+            },
+            {
+                q: "Which authority administers GST and customs in India?",
+                options: ["CBDT", "CBIC (Central Board of Indirect Taxes and Customs)", "RBI", "IRDAI"],
+                correct: 1,
+                explain: "CBIC oversees indirect taxes — GST, customs, and excise."
+            },
+            {
+                q: "What is \"Form 16\"?",
+                options: ["A GST return", "A TDS certificate issued by an employer for salary", "A PAN application form", "A loan sanction letter"],
+                correct: 1,
+                explain: "Form 16 is the annual TDS certificate your employer gives you, summarizing salary paid and tax deducted."
+            },
+            {
+                q: "What is \"Form 16A\"?",
+                options: ["A TDS certificate for non-salary payments", "A salary TDS certificate", "A GST registration form", "An ITR acknowledgment"],
+                correct: 0,
+                explain: "Form 16A covers TDS on non-salary payments — like professional fees, rent, or interest."
+            },
+            {
+                q: "What do you receive as an acknowledgment after e-filing your ITR?",
+                options: ["Form 26AS", "ITR-V", "Form 16", "AIS"],
+                correct: 1,
+                explain: "ITR-V is the acknowledgment form generated after filing — it also serves as the verification form if not e-verified."
+            },
+            {
+                q: "What does \"e-verification\" of an ITR do?",
+                options: ["Confirms your identity to complete the filing process", "Triggers an automatic audit", "Processes your refund instantly", "Corrects errors in your PAN"],
+                correct: 0,
+                explain: "Without e-verification (or a physical ITR-V submission), your return isn't treated as filed at all."
+            },
+            {
+                q: "Which of these incomes is generally fully exempt from income tax under Section 10?",
+                options: ["Salary income", "Agricultural income", "Business profit", "Rental income"],
+                correct: 1,
+                explain: "Agricultural income is exempt from central income tax (though it can affect your tax rate on other income via partial integration)."
+            },
+            {
+                q: "What is the \"previous year\" in Indian tax terminology?",
+                options: ["The year in which income is earned (usually the same as the Financial Year)", "The year before the Financial Year", "Any random past year", "The year you file your return"],
+                correct: 0,
+                explain: "Confusingly named, the \"previous year\" is simply the year the income was actually earned — not an earlier year."
+            },
+            {
+                q: "Who typically must sign/verify a company's ITR?",
+                options: ["Any employee of the company", "A managing director or another authorised director", "Only the company's external auditor", "The company's bank"],
+                correct: 1,
+                explain: "A managing director (or another authorised director, in specified situations) must verify a company's return."
+            },
+            {
+                q: "What is \"advance tax\"?",
+                options: ["Tax paid in instalments during the year if your total tax liability crosses a threshold", "A loan from the tax department", "A refund paid in advance", "A tax paid only by companies"],
+                correct: 0,
+                explain: "If your estimated tax liability for the year exceeds ₹10,000, you're expected to pay it in instalments during the year rather than all at once after year-end."
+            },
+            {
+                q: "Advance tax generally becomes applicable once your estimated tax liability for the year exceeds:",
+                options: ["₹1,000", "₹10,000", "₹50,000", "₹1,00,000"],
+                correct: 1,
+                explain: "Cross ₹10,000 in estimated annual tax liability, and advance tax instalments generally kick in."
+            },
+            {
+                q: "What is \"self-assessment tax\"?",
+                options: ["Tax you calculate and pay yourself for any shortfall, before filing your return", "A penalty for late filing", "A GST term", "A type of refund"],
+                correct: 0,
+                explain: "It covers any gap between your total tax liability and what's already been paid via TDS/advance tax — settled before you file."
+            },
+            {
+                q: "What is India's standard Financial Year?",
+                options: ["1 April to 31 March", "1 January to 31 December", "1 July to 30 June", "1 April to 31 December"],
+                correct: 0,
+                explain: "India's Financial Year runs 1 April to 31 March — different from the calendar year many other countries use."
+            },
+            {
+                q: "Which of these is NOT one of the recognized \"heads of income\" under Indian tax law?",
+                options: ["Salary", "House Property", "Capital Gains", "Personal Expenses"],
+                correct: 3,
+                explain: "The five heads are Salary, House Property, Business/Profession, Capital Gains, and Other Sources — personal expenses aren't a head of income at all."
+            },
+            {
+                q: "What does \"clubbing of income\" refer to?",
+                options: ["Combining a married couple's income into one joint return", "Including certain income of another person (like a minor child) in your own, under specific anti-avoidance rules", "A GST provision for group companies", "A penalty for late filing"],
+                correct: 1,
+                explain: "Clubbing provisions stop people from shifting income to a minor child or spouse purely to reduce tax — such income often gets added back to the original earner's."
+            },
+            {
+                q: "What is a \"revised return\"?",
+                options: ["A return filed to correct an error or omission in an original return already filed", "A return only for late filers", "A type of GST return", "An audit report"],
+                correct: 0,
+                explain: "If you spot a mistake after filing, a revised return lets you correct it, within the time limit the law allows."
+            },
+            {
+                q: "What is an \"updated return\" (ITR-U)?",
+                options: ["A way to report previously omitted income within a longer window than a revised return, usually with additional tax", "A way to cancel an already-filed return", "A type of GST return", "Only available to companies"],
+                correct: 0,
+                explain: "ITR-U gives taxpayers extra time (beyond the normal revision window) to come clean on missed income — at the cost of an additional tax payment."
+            },
+            {
+                q: "What is a \"PAN card\" primarily designed to help the tax department do?",
+                options: ["Track traffic violations", "Track financial transactions and prevent tax evasion", "Verify passports", "Prevent voter fraud"],
+                correct: 1,
+                explain: "PAN links your financial transactions together so the department can spot mismatches and under-reporting."
+            },
+            {
+                q: "Which of these commonly requires quoting your PAN?",
+                options: ["Buying a coffee", "Opening a bank account", "Watching a movie", "Buying groceries under ₹100"],
+                correct: 1,
+                explain: "Banks, among many other institutions, require PAN for account opening and several other specified transactions."
+            },
+            {
+                q: "What is the combined investment limit under Section 80C (Old Regime)?",
+                options: ["₹1,00,000", "₹1,50,000", "₹2,00,000", "₹50,000"],
+                correct: 1,
+                explain: "₹1,50,000/year is the combined cap across all Section 80C investments and expenses put together."
+            },
+            {
+                q: "Which of these is NOT eligible for a deduction under Section 80C?",
+                options: ["PPF contributions", "ELSS mutual funds", "Health insurance premium", "Life insurance premium"],
+                correct: 2,
+                explain: "Health insurance premium falls under Section 80D, a separate deduction from the 80C basket."
+            },
+            {
+                q: "Section 80TTA gives a deduction on:",
+                options: ["Life insurance premium", "Savings account interest (for non-senior citizens)", "Rent paid", "Medical expenses"],
+                correct: 1,
+                explain: "Up to a specified limit, interest earned on a savings account is deductible under 80TTA for non-senior citizens."
+            },
+            {
+                q: "Section 80TTB, meant for senior citizens, covers:",
+                options: ["Interest income from deposits (savings accounts and FDs)", "Life insurance premium", "Home loan interest", "Tuition fees"],
+                correct: 0,
+                explain: "80TTB gives senior citizens a higher deduction on deposit interest than the 80TTA limit available to everyone else."
+            },
+            {
+                q: "Section 80E gives a deduction for:",
+                options: ["Home loan principal repayment", "Interest paid on an education loan", "Health insurance premium", "Donations to charity"],
+                correct: 1,
+                explain: "80E covers interest (not principal) on a loan taken for higher education, with no upper monetary cap."
+            },
+            {
+                q: "Section 80G gives a deduction for:",
+                options: ["Donations to specified funds and charitable institutions", "Life insurance premium", "Rent paid", "Medical bills"],
+                correct: 0,
+                explain: "Depending on the recipient institution, 80G allows 50% or 100% deduction on eligible donations, sometimes subject to a qualifying limit."
+            },
+            {
+                q: "Section 80GG is meant to help a taxpayer who:",
+                options: ["Owns multiple houses", "Pays rent but doesn't receive HRA as part of salary", "Has no income at all", "Runs a business"],
+                correct: 1,
+                explain: "80GG steps in for people paying rent without an HRA component — self-employed individuals, or salaried employees whose employer doesn't give HRA."
+            },
+            {
+                q: "What's the maximum flat annual deduction under Section 80GG?",
+                options: ["₹24,000", "₹60,000", "₹1,00,000", "₹2,00,000"],
+                correct: 1,
+                explain: "The flat cap is ₹60,000/year (₹5,000/month) — one of three limits, the lowest of which applies."
+            },
+            {
+                q: "Under Section 24(b), interest on a home loan for a self-occupied property is deductible (Old Regime) up to:",
+                options: ["₹1,00,000", "₹1,50,000", "₹2,00,000", "No limit"],
+                correct: 2,
+                explain: "₹2,00,000/year is the cap for a self-occupied property under the Old Regime."
+            },
+            {
+                q: "Section 80CCD(1B) allows an additional deduction, over and above 80C, for:",
+                options: ["NPS contribution, up to ₹50,000", "Life insurance premium", "Home loan principal", "Health insurance premium"],
+                correct: 0,
+                explain: "This extra ₹50,000 NPS deduction sits outside the ₹1,50,000 Section 80C cap entirely."
+            },
+            {
+                q: "Which allowance is specifically meant to help with the cost of rented accommodation?",
+                options: ["LTA", "HRA", "DA", "Conveyance Allowance"],
+                correct: 1,
+                explain: "House Rent Allowance (HRA) is designed around your actual rent expense, subject to the Section 10(13A) formula."
+            },
+            {
+                q: "What does \"LTA\" stand for?",
+                options: ["Long-Term Allowance", "Leave Travel Allowance", "Life Tax Allowance", "Loan Term Adjustment"],
+                correct: 1,
+                explain: "Leave Travel Allowance — an exemption for travel costs incurred during leave, subject to conditions."
+            },
+            {
+                q: "LTA exemption generally covers:",
+                options: ["Any travel, anywhere in the world", "Travel within India, for the employee and specified family members", "International vacations only", "Daily office commute"],
+                correct: 1,
+                explain: "LTA is restricted to domestic travel, and only for the employee plus specified family members — not overseas trips."
+            },
+            {
+                q: "What is a \"perquisite\" in salary terms?",
+                options: ["A cash bonus", "A non-cash benefit provided by an employer, like a company car or rent-free accommodation", "A GST term", "A late-payment penalty"],
+                correct: 1,
+                explain: "Perquisites are non-cash benefits — some are tax-exempt, others are valued and taxed as part of salary."
+            },
+            {
+                q: "Gratuity received by a government employee on retirement is generally:",
+                options: ["Fully taxable", "Fully exempt", "Taxable at a flat 50%", "Exempt only for private-sector employees"],
+                correct: 1,
+                explain: "Government employees enjoy full exemption on gratuity; private-sector employees get exemption only up to specified limits."
+            },
+            {
+                q: "Leave encashment on retirement is generally:",
+                options: ["Always fully taxable", "Exempt up to specified limits for non-government employees, and fully exempt for government employees", "Never taxable for anyone", "Only relevant for private companies"],
+                correct: 1,
+                explain: "Government employees get full exemption; others get exemption capped at a specified limit."
+            },
+            {
+                q: "Section 80U provides a deduction for:",
+                options: ["A taxpayer who has a disability", "Donations made", "Education loan interest", "Rent paid"],
+                correct: 0,
+                explain: "80U is a self-relief provision for taxpayers with a certified disability."
+            },
+            {
+                q: "Section 80DD provides a deduction for:",
+                options: ["Maintenance and medical treatment of a dependent with a disability", "The taxpayer's own health insurance", "Home loan interest", "Tuition fees"],
+                correct: 0,
+                explain: "Unlike 80U (self), 80DD is for expenses on a dependent family member with a disability."
+            },
+            {
+                q: "Section 80DDB provides a deduction for:",
+                options: ["Treatment of specified serious illnesses", "Life insurance premium", "Rent paid", "Donations"],
+                correct: 0,
+                explain: "It covers medical treatment expenses for specified diseases listed under the relevant rules."
+            },
+            {
+                q: "Tuition fees for how many children can be claimed under Section 80C?",
+                options: ["1", "2", "3", "Unlimited"],
+                correct: 1,
+                explain: "The tuition-fee component of 80C is capped at two children per taxpayer."
+            },
+            {
+                q: "Which of these tuition-related payments is eligible under Section 80C?",
+                options: ["Full-time tuition fees at a school/college/university in India", "Donations or capitation fees", "Private tuition or coaching fees", "Development fees"],
+                correct: 0,
+                explain: "Only genuine tuition fees for full-time education in India qualify — donations, capitation fees, and coaching charges don't."
+            },
+            {
+                q: "What is the broad purpose of \"marginal relief\" in income tax?",
+                options: ["To ensure tax on income just above a threshold doesn't exceed the extra income itself", "A special refund scheme", "A GST provision", "A penalty waiver for TDS"],
+                correct: 0,
+                explain: "It prevents a small increase in income from triggering a disproportionately larger tax jump right at a slab or rebate boundary."
+            },
+            {
+                q: "What is \"Dearness Allowance\" (DA)?",
+                options: ["A cost-of-living adjustment allowance, mainly for government employees", "A GST term", "A home loan benefit", "A type of stock option"],
+                correct: 0,
+                explain: "DA adjusts salary for inflation and is a significant, regularly revised component of government employees' pay."
+            },
+            {
+                q: "What does \"TCS\" stand for?",
+                options: ["Tax Collected at Source", "Total Contribution Scheme", "Tax Certification System", "Transaction Clearing Service"],
+                correct: 0,
+                explain: "TCS is collected by the seller from the buyer in specified transactions, unlike TDS which the payer deducts."
+            },
+            {
+                q: "Who generally deducts TDS?",
+                options: ["The recipient of the income", "The payer of the income, in specified cases", "The bank, always", "The government, directly"],
+                correct: 1,
+                explain: "The payer withholds tax before paying, and deposits it with the government on the recipient's behalf."
+            },
+            {
+                q: "Who generally collects TCS?",
+                options: ["The buyer", "The seller, in specified transactions", "The bank", "The government, directly"],
+                correct: 1,
+                explain: "Unlike TDS, TCS flows the other way — the seller collects it from the buyer at the time of sale."
+            },
+            {
+                q: "Form 27Q is used for TDS returns on payments made to:",
+                options: ["Residents", "Non-residents", "Salaried employees only", "GST-registered persons"],
+                correct: 1,
+                explain: "Form 27Q specifically covers TDS on payments to non-residents."
+            },
+            {
+                q: "Form 24Q is used for TDS returns on:",
+                options: ["Salary payments", "Non-salary payments to residents", "Payments to non-residents", "GST transactions"],
+                correct: 0,
+                explain: "Form 24Q is the quarterly TDS return specifically for salary."
+            },
+            {
+                q: "Form 26Q is used for TDS returns on:",
+                options: ["Salary", "Non-salary payments to residents", "Payments to non-residents", "Property purchases only"],
+                correct: 1,
+                explain: "Form 26Q covers the bulk of non-salary TDS — contractor payments, professional fees, rent, interest, and more."
+            },
+            {
+                q: "Section 194-IA (old Act) covers TDS on:",
+                options: ["Rent", "Sale of immovable property, above a threshold", "Salary", "Dividend"],
+                correct: 1,
+                explain: "A buyer deducts TDS when purchasing immovable property valued at or above the specified threshold."
+            },
+            {
+                q: "What is the TDS threshold under Section 194-IA (property purchase)?",
+                options: ["₹20 lakh", "₹50 lakh", "₹1 crore", "No threshold at all"],
+                correct: 1,
+                explain: "₹50 lakh — cross that consideration value, and the buyer must deduct TDS on the purchase."
+            },
+            {
+                q: "What is the standard TDS rate under Section 194-IA?",
+                options: ["1%", "2%", "5%", "10%"],
+                correct: 0,
+                explain: "A flat 1% applies on the sale consideration (or stamp duty value, if higher), regardless of PAN in most cases."
+            },
+            {
+                q: "If TDS is deducted from your income but the deductor delays or fails to deposit it, once it is correctly reported, who ultimately gets the credit?",
+                options: ["The payee, once it's reflected against their PAN", "No one", "Only the payer", "The bank"],
+                correct: 0,
+                explain: "Credit generally follows correct reporting against the payee's PAN, though a genuine mismatch can cause temporary refund delays."
+            },
+            {
+                q: "What is Section 206AA broadly about?",
+                options: ["A higher TDS rate applies if the payee has no PAN", "A lower TDS rate on exports", "A GST provision", "TDS applicable only on dividends"],
+                correct: 0,
+                explain: "Without a valid PAN, TDS is deducted at a higher rate — often 20% or the specified rate, whichever is higher."
+            },
+            {
+                q: "TDS on rent paid by an individual/HUF not liable to tax audit is covered (under the old Act) by:",
+                options: ["Section 194-IB", "Section 194J", "Section 194H", "Section 194D"],
+                correct: 0,
+                explain: "Section 194-IB specifically targets individuals/HUFs paying rent above a monthly threshold who aren't otherwise required to deduct TDS under 194-I."
+            },
+            {
+                q: "Who is generally responsible for depositing deducted TDS with the government?",
+                options: ["The payee", "The deductor (the payer)", "The bank, automatically", "No one — it happens automatically"],
+                correct: 1,
+                explain: "The deductor must deposit TDS within the prescribed time and file the corresponding quarterly return."
+            },
+            {
+                q: "What is the purpose of a lower/nil TDS deduction certificate under Section 197?",
+                options: ["To let a taxpayer request TDS at a lower or nil rate, when their actual tax liability is lower", "To avoid filing a return altogether", "A GST exemption certificate", "A waiver of a late-filing penalty"],
+                correct: 0,
+                explain: "Useful when someone's actual tax liability is genuinely lower than the standard TDS rate would deduct — avoiding a large refund claim later."
+            },
+            {
+                q: "TCS under Section 206C(1H) on sale of goods generally applies once receipts from a buyer in a year cross:",
+                options: ["₹50 lakh", "₹10 lakh", "₹5 lakh", "₹1 crore"],
+                correct: 0,
+                explain: "₹50 lakh in receipts from a single buyer in a financial year is the trigger point (for sellers above a turnover threshold)."
+            },
+            {
+                q: "If excess TDS has been deducted from your income, what can you generally do?",
+                options: ["Nothing — it's lost permanently", "Claim a refund when you file your ITR", "It gets automatically adjusted the next year", "Ask your bank to reverse it"],
+                correct: 1,
+                explain: "Filing your return lets you reconcile actual tax liability against TDS already deducted, and claim back any excess."
+            },
+            {
+                q: "Under the Income Tax Act, 2025, most non-salary TDS provisions are now placed under which section?",
+                options: ["Section 192", "Section 393", "Section 10", "Section 80C"],
+                correct: 1,
+                explain: "Section 393 consolidates what used to be spread across many separate sections like 194A, 194C, 194H and 194J."
+            },
+            {
+                q: "TDS on salary is deducted based on:",
+                options: ["A flat 10% always", "The employee's estimated total tax liability for the year, at slab rates", "GST rates", "A random amount decided by the employer"],
+                correct: 1,
+                explain: "Employers estimate your full-year tax liability (factoring in declared investments/deductions) and spread the deduction across the year's salary payments."
+            },
+            {
+                q: "What is Form 15G/15H used for?",
+                options: ["Declaring that your income is below the taxable limit, to avoid TDS on interest", "Filing a GST return", "Applying for a PAN card", "Registering a company"],
+                correct: 0,
+                explain: "Eligible individuals (15H for senior citizens) submit these to banks to prevent TDS deduction on interest when their total income doesn't warrant tax."
+            },
+            {
+                q: "What is the general due date for depositing TDS deducted in a given month?",
+                options: ["The 7th of the following month (with a March-specific extension)", "The end of the financial year", "Immediately on the same day", "Once a year only"],
+                correct: 0,
+                explain: "TDS deducted in a month is generally due for deposit by the 7th of the next month, with March's deduction due by 30 April."
+            },
+            {
+                q: "GST was implemented in India from:",
+                options: ["1 April 2016", "1 July 2017", "1 January 2018", "1 April 2020"],
+                correct: 1,
+                explain: "GST rolled out nationwide at midnight on 1 July 2017, after years of preparation and constitutional amendment."
+            },
+            {
+                q: "GST replaced which of these taxes, among others?",
+                options: ["Income tax", "VAT, Service Tax and Excise Duty", "Customs duty", "Wealth tax"],
+                correct: 1,
+                explain: "GST subsumed a whole web of state and central indirect taxes — VAT, service tax, excise duty, and more — into one system."
+            },
+            {
+                q: "GST in India follows which structural model?",
+                options: ["A single unified national tax only", "A dual model — Central GST (CGST) plus State GST (SGST/UTGST)", "A state-only tax", "An import-tax-only model"],
+                correct: 1,
+                explain: "Being a federal country, India split GST into CGST (Centre) and SGST/UTGST (State/UT), plus IGST for inter-state supply."
+            },
+            {
+                q: "IGST (Integrated GST) applies to:",
+                options: ["Intra-state supply", "Inter-state supply and imports", "Exports only", "Services only"],
+                correct: 1,
+                explain: "IGST covers supply across state borders and imports, and is later apportioned between the Centre and the destination state."
+            },
+            {
+                q: "What is \"Input Tax Credit\" (ITC) under GST?",
+                options: ["A discount given by the seller", "Credit for GST already paid on purchases, used to offset GST payable on sales", "A government subsidy", "A late-filing penalty"],
+                correct: 1,
+                explain: "ITC is the backbone of GST's design — it avoids tax cascading by letting businesses offset tax paid on inputs against tax collected on outputs."
+            },
+            {
+                q: "What is GSTR-3B?",
+                options: ["An annual return only", "A summary return for reporting sales, ITC claimed, and tax payment", "A return only for composition dealers", "Not a real GST form"],
+                correct: 1,
+                explain: "GSTR-3B is the workhorse monthly/quarterly summary return most regular taxpayers file."
+            },
+            {
+                q: "The GST Annual Return is filed using which form?",
+                options: ["GSTR-1", "GSTR-9", "GSTR-3B", "GSTR-2A"],
+                correct: 1,
+                explain: "GSTR-9 consolidates a full year's GST activity into one annual filing."
+            },
+            {
+                q: "What do GSTR-2A and GSTR-2B primarily show a taxpayer?",
+                options: ["Their own sales", "Purchases as reported by their suppliers, for ITC matching/reconciliation", "Applicable GST rates", "Company registration details"],
+                correct: 1,
+                explain: "These auto-populated statements let you check what your suppliers have reported, so you can reconcile it against your own purchase records before claiming ITC."
+            },
+            {
+                q: "What is the \"reverse charge mechanism\" (RCM) in GST?",
+                options: ["The recipient, instead of the supplier, pays GST directly, in specified cases", "A GST refund process", "A special GST rate", "A type of registration"],
+                correct: 0,
+                explain: "RCM shifts the liability to pay GST onto the recipient for certain notified goods/services or supplier categories (like unregistered suppliers in specified cases)."
+            },
+            {
+                q: "E-way bills are generally required for movement of goods valued above:",
+                options: ["₹10,000", "₹50,000", "₹1,00,000", "₹5,00,000"],
+                correct: 1,
+                explain: "₹50,000 is the standard threshold above which an e-way bill is required for transporting goods (subject to state-specific variations)."
+            },
+            {
+                q: "What does the \"HSN code\" on an invoice represent?",
+                options: ["A classification code for goods, used to determine the applicable GST rate", "A bank code", "A PAN-like identification number", "A GST registration number"],
+                correct: 0,
+                explain: "HSN (Harmonized System of Nomenclature) codes classify goods internationally, and GST rates are mapped against them."
+            },
+            {
+                q: "What is the \"SAC code\" used for under GST?",
+                options: ["Classifying services (Services Accounting Code)", "Classifying stocks", "A bank IFSC-style code", "A customs-only code"],
+                correct: 0,
+                explain: "SAC does for services what HSN does for goods — a standardized classification for rate and reporting purposes."
+            },
+            {
+                q: "GST registration is compulsory for a person making inter-state taxable supply:",
+                options: ["Regardless of turnover, in most cases", "Only above ₹1 crore turnover", "Never required", "Only for exporters"],
+                correct: 0,
+                explain: "Inter-state suppliers generally must register regardless of turnover, unlike purely intra-state small suppliers who get a threshold exemption."
+            },
+            {
+                q: "Which of these supplies is generally treated as \"zero-rated\" under GST?",
+                options: ["Sale within the same state", "Exports", "Sale to a related party", "Sale of exempted goods"],
+                correct: 1,
+                explain: "Exports (and supplies to SEZs) are zero-rated — no GST is charged, and exporters can still claim ITC on inputs, unlike a plain exemption."
+            },
+            {
+                q: "What is a \"GSTIN\"?",
+                options: ["A 15-digit unique GST registration number", "A bank account number", "A PAN alternative for individuals", "A customs clearance code"],
+                correct: 0,
+                explain: "GSTIN is built partly from your PAN, plus a state code and a few check digits — 15 characters in total."
+            },
+            {
+                q: "The first two digits of a GSTIN represent:",
+                options: ["The state code", "The financial year of registration", "The type of business", "A random check digit"],
+                correct: 0,
+                explain: "Each state/UT has its own two-digit code, forming the first part of every GSTIN registered there."
+            },
+            {
+                q: "A composition scheme dealer under GST generally cannot:",
+                options: ["Charge GST separately on invoices, or claim input tax credit", "File any returns", "Sell goods at all", "Operate in more than one state"],
+                correct: 0,
+                explain: "In exchange for a flat, lower tax rate and simpler compliance, composition dealers give up the right to charge GST separately or claim ITC."
+            },
+            {
+                q: "Even a business with zero transactions in a period must generally still file:",
+                options: ["Nothing at all", "A \"Nil\" GSTR-3B return", "Only an annual return", "A special exemption form"],
+                correct: 1,
+                explain: "A registered taxpayer must file returns for every period, even a Nil one, until they formally cancel their registration."
+            },
+            {
+                q: "What is the GST Council responsible for?",
+                options: ["Setting GST rates and policy, as a joint Centre-State body", "Only collecting central taxes", "Only customs matters", "Registering companies"],
+                correct: 0,
+                explain: "The GST Council brings together the Union and State finance ministers to jointly decide rates, exemptions, and GST policy."
+            },
+            {
+                q: "Who chairs the GST Council?",
+                options: ["The RBI Governor", "The Union Finance Minister", "The Prime Minister", "The CBIC Chairman"],
+                correct: 1,
+                explain: "The Union Finance Minister chairs the Council, with state finance ministers as members."
+            },
+            {
+                q: "What is an \"e-invoice\" under GST, broadly?",
+                options: ["An invoice generated and reported to a government portal in real time, for eligible taxpayers", "Any invoice created on a computer", "A WhatsApp-sent bill", "An SMS receipt"],
+                correct: 0,
+                explain: "E-invoicing standardizes invoice data and reports it to the Invoice Registration Portal in real time, generating a unique reference number."
+            },
+            {
+                q: "What does \"place of supply\" determine under GST?",
+                options: ["Whether CGST+SGST or IGST applies to a transaction", "The GST rate only", "Whether ITC is available at all", "The HSN code to use"],
+                correct: 0,
+                explain: "Place of supply rules decide whether a transaction is treated as intra-state (CGST+SGST) or inter-state (IGST)."
+            },
+            {
+                q: "Under GST, \"aggregate turnover\" for the registration threshold is calculated:",
+                options: ["State-wise only", "On an all-India, PAN-wide basis, across all your business verticals/branches", "Only from cash sales", "Only from exports"],
+                correct: 1,
+                explain: "All supplies under the same PAN, across every state, are added together to check if you've crossed the registration threshold."
+            },
+            {
+                q: "A \"credit note\" under GST is typically issued when:",
+                options: ["The taxable value or tax charged on an earlier invoice needs to be reduced (e.g. a sales return)", "A new customer registers with you", "Extra ITC needs to be claimed", "A refund application is rejected"],
+                correct: 0,
+                explain: "A credit note formally reduces the tax/value on a supply already invoiced — common for returns, discounts given after sale, or billing errors."
+            },
+            {
+                q: "What is the \"QRMP scheme\" under GST?",
+                options: ["Quarterly Return, Monthly Payment — lets small taxpayers file GSTR-1/3B quarterly while paying tax monthly", "An annual-only filing scheme", "A special export scheme", "A scheme only for composition dealers"],
+                correct: 0,
+                explain: "QRMP reduces filing frequency for eligible small taxpayers while keeping monthly cash flow to the government steady."
+            },
+            {
+                q: "Who is generally eligible for the QRMP scheme?",
+                options: ["Taxpayers with aggregate turnover up to ₹5 crore", "Only exporters", "Only composition-scheme dealers", "Only companies, not proprietorships"],
+                correct: 0,
+                explain: "Turnover up to ₹5 crore in the preceding financial year is the eligibility threshold for QRMP."
+            },
+            {
+                q: "What does \"RCM\" stand for in the GST context?",
+                options: ["Reverse Charge Mechanism", "Regular Compliance Method", "Refund Collection Mode", "Rate Change Mechanism"],
+                correct: 0,
+                explain: "RCM shifts the tax-payment obligation from supplier to recipient in specified situations."
+            },
+            {
+                q: "GST rates in India are generally structured as:",
+                options: ["A single flat rate for everything", "Multiple slabs (such as 5%, 12%, 18%, 28%)", "Only two possible rates", "No fixed rates at all"],
+                correct: 1,
+                explain: "India adopted a multi-slab GST structure rather than a single flat rate, unlike some other countries' GST/VAT systems."
+            },
+            {
+                q: "What is \"GSTR-4\"?",
+                options: ["The annual return filed by composition-scheme taxpayers", "A monthly return for all taxpayers", "A TDS return under GST", "An export-specific return"],
+                correct: 0,
+                explain: "Composition dealers, who don't file the regular monthly/quarterly returns, instead file GSTR-4 annually."
+            },
+            {
+                q: "What generally distinguishes a \"short-term\" from a \"long-term\" capital asset?",
+                options: ["The taxpayer's personal choice", "How long the asset was held before sale", "Its purchase price", "The seller's age"],
+                correct: 1,
+                explain: "Holding period is the deciding factor — and the exact threshold varies by asset type."
+            },
+            {
+                q: "For listed equity shares, the long-term holding period threshold is generally:",
+                options: ["6 months", "12 months", "24 months", "36 months"],
+                correct: 1,
+                explain: "Hold listed shares/equity mutual funds for 12 months or more, and any gain is treated as long-term."
+            },
+            {
+                q: "For immovable property, the long-term holding period threshold is generally:",
+                options: ["12 months", "24 months", "36 months", "6 months"],
+                correct: 1,
+                explain: "Property needs to be held for at least 24 months to qualify for long-term treatment, post the Budget 2024 simplification."
+            },
+            {
+                q: "Post-Budget 2024, STCG on listed equity shares (STT paid) is taxed at:",
+                options: ["10%", "15%", "20%", "Slab rate"],
+                correct: 2,
+                explain: "The rate was raised from 15% to 20% for transfers on or after 23 July 2024."
+            },
+            {
+                q: "What is \"indexation\" in the context of capital gains?",
+                options: ["Adjusting an asset's cost for inflation before computing the taxable gain", "A GST classification term", "A specific TDS rate", "A stock market index"],
+                correct: 0,
+                explain: "Indexation reduces taxable gains by inflating the historical cost using the Cost Inflation Index — though it's now unavailable for most assets after Budget 2024."
+            },
+            {
+                q: "What is a \"capital loss\"?",
+                options: ["When the sale price of an asset is less than its adjusted cost, resulting in a negative gain", "A type of business loss", "A salary deduction", "A GST term"],
+                correct: 0,
+                explain: "A capital loss can often be set off against capital gains (subject to specific rules) and carried forward if reported on time."
+            },
+            {
+                q: "Short-term capital losses can generally be set off against:",
+                options: ["Only short-term capital gains", "Any capital gain — short-term or long-term", "Salary income", "Nothing at all"],
+                correct: 1,
+                explain: "Short-term losses are the more flexible of the two — they can offset either kind of capital gain."
+            },
+            {
+                q: "Long-term capital losses can generally be set off against:",
+                options: ["Any type of income", "Only long-term capital gains", "Only short-term capital gains", "Salary income"],
+                correct: 1,
+                explain: "Long-term losses are restricted — they can only reduce long-term gains, not short-term ones or other income."
+            },
+            {
+                q: "What is a \"bonus share\"?",
+                options: ["An extra share issued to existing shareholders free of cost, from company reserves", "A dividend payment", "A stock split", "A rights issue"],
+                correct: 0,
+                explain: "Bonus shares increase the number of shares you hold without any fresh investment, funded from the company's reserves."
+            },
+            {
+                q: "What is a \"dividend\"?",
+                options: ["A share of a company's profit distributed to its shareholders", "A type of loan", "A GST refund", "A tax deduction"],
+                correct: 0,
+                explain: "Dividends are a direct payout of profit to shareholders, and are taxable in the recipient's hands."
+            },
+            {
+                q: "Section 54 of the Income-tax Act provides a capital gains exemption on the sale of:",
+                options: ["A residential house, when the gain is reinvested in another residential house", "Gold", "Shares", "A car"],
+                correct: 0,
+                explain: "Section 54 is the classic \"sell a house, buy another house\" exemption route for long-term capital gains."
+            },
+            {
+                q: "Section 54EC allows exemption of capital gains (from land/building) by investing in:",
+                options: ["Specified capital gains bonds (like NHAI or REC bonds)", "Mutual funds", "Fixed deposits", "Gold"],
+                correct: 0,
+                explain: "These specified bonds come with a lock-in period and a cap on the amount eligible for exemption."
+            },
+            {
+                q: "What is a \"mutual fund\"?",
+                options: ["A pool of money from many investors, professionally managed and invested in securities", "A type of bank savings account", "A government scheme only", "A type of personal loan"],
+                correct: 0,
+                explain: "Mutual funds let investors pool money together and access professional fund management and diversification."
+            },
+            {
+                q: "What does \"NAV\" mean in mutual fund terms?",
+                options: ["Net Asset Value — the per-unit value of a fund's holdings", "National Average Value", "New Account Verification", "Net Annual Value"],
+                correct: 0,
+                explain: "NAV is essentially the price per unit of a mutual fund, calculated from its total assets minus liabilities."
+            },
+            {
+                q: "What is a \"SIP\" in investing?",
+                options: ["Systematic Investment Plan — regular, fixed investments into a mutual fund", "A government subsidy scheme", "A tax deduction", "A loan repayment plan"],
+                correct: 0,
+                explain: "SIPs let investors commit to periodic (often monthly) investments rather than a single lump sum."
+            },
+            {
+                q: "What does \"ROC\" stand for?",
+                options: ["Registrar of Companies", "Regional Office of Commerce", "Reserve of Capital", "Revenue Office of the Centre"],
+                correct: 0,
+                explain: "The ROC, under the Ministry of Corporate Affairs, is where companies and LLPs register and file their statutory documents."
+            },
+            {
+                q: "What does \"MCA\" stand for, in the company-law context?",
+                options: ["Ministry of Corporate Affairs", "Ministry of Commercial Accounts", "Municipal Corporation Authority", "Ministry of Capital Assets"],
+                correct: 0,
+                explain: "The MCA administers the Companies Act and oversees company/LLP regulation in India."
+            },
+            {
+                q: "What is a \"DIN\"?",
+                options: ["Director Identification Number", "Direct Income Number", "Dividend Index Number", "Deposit Identification Number"],
+                correct: 0,
+                explain: "Every individual who wants to be a company director needs a unique DIN, issued once and used for life."
+            },
+            {
+                q: "What is \"DIR-3 KYC\"?",
+                options: ["An annual KYC filing required for every person holding a DIN", "A GST registration form", "An income tax return form", "A bank KYC form"],
+                correct: 0,
+                explain: "Directors must complete this annual KYC exercise, or their DIN can be marked as deactivated."
+            },
+            {
+                q: "What is an \"AGM\"?",
+                options: ["Annual General Meeting — a mandatory yearly meeting of a company's shareholders", "A type of GST return", "A tax audit report", "A loan agreement"],
+                correct: 0,
+                explain: "Most companies must hold an AGM every year to approve accounts, appoint auditors, and handle other statutory business."
+            },
+            {
+                q: "What is Form AOC-4 used for?",
+                options: ["Filing a company's financial statements with the ROC", "Filing TDS returns", "GST registration", "Reporting a director's resignation"],
+                correct: 0,
+                explain: "AOC-4 is how a company submits its balance sheet, P&L, and related disclosures to the ROC each year."
+            },
+            {
+                q: "What is Form MGT-7/MGT-7A used for?",
+                options: ["Filing a company's Annual Return with the ROC", "Filing a GST return", "Filing an income tax return", "Bank KYC"],
+                correct: 0,
+                explain: "MGT-7 (or MGT-7A for small companies/OPCs) captures a company's shareholding pattern, management details, and other annual disclosures."
+            },
+            {
+                q: "What is an \"OPC\"?",
+                options: ["One Person Company — a company structure with a single shareholder", "An overseas branch company", "A type of partnership", "A GST scheme"],
+                correct: 0,
+                explain: "OPCs let a solo entrepreneur enjoy the limited-liability benefit of a company structure without needing a co-shareholder."
+            },
+            {
+                q: "What is an \"LLP\"?",
+                options: ["Limited Liability Partnership — combines partnership flexibility with limited liability protection", "A type of bank loan", "A GST scheme", "A mutual fund"],
+                correct: 0,
+                explain: "LLPs give partners limited liability (unlike a traditional partnership) while keeping much of a partnership's operational flexibility."
+            },
+            {
+                q: "LLPs file their \"Statement of Account & Solvency\" using which form?",
+                options: ["Form 8", "Form 11", "AOC-4", "MGT-7"],
+                correct: 0,
+                explain: "Form 8 is the LLP equivalent of a company's financial statement filing."
+            },
+            {
+                q: "LLPs file their Annual Return using which form?",
+                options: ["Form 8", "Form 11", "AOC-4", "MGT-7"],
+                correct: 1,
+                explain: "Form 11 captures the LLP's partner details and other annual particulars — separate from the Form 8 financial filing."
+            },
+            {
+                q: "What is a \"Section 8 Company\"?",
+                options: ["A company formed for charitable or non-profit purposes, which can't distribute profits to members", "A foreign-owned company", "A single-shareholder company", "A listed company"],
+                correct: 0,
+                explain: "Section 8 companies exist to promote objects like charity, education, or social welfare, ploughing profits back rather than distributing them."
+            },
+            {
+                q: "What does \"MOA\" stand for in company law?",
+                options: ["Memorandum of Association — defines a company's objectives and scope", "A tax filing form", "A GST document", "A bank guarantee"],
+                correct: 0,
+                explain: "The MOA is a company's foundational charter, setting out what it exists to do."
+            },
+            {
+                q: "What does \"AOA\" stand for in company law?",
+                options: ["Articles of Association — governs a company's internal rules and management", "A tax filing form", "A GST document", "A loan agreement"],
+                correct: 0,
+                explain: "The AOA is essentially a company's internal rulebook — how meetings are run, how directors are appointed, and so on."
+            },
+            {
+                q: "What is a \"statutory audit\"?",
+                options: ["An audit mandated by law (like the Companies Act), regardless of company size", "An optional internal management review", "A GST-only audit", "A bank-requested financial review"],
+                correct: 0,
+                explain: "Unlike an internal or tax audit, a statutory audit is a legal requirement for companies under the Companies Act."
+            },
+            {
+                q: "What is \"DPT-3\"?",
+                options: ["An annual return of deposits (and certain other receipts) that companies must file with the ROC", "A GST return", "A TDS form", "A dividend declaration form"],
+                correct: 0,
+                explain: "DPT-3 helps the ROC track loans and deposits a company has accepted, to guard against unauthorized deposit-taking."
+            },
+            {
+                q: "A \"small company\" under the Companies Act generally benefits from:",
+                options: ["Higher tax rates", "Relaxed compliance requirements, like fewer mandatory board meetings", "No compliance requirements at all", "Automatic exemption from all filings"],
+                correct: 1,
+                explain: "Small companies get a lighter compliance load — for instance, needing only 2 board meetings a year instead of 4."
+            },
+            {
+                q: "What is a company's \"Registered Office\" used for?",
+                options: ["The official address for legal and regulatory communication", "Only the CEO's residence", "A GST warehouse", "A specific bank branch"],
+                correct: 0,
+                explain: "It's the address of record the ROC and other authorities use to formally communicate with the company."
+            },
+            {
+                q: "What is \"incorporation\" of a company?",
+                options: ["The legal process of forming a company as a separate legal entity", "Filing an income tax return", "Registering for GST", "Opening a bank account"],
+                correct: 0,
+                explain: "Incorporation gives a company its own legal identity, distinct from its shareholders and directors."
+            },
+            {
+                q: "A \"private limited company\" is primarily characterized by:",
+                options: ["Shares freely traded on a stock exchange", "Restrictions on transferring shares, and no public trading", "An unlimited number of shareholders", "Compulsory government ownership"],
+                correct: 1,
+                explain: "Private limited companies restrict share transfers and can't offer shares to the general public, unlike a listed public company."
+            },
+            {
+                q: "What is an \"EMI\"?",
+                options: ["Equated Monthly Installment — a fixed periodic loan repayment amount", "A tax term", "A GST rate", "An insurance premium"],
+                correct: 0,
+                explain: "EMI bundles principal and interest into one fixed payment repeated every month over the loan tenure."
+            },
+            {
+                q: "In a standard reducing-balance loan, over time, the EMI's composition:",
+                options: ["The interest portion decreases and the principal portion increases", "Both stay exactly constant", "The interest portion increases over time", "The EMI amount itself changes every month"],
+                correct: 0,
+                explain: "Early EMIs are interest-heavy; as the outstanding balance shrinks, later EMIs become more principal-heavy — even though the EMI amount itself stays fixed."
+            },
+            {
+                q: "What is \"depreciation\" in accounting?",
+                options: ["A decline in a company's cash balance", "The systematic allocation of an asset's cost over its useful life", "A type of tax refund", "A GST term"],
+                correct: 1,
+                explain: "Depreciation spreads an asset's cost across the years it's expected to be useful, rather than expensing it all at once."
+            },
+            {
+                q: "What is a \"balance sheet\"?",
+                options: ["A snapshot of assets, liabilities and equity at a specific point in time", "A monthly bank statement", "A GST return", "A tax challan"],
+                correct: 0,
+                explain: "Unlike the P&L (which covers a period), a balance sheet is a freeze-frame of financial position on one particular date."
+            },
+            {
+                q: "What is a \"profit and loss account\" (income statement)?",
+                options: ["A summary of income and expenses over a period, showing profit or loss", "A balance sheet", "A GST invoice", "A loan agreement"],
+                correct: 0,
+                explain: "It tells you how a business performed over a stretch of time — a month, quarter, or year."
+            },
+            {
+                q: "What is \"working capital\"?",
+                options: ["Current assets minus current liabilities", "Total assets of a business", "Share capital raised", "Fixed assets only"],
+                correct: 0,
+                explain: "Working capital measures a business's short-term liquidity — its ability to cover near-term obligations."
+            },
+            {
+                q: "What is a \"fixed deposit\" (FD)?",
+                options: ["A lump-sum deposit with a bank for a fixed tenure at a fixed interest rate", "A type of mutual fund", "A listed stock", "A type of loan"],
+                correct: 0,
+                explain: "FDs trade flexibility for a guaranteed, fixed return over a chosen tenure."
+            },
+            {
+                q: "What is \"EPF\"?",
+                options: ["Employees' Provident Fund — a retirement savings scheme for salaried employees", "A GST scheme", "A tax deduction only", "An insurance policy"],
+                correct: 0,
+                explain: "Both employer and employee contribute a percentage of salary into EPF, building a retirement corpus over a career."
+            },
+            {
+                q: "What is \"NPS\"?",
+                options: ["National Pension System — a voluntary, long-term retirement savings scheme", "A GST scheme", "A type of personal loan", "A TDS form"],
+                correct: 0,
+                explain: "NPS is a market-linked pension scheme open to most Indians, with additional tax benefits under Section 80CCD."
+            },
+            {
+                q: "What is \"ESI\"?",
+                options: ["Employees' State Insurance — a social security scheme covering medical and sickness benefits for certain employees", "A tax deduction", "A GST term", "A pension scheme only"],
+                correct: 0,
+                explain: "ESI provides medical care and cash benefits to eligible employees (typically below a wage threshold) and their families."
+            },
+            {
+                q: "What is a \"credit score\"?",
+                options: ["A numeric indicator of creditworthiness based on repayment history", "A bank account number", "A tax identification code", "A GST rating"],
+                correct: 0,
+                explain: "Lenders use your credit score to gauge how likely you are to repay a new loan on time, based on your past behaviour."
+            },
+            {
+                q: "What is \"KYC\"?",
+                options: ["Know Your Customer — identity verification required by banks and financial institutions", "A tax filing form", "A GST return", "A type of loan"],
+                correct: 0,
+                explain: "KYC norms require institutions to verify who they're dealing with, mainly to prevent fraud and money laundering."
+            },
+            {
+                q: "What is an \"audit trail\"?",
+                options: ["A chronological record of transactions or changes, useful for verification", "A type of bank loan", "A GST invoice", "A tax refund process"],
+                correct: 0,
+                explain: "A good audit trail lets you (or an auditor) retrace exactly how a number in the books came to be."
+            },
+            {
+                q: "What is \"double-entry bookkeeping\"?",
+                options: ["A system where every transaction affects at least two accounts (a debit and a credit)", "Recording a transaction twice by mistake", "A specific GST rule", "A type of tax penalty"],
+                correct: 0,
+                explain: "This centuries-old system keeps the books balanced — every debit has a matching credit somewhere."
+            },
+            {
+                q: "In accounting, a \"debit\" entry to an asset account generally means:",
+                options: ["A decrease in that asset", "An increase in that asset", "No change at all", "Always signals an error"],
+                correct: 1,
+                explain: "For asset accounts specifically, a debit increases the balance — the opposite convention applies to liability and equity accounts."
+            },
+            {
+                q: "What is \"goodwill\" in accounting?",
+                options: ["An intangible asset representing reputation or brand value, often arising on an acquisition", "A type of bank loan", "A GST exemption", "A tax refund"],
+                correct: 0,
+                explain: "Goodwill typically shows up on a balance sheet when a business is acquired for more than the fair value of its identifiable net assets."
+            },
+            {
+                q: "What is a \"contingent liability\"?",
+                options: ["A potential obligation that depends on a future uncertain event", "A guaranteed payment due immediately", "A tax refund receivable", "A GST input credit"],
+                correct: 0,
+                explain: "Think of a pending lawsuit — the company might have to pay, but only if a future event (losing the case) actually happens."
+            },
+            {
+                q: "What does \"ROI\" commonly stand for in finance?",
+                options: ["Return on Investment", "Rate of Inflation", "Registered Office Information", "Revenue of Income"],
+                correct: 0,
+                explain: "ROI measures the gain or loss generated on an investment, relative to its cost."
+            },
+            {
+                q: "What is \"inflation\"?",
+                options: ["A general and sustained rise in prices over time, which reduces purchasing power", "A tax term", "A GST rate", "A type of loan"],
+                correct: 0,
+                explain: "As prices rise, the same amount of money buys less — which is why inflation matters so much for long-term financial planning."
+            },
+            {
+                q: "What is a \"recurring deposit\" (RD)?",
+                options: ["Depositing a fixed amount regularly (e.g. monthly) with a bank for a fixed tenure", "A one-time lump-sum deposit", "A type of mutual fund", "A type of loan"],
+                correct: 0,
+                explain: "RDs suit people who want FD-like discipline and returns, but prefer investing in smaller regular instalments rather than one lump sum."
+            },
+            {
+                q: "Income tax was first introduced in India (in a form recognizable today) by the British, in which decade?",
+                options: ["1860s", "1900s", "1950s", "1990s"],
+                correct: 0,
+                explain: "Sir James Wilson introduced income tax in India in 1860, largely to recover losses from the 1857 revolt."
+            },
+            {
+                q: "Which city hosts the headquarters of the Central Board of Direct Taxes (CBDT)?",
+                options: ["Mumbai", "New Delhi", "Kolkata", "Bengaluru"],
+                correct: 1,
+                explain: "The CBDT, part of the Department of Revenue under the Ministry of Finance, is headquartered in New Delhi."
+            },
+            {
+                q: "Where is the GST Council Secretariat located?",
+                options: ["Mumbai", "New Delhi", "Chennai", "Hyderabad"],
+                correct: 1,
+                explain: "The GST Council Secretariat operates out of New Delhi."
+            },
+            {
+                q: "In recent years, the Union Budget in India has traditionally been presented on:",
+                options: ["1 February", "1 April", "31 March", "15 August"],
+                correct: 0,
+                explain: "The Budget presentation date moved to 1 February (from the earlier last-working-day-of-February tradition) starting in 2017."
+            },
+            {
+                q: "Who presents the Union Budget in Parliament?",
+                options: ["The Prime Minister", "The Finance Minister", "The President", "The RBI Governor"],
+                correct: 1,
+                explain: "The Finance Minister presents the Budget, outlining the government's tax proposals and spending plans for the year."
+            },
+            {
+                q: "What is the \"Economic Survey\"?",
+                options: ["A government report reviewing the state of the economy, usually presented just before the Budget", "A tax filing form", "A GST report", "A bank audit document"],
+                correct: 0,
+                explain: "The Economic Survey gives context and analysis ahead of the Budget's specific proposals."
+            },
+            {
+                q: "Which body regulates India's securities and stock markets?",
+                options: ["RBI", "SEBI (Securities and Exchange Board of India)", "IRDAI", "CBDT"],
+                correct: 1,
+                explain: "SEBI oversees stock exchanges, listed companies, mutual funds, and market intermediaries."
+            },
+            {
+                q: "Which body regulates banks in India?",
+                options: ["SEBI", "RBI (Reserve Bank of India)", "IRDAI", "CBIC"],
+                correct: 1,
+                explain: "The RBI is India's central bank and the primary regulator of banks and monetary policy."
+            },
+            {
+                q: "Which body regulates insurance companies in India?",
+                options: ["IRDAI", "SEBI", "RBI", "CBDT"],
+                correct: 0,
+                explain: "IRDAI (Insurance Regulatory and Development Authority of India) oversees the insurance sector."
+            },
+            {
+                q: "What is \"ICAI\"?",
+                options: ["The Institute of Chartered Accountants of India", "A government tax department", "A commercial bank", "A stock exchange"],
+                correct: 0,
+                explain: "ICAI is the statutory body that regulates and grants the Chartered Accountant qualification in India."
+            },
+            {
+                q: "Who regulates and grants the \"Chartered Accountant\" designation in India?",
+                options: ["ICAI", "SEBI", "RBI", "The MCA directly"],
+                correct: 0,
+                explain: "ICAI sets the exams, training requirements, and professional standards for CAs in India."
+            },
+            {
+                q: "What is \"ICSI\"?",
+                options: ["Institute of Company Secretaries of India", "A tax department", "A stock exchange", "A commercial bank"],
+                correct: 0,
+                explain: "ICSI regulates and certifies the Company Secretary profession in India."
+            },
+            {
+                q: "What is \"ICMAI\" (formerly ICWAI)?",
+                options: ["Institute of Cost Accountants of India", "A tax department", "A GST regulatory body", "A commercial bank"],
+                correct: 0,
+                explain: "ICMAI certifies Cost and Management Accountants — a distinct professional qualification from CA."
+            },
+            {
+                q: "Which of these is a recognized Indian stock exchange?",
+                options: ["NASDAQ", "BSE (Bombay Stock Exchange)", "NYSE", "LSE"],
+                correct: 1,
+                explain: "The BSE, established in 1875, is one of Asia's oldest stock exchanges."
+            },
+            {
+                q: "What does \"NSE\" stand for?",
+                options: ["National Stock Exchange", "National Savings Exchange", "New Stock Enterprise", "National Securities Establishment"],
+                correct: 0,
+                explain: "The NSE, along with the BSE, is one of India's two major stock exchanges."
+            },
+            {
+                q: "What is \"Sensex\"?",
+                options: ["The benchmark stock index of the BSE", "A tax term", "A GST rate category", "A currency"],
+                correct: 0,
+                explain: "Sensex tracks 30 large, actively traded stocks listed on the BSE."
+            },
+            {
+                q: "What is \"Nifty 50\"?",
+                options: ["The benchmark stock index of the NSE, tracking 50 major companies", "A GST scheme", "A tax filing form", "A type of mutual fund"],
+                correct: 0,
+                explain: "Nifty 50 is the NSE's flagship index, widely used as a barometer of the Indian stock market."
+            },
+            {
+                q: "What is the Indian currency symbol \"₹\" officially called?",
+                options: ["The Rupee sign", "The Rand sign", "The Rial sign", "The Ringgit sign"],
+                correct: 0,
+                explain: "The ₹ symbol represents the Indian Rupee specifically, distinct from similarly named currencies elsewhere."
+            },
+            {
+                q: "In which year was the \"₹\" symbol officially adopted for the Indian Rupee?",
+                options: ["2010", "1991", "2000", "2015"],
+                correct: 0,
+                explain: "The symbol was adopted in 2010, designed by Udaya Kumar, after a public design competition."
+            },
+            {
+                q: "What is \"Aadhaar\"?",
+                options: ["A unique 12-digit identity number issued to Indian residents", "A tax filing form", "A bank account type", "A GST registration"],
+                correct: 0,
+                explain: "Issued by UIDAI, Aadhaar has become central to identity verification across many financial and government services."
+            },
+            {
+                q: "Linking PAN with Aadhaar is generally important because:",
+                options: ["It keeps your PAN operative, which affects smooth ITR filing and other transactions", "It's only relevant for GST", "It's only relevant for passports", "It has nothing to do with tax"],
+                correct: 0,
+                explain: "An inoperative PAN (due to non-linking) can disrupt filing, higher TDS deduction, and several other financial transactions."
+            },
+            {
+                q: "What is \"UPI\"?",
+                options: ["Unified Payments Interface — a real-time payment system in India", "A tax filing form", "A GST scheme", "A type of loan"],
+                correct: 0,
+                explain: "UPI enables instant bank-to-bank transfers using a mobile app, and has become India's dominant digital payment rail."
+            },
+            {
+                q: "What does \"NEFT\" stand for?",
+                options: ["National Electronic Funds Transfer", "Net Earnings for Tax", "New Employee Fund Trust", "National Excise Fund Tariff"],
+                correct: 0,
+                explain: "NEFT is a widely used electronic funds transfer system for moving money between Indian bank accounts."
+            },
+            {
+                q: "What does \"RTGS\" stand for?",
+                options: ["Real Time Gross Settlement", "Regional Tax Government Scheme", "Reserve Transfer of Gold Standard", "Rapid Transaction Gateway System"],
+                correct: 0,
+                explain: "RTGS is meant for high-value transactions that settle individually and instantly, rather than in batches like NEFT."
+            },
+            {
+                q: "What does an \"IFSC code\" identify?",
+                options: ["A specific bank branch, for electronic fund transfers", "A tax jurisdiction", "A GST registration", "A company's legal identity"],
+                correct: 0,
+                explain: "Every bank branch in India has a unique IFSC code, used to route NEFT/RTGS/IMPS transfers correctly."
+            },
+            {
+                q: "A \"cheque bounce\" is generally caused by:",
+                options: ["Insufficient funds, or a signature/detail mismatch", "Filing your tax return late", "A GST filing error", "A loan default only"],
+                correct: 0,
+                explain: "Common causes include insufficient balance, a mismatched signature, or an error in how the cheque was filled out."
+            },
+            {
+                q: "Dishonour of a cheque is a punishable offence in India under:",
+                options: ["Section 138 of the Negotiable Instruments Act", "Section 80C of the Income Tax Act", "Section 194C", "Section 10 of the GST Act"],
+                correct: 0,
+                explain: "Section 138 makes cheque bouncing (for an unpaid debt/liability) a criminal offence, subject to specific conditions and notice requirements."
+            },
+            {
+                q: "What is a \"moratorium\" on a loan?",
+                options: ["A temporary suspension of EMI payments, usually with interest still accruing", "A complete loan waiver", "A type of tax exemption", "A GST term"],
+                correct: 0,
+                explain: "A moratorium offers temporary breathing room on repayments, but interest typically keeps accumulating in the background."
+            },
+            {
+                q: "What is \"insolvency\"?",
+                options: ["A situation where a person or entity cannot pay their debts as they fall due", "A tax exemption category", "A type of GST registration", "A type of profit"],
+                correct: 0,
+                explain: "Insolvency is about cash-flow/financial inability to meet obligations — distinct from simply having a poor year of profits."
+            },
+            {
+                q: "What does \"IBC\" stand for?",
+                options: ["Insolvency and Bankruptcy Code", "Indian Business Council", "Income and Business Committee", "Internal Bank Compliance"],
+                correct: 0,
+                explain: "The IBC (2016) created a unified, time-bound legal framework for resolving insolvency in India."
+            },
+            {
+                q: "What is the \"NCLT\"?",
+                options: ["National Company Law Tribunal — adjudicates company law and insolvency matters", "A tax tribunal only", "A GST appellate authority", "A stock exchange"],
+                correct: 0,
+                explain: "The NCLT handles company disputes, mergers, and insolvency proceedings under the Companies Act and IBC."
+            },
+            {
+                q: "What is a \"shell company\" generally understood to be?",
+                options: ["An entity with little or no active business, sometimes misused to disguise transactions", "A large manufacturing company", "A government-owned company", "Any listed company"],
+                correct: 0,
+                explain: "Not every shell company is illegal, but the structure is often flagged for scrutiny due to its potential misuse."
+            },
+            {
+                q: "What is \"benami property\"?",
+                options: ["Property held in someone else's name to conceal the real owner", "Property owned by the government", "Property purchased through a home loan", "Agricultural land specifically"],
+                correct: 0,
+                explain: "The Benami Transactions Act targets exactly this kind of concealment, with confiscation and penalty provisions."
+            },
+            {
+                q: "What is \"money laundering\"?",
+                options: ["Disguising the origins of illegally obtained money to make it appear legitimate", "A type of tax deduction", "A GST exemption", "A type of business loan"],
+                correct: 0,
+                explain: "Money laundering typically involves layering illicit funds through transactions to make them look like legitimate income."
+            },
+            {
+                q: "What does \"PMLA\" stand for?",
+                options: ["Prevention of Money Laundering Act", "Personal Money Loan Agreement", "Public Money Lending Authority", "Provident Money Law Act"],
+                correct: 0,
+                explain: "The PMLA (2002) is India's principal law targeting money laundering and related asset seizure."
+            },
+            {
+                q: "What is a \"whistleblower\" in a corporate or regulatory context?",
+                options: ["Someone who reports wrongdoing or fraud within an organization", "A company's external auditor, specifically", "A tax officer", "A GST inspector"],
+                correct: 0,
+                explain: "Whistleblower mechanisms (often legally protected) encourage insiders to flag fraud or misconduct without fear of retaliation."
+            },
+            {
+                q: "What is Corporate Social Responsibility (CSR), as mandated for certain companies in India?",
+                options: ["A purely voluntary marketing activity", "A legal requirement for certain companies to spend a portion of profits on social welfare activities", "A type of tax deduction", "A GST exemption"],
+                correct: 1,
+                explain: "The Companies Act, 2013 made CSR spending mandatory (not just encouraged) for companies crossing specified thresholds."
+            },
+            {
+                q: "Under the Companies Act, which companies are generally required to spend on CSR?",
+                options: ["All companies, regardless of size", "Companies meeting specified net worth, turnover, or profit thresholds", "Only listed companies", "Only government-owned companies"],
+                correct: 1,
+                explain: "CSR obligations kick in once a company crosses specified financial thresholds — it isn't universal."
+            },
+            {
+                q: "What is an \"IPO\"?",
+                options: ["Initial Public Offering — when a company first sells shares to the public", "A tax refund process", "A GST registration type", "A type of loan"],
+                correct: 0,
+                explain: "An IPO is how a private company transitions to being publicly listed and traded on a stock exchange."
+            },
+            {
+                q: "What is a \"unicorn\" in the startup world?",
+                options: ["A private startup valued at over $1 billion", "A publicly listed company", "A specific government scheme", "A type of business loan"],
+                correct: 0,
+                explain: "The term captures how rare such high valuations once were among young private companies."
+            },
+            {
+                q: "What is \"Startup India\"?",
+                options: ["A government initiative to promote and support startups, including tax and compliance benefits", "A tax filing form", "A GST return type", "A bank-only scheme"],
+                correct: 0,
+                explain: "Startup India offers recognized startups benefits like tax exemptions on certain profits and easier compliance."
+            },
+            {
+                q: "What is a \"term insurance\" plan?",
+                options: ["A pure life insurance policy providing a payout only on death within the term, with no maturity benefit", "A savings-linked insurance plan", "A health insurance plan", "A vehicle insurance plan"],
+                correct: 0,
+                explain: "Term plans are typically the most cost-effective way to get a large life cover, precisely because there's no maturity/savings component."
+            },
+            {
+                q: "What is a \"no-claim bonus\" (NCB) in motor insurance?",
+                options: ["A discount on premium for not making a claim in the previous policy year(s)", "A cash bonus paid after an accident", "A GST exemption", "A tax deduction"],
+                correct: 0,
+                explain: "NCB rewards careful drivers with a growing premium discount for each claim-free year."
+            },
+            {
+                q: "What is \"surrender value\" in a life insurance policy?",
+                options: ["The amount payable to the policyholder if they exit the policy before maturity", "The maturity payout", "The death benefit", "The GST charged on premium"],
+                correct: 0,
+                explain: "Surrendering early usually means getting back less than what you've paid in, especially in the early policy years."
+            }
+        ];
+
+        // Shuffle helper (Fisher-Yates) — used both to pick a fresh subset of
+        // questions each time, and to shuffle each question's answer order,
+        // so the quiz doesn't feel identical on a repeat play.
+        function shuffle(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        const QUESTIONS_PER_ROUND = 8;
+        let activeQuestions = [];
+        let current = 0;
+        let score = 0;
+        let answered = false;
+
+        function buildRound() {
+            const pool = shuffle(QUESTIONS).slice(0, QUESTIONS_PER_ROUND);
+            activeQuestions = pool.map(item => {
+                const order = shuffle(item.options.map((_, i) => i));
+                return {
+                    q: item.q,
+                    explain: item.explain,
+                    options: order.map(i => item.options[i]),
+                    correct: order.indexOf(item.correct)
+                };
+            });
+        }
+
+        function renderQuestion() {
+            const item = activeQuestions[current];
+            document.getElementById('quiz-progress').textContent = `Question ${current + 1} of ${activeQuestions.length}`;
+            document.getElementById('quiz-progress-bar').style.width = `${((current) / activeQuestions.length) * 100}%`;
+            document.getElementById('quiz-score-live').textContent = `Score: ${score}`;
+            document.getElementById('quiz-question').textContent = item.q;
+            document.getElementById('quiz-explanation').style.display = 'none';
+            document.getElementById('btn-quiz-next').style.display = 'none';
+            answered = false;
+
+            const optWrap = document.getElementById('quiz-options');
+            optWrap.innerHTML = item.options.map((opt, i) => `
+                <button class="quiz-option-btn" data-idx="${i}" style="text-align:left; padding:14px 18px; border:1px solid #cbd5e1; border-radius:8px; background:#fff; cursor:pointer; font-size:0.98rem; font-family:inherit; transition:all 0.15s;">${opt}</button>
+            `).join('');
+            optWrap.querySelectorAll('.quiz-option-btn').forEach(btn => {
+                btn.addEventListener('click', () => selectAnswer(Number(btn.dataset.idx)));
+            });
+        }
+
+        function selectAnswer(idx) {
+            if (answered) return;
+            answered = true;
+            const item = activeQuestions[current];
+            const buttons = document.querySelectorAll('.quiz-option-btn');
+            buttons.forEach((btn, i) => {
+                btn.style.cursor = 'default';
+                if (i === item.correct) {
+                    btn.style.background = '#f0fdf4';
+                    btn.style.borderColor = '#10b981';
+                    btn.style.fontWeight = '700';
+                } else if (i === idx) {
+                    btn.style.background = '#fef2f2';
+                    btn.style.borderColor = '#dc2626';
+                }
+            });
+            if (idx === item.correct) score++;
+            document.getElementById('quiz-score-live').textContent = `Score: ${score}`;
+            const explEl = document.getElementById('quiz-explanation');
+            explEl.textContent = (idx === item.correct ? '✅ Correct! ' : '❌ Not quite. ') + item.explain;
+            explEl.style.display = 'block';
+            document.getElementById('btn-quiz-next').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            current++;
+            if (current >= activeQuestions.length) {
+                showResult();
+            } else {
+                renderQuestion();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz-card').style.display = 'none';
+            document.getElementById('quiz-result-card').style.display = 'block';
+            document.getElementById('quiz-final-score').textContent = `${score} / ${activeQuestions.length}`;
+            let verdict;
+            if (score === activeQuestions.length) verdict = 'Perfect score — you could practically file your own return (but we\'d still love to double-check it)!';
+            else if (score >= activeQuestions.length * 0.75) verdict = 'Sharp! You clearly keep half an eye on tax news.';
+            else if (score >= activeQuestions.length * 0.5) verdict = 'Solid grasp of the basics — a few surprises along the way, though.';
+            else verdict = 'No shame — tax law changes constantly. That\'s exactly what we\'re here for.';
+            document.getElementById('quiz-verdict-line').textContent = verdict;
+        }
+
+        document.getElementById('btn-quiz-next').addEventListener('click', nextQuestion);
+        document.getElementById('btn-quiz-retry').addEventListener('click', () => {
+            current = 0; score = 0;
+            document.getElementById('quiz-result-card').style.display = 'none';
+            document.getElementById('quiz-card').style.display = 'block';
+            buildRound();
+            renderQuestion();
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => ({
+            eyebrow: 'My Tax Trivia Result',
+            headline: 'Tax IQ Quiz',
+            resultLine: `${score}/${activeQuestions.length}`,
+            resultSub: 'Think you can beat this? Take the quiz yourself.',
+            footerNote: 'A bit of fun — not a certified qualification!',
+            toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+        }), 'My_Tax_IQ_Score');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            buildRound();
+            renderQuestion();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

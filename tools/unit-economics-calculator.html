@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Economics Calculator — CAC, LTV &amp; Payback Period | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free Unit Economics Calculator for startups — work out your Customer Acquisition Cost (CAC), Customer Lifetime Value (LTV), LTV:CAC ratio and CAC payback period in seconds. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Unit Economics Calculator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Unit Economics Calculator</h2>
+        <p class="section-subtitle">Work out your Customer Acquisition Cost (CAC), Customer Lifetime Value (LTV), the LTV:CAC ratio, and your CAC payback period — the three numbers investors and your own gut-check ask for first. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Startup Suite</span>
+                    </h3>
+                    <div class="sub-caption">Unit Economics Calculator — CAC, LTV &amp; Payback Period</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Planning aid, not an audited metric.</strong> This calculator uses the standard, widely-used unit-economics formulas (CAC = spend ÷ new customers; LTV = ARPU × gross margin % × average customer lifetime). The LTV:CAC benchmarks shown (3:1 as "healthy") are commonly-cited investor rules of thumb, not a guarantee — a good ratio for your specific business depends on your industry, funding stage and growth ambitions.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Unit Economics Calculator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help setting up proper MIS or Virtual CFO support for your startup. <strong>No business data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the business figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Acquisition &amp; Revenue Inputs</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Total Sales &amp; Marketing Spend, last period (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-sm-spend" value="300000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">New Customers Acquired, same period</label>
+                            <input type="number" class="tool-form-control" id="inp-new-customers" value="60" min="1" step="1">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Average Revenue per Customer, per month (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-arpu" value="2500" min="0" step="100">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Gross Margin (%)</label>
+                            <input type="number" class="tool-form-control" id="inp-gross-margin" value="70" min="1" max="100" step="1">
+                        </div>
+                        <div class="tool-form-group" style="grid-column: 1 / -1;">
+                            <label class="tool-form-label">Monthly Customer Churn Rate (%) — the share of customers who leave each month</label>
+                            <input type="number" class="tool-form-control" id="inp-churn" value="5" min="0.1" max="100" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Result
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;" disabled>📸 Get My Shareable Verdict Card</button>
+                        </div>
+                    </div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Download a shareable image of your result — nice for a pitch deck appendix or a founder-group chat. No data is uploaded; the image is drawn entirely in your browser.</p>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Full Breakdown
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-ue-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="breakdown-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">How to Use This Number</div>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not an audited or certified metric. It assumes a constant monthly churn rate (so average customer lifetime = 1 ÷ monthly churn rate) and a constant ARPU over a customer's lifetime — real businesses see both change over time, especially with expansion revenue or cohort-based pricing. Aggarwal Abhishek &amp; Co. does not certify these figures — for a proper MIS/Virtual CFO setup tailored to your business, please get in touch.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+
+        function verdictFor(ratio) {
+            if (ratio >= 3) return { label: 'Healthy', color: '#10b981' };
+            if (ratio >= 1) return { label: 'Marginal', color: '#f59e0b' };
+            return { label: 'Losing Money per Customer', color: '#dc2626' };
+        }
+
+        function render() {
+            const smSpend = Math.max(0, Number(document.getElementById('inp-sm-spend').value) || 0);
+            const newCustomers = Math.max(0, Number(document.getElementById('inp-new-customers').value) || 0);
+            const arpu = Math.max(0, Number(document.getElementById('inp-arpu').value) || 0);
+            const grossMarginPct = Math.min(100, Math.max(0, Number(document.getElementById('inp-gross-margin').value) || 0));
+            const churnPct = Math.min(100, Math.max(0.1, Number(document.getElementById('inp-churn').value) || 0.1));
+
+            if (newCustomers <= 0 || arpu <= 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#64748b; padding:10px;">Enter a positive number of new customers and average revenue per customer to see results.</p>';
+                document.getElementById('breakdown-table-wrap').innerHTML = '';
+                document.getElementById('insights-card').style.display = 'none';
+                document.getElementById('btn-verdict-card').disabled = true;
+                lastResult = null;
+                return;
+            }
+            document.getElementById('btn-verdict-card').disabled = false;
+
+            const cac = smSpend / newCustomers;
+            const grossMargin = grossMarginPct / 100;
+            const monthlyChurn = churnPct / 100;
+            const lifetimeMonths = Math.min(120, 1 / monthlyChurn);
+            const contributionPerMonth = arpu * grossMargin;
+            const ltv = contributionPerMonth * lifetimeMonths;
+            const ratio = cac > 0 ? ltv / cac : Infinity;
+            const paybackMonths = contributionPerMonth > 0 ? cac / contributionPerMonth : Infinity;
+            const verdict = verdictFor(ratio);
+
+            lastResult = { smSpend, newCustomers, arpu, grossMarginPct, churnPct, cac, lifetimeMonths, ltv, ratio, paybackMonths, verdict };
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['Customer Acquisition Cost (CAC)', fmtMoneyWhole(cac), 'per new customer', '#002b49'],
+                ['Customer Lifetime Value (LTV)', fmtMoneyWhole(ltv), `over ~${lifetimeMonths.toFixed(1)} months`, '#0ea5e9'],
+                ['LTV : CAC Ratio', ratio === Infinity ? '∞' : ratio.toFixed(2) + ' : 1', verdict.label, verdict.color],
+                ['CAC Payback Period', paybackMonths === Infinity ? '—' : paybackMonths.toFixed(1) + ' months', 'to recover acquisition cost', '#f59e0b']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights());
+            renderBreakdownTable();
+        }
+
+        function buildInsights() {
+            if (!lastResult) return [];
+            const r = lastResult;
+            const insights = [];
+
+            if (r.ratio >= 3) {
+                insights.push({ level: 'good', text: `An LTV:CAC ratio of ${r.ratio.toFixed(2)}:1 clears the commonly-cited "3:1 or better" bar investors look for — each customer is worth notably more than what it costs to acquire them.` });
+            } else if (r.ratio >= 1) {
+                insights.push({ level: 'warning', text: `An LTV:CAC ratio of ${r.ratio.toFixed(2)}:1 means you're profitable per customer, but below the 3:1 rule of thumb — there's less room to fund growth from this margin alone.` });
+            } else {
+                insights.push({ level: 'critical', text: `An LTV:CAC ratio below 1:1 means you're spending more to acquire a customer than they're worth over their lifetime — this is unsustainable without a plan to lower CAC, raise ARPU, or cut churn.` });
+            }
+
+            if (r.paybackMonths !== Infinity) {
+                if (r.paybackMonths <= 12) {
+                    insights.push({ level: 'good', text: `A CAC payback period of ${r.paybackMonths.toFixed(1)} months is within the commonly-cited 12-month comfort zone — you recover acquisition spend reasonably fast.` });
+                } else {
+                    insights.push({ level: 'warning', text: `A CAC payback period of ${r.paybackMonths.toFixed(1)} months is longer than the 12-month zone many investors prefer — it ties up cash for longer before a customer becomes profitable, which matters more the faster you're trying to grow.` });
+                }
+            }
+
+            if (r.churnPct >= 10) {
+                insights.push({ level: 'warning', text: `A ${r.churnPct}% monthly churn rate is on the higher side — it caps your average customer lifetime at just ${r.lifetimeMonths.toFixed(1)} months. Reducing churn even slightly tends to move LTV more than almost any other lever.` });
+            }
+
+            insights.push({ level: 'info', text: 'This model assumes churn and ARPU stay constant over a customer\'s life — a real cohort\'s ARPU often grows (upsells) or shrinks (downgrades) over time, so treat this as a directional estimate, not a precise forecast.' });
+
+            return insights;
+        }
+
+        function renderBreakdownTable() {
+            const wrap = document.getElementById('breakdown-table-wrap');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rows = [
+                ['Sales &amp; Marketing Spend', fmtMoneyWhole(r.smSpend)],
+                ['New Customers Acquired', r.newCustomers],
+                ['Customer Acquisition Cost (CAC)', fmtMoneyWhole(r.cac)],
+                ['Average Revenue per Customer / month (ARPU)', fmtMoneyWhole(r.arpu)],
+                ['Gross Margin', r.grossMarginPct + '%'],
+                ['Contribution per Customer / month', fmtMoneyWhole(r.arpu * r.grossMarginPct / 100)],
+                ['Monthly Churn Rate', r.churnPct + '%'],
+                ['Average Customer Lifetime', r.lifetimeMonths.toFixed(1) + ' months'],
+                ['<strong>Customer Lifetime Value (LTV)</strong>', `<strong>${fmtMoneyWhole(r.ltv)}</strong>`],
+                ['<strong>LTV : CAC Ratio</strong>', `<strong>${r.ratio === Infinity ? '∞' : r.ratio.toFixed(2) + ' : 1'}</strong>`],
+                ['<strong>CAC Payback Period</strong>', `<strong>${r.paybackMonths === Infinity ? '—' : r.paybackMonths.toFixed(1) + ' months'}</strong>`]
+            ];
+            wrap.innerHTML = `<table class="tool-table">
+                <thead><tr><th>Component</th><th>Value</th></tr></thead>
+                <tbody>${rows.map(([label, val]) => `<tr><td>${label}</td><td>${val}</td></tr>`).join('')}</tbody>
+            </table>`;
+        }
+
+        document.getElementById('btn-ue-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const r = lastResult;
+            const lines = [
+                ['Component', 'Value'].map(csvEscape).join(','),
+                ['Sales & Marketing Spend', r.smSpend].map(csvEscape).join(','),
+                ['New Customers Acquired', r.newCustomers].map(csvEscape).join(','),
+                ['Customer Acquisition Cost (CAC)', r.cac.toFixed(2)].map(csvEscape).join(','),
+                ['Average Revenue per Customer / month', r.arpu].map(csvEscape).join(','),
+                ['Gross Margin %', r.grossMarginPct].map(csvEscape).join(','),
+                ['Monthly Churn Rate %', r.churnPct].map(csvEscape).join(','),
+                ['Average Customer Lifetime (months)', r.lifetimeMonths.toFixed(2)].map(csvEscape).join(','),
+                ['Customer Lifetime Value (LTV)', r.ltv.toFixed(2)].map(csvEscape).join(','),
+                ['LTV : CAC Ratio', r.ratio === Infinity ? 'Infinity' : r.ratio.toFixed(2)].map(csvEscape).join(','),
+                ['CAC Payback Period (months)', r.paybackMonths === Infinity ? 'Infinity' : r.paybackMonths.toFixed(2)].map(csvEscape).join(',')
+            ];
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Unit_Economics_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        const HOW_TO_USE_ITEMS = [
+            'LTV:CAC below 1:1 — stop and fix this before spending more on growth; you\'re losing money on every customer.',
+            'LTV:CAC between 1:1 and 3:1 — profitable, but growth will feel expensive; look at reducing CAC or churn.',
+            'LTV:CAC of 3:1 or higher — a commonly healthy zone; you likely have room to invest more in acquisition.',
+            'CAC payback under ~12 months is the usual comfort zone for reinvesting cash into more growth.',
+            'Churn is usually the single biggest lever on LTV — a small drop in monthly churn compounds a lot over a customer\'s lifetime.',
+            'Re-run this every quarter as your numbers change — unit economics drift as pricing, marketing efficiency and product retention evolve.'
+        ];
+        function renderDocChecklist() {
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = HOW_TO_USE_ITEMS.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            HOW_TO_USE_ITEMS.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        ['inp-sm-spend', 'inp-new-customers', 'inp-arpu', 'inp-gross-margin', 'inp-churn'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => {
+            if (!lastResult) return null;
+            const r = lastResult;
+            return {
+                eyebrow: 'My Unit Economics Verdict',
+                headline: `${r.ratio === Infinity ? '∞' : r.ratio.toFixed(2) + ':1'} LTV:CAC`,
+                resultLine: r.verdict.label,
+                resultSub: `CAC ${fmtMoneyWhole(r.cac)} · LTV ${fmtMoneyWhole(r.ltv)} · Payback ${r.paybackMonths === Infinity ? '—' : r.paybackMonths.toFixed(1) + ' mo'}`,
+                footerNote: 'Estimate only — based on figures entered by the user.',
+                toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+            };
+        }, 'My_Unit_Economics_Verdict');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDocChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

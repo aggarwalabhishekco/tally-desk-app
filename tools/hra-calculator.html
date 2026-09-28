@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRA Exemption Calculator | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free HRA (House Rent Allowance) exemption calculator under Section 10(13A) for FY 2025-26, plus Section 80GG for those without HRA in salary. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / HRA Exemption Calculator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">HRA Exemption Calculator</h2>
+        <p class="section-subtitle">Work out exactly how much of your House Rent Allowance is tax-exempt under Section 10(13A) — or your Section 80GG deduction if you don't receive HRA at all. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">HRA Exemption / Section 80GG Calculator — FY 2025-26 (AY 2026-27)</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Educational tool — not a filed computation.</strong> This assumes your Basic Salary, DA, HRA and rent stayed constant through the year — if any of these changed (e.g. a salary hike, or a house move mid-year), the exemption should really be computed month-by-month, and the total may differ slightly from this estimate. Also note: this exemption applies under the <strong>Old Tax Regime only</strong> — it is not available if you opt for the New Tax Regime.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="HRA Exemption Calculator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help with your tax planning or return filing. <strong>No salary or financial data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the salary or rent figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Your Situation</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group" style="grid-column: 1 / -1;">
+                            <label class="tool-form-label">Do you receive HRA as part of your salary?</label>
+                            <select class="tool-form-control" id="inp-has-hra">
+                                <option value="yes" selected>Yes — calculate my Section 10(13A) exemption</option>
+                                <option value="no">No — I'm salaried without HRA, or self-employed (calculate my Section 80GG deduction instead)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="card-hra-inputs">
+                    <div class="tool-card-title">Annual Figures</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Basic Salary + DA (Annual, ₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-basic" value="600000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">HRA Received (Annual, ₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-hra-received" value="240000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Rent Paid (Annual, ₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-rent" value="216000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">City of Residence</label>
+                            <select class="tool-form-control" id="inp-city">
+                                <option value="metro" selected>Metro (Delhi, Mumbai, Kolkata, Chennai)</option>
+                                <option value="nonmetro">Non-Metro (any other city)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="card-80gg-inputs" style="display:none;">
+                    <div class="tool-card-title">Annual Figures — Section 80GG</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Total Income Before This Deduction (Annual, ₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-total-income" value="800000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Rent Paid (Annual, ₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-rent-80gg" value="180000" min="0" step="1000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title" id="result-title">Result</div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Calculation Breakdown
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-hra-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="breakdown-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Documents to Keep Handy</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">A general list — nothing here is saved or sent anywhere.</p>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not a filed computation. It assumes salary components stay constant through the year and does not account for a house move, salary revision, or a period spent in your own house. Section 10(13A) HRA exemption and Section 80GG deduction are available under the Old Tax Regime only. Aggarwal Abhishek &amp; Co. does not certify these figures — please have us review your actual month-wise computation before filing.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+
+        function updateMode() {
+            const hasHra = document.getElementById('inp-has-hra').value === 'yes';
+            document.getElementById('card-hra-inputs').style.display = hasHra ? '' : 'none';
+            document.getElementById('card-80gg-inputs').style.display = hasHra ? 'none' : '';
+            document.getElementById('result-title').textContent = hasHra ? 'Result — Section 10(13A) HRA Exemption' : 'Result — Section 80GG Deduction';
+        }
+
+        function render() {
+            updateMode();
+            const hasHra = document.getElementById('inp-has-hra').value === 'yes';
+
+            if (hasHra) {
+                const basic = Math.max(0, Number(document.getElementById('inp-basic').value) || 0);
+                const hraReceived = Math.max(0, Number(document.getElementById('inp-hra-received').value) || 0);
+                const rent = Math.max(0, Number(document.getElementById('inp-rent').value) || 0);
+                const isMetro = document.getElementById('inp-city').value === 'metro';
+
+                const tenPctSalary = basic * 0.10;
+                const rentMinus10Pct = Math.max(0, rent - tenPctSalary);
+                const pctOfSalary = basic * (isMetro ? 0.50 : 0.40);
+                const exempt = Math.min(hraReceived, rentMinus10Pct, pctOfSalary);
+                const taxable = Math.max(0, hraReceived - exempt);
+
+                lastResult = { mode: 'hra', basic, hraReceived, rent, isMetro, tenPctSalary, rentMinus10Pct, pctOfSalary, exempt, taxable };
+
+                document.getElementById('summary-cards').innerHTML = [
+                    ['HRA Exempt (Tax-Free)', fmtMoneyWhole(exempt), 'Least of the three limits below', '#10b981'],
+                    ['HRA Taxable', fmtMoneyWhole(taxable), 'Added to your taxable salary', '#dc2626'],
+                    ['HRA Received', fmtMoneyWhole(hraReceived), 'As per your salary structure', '#64748b'],
+                    ['Rent Paid', fmtMoneyWhole(rent), isMetro ? 'Metro city' : 'Non-metro city', '#0ea5e9']
+                ].map(([label, val, sub, color]) => `
+                    <div class="metric-card" style="border-top-color:${color};">
+                        <div class="label">${label}</div>
+                        <div class="value">${val}</div>
+                        <div class="subtext" style="color:${color};">${sub}</div>
+                    </div>
+                `).join('');
+
+                document.getElementById('breakdown-table-wrap').innerHTML = `<table class="tool-table">
+                    <thead><tr><th>Limit (least of these three is exempt)</th><th>Amount</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Actual HRA received</td><td>${fmtMoneyWhole(hraReceived)}</td></tr>
+                        <tr><td>2. Rent paid minus 10% of Basic+DA</td><td>${fmtMoneyWhole(rentMinus10Pct)}</td></tr>
+                        <tr><td>3. ${isMetro ? '50%' : '40%'} of Basic+DA (${isMetro ? 'metro' : 'non-metro'})</td><td>${fmtMoneyWhole(pctOfSalary)}</td></tr>
+                        <tr><td><strong>Exempt HRA (minimum of the above)</strong></td><td><strong>${fmtMoneyWhole(exempt)}</strong></td></tr>
+                        <tr><td><strong>Taxable HRA</strong></td><td><strong>${fmtMoneyWhole(taxable)}</strong></td></tr>
+                    </tbody>
+                </table>`;
+
+                renderSmartInsights(buildHraInsights());
+            } else {
+                const totalIncome = Math.max(0, Number(document.getElementById('inp-total-income').value) || 0);
+                const rent = Math.max(0, Number(document.getElementById('inp-rent-80gg').value) || 0);
+
+                const tenPctIncome = totalIncome * 0.10;
+                const rentMinus10Pct = Math.max(0, rent - tenPctIncome);
+                const flatCap = 60000; // ₹5,000/month
+                const twentyFivePctIncome = totalIncome * 0.25;
+                const deduction = Math.min(rentMinus10Pct, flatCap, twentyFivePctIncome);
+
+                lastResult = { mode: '80gg', totalIncome, rent, tenPctIncome, rentMinus10Pct, flatCap, twentyFivePctIncome, deduction };
+
+                document.getElementById('summary-cards').innerHTML = [
+                    ['Section 80GG Deduction', fmtMoneyWhole(deduction), 'Least of the three limits below', '#10b981'],
+                    ['Rent Paid', fmtMoneyWhole(rent), 'Annual', '#0ea5e9'],
+                    ['Total Income', fmtMoneyWhole(totalIncome), 'Before this deduction', '#64748b'],
+                    ['Monthly Cap', fmtMoneyWhole(flatCap / 12), '₹60,000/year flat ceiling', '#f59e0b']
+                ].map(([label, val, sub, color]) => `
+                    <div class="metric-card" style="border-top-color:${color};">
+                        <div class="label">${label}</div>
+                        <div class="value">${val}</div>
+                        <div class="subtext" style="color:${color};">${sub}</div>
+                    </div>
+                `).join('');
+
+                document.getElementById('breakdown-table-wrap').innerHTML = `<table class="tool-table">
+                    <thead><tr><th>Limit (least of these three is deductible)</th><th>Amount</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Rent paid minus 10% of total income</td><td>${fmtMoneyWhole(rentMinus10Pct)}</td></tr>
+                        <tr><td>2. Flat ₹5,000/month (₹60,000/year)</td><td>${fmtMoneyWhole(flatCap)}</td></tr>
+                        <tr><td>3. 25% of total income</td><td>${fmtMoneyWhole(twentyFivePctIncome)}</td></tr>
+                        <tr><td><strong>Deduction allowed (minimum of the above)</strong></td><td><strong>${fmtMoneyWhole(deduction)}</strong></td></tr>
+                    </tbody>
+                </table>`;
+
+                renderSmartInsights(buildGgInsights());
+            }
+        }
+
+        function buildHraInsights() {
+            const r = lastResult;
+            const insights = [];
+            if (r.rent === 0) {
+                insights.push({ level: 'warning', text: 'You\'ve entered zero rent — if you live in your own house (or rent-free), no HRA exemption is available and the full HRA received is taxable.' });
+            } else if (r.exempt === r.hraReceived && r.hraReceived > 0) {
+                insights.push({ level: 'good', text: 'Your entire HRA is exempt — the rent you pay comfortably covers all three limits.' });
+            } else if (r.exempt < r.hraReceived) {
+                insights.push({ level: 'warning', text: `${fmtMoneyWhole(r.taxable)} of your HRA will be added to your taxable salary — this is common when rent paid is low relative to HRA received.` });
+            }
+            if (r.rent > 100000) {
+                insights.push({ level: 'info', text: 'Since your annual rent exceeds ₹1,00,000, you\'ll need your landlord\'s PAN on your Form 12BB / return — without it, your employer may not allow the exemption in TDS on salary.' });
+            }
+            insights.push({ level: 'critical', text: 'Remember: this exemption is available only if you choose the Old Tax Regime. Under the New Regime, your entire HRA received is taxable regardless of rent paid.' });
+            return insights;
+        }
+
+        function buildGgInsights() {
+            const r = lastResult;
+            const insights = [];
+            if (r.deduction === r.flatCap) {
+                insights.push({ level: 'info', text: 'Your deduction is capped at the flat ₹60,000/year limit — this cap rarely changes, so paying more rent beyond this point won\'t increase your 80GG deduction.' });
+            }
+            if (r.rent === 0) {
+                insights.push({ level: 'warning', text: 'No rent entered — Section 80GG requires you to actually pay rent and file Form 10BA declaring you (or your spouse/minor child) don\'t own residential accommodation where you live or work.' });
+            }
+            insights.push({ level: 'info', text: 'Section 80GG is only available if you, your spouse or minor child don\'t own a house at your place of residence or employment, and you haven\'t claimed HRA from an employer for any part of the year.' });
+            return insights;
+        }
+
+        document.getElementById('btn-hra-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const r = lastResult;
+            let lines = [];
+            if (r.mode === 'hra') {
+                lines = [
+                    ['Item', 'Amount'].map(csvEscape).join(','),
+                    ['Basic Salary + DA (Annual)', r.basic].map(csvEscape).join(','),
+                    ['HRA Received (Annual)', r.hraReceived].map(csvEscape).join(','),
+                    ['Rent Paid (Annual)', r.rent].map(csvEscape).join(','),
+                    ['City', r.isMetro ? 'Metro' : 'Non-Metro'].map(csvEscape).join(','),
+                    ['Limit 1: Actual HRA Received', r.hraReceived].map(csvEscape).join(','),
+                    ['Limit 2: Rent - 10% of Salary', r.rentMinus10Pct.toFixed(2)].map(csvEscape).join(','),
+                    ['Limit 3: ' + (r.isMetro ? '50%' : '40%') + ' of Salary', r.pctOfSalary.toFixed(2)].map(csvEscape).join(','),
+                    ['Exempt HRA', r.exempt.toFixed(2)].map(csvEscape).join(','),
+                    ['Taxable HRA', r.taxable.toFixed(2)].map(csvEscape).join(',')
+                ];
+            } else {
+                lines = [
+                    ['Item', 'Amount'].map(csvEscape).join(','),
+                    ['Total Income (before deduction)', r.totalIncome].map(csvEscape).join(','),
+                    ['Rent Paid (Annual)', r.rent].map(csvEscape).join(','),
+                    ['Limit 1: Rent - 10% of Income', r.rentMinus10Pct.toFixed(2)].map(csvEscape).join(','),
+                    ['Limit 2: Flat Cap', r.flatCap].map(csvEscape).join(','),
+                    ['Limit 3: 25% of Income', r.twentyFivePctIncome.toFixed(2)].map(csvEscape).join(','),
+                    ['Section 80GG Deduction', r.deduction.toFixed(2)].map(csvEscape).join(',')
+                ];
+            }
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `HRA_Exemption_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        const DOC_CHECKLIST_ITEMS = [
+            'Rent receipts for each month, or a rent agreement covering the year',
+            'Landlord\'s PAN (mandatory if annual rent exceeds ₹1,00,000)',
+            'Bank statement showing rent payments (strongly recommended even if not mandatory)',
+            'Salary slips showing your Basic + DA and HRA components',
+            'Form 12BB submitted to your employer declaring this exemption, if claiming through payroll',
+            'Form 10BA (only if claiming Section 80GG instead of HRA)'
+        ];
+        function renderDocChecklist() {
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = DOC_CHECKLIST_ITEMS.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            DOC_CHECKLIST_ITEMS.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        ['inp-has-hra', 'inp-basic', 'inp-hra-received', 'inp-rent', 'inp-city', 'inp-total-income', 'inp-rent-80gg'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDocChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

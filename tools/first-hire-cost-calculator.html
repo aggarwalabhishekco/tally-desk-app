@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First-Hire Compliance &amp; Cost Calculator | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free calculator for founders hiring their first employee — see the true cost to company (PF, ESI, gratuity provision) and the registrations that hiring employee #1 triggers. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / First-Hire Compliance &amp; Cost Calculator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">First-Hire Compliance &amp; Cost Calculator</h2>
+        <p class="section-subtitle">Hiring your first employee costs more than the salary you quote them, and triggers a few registrations most founders don't expect. See the true monthly cost to company, and the compliance checklist that comes with it. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Startup Suite</span>
+                    </h3>
+                    <div class="sub-caption">First-Hire Compliance &amp; Cost Calculator</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Planning aid, not a payroll computation.</strong> EPF is mandatory only once an establishment reaches 20 employees (voluntary registration is allowed earlier); ESI is mandatory only once an establishment reaches 10 employees in most states, and only for employees drawing ₹21,000/month or less. This calculator lets you model costs either way, and flags which registrations are triggered by your actual headcount and state. <strong>Three recent changes worth knowing before your first hire:</strong> (1) the EPF wage ceiling for automatic mandatory coverage was raised from ₹15,000 to ₹25,000/month effective 17 September 2026 — more new hires now fall within mandatory coverage once your establishment crosses 20 employees; (2) the ESI Act, 1948 was repealed when the Code on Social Security, 2020 took effect on 21 November 2025, and ESI currently runs under a one-year transition provision expiring 20 November 2026 with no replacement scheme notified yet — this may change soon; (3) gratuity's 5-year eligibility rule below still applies to regular employees, but fixed-term employees now qualify for pro-rata gratuity after just 1 year under the Code on Social Security, 2020.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="First-Hire Compliance Cost Calculator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help setting up payroll compliance for your first hires. <strong>No salary data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the salary figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Employee &amp; Business Details</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Gross Monthly Salary offered (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-gross" value="30000" min="0" step="500">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Basic Salary component (₹) — used for PF/gratuity</label>
+                            <input type="number" class="tool-form-control" id="inp-basic" value="15000" min="0" step="500">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Total Employees (including this hire)</label>
+                            <input type="number" class="tool-form-control" id="inp-headcount" value="1" min="1" step="1">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">State (for Professional Tax applicability)</label>
+                            <select class="tool-form-control" id="inp-state">
+                                <option value="none" selected>No Professional Tax in my state</option>
+                                <option value="pt">My state levies Professional Tax (e.g. Maharashtra, Karnataka, West Bengal, Telangana, Andhra Pradesh, Gujarat, MP, Odisha, Kerala, Assam, Tripura, Meghalaya)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tool-grid-2" style="margin-top:6px;">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="chk-epf" style="width:auto;"> Register for EPF (mandatory only at 20+ employees; can opt in earlier)
+                            </label>
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="chk-esi" style="width:auto;"> Register for ESI (mandatory only at 10+ employees, wage ≤ ₹21,000; can opt in earlier)
+                            </label>
+                        </div>
+                        <div class="tool-form-group" style="grid-column: 1 / -1;">
+                            <label class="tool-form-label" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="chk-gratuity" style="width:auto;"> Provision monthly for future Gratuity liability (optional accounting practice — payable after 5 years' continuous service for regular employees, or after just 1 year, pro-rata, for fixed-term employees under the Code on Social Security, 2020)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Result
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;" disabled>📸 Get My Shareable Verdict Card</button>
+                        </div>
+                    </div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Download a shareable image of your result. No data is uploaded; the image is drawn entirely in your browser.</p>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Full Cost Breakdown
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-fh-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="breakdown-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Registrations &amp; Compliance Checklist for Hiring Employee #1</div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">A general list based on your inputs above — nothing here is saved or sent anywhere.</p>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not a payroll computation. PF is approximated at ~13% of Basic (12% EPF/EPS + ~0.5% EDLI + ~0.5% admin charges — actual admin charges and the EPS wage ceiling are periodically revised by EPFO/the government). ESI, Professional Tax slabs, Shops &amp; Establishment rules and Labour Welfare Fund applicability vary by state and are subject to change — please have us confirm your exact obligations before your first hire joins.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+        const ESI_WAGE_CEILING = 21000;
+
+        function updateEsiAvailability() {
+            const gross = Number(document.getElementById('inp-gross').value) || 0;
+            const esiCheckbox = document.getElementById('chk-esi');
+            if (gross > ESI_WAGE_CEILING) {
+                esiCheckbox.checked = false;
+                esiCheckbox.disabled = true;
+            } else {
+                esiCheckbox.disabled = false;
+            }
+        }
+
+        function render() {
+            updateEsiAvailability();
+            const gross = Math.max(0, Number(document.getElementById('inp-gross').value) || 0);
+            const basic = Math.max(0, Number(document.getElementById('inp-basic').value) || 0);
+            const headcount = Math.max(1, Number(document.getElementById('inp-headcount').value) || 1);
+            const stateHasPT = document.getElementById('inp-state').value === 'pt';
+            const epfOn = document.getElementById('chk-epf').checked;
+            const esiOn = document.getElementById('chk-esi').checked && gross <= ESI_WAGE_CEILING;
+            const gratuityOn = document.getElementById('chk-gratuity').checked;
+
+            if (gross <= 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#64748b; padding:10px;">Enter a positive gross monthly salary to see results.</p>';
+                document.getElementById('breakdown-table-wrap').innerHTML = '';
+                document.getElementById('insights-card').style.display = 'none';
+                document.getElementById('btn-verdict-card').disabled = true;
+                lastResult = null;
+                return;
+            }
+            document.getElementById('btn-verdict-card').disabled = false;
+
+            const epfEmployerCost = epfOn ? basic * 0.13 : 0;
+            const esiEmployerCost = esiOn ? gross * 0.0325 : 0;
+            const gratuityProvision = gratuityOn ? basic * 0.0481 : 0;
+
+            const totalMonthlyCost = gross + epfEmployerCost + esiEmployerCost + gratuityProvision;
+            const totalAnnualCost = totalMonthlyCost * 12;
+            const loadPct = ((totalMonthlyCost - gross) / gross) * 100;
+
+            const epfMandatory = headcount >= 20;
+            const esiMandatory = headcount >= 10 && gross <= ESI_WAGE_CEILING;
+
+            lastResult = { gross, basic, headcount, stateHasPT, epfOn, esiOn, gratuityOn, epfEmployerCost, esiEmployerCost, gratuityProvision, totalMonthlyCost, totalAnnualCost, loadPct, epfMandatory, esiMandatory };
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['Gross Salary Offered', fmtMoneyWhole(gross), 'per month', '#002b49'],
+                ['True Monthly Cost to Company', fmtMoneyWhole(totalMonthlyCost), `+${loadPct.toFixed(1)}% over gross salary`, '#0ea5e9'],
+                ['Annual Cost to Company', fmtMoneyWhole(totalAnnualCost), 'for this one hire', '#f59e0b'],
+                ['Statutory Load', fmtMoneyWhole(totalMonthlyCost - gross), 'PF + ESI + gratuity provision, per month', '#10b981']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights());
+            renderBreakdownTable();
+            renderChecklist();
+        }
+
+        function buildInsights() {
+            if (!lastResult) return [];
+            const r = lastResult;
+            const insights = [];
+
+            insights.push({ level: 'info', text: `The true monthly cost of this hire is ${fmtMoneyWhole(r.totalMonthlyCost)} — about ${r.loadPct.toFixed(1)}% more than the ${fmtMoneyWhole(r.gross)} salary you're quoting them. Budget on this fully-loaded number, not the headline salary.` });
+
+            if (r.headcount < 20 && !r.epfOn) {
+                insights.push({ level: 'info', text: `At ${r.headcount} employee(s), EPF isn't mandatory yet (the threshold is 20). You've modeled without it — you can register voluntarily any time, which some candidates value as a benefit.` });
+            } else if (r.epfMandatory && !r.epfOn) {
+                insights.push({ level: 'critical', text: `At ${r.headcount} employees, EPF registration becomes mandatory once you cross 20 — this calculator isn't currently including that cost. Re-check the EPF box to see the fully-loaded number.` });
+            }
+
+            if (r.gross > ESI_WAGE_CEILING) {
+                insights.push({ level: 'info', text: `This employee's wage (${fmtMoneyWhole(r.gross)}) is above the ₹21,000 ESI wage ceiling, so ESI doesn't apply to them regardless of your total headcount.` });
+            } else if (r.headcount < 10 && !r.esiOn) {
+                insights.push({ level: 'info', text: `At ${r.headcount} employee(s), ESI isn't mandatory yet (the threshold is 10, for employees earning ≤ ₹21,000/month). You've modeled without it.` });
+            } else if (r.esiMandatory && !r.esiOn) {
+                insights.push({ level: 'critical', text: `At ${r.headcount} employees with wages under the ESI ceiling, ESI registration is mandatory in most states once you cross 10 — this isn't currently included in the cost above.` });
+            }
+
+            if (r.stateHasPT) {
+                insights.push({ level: 'warning', text: `Since your state levies Professional Tax, you'll need employer Professional Tax registration (PTEC) even for a single employee — this is a state obligation that doesn't wait for any headcount threshold, unlike EPF/ESI. It's deducted from the employee's salary, so it doesn't add to your cost, but the registration and monthly deposit/return are still your responsibility.` });
+            }
+
+            if (r.gratuityOn) {
+                insights.push({ level: 'good', text: `You're provisioning for gratuity from month one — a good habit, since gratuity itself becomes payable only after 5 years' continuous service for a regular employee (or after just 1 year, pro-rata, if this is a fixed-term hire, under the Code on Social Security, 2020), but the liability actually starts building from day one.` });
+            }
+
+            insights.push({ level: 'info', text: 'Also budget for TDS on salary (Section 192) once the employee\'s income crosses the basic exemption threshold, and for an offer letter / appointment letter compliant with your state\'s Shops & Establishments Act.' });
+
+            return insights;
+        }
+
+        function renderBreakdownTable() {
+            const wrap = document.getElementById('breakdown-table-wrap');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rows = [
+                ['Gross Monthly Salary', fmtMoneyWhole(r.gross)],
+                ['Basic Salary Component', fmtMoneyWhole(r.basic)],
+                ['Employer PF Cost (~13% of Basic)' + (r.epfOn ? '' : ' — not modeled'), fmtMoneyWhole(r.epfEmployerCost)],
+                ['Employer ESI Cost (3.25% of Gross)' + (r.esiOn ? '' : ' — not modeled'), fmtMoneyWhole(r.esiEmployerCost)],
+                ['Gratuity Provision (~4.81% of Basic)' + (r.gratuityOn ? '' : ' — not modeled'), fmtMoneyWhole(r.gratuityProvision)],
+                ['<strong>True Monthly Cost to Company</strong>', `<strong>${fmtMoneyWhole(r.totalMonthlyCost)}</strong>`],
+                ['<strong>Annual Cost to Company</strong>', `<strong>${fmtMoneyWhole(r.totalAnnualCost)}</strong>`],
+                ['Load over Gross Salary', r.loadPct.toFixed(1) + '%']
+            ];
+            wrap.innerHTML = `<table class="tool-table">
+                <thead><tr><th>Component</th><th>Value</th></tr></thead>
+                <tbody>${rows.map(([label, val]) => `<tr><td>${label}</td><td>${val}</td></tr>`).join('')}</tbody>
+            </table>`;
+        }
+
+        function renderChecklist() {
+            if (!lastResult) return;
+            const r = lastResult;
+            const items = [
+                'Shops &amp; Establishment registration — required in most states within a set number of days of starting business or hiring your first employee.',
+                'A written offer letter / appointment letter covering salary, designation, notice period and other terms your state\'s Shops &amp; Establishments Act expects.',
+                'TAN (Tax Deduction Account Number) — needed to deduct and deposit TDS on salary under Section 192, if not already obtained.',
+                'Statutory registers/muster roll and salary records as required under your state\'s Shops &amp; Establishments Act.',
+                r.stateHasPT ? 'Professional Tax Registration Certificate (PTEC) for the employer, and Professional Tax Registration Certificate (PTRC) to deduct and deposit PT from this employee\'s salary — applicable in your state regardless of headcount.' : 'Professional Tax registration — not applicable in states with no Professional Tax, but re-check if you hire in a different state.',
+                r.epfMandatory ? 'EPF registration — mandatory now that you\'ve crossed 20 employees.' : 'EPF registration — not mandatory yet (kicks in at 20 employees), but can be taken up voluntarily.',
+                r.esiMandatory ? 'ESI registration — mandatory now that you\'ve crossed 10 employees with wages under the ESI ceiling.' : 'ESI registration — not mandatory yet (kicks in at 10 employees, wage ≤ ₹21,000), but can be taken up voluntarily.',
+                'Labour Welfare Fund contribution — applicable in some states, usually a small fixed half-yearly amount per employee; check applicability in your state.'
+            ];
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = items.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            items.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        document.getElementById('btn-fh-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const r = lastResult;
+            const lines = [
+                ['Component', 'Value'].map(csvEscape).join(','),
+                ['Gross Monthly Salary', r.gross].map(csvEscape).join(','),
+                ['Basic Salary Component', r.basic].map(csvEscape).join(','),
+                ['Employer PF Cost', r.epfEmployerCost.toFixed(2)].map(csvEscape).join(','),
+                ['Employer ESI Cost', r.esiEmployerCost.toFixed(2)].map(csvEscape).join(','),
+                ['Gratuity Provision', r.gratuityProvision.toFixed(2)].map(csvEscape).join(','),
+                ['True Monthly Cost to Company', r.totalMonthlyCost.toFixed(2)].map(csvEscape).join(','),
+                ['Annual Cost to Company', r.totalAnnualCost.toFixed(2)].map(csvEscape).join(','),
+                ['Load over Gross Salary %', r.loadPct.toFixed(2)].map(csvEscape).join(',')
+            ];
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `First_Hire_Cost_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        ['inp-gross', 'inp-basic', 'inp-headcount', 'inp-state'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+        ['chk-epf', 'chk-esi', 'chk-gratuity'].forEach(id => {
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => {
+            if (!lastResult) return null;
+            const r = lastResult;
+            return {
+                eyebrow: 'My First-Hire Cost Verdict',
+                headline: fmtMoneyWhole(r.totalMonthlyCost) + '/month',
+                resultLine: `+${r.loadPct.toFixed(1)}% over gross salary`,
+                resultSub: `Annual cost to company: ${fmtMoneyWhole(r.totalAnnualCost)}`,
+                footerNote: 'Estimate only — based on figures entered by the user.',
+                toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+            };
+        }, 'My_First_Hire_Cost_Verdict');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

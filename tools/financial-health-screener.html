@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Health Screener | Aggarwal Abhishek & Co.</title>
+    <meta name="description" content="Free financial ratio screening tool with benchmark comparison, weighted scoring, a qualitative due-diligence checklist, and a downloadable PDF report. Educational tool — not investment advice.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek & Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Financial Health Screener</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Financial Health Screener</h2>
+        <p class="section-subtitle">Educational Ratio Analysis &amp; Due-Diligence Self-Assessment — Not Investment Advice</p>
+
+        <div class="tool-wrapper">
+            <!-- Tool Header -->
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek & Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">Interactive Financial Evaluation Engine & Scoring System</div>
+                </div>
+
+                <div class="tool-controls">
+                    <button class="btn-tool-outline" id="btn-reset">🔄 Reset</button>
+                    <button class="btn-tool-outline" id="btn-export">📥 Export JSON</button>
+                    <button class="btn-tool-outline" id="btn-import-trigger">📤 Import JSON</button>
+                    <input type="file" id="file-import" accept=".json" style="display: none;">
+                    <button class="btn-tool-gold" id="btn-print">🖨️ Export PDF Report</button>
+                </div>
+            </div>
+
+            <!-- Educational-use notice -->
+            <div class="tool-notice-banner">
+                <strong>Educational tool — not advice.</strong> This is a free self-assessment aid to help you organize financial ratios and ask better questions. It does not certify any figures, does not recommend buying, holding or selling any security or business interest, and does not create an advisor-client relationship with Aggarwal Abhishek &amp; Co. For advice specific to your situation, please <a href="../contact.html" style="color:#78350f; font-weight:800; text-decoration:underline;">contact us directly</a>.
+            </div>
+
+            <!-- Tool Body -->
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Financial Health Screener">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like professional help with what it shows. <strong>None of the financial figures you enter into the tool itself are sent to us</strong> — they stay in your browser, exactly as before.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the figures or files you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <!-- Tabs Navigation -->
+                <nav class="tabs-nav">
+                    <button class="tab-btn active" data-tab="tab-inputs">1. Financial Inputs</button>
+                    <button class="tab-btn" data-tab="tab-ratios">2. Financial Ratios</button>
+                    <button class="tab-btn" data-tab="tab-benchmarks">3. Benchmarks & Weights</button>
+                    <button class="tab-btn" data-tab="tab-qualitative">4. Qualitative Checklist</button>
+                    <button class="tab-btn" data-tab="tab-report">5. Scoring & Decision Report</button>
+                    <button class="tab-btn" data-tab="tab-dashboard">6. Executive Dashboard</button>
+                </nav>
+
+                <!-- TAB 1: FINANCIAL INPUTS -->
+                <div id="tab-inputs" class="tab-panel active">
+                    <div class="tool-card">
+                        <div class="tool-card-title">Target Metadata & Company Profile</div>
+                        <div class="tool-grid-2">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Target Company Name</label>
+                                <input type="text" class="tool-form-control" id="inp-comp-name" value="Acme Distribution Inc.">
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Industry Sector</label>
+                                <input type="text" class="tool-form-control" id="inp-comp-industry" value="Commercial Wholesale & Distribution">
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Evaluation Period / FY</label>
+                                <input type="text" class="tool-form-control" id="inp-comp-fy" value="FY 2025-26">
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Currency & Denomination</label>
+                                <input type="text" class="tool-form-control" id="inp-comp-unit" value="USD in thousands">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-grid-2">
+                        <!-- Income Statement -->
+                        <div class="tool-card">
+                            <div class="tool-card-title">Income Statement</div>
+                            <div class="tool-table-container">
+                                <table class="tool-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Line Item</th>
+                                            <th class="text-right">Current Period</th>
+                                            <th class="text-right">Prior Period</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Gross Revenue</strong></td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-revenue" value="24500"></td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-revenue-prior" value="21800"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cost of Goods Sold (COGS)</td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-cogs" value="16660"></td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-cogs-prior" value="15050"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Gross Profit</strong></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-gp" readonly></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-gp-prior" readonly></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SG&A Expense</td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-sga" value="4200"></td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-sga-prior" value="3950"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Depreciation & Amortization</td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-dna" value="640"></td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-dna-prior" value="600"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>EBITDA</strong></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-ebitda" readonly></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-ebitda-prior" readonly></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>EBIT / Operating Income</strong></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-ebit" readonly></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-ebit-prior" readonly></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Interest Expense</td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-interest" value="380"></td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-interest-prior" value="410"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pre-Tax Income (EBT)</td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-ebt" readonly></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-ebt-prior" readonly></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tax Expense</td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-tax" value="620"></td>
+                                            <td><input type="number" class="tool-form-control text-right" id="inp-tax-prior" value="520"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="font-size:0.72rem; color:#64748b; background:#f8fafc;">Tax treatment: enter tax expense as a positive number and it will be deducted automatically. Enter a negative number only when you want a tax benefit/add-back.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Net Income</strong></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-netincome" readonly></td>
+                                            <td><input type="text" class="tool-form-control calculated text-right" id="calc-netincome-prior" readonly></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Balance Sheet & Cash Flows -->
+                        <div>
+                            <div class="tool-card">
+                                <div class="tool-card-title">Balance Sheet</div>
+                                <div class="tool-table-container">
+                                    <table class="tool-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Line Item</th>
+                                                <th class="text-right">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="background:#e2e8f0; font-weight:700;"><td colspan="2">ASSETS</td></tr>
+                                            <tr>
+                                                <td>Cash & Cash Equivalents</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-cash" value="1850"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Accounts Receivable</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-ar" value="3100"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Inventories</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-inv" value="2900"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Other Current Assets</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-oca" value="400"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total Current Assets (TCA)</strong></td>
+                                                <td><input type="text" class="tool-form-control calculated text-right" id="calc-tca" readonly></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Net PP&E</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-nppe" value="5400"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Other Non-Current Assets</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-olta" value="750"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total Assets</strong></td>
+                                                <td><input type="text" class="tool-form-control calculated text-right" id="calc-total-assets" readonly></td>
+                                            </tr>
+
+                                            <tr style="background:#e2e8f0; font-weight:700;"><td colspan="2">LIABILITIES</td></tr>
+                                            <tr>
+                                                <td>Accounts Payable</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-ap" value="2050"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Short-Term Borrowings</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-stdebt" value="600"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Other Current Liabilities</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-ocl" value="550"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total Current Liabilities (TCL)</strong></td>
+                                                <td><input type="text" class="tool-form-control calculated text-right" id="calc-tcl" readonly></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Long-Term Debt</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-ltdebt" value="3200"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Other Non-Current Liabilities</td>
+                                                <td><input type="number" class="tool-form-control text-right" id="inp-oltl" value="300"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total Liabilities</strong></td>
+                                                <td><input type="text" class="tool-form-control calculated text-right" id="calc-total-liab" readonly></td>
+                                            </tr>
+
+                                            <tr style="background:#cbd5e1; font-weight:700;"><td colspan="2">EQUITY</td></tr>
+                                            <tr>
+                                                <td><strong>Total Shareholders' Equity</strong></td>
+                                                <td><input type="text" class="tool-form-control calculated text-right" id="calc-equity" readonly></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="font-size:0.72rem; color:#64748b; margin-top:8px;">Memo: Financial (interest-bearing) debt = Short-Term Borrowings + Long-Term Debt only — see <strong>Financial Debt-to-Equity</strong> in Tab 2, shown alongside the scored Total-Liabilities-based Debt-to-Equity so the two are never confused.</div>
+                            </div>
+
+                            <div class="tool-card">
+                                <div class="tool-card-title">Cash Flow & Valuation Inputs</div>
+                                <div class="tool-grid-2">
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Cash Flow Ops (CFO)</label>
+                                        <input type="number" class="tool-form-control" id="inp-cfo" value="2150">
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">CapEx</label>
+                                        <input type="number" class="tool-form-control" id="inp-capex" value="900">
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Free Cash Flow (FCF)</label>
+                                        <input type="text" class="tool-form-control calculated" id="calc-fcf" readonly>
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Dividends Paid</label>
+                                        <input type="number" class="tool-form-control" id="inp-dividends" value="300">
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Share Price</label>
+                                        <input type="number" class="tool-form-control" id="inp-price" step="0.01" value="18.50">
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Shares (Thousands)</label>
+                                        <input type="number" class="tool-form-control" id="inp-shares" value="5000">
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Market Cap</label>
+                                        <input type="text" class="tool-form-control calculated" id="calc-mktcap" readonly>
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Enterprise Value</label>
+                                        <input type="text" class="tool-form-control calculated" id="calc-ev" readonly>
+                                    </div>
+                                </div>
+                                <div id="cfo-reconciliation-note" style="font-size:0.72rem; color:#64748b; margin-top:8px;"></div>
+                            </div>
+
+                            <div class="tool-card">
+                                <div class="tool-card-title">
+                                    Average-Balance Inputs
+                                    <span style="font-size:0.7rem; font-weight:normal; color:#64748b;">Optional — improves ROA / ROE / Turnover accuracy</span>
+                                </div>
+                                <p style="font-size:0.78rem; color:#64748b; margin-bottom:12px;">ROA, ROE, Asset Turnover and Receivables Turnover are scored using period-end balances above (standard practice in most published reports). If the company grew or shrank materially during the year, period-end balances distort these ratios. Enter <strong>Prior FY-End</strong> balances below to see an average-balance version alongside the scored figure in Tab 2 — informational only, not weighted into the score.</p>
+                                <div class="tool-grid-2">
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Total Assets (Prior FY-End)</label>
+                                        <input type="number" class="tool-form-control" id="inp-ta-prior" value="">
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Shareholders' Equity (Prior FY-End)</label>
+                                        <input type="number" class="tool-form-control" id="inp-equity-prior" value="">
+                                    </div>
+                                    <div class="tool-form-group">
+                                        <label class="tool-form-label">Accounts Receivable (Prior FY-End)</label>
+                                        <input type="number" class="tool-form-control" id="inp-ar-prior" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: FINANCIAL RATIOS -->
+                <div id="tab-ratios" class="tab-panel">
+                    <div class="tool-card">
+                        <div class="tool-card-title">
+                            Dynamic Ratio Computation Breakdown
+                            <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">Computed live from Tab 1</span>
+                        </div>
+                        <div id="ratios-category-container"></div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: BENCHMARKS & WEIGHTS -->
+                <div id="tab-benchmarks" class="tab-panel">
+                    <div class="tool-card">
+                        <div class="tool-card-title">
+                            Scoring Bands (Transparent & Configurable)
+                        </div>
+                        <p style="font-size:0.85rem; color:#475569; margin-bottom:12px;">Every score below is driven by <strong>Favorability %</strong> — how far the company's ratio sits from the benchmark, in the direction that is good for the company. These bands are documented (not hidden) so the score can be audited or reproduced:</p>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;">
+                            <div style="background:#dcfce7; border:1px solid #bbf7d0; border-radius:8px; padding:10px; text-align:center;"><strong>Score 5</strong><br><span style="font-size:0.8rem;">Favorability ≥ +50%</span></div>
+                            <div style="background:#f0fdf4; border:1px solid #c6f6d5; border-radius:8px; padding:10px; text-align:center;"><strong>Score 4</strong><br><span style="font-size:0.8rem;">+25% to +50%</span></div>
+                            <div style="background:#e0f2fe; border:1px solid #bae6fd; border-radius:8px; padding:10px; text-align:center;"><strong>Score 3</strong><br><span style="font-size:0.8rem;">0% to +25%</span></div>
+                            <div style="background:#fff7ed; border:1px solid #ffedd5; border-radius:8px; padding:10px; text-align:center;"><strong>Score 2</strong><br><span style="font-size:0.8rem;">-25% to 0%</span></div>
+                            <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:10px; text-align:center;"><strong>Score 1</strong><br><span style="font-size:0.8rem;">Below -25%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-card-title">
+                            Industry Benchmark & Weight Calibration
+                            <span id="weight-total-badge" class="score-badge badge-score-3">Total Weight: 100%</span>
+                        </div>
+                        <p style="font-size:0.8rem; color:#64748b; margin-bottom:10px;">Replace these benchmark values with real, cited industry data before relying on the score (e.g. sector ratio studies, comparable-company filings, trade-association averages). Weights are editable but must sum to 100% — the badge above turns red if they don't.</p>
+                        <div class="tool-table-container">
+                            <table class="tool-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Ratio Metric</th>
+                                        <th>Direction Target</th>
+                                        <th class="text-right">Target Benchmark</th>
+                                        <th class="text-right">Weight</th>
+                                        <th>Source (edit me)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="benchmarks-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: QUALITATIVE CHECKLIST -->
+                <div id="tab-qualitative" class="tab-panel">
+                    <div class="tool-card">
+                        <div class="tool-card-title">
+                            Due-Diligence Checklist
+                            <span id="qual-gate-badge" class="score-badge badge-score-5">No Red Flags</span>
+                        </div>
+                        <p style="font-size:0.85rem; color:#475569; margin-bottom:14px;">Ratios cannot see fraud, key-person dependency, or an undisclosed lawsuit. Rate each item honestly. <strong>Any single "High" rating overrides the quantitative score</strong> on the Dashboard and Decision Report — the model will flag the company for manual review regardless of how strong its ratios look.</p>
+                        <div class="tool-table-container">
+                            <table class="tool-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:32%">Due-Diligence Item</th>
+                                        <th style="width:14%">Risk Rating</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="qualitative-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 5: SCORING & DECISION REPORT -->
+                <div id="tab-report" class="tab-panel">
+                    <div class="tool-card">
+                        <div class="tool-card-title">
+                            Institutional Decision & Evaluation Matrix
+                            <span id="report-overall-score-badge" class="score-badge badge-score-4" style="font-size:0.95rem; padding:6px 14px;">Overall Score: 0.00 / 5.00</span>
+                        </div>
+
+                        <div class="tool-table-container">
+                            <table class="tool-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Ratio Metric</th>
+                                        <th class="text-right">Company</th>
+                                        <th class="text-right">Benchmark</th>
+                                        <th class="text-right">Variance</th>
+                                        <th class="text-center">Score (1-5)</th>
+                                        <th class="text-right">Weight</th>
+                                        <th class="text-right">Weighted Score</th>
+                                        <th>Investment Guidance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="report-table-body"></tbody>
+                                <tfoot>
+                                    <tr style="background: #002b49; color: #ffffff; font-weight: 800; font-size:0.95rem;">
+                                        <td colspan="5" class="text-right">OVERALL WEIGHTED FINANCIAL SCORE</td>
+                                        <td class="text-center" id="foot-avg-score">-</td>
+                                        <td class="text-right" id="foot-total-weight-pct">100.0%</td>
+                                        <td class="text-right" id="foot-total-weighted">0.00</td>
+                                        <td id="foot-verdict-summary">Rating Summary</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="tool-card-title" style="margin-top:24px; font-size:1rem;">Memo Ratios <span style="font-size:0.75rem; font-weight:normal; color:#64748b;">— informational only, not included in the weighted score</span></div>
+                        <div class="tool-table-container">
+                            <table class="tool-table">
+                                <thead>
+                                    <tr><th>Category</th><th>Metric</th><th class="text-right">Value</th><th>Note</th></tr>
+                                </thead>
+                                <tbody id="memo-table-body"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- MANDATORY DISCLAIMER BOX -->
+                        <div class="disclaimer-box">
+                            <strong>Disclaimer:</strong> This report is based on data provided to us and only for information purpose. We are not certifying any figures in this report. A high score reflects outperformance against the benchmarks entered here — it is not investment advice and does not confirm the price paid is fair or that undisclosed risks are absent. Complete the Qualitative Checklist before acting on any result.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 5: EXECUTIVE DASHBOARD -->
+                <div id="tab-dashboard" class="tab-panel">
+                    <!-- Metric Cards -->
+                    <div class="widget-grid">
+                        <div class="metric-card" style="border-top-color:#002b49;">
+                            <div class="label">Weighted Score</div>
+                            <div class="value" id="dash-score-val">0.00</div>
+                            <div class="subtext" id="dash-score-pct">0% Target Achieved</div>
+                        </div>
+
+                        <div class="metric-card" style="border-top-color:#10b981;">
+                            <div class="label">Board Recommendation</div>
+                            <div class="value" id="dash-verdict-badge" style="font-size:1.25rem; margin-top:8px;">-</div>
+                            <div class="subtext">Investment Rating</div>
+                        </div>
+
+                        <div class="metric-card" style="border-top-color:#0284c7;">
+                            <div class="label">Key Pillar Strength</div>
+                            <div class="value" id="dash-strength-area" style="font-size:1.15rem; color:#15803d; margin-top:6px;">-</div>
+                            <div class="subtext">Top Category Score</div>
+                        </div>
+
+                        <div class="metric-card" style="border-top-color:#ef4444;">
+                            <div class="label">Primary Advisory Concern</div>
+                            <div class="value" id="dash-risk-area" style="font-size:1.15rem; color:#dc2626; margin-top:6px;">-</div>
+                            <div class="subtext">Requires Focus</div>
+                        </div>
+
+                        <div class="metric-card" style="border-top-color:#d97706;">
+                            <div class="label">Qualitative Gate</div>
+                            <div class="value" id="dash-qual-gate" style="font-size:1.15rem; margin-top:6px;">-</div>
+                            <div class="subtext" id="dash-qual-gate-sub">Due-diligence red flags</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row -->
+                    <div class="tool-grid-2">
+                        <div class="tool-card">
+                            <div class="tool-card-title">Category Score Breakdown (Scale 1-5)</div>
+                            <div class="chart-container">
+                                <canvas id="chart-categories"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="tool-card">
+                            <div class="tool-card-title">Investment Profile Radar View</div>
+                            <div class="chart-container">
+                                <canvas id="chart-radar"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bullet Highlights -->
+                    <div class="tool-grid-2">
+                        <div class="tool-card">
+                            <div class="tool-card-title" style="color:#15803d;">🟢 Key Strengths</div>
+                            <ul id="dash-strengths-list" style="padding-left:18px; font-size:0.875rem; line-height:1.7; color:#334155;"></ul>
+                        </div>
+
+                        <div class="tool-card">
+                            <div class="tool-card-title" style="color:#dc2626;">⚠️ Primary Risk Factors</div>
+                            <ul id="dash-risks-list" style="padding-left:18px; font-size:0.875rem; line-height:1.7; color:#334155;"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Executive Synthesis -->
+                    <div class="tool-card" style="border-left:4px solid #002b49;">
+                        <div class="tool-card-title">💡 Smart Insights — Executive Summary &amp; Advisory Synthesis</div>
+                        <p id="dash-synthesis-text" style="font-size:0.925rem; color:#1e293b; line-height:1.7;"></p>
+
+                        <!-- MANDATORY DISCLAIMER BOX -->
+                        <div class="disclaimer-box">
+                            <strong>Disclaimer:</strong> This report is based on data provided to us and only for information purpose. We are not certifying any figures in this report. Do not invest solely on the strength of this score — verify source figures against audited statements, confirm the benchmarks match the correct industry and period, and consult a licensed advisor before any material decision.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Dedicated professional A4 PDF report surface -->
+    <section id="pdf-report" aria-hidden="true">
+        <div id="pdf-report-content"></div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek & Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use. Figures entered and generated are not certified by Aggarwal Abhishek & Co.</p>
+    </footer>
+
+    <!-- ==========================================================================
+         JAVASCRIPT LOGIC ENGINE — Financial Health Screener
+         ========================================================================== -->
+    <script>
+        const RATIOS_CONFIG = [
+            { id: 'current_ratio', name: 'Current Ratio', category: 'Liquidity', unit: 'multiple', higherIsBetter: true, defaultBenchmark: 1.8, weight: 0.05, note: 'Target 1.5x–2.5x', calc: d => safeDiv(d.tca, d.tcl) },
+            { id: 'quick_ratio', name: 'Quick Ratio', category: 'Liquidity', unit: 'multiple', higherIsBetter: true, defaultBenchmark: 1.0, weight: 0.05, note: 'Target 0.8x–1.2x', calc: d => safeDiv(d.tca - d.inventory, d.tcl) },
+            { id: 'cash_ratio', name: 'Cash Ratio', category: 'Liquidity', unit: 'multiple', higherIsBetter: true, defaultBenchmark: 0.3, weight: 0.02, note: 'Target > 0.2x', calc: d => safeDiv(d.cash, d.tcl) },
+            
+            { id: 'gross_margin', name: 'Gross Margin', category: 'Profitability', unit: 'percent', higherIsBetter: true, defaultBenchmark: 30.0, weight: 0.05, note: 'Target 20%–40%', calc: d => safeDiv(d.grossProfit, d.revenue) },
+            { id: 'operating_margin', name: 'Operating Margin', category: 'Profitability', unit: 'percent', higherIsBetter: true, defaultBenchmark: 10.0, weight: 0.06, note: 'Target 8%–15%', calc: d => safeDiv(d.ebit, d.revenue) },
+            { id: 'ebitda_margin', name: 'EBITDA Margin', category: 'Profitability', unit: 'percent', higherIsBetter: true, defaultBenchmark: 13.0, weight: 0.03, note: 'Target 10%–20%', calc: d => safeDiv(d.ebitda, d.revenue) },
+            { id: 'net_margin', name: 'Net Profit Margin', category: 'Profitability', unit: 'percent', higherIsBetter: true, defaultBenchmark: 7.0, weight: 0.07, note: 'Target 5%–12%', calc: d => safeDiv(d.netIncome, d.revenue) },
+            { id: 'roa', name: 'Return on Assets (ROA)', category: 'Profitability', unit: 'percent', higherIsBetter: true, defaultBenchmark: 6.0, weight: 0.05, note: 'Target > 5%', calc: d => safeDiv(d.netIncome, d.totalAssets) },
+            { id: 'roe', name: 'Return on Equity (ROE)', category: 'Profitability', unit: 'percent', higherIsBetter: true, defaultBenchmark: 14.0, weight: 0.07, note: 'Target 12%–20%', calc: d => safeDiv(d.netIncome, d.equity) },
+            
+            { id: 'debt_to_equity', name: 'Debt-to-Equity', category: 'Leverage', unit: 'multiple', higherIsBetter: false, defaultBenchmark: 1.0, weight: 0.07, note: 'Target < 1.5x', calc: d => safeDiv(d.totalLiabilities, d.equity) },
+            { id: 'debt_to_assets', name: 'Debt-to-Assets', category: 'Leverage', unit: 'percent', higherIsBetter: false, defaultBenchmark: 40.0, weight: 0.05, note: 'Target < 50%', calc: d => safeDiv(d.totalLiabilities, d.totalAssets) },
+            { id: 'equity_multiplier', name: 'Equity Multiplier', category: 'Leverage', unit: 'multiple', higherIsBetter: false, defaultBenchmark: 2.0, weight: 0.03, note: 'Target < 2.5x', calc: d => safeDiv(d.totalAssets, d.equity) },
+            { id: 'interest_coverage', name: 'Interest Coverage', category: 'Leverage', unit: 'multiple', higherIsBetter: true, defaultBenchmark: 5.0, weight: 0.06, note: 'Target > 3.0x', calc: d => safeDiv(d.ebit, d.interest) },
+            
+            { id: 'asset_turnover', name: 'Asset Turnover', category: 'Efficiency', unit: 'multiple', higherIsBetter: true, defaultBenchmark: 1.2, weight: 0.04, note: 'Target 1.0x–2.0x', calc: d => safeDiv(d.revenue, d.totalAssets) },
+            { id: 'inventory_turnover', name: 'Inventory Turnover', category: 'Efficiency', unit: 'multiple', higherIsBetter: true, defaultBenchmark: 6.0, weight: 0.03, note: 'Target 5x–10x', calc: d => safeDiv(d.cogs, d.inventory) },
+            { id: 'receivables_turnover', name: 'Receivables Turnover', category: 'Efficiency', unit: 'multiple', higherIsBetter: true, defaultBenchmark: 8.0, weight: 0.03, note: 'Target 7x–12x', calc: d => safeDiv(d.revenue, d.ar) },
+            { id: 'dso', name: 'Days Sales Outstanding', category: 'Efficiency', unit: 'days', higherIsBetter: false, defaultBenchmark: 45.0, weight: 0.02, note: 'Target < 45 days', calc: d => safeDiv(365, safeDiv(d.revenue, d.ar)) },
+            
+            { id: 'revenue_growth', name: 'Revenue Growth', category: 'Growth', unit: 'percent', higherIsBetter: true, defaultBenchmark: 6.0, weight: 0.07, note: 'Target 5%–15%', calc: d => safeDiv(d.revenue - d.revenuePrior, d.revenuePrior) },
+            { id: 'net_income_growth', name: 'Net Income Growth', category: 'Growth', unit: 'percent', higherIsBetter: true, defaultBenchmark: 6.0, weight: 0.07, note: 'Target 5%–15%', calc: d => safeDiv(d.netIncome - d.netIncomePrior, d.netIncomePrior) },
+            
+            { id: 'fcf_margin', name: 'FCF Margin', category: 'Cash Flow', unit: 'percent', higherIsBetter: true, defaultBenchmark: 6.0, weight: 0.05, note: 'Target > 5%', calc: d => safeDiv(d.fcf, d.revenue) },
+            { id: 'ocf_ratio', name: 'Operating Cash Flow Ratio', category: 'Cash Flow', unit: 'multiple', higherIsBetter: true, defaultBenchmark: 0.4, weight: 0.03, note: 'Target > 0.4x', calc: d => safeDiv(d.cfo, d.tcl) }
+        ];
+
+        const UNSCORED_RATIOS_CONFIG = [
+            { id: 'working_capital', name: 'Working Capital', category: 'Liquidity', unit: 'currency', note: 'Current Assets − Current Liabilities', calc: d => d.tca - d.tcl },
+            { id: 'eps', name: 'Earnings Per Share (EPS)', category: 'Valuation', unit: 'currency_raw', note: 'Net Income / Shares Outstanding', calc: d => safeDiv(d.netIncome, d.shares) },
+            { id: 'pe_ratio', name: 'P/E Ratio', category: 'Valuation', unit: 'multiple', note: 'Share Price / EPS', calc: d => safeDiv(d.sharePrice, safeDiv(d.netIncome, d.shares)) },
+            { id: 'pb_ratio', name: 'P/B Ratio', category: 'Valuation', unit: 'multiple', note: 'Market Cap / Equity', calc: d => safeDiv(d.mktCap, d.equity) },
+            { id: 'ev_ebitda', name: 'EV / EBITDA', category: 'Valuation', unit: 'multiple', note: 'Enterprise Value / EBITDA', calc: d => safeDiv(d.ev, d.ebitda) },
+            { id: 'fin_debt_equity', name: 'Financial Debt-to-Equity', category: 'Leverage', unit: 'multiple', note: 'ST + LT Borrowings only (not Total Liabilities) / Equity — compare to the scored Debt-to-Equity above', calc: d => safeDiv(d.stdebt + d.ltdebt, d.equity) },
+            { id: 'roa_avg', name: 'ROA (average-balance)', category: 'Profitability', unit: 'percent', note: 'Net Income / AVERAGE(Total Assets, Prior). More accurate than period-end when the company is growing.', calc: d => safeDiv(d.netIncome, avgOrFallback(d.totalAssets, d.taPrior)) },
+            { id: 'roe_avg', name: 'ROE (average-balance)', category: 'Profitability', unit: 'percent', note: 'Net Income / AVERAGE(Equity, Prior). More accurate than period-end when the company is growing.', calc: d => safeDiv(d.netIncome, avgOrFallback(d.equity, d.equityPrior)) },
+            { id: 'asset_turnover_avg', name: 'Asset Turnover (average-balance)', category: 'Efficiency', unit: 'multiple', note: 'Revenue / AVERAGE(Total Assets, Prior)', calc: d => safeDiv(d.revenue, avgOrFallback(d.totalAssets, d.taPrior)) },
+            { id: 'receivables_turnover_avg', name: 'Receivables Turnover (average-balance)', category: 'Efficiency', unit: 'multiple', note: 'Revenue / AVERAGE(AR, Prior)', calc: d => safeDiv(d.revenue, avgOrFallback(d.ar, d.arPrior)) }
+        ];
+
+        // Falls back to the ending balance when no Prior FY-End figure has been entered
+        function avgOrFallback(current, prior) {
+            if (!prior || isNaN(prior) || prior === 0) return current;
+            return (current + prior) / 2;
+        }
+
+        const QUALITATIVE_ITEMS = [
+            { id: 'q_management', label: 'Management track record & integrity', note: 'Reputation, prior ventures, background checks.', def: 'Low' },
+            { id: 'q_concentration_cust', label: 'Customer / revenue concentration', note: 'Any single customer > ~10-15% of revenue is a risk.', def: 'Medium' },
+            { id: 'q_concentration_supplier', label: 'Supplier / key-input concentration', note: 'Single-source suppliers, commodity exposure.', def: 'Low' },
+            { id: 'q_moat', label: 'Competitive moat / market position', note: 'Barriers to entry, pricing power, market share trend.', def: 'Low' },
+            { id: 'q_regulatory', label: 'Regulatory & legal / compliance risk', note: 'Licenses, pending regulation changes, sector scrutiny.', def: 'Low' },
+            { id: 'q_litigation', label: 'Pending litigation or contingent liabilities', note: 'Check notes to financial statements, not just the balance sheet.', def: 'Low' },
+            { id: 'q_related_party', label: 'Related-party transactions', note: "Loans to/from promoters, non-arm's-length pricing.", def: 'Medium' },
+            { id: 'q_audit', label: 'Audit opinion / qualification history', note: 'Qualified, adverse, or disclaimer opinions in recent audits.', def: 'Low' },
+            { id: 'q_cyclicality', label: 'Industry cyclicality & macro sensitivity', note: 'Sensitivity to interest rates, commodity prices, FX.', def: 'Medium' },
+            { id: 'q_governance', label: 'Ownership / governance concerns', note: 'Promoter share pledging, board independence, related-party board seats.', def: 'Low' }
+        ];
+
+        function safeDiv(n, d, fallback = 0) {
+            if (!d || isNaN(d) || d === 0) return fallback;
+            const r = n / d;
+            return isFinite(r) ? r : fallback;
+        }
+
+        function formatNumber(v, decimals = 0) {
+            if (v === null || v === undefined || isNaN(v)) return '0';
+            return new Intl.NumberFormat('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(v);
+        }
+
+        function getUnitLabel() {
+            const el = document.getElementById('inp-comp-unit');
+            const value = el ? el.value.trim() : '';
+            return value || 'Amount / denomination as provided';
+        }
+
+        function formatValByUnit(v, unit, decimals = 1) {
+            if (v === null || v === undefined || isNaN(v)) return '-';
+            if (unit === 'percent') return (v * 100).toFixed(decimals) + '%';
+            if (unit === 'multiple') return v.toFixed(2) + 'x';
+            if (unit === 'days') return v.toFixed(1) + ' days';
+            if (unit === 'currency') return formatNumber(v, 0);
+            if (unit === 'currency_raw') return v.toFixed(2);
+            return v.toFixed(decimals);
+        }
+
+        function formatCurrencyValue(v, decimals = 0) {
+            return formatNumber(v, decimals);
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>\"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[ch]));
+        }
+
+        function getInputs() {
+            const revenue = parseFloat(document.getElementById('inp-revenue').value) || 0;
+            const revenuePrior = parseFloat(document.getElementById('inp-revenue-prior').value) || 0;
+            const cogs = parseFloat(document.getElementById('inp-cogs').value) || 0;
+            const cogsPrior = parseFloat(document.getElementById('inp-cogs-prior').value) || 0;
+            const sga = parseFloat(document.getElementById('inp-sga').value) || 0;
+            const sgaPrior = parseFloat(document.getElementById('inp-sga-prior').value) || 0;
+            const dna = parseFloat(document.getElementById('inp-dna').value) || 0;
+            const dnaPrior = parseFloat(document.getElementById('inp-dna-prior').value) || 0;
+            const interest = parseFloat(document.getElementById('inp-interest').value) || 0;
+            const interestPrior = parseFloat(document.getElementById('inp-interest-prior').value) || 0;
+            const tax = parseFloat(document.getElementById('inp-tax').value) || 0;
+            const taxPrior = parseFloat(document.getElementById('inp-tax-prior').value) || 0;
+
+            const cash = parseFloat(document.getElementById('inp-cash').value) || 0;
+            const ar = parseFloat(document.getElementById('inp-ar').value) || 0;
+            const inventory = parseFloat(document.getElementById('inp-inv').value) || 0;
+            const oca = parseFloat(document.getElementById('inp-oca').value) || 0;
+            const nppe = parseFloat(document.getElementById('inp-nppe').value) || 0;
+            const olta = parseFloat(document.getElementById('inp-olta').value) || 0;
+
+            const ap = parseFloat(document.getElementById('inp-ap').value) || 0;
+            const stdebt = parseFloat(document.getElementById('inp-stdebt').value) || 0;
+            const ocl = parseFloat(document.getElementById('inp-ocl').value) || 0;
+            const ltdebt = parseFloat(document.getElementById('inp-ltdebt').value) || 0;
+            const oltl = parseFloat(document.getElementById('inp-oltl').value) || 0;
+
+            const cfo = parseFloat(document.getElementById('inp-cfo').value) || 0;
+            const capex = parseFloat(document.getElementById('inp-capex').value) || 0;
+            const dividends = parseFloat(document.getElementById('inp-dividends').value) || 0;
+            const sharePrice = parseFloat(document.getElementById('inp-price').value) || 0;
+            const shares = parseFloat(document.getElementById('inp-shares').value) || 0;
+
+            const taPrior = parseFloat(document.getElementById('inp-ta-prior').value) || 0;
+            const equityPrior = parseFloat(document.getElementById('inp-equity-prior').value) || 0;
+            const arPrior = parseFloat(document.getElementById('inp-ar-prior').value) || 0;
+
+            const grossProfit = revenue - cogs;
+            const grossProfitPrior = revenuePrior - cogsPrior;
+            const ebit = grossProfit - sga - dna;
+            const ebitPrior = grossProfitPrior - sgaPrior - dnaPrior;
+            const ebitda = ebit + dna;
+            const ebitdaPrior = ebitPrior + dnaPrior;
+            const ebt = ebit - interest;
+            const ebtPrior = ebitPrior - interestPrior;
+            const netIncome = ebt - tax;
+            const netIncomePrior = ebtPrior - taxPrior;
+
+            const tca = cash + ar + inventory + oca;
+            const totalAssets = tca + nppe + olta;
+            const tcl = ap + stdebt + ocl;
+            const totalLiabilities = tcl + ltdebt + oltl;
+            const equity = totalAssets - totalLiabilities;
+
+            const fcf = cfo - capex;
+            const mktCap = sharePrice * shares;
+            const ev = mktCap + stdebt + ltdebt - cash;
+
+            return {
+                revenue, revenuePrior, cogs, cogsPrior, sga, sgaPrior, dna, dnaPrior,
+                interest, interestPrior, tax, taxPrior,
+                grossProfit, grossProfitPrior, ebit, ebitPrior, ebitda, ebitdaPrior,
+                ebt, ebtPrior, netIncome, netIncomePrior,
+                cash, ar, inventory, oca, nppe, olta, tca, totalAssets,
+                ap, stdebt, ocl, ltdebt, oltl, tcl, totalLiabilities, equity,
+                cfo, capex, dividends, fcf, sharePrice, shares, mktCap, ev,
+                taPrior, equityPrior, arPrior
+            };
+        }
+
+        function getQualitativeGate() {
+            let high = 0, medium = 0;
+            const details = [];
+            QUALITATIVE_ITEMS.forEach(item => {
+                const sel = document.getElementById(item.id);
+                const rating = sel ? sel.value : item.def;
+                if (rating === 'High') high++;
+                if (rating === 'Medium') medium++;
+                details.push({ ...item, rating });
+            });
+            return { high, medium, details };
+        }
+
+        // Transparent, documented scoring bands (shown verbatim in Tab 3):
+        //   Favorability >= +50%  -> 5      Favorability >= 0%   -> 3
+        //   Favorability >= +25%  -> 4      Favorability >= -25% -> 2
+        //   otherwise -> 1
+        // Favorability = variance in the direction that is good for the company,
+        // i.e. variance is flipped for "lower is better" metrics (e.g. Debt-to-Assets, DSO).
+        function calculateScore(compVal, benchVal, higherIsBetter, unit) {
+            if (!benchVal || benchVal === 0) return 3;
+            let bench = unit === 'percent' ? benchVal / 100 : benchVal;
+            const variance = safeDiv(compVal - bench, Math.abs(bench));
+            const favorability = higherIsBetter ? variance : -variance;
+
+            if (favorability >= 0.50) return 5;
+            if (favorability >= 0.25) return 4;
+            if (favorability >= 0.00) return 3;
+            if (favorability >= -0.25) return 2;
+            return 1;
+        }
+
+        function getComment(score, higherIsBetter) {
+            if (higherIsBetter) {
+                switch(score) {
+                    case 5: return "Outperforming target significantly";
+                    case 4: return "Favorable performance above target";
+                    case 3: return "Aligned with industry benchmark";
+                    case 2: return "Sub-par performance; needs review";
+                    case 1: return "Operational deficit risk";
+                }
+            } else {
+                switch(score) {
+                    case 5: return "Controlled well below threshold";
+                    case 4: return "Conservative positioning";
+                    case 3: return "Aligned with standard risk";
+                    case 2: return "Elevated risk profile";
+                    case 1: return "Critical risk variance";
+                }
+            }
+            return "Aligned with benchmark";
+        }
+
+        function updateDynamicDenominationLabels() {
+            const unit = getUnitLabel();
+            const tables = document.querySelectorAll('#tab-inputs .tool-table');
+            const incomeTable = tables[0];
+            const balanceTable = tables[1];
+            if (incomeTable) {
+                const first = incomeTable.querySelector('th:first-child');
+                if (first) first.textContent = `Line Item • ${unit}`;
+            }
+            if (balanceTable) {
+                const first = balanceTable.querySelector('th:first-child');
+                const second = balanceTable.querySelector('th:nth-child(2)');
+                if (first) first.textContent = `Line Item • ${unit}`;
+                if (second) second.textContent = `Amount • ${unit}`;
+            }
+
+            const unitTargets = [
+                ['inp-comp-unit', null],
+                ['inp-price', `Share Price • ${unit}`],
+                ['calc-mktcap', `Market Cap • ${unit}`],
+                ['calc-ev', `Enterprise Value • ${unit}`]
+            ];
+            unitTargets.forEach(([id, label]) => {
+                const el = document.getElementById(id);
+                if (!el || !label) return;
+                const labelEl = document.querySelector(`label[for="${id}"]`);
+                if (labelEl) labelEl.textContent = label;
+            });
+        }
+
+        function updateApp() {
+            updateDynamicDenominationLabels();
+            const d = getInputs();
+
+            // Tab 1 Calculated
+            document.getElementById('calc-gp').value = formatNumber(d.grossProfit);
+            document.getElementById('calc-gp-prior').value = formatNumber(d.grossProfitPrior);
+            document.getElementById('calc-ebitda').value = formatNumber(d.ebitda);
+            document.getElementById('calc-ebitda-prior').value = formatNumber(d.ebitdaPrior);
+            document.getElementById('calc-ebit').value = formatNumber(d.ebit);
+            document.getElementById('calc-ebit-prior').value = formatNumber(d.ebitPrior);
+            document.getElementById('calc-ebt').value = formatNumber(d.ebt);
+            document.getElementById('calc-ebt-prior').value = formatNumber(d.ebtPrior);
+            document.getElementById('calc-netincome').value = formatNumber(d.netIncome);
+            document.getElementById('calc-netincome-prior').value = formatNumber(d.netIncomePrior);
+
+            document.getElementById('calc-tca').value = formatNumber(d.tca);
+            document.getElementById('calc-total-assets').value = formatNumber(d.totalAssets);
+            document.getElementById('calc-tcl').value = formatNumber(d.tcl);
+            document.getElementById('calc-total-liab').value = formatNumber(d.totalLiabilities);
+            document.getElementById('calc-equity').value = formatNumber(d.equity);
+
+            document.getElementById('calc-fcf').value = formatNumber(d.fcf);
+            document.getElementById('calc-mktcap').value = formatNumber(d.mktCap);
+            document.getElementById('calc-ev').value = formatNumber(d.ev);
+
+            const cfoCheck = d.netIncome + d.dna;
+            const cfoNote = document.getElementById('cfo-reconciliation-note');
+            if (cfoNote) {
+                const gap = d.cfo - cfoCheck;
+                cfoNote.innerHTML = `Reconciliation check: Net Income (${formatNumber(d.netIncome)}) + D&amp;A (${formatNumber(d.dna)}) = ${formatNumber(cfoCheck)}, vs. CFO entered above of ${formatNumber(d.cfo)} — a gap of ${formatNumber(gap)} implied from working-capital movements and other operating adjustments not itemized here.`;
+            }
+
+            updateWeightTotalBadge();
+            updateQualitativeGateBadge();
+
+            renderTab2(d);
+            const reportData = calculateReportData(d);
+            renderTab4(reportData, d);
+            renderDashboard(reportData, d);
+        }
+
+        function renderTab2(d) {
+            const container = document.getElementById('ratios-category-container');
+            container.innerHTML = '';
+
+            const categories = ['Liquidity', 'Profitability', 'Leverage', 'Efficiency', 'Growth', 'Cash Flow', 'Valuation'];
+
+            categories.forEach(cat => {
+                const catRatios = RATIOS_CONFIG.filter(r => r.category === cat)
+                    .concat(UNSCORED_RATIOS_CONFIG.filter(r => r.category === cat));
+
+                if (!catRatios.length) return;
+
+                let html = `
+                    <div style="margin-bottom:20px;">
+                        <h4 style="font-size:1rem; color:#002b49; margin-bottom:10px; border-bottom:1.5px solid #e2e8f0; padding-bottom:4px;">${cat} Metrics</h4>
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:12px;">
+                `;
+
+                catRatios.forEach(r => {
+                    const val = r.calc(d);
+                    const formattedVal = formatValByUnit(val, r.unit);
+
+                    html += `
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:8px; border-left:4px solid #002b49;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+                                <span style="font-weight:700; font-size:0.85rem; color:#334155;">${r.name}</span>
+                                <span style="font-weight:900; font-size:1rem; color:#002b49;">${formattedVal}</span>
+                            </div>
+                            <div style="font-size:0.75rem; color:#64748b;">${r.note}</div>
+                        </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        function initTab3() {
+            const tbody = document.getElementById('benchmarks-table-body');
+            tbody.innerHTML = '';
+
+            RATIOS_CONFIG.forEach(r => {
+                const dirBadge = r.higherIsBetter
+                    ? `<span class="score-badge badge-score-5">Higher Target</span>`
+                    : `<span class="score-badge badge-score-3">Lower Target</span>`;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${r.category}</strong></td>
+                    <td>${r.name}</td>
+                    <td>${dirBadge}</td>
+                    <td class="text-right">
+                        <input type="number" class="tool-form-control text-right benchmark-input" data-id="${r.id}" value="${r.defaultBenchmark}" step="0.1" style="width:90px; display:inline-block;">
+                        <span style="font-size:0.8rem; color:#64748b;">${r.unit === 'percent' ? '%' : (r.unit === 'days' ? 'days' : 'x')}</span>
+                    </td>
+                    <td class="text-right">
+                        <input type="number" class="tool-form-control text-right weight-input" data-id="${r.id}" value="${(r.weight * 100).toFixed(0)}" step="1" min="0" max="100" style="width:70px; display:inline-block;">
+                        <span style="font-size:0.8rem; color:#64748b;">%</span>
+                    </td>
+                    <td style="font-size:0.78rem; color:#64748b;">
+                        <input type="text" class="tool-form-control source-input" data-id="${r.id}" value="Illustrative — replace with cited industry benchmark (e.g. sector ratio study, comps, trade body)." style="font-size:0.72rem; font-style:italic;">
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            tbody.querySelectorAll('.benchmark-input, .weight-input').forEach(inp => {
+                inp.addEventListener('input', updateApp);
+            });
+
+            updateWeightTotalBadge();
+        }
+
+        function getWeight(id, fallback) {
+            const inp = document.querySelector(`.weight-input[data-id="${id}"]`);
+            const v = inp ? parseFloat(inp.value) : NaN;
+            return (isNaN(v) ? fallback * 100 : v) / 100;
+        }
+
+        function updateWeightTotalBadge() {
+            let total = 0;
+            RATIOS_CONFIG.forEach(r => { total += getWeight(r.id, r.weight); });
+            const pct = total * 100;
+            const badge = document.getElementById('weight-total-badge');
+            if (!badge) return;
+            badge.innerText = `Total Weight: ${pct.toFixed(0)}%`;
+            badge.className = Math.abs(pct - 100) < 0.51 ? 'score-badge badge-score-5' : 'score-badge badge-score-1';
+        }
+
+        function initQualitativeTab() {
+            const tbody = document.getElementById('qualitative-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            QUALITATIVE_ITEMS.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${escapeHtml(item.label)}</strong></td>
+                    <td>
+                        <select class="tool-form-control qual-select" id="${item.id}">
+                            <option value="Low" ${item.def === 'Low' ? 'selected' : ''}>Low</option>
+                            <option value="Medium" ${item.def === 'Medium' ? 'selected' : ''}>Medium</option>
+                            <option value="High" ${item.def === 'High' ? 'selected' : ''}>High</option>
+                        </select>
+                    </td>
+                    <td style="font-size:0.8rem; color:#64748b;">${escapeHtml(item.note)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            tbody.querySelectorAll('.qual-select').forEach(sel => {
+                sel.addEventListener('change', updateApp);
+            });
+        }
+
+        function updateQualitativeGateBadge() {
+            const gate = getQualitativeGate();
+            const badge = document.getElementById('qual-gate-badge');
+            if (!badge) return gate;
+            if (gate.high > 0) {
+                badge.innerText = `${gate.high} High-Risk Flag${gate.high > 1 ? 's' : ''}`;
+                badge.className = 'score-badge badge-score-1';
+            } else if (gate.medium > 0) {
+                badge.innerText = `${gate.medium} Medium-Risk Item${gate.medium > 1 ? 's' : ''}`;
+                badge.className = 'score-badge badge-score-3';
+            } else {
+                badge.innerText = 'No Red Flags';
+                badge.className = 'score-badge badge-score-5';
+            }
+            return gate;
+        }
+
+        function calculateReportData(d) {
+            let totalWeightedScore = 0;
+            let totalWeight = 0;
+            const rows = [];
+
+            RATIOS_CONFIG.forEach(r => {
+                const companyVal = r.calc(d);
+                const benchInp = document.querySelector(`.benchmark-input[data-id="${r.id}"]`);
+                const benchmarkVal = benchInp ? parseFloat(benchInp.value) || 0 : r.defaultBenchmark;
+                const weight = getWeight(r.id, r.weight);
+
+                const score = calculateScore(companyVal, benchmarkVal, r.higherIsBetter, r.unit);
+                const weightedScore = score * weight;
+                totalWeightedScore += weightedScore;
+                totalWeight += weight;
+
+                let benchNorm = r.unit === 'percent' ? benchmarkVal / 100 : benchmarkVal;
+                let variancePct = benchNorm !== 0 ? ((companyVal - benchNorm) / Math.abs(benchNorm)) * 100 : 0;
+                const comment = getComment(score, r.higherIsBetter);
+
+                rows.push({ ...r, weight, companyVal, benchmarkVal, variancePct, score, weightedScore, comment });
+            });
+
+            const qualGate = getQualitativeGate();
+
+            return { rows, totalWeightedScore, totalWeight, qualGate };
+        }
+
+        // Single source of truth for the verdict wording used in Tab 5, the Dashboard and the PDF.
+        // A High-risk qualitative flag always overrides the quantitative score.
+        function getVerdict(score, qualGate) {
+            if (qualGate && qualGate.high > 0) {
+                return { text: 'CAUTION – MANUAL REVIEW REQUIRED', badgeClass: 'badge-score-1', color: '#dc2626' };
+            }
+            if (qualGate && qualGate.medium >= 3 && score >= 4) {
+                return { text: 'POSITIVE, BUT VERIFY QUALITATIVE FLAGS', badgeClass: 'badge-score-4', color: '#16a34a' };
+            }
+            if (score >= 4.25) return { text: 'STRONG QUANTITATIVE PROFILE – VERIFY FURTHER', badgeClass: 'badge-score-5', color: '#15803d' };
+            if (score >= 3.5) return { text: 'SOLID PROFILE – WORTH DEEPER DILIGENCE', badgeClass: 'badge-score-4', color: '#16a34a' };
+            if (score >= 2.5) return { text: 'MIXED / NEUTRAL – PROCEED WITH CAUTION', badgeClass: 'badge-score-3', color: '#0284c7' };
+            if (score >= 1.75) return { text: 'WEAK PROFILE – HIGH RISK', badgeClass: 'badge-score-2', color: '#c2410c' };
+            return { text: 'UNFAVORABLE – AVOID UNLESS CLEAR TURNAROUND THESIS', badgeClass: 'badge-score-1', color: '#dc2626' };
+        }
+
+        function renderTab4(reportData, d) {
+            const tbody = document.getElementById('report-table-body');
+            tbody.innerHTML = '';
+
+            reportData.rows.forEach(r => {
+                const compFormatted = formatValByUnit(r.companyVal, r.unit);
+                const benchFormatted = r.unit === 'percent' ? r.benchmarkVal.toFixed(1) + '%' : (r.unit === 'days' ? r.benchmarkVal.toFixed(1) + ' days' : r.benchmarkVal.toFixed(2) + 'x');
+
+                let varColor = r.variancePct >= 0 ? '#16a34a' : '#dc2626';
+                if (!r.higherIsBetter) varColor = r.variancePct <= 0 ? '#16a34a' : '#dc2626';
+
+                const varFormatted = (r.variancePct >= 0 ? '+' : '') + r.variancePct.toFixed(1) + '%';
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${r.category}</strong></td>
+                    <td>${r.name}</td>
+                    <td class="text-right" style="font-weight:800; color:#0f172a;">${compFormatted}</td>
+                    <td class="text-right" style="color:#64748b;">${benchFormatted}</td>
+                    <td class="text-right" style="font-weight:700; color:${varColor};">${varFormatted}</td>
+                    <td class="text-center"><span class="score-badge badge-score-${r.score}">${r.score}</span></td>
+                    <td class="text-right">${(r.weight * 100).toFixed(0)}%</td>
+                    <td class="text-right" style="font-weight:800;">${r.weightedScore.toFixed(2)}</td>
+                    <td style="font-size:0.8rem; color:#334155;">${r.comment}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Memo ratios (unscored)
+            const memoBody = document.getElementById('memo-table-body');
+            if (memoBody && d) {
+                memoBody.innerHTML = '';
+                const memoIds = ['fin_debt_equity', 'roa_avg', 'roe_avg', 'asset_turnover_avg', 'receivables_turnover_avg'];
+                UNSCORED_RATIOS_CONFIG.filter(r => memoIds.includes(r.id)).forEach(r => {
+                    const val = r.calc(d);
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${r.category}</td>
+                        <td><strong>${r.name}</strong></td>
+                        <td class="text-right" style="font-weight:800; color:#0f172a;">${formatValByUnit(val, r.unit)}</td>
+                        <td style="font-size:0.78rem; color:#64748b;">${r.note}</td>
+                    `;
+                    memoBody.appendChild(tr);
+                });
+            }
+
+            const avgScore = reportData.totalWeightedScore;
+            document.getElementById('foot-total-weighted').innerText = avgScore.toFixed(2);
+            document.getElementById('foot-avg-score').innerText = avgScore.toFixed(2);
+            const weightPctEl = document.getElementById('foot-total-weight-pct');
+            if (weightPctEl) weightPctEl.innerText = (reportData.totalWeight * 100).toFixed(0) + '%';
+
+            const verdict = getVerdict(avgScore, reportData.qualGate);
+
+            const badgeEl = document.getElementById('report-overall-score-badge');
+            badgeEl.className = `score-badge ${verdict.badgeClass}`;
+            badgeEl.innerText = `Overall Score: ${avgScore.toFixed(2)} / 5.00 (${verdict.text})`;
+
+            document.getElementById('foot-verdict-summary').innerText = verdict.text;
+        }
+
+        function renderDashboard(reportData, d) {
+            const overallScore = reportData.totalWeightedScore;
+            document.getElementById('dash-score-val').innerText = overallScore.toFixed(2);
+            document.getElementById('dash-score-pct').innerText = ((overallScore / 5.0) * 100).toFixed(1) + '% of maximum target';
+
+            const verdictInfo = getVerdict(overallScore, reportData.qualGate);
+            const vEl = document.getElementById('dash-verdict-badge');
+            vEl.innerText = verdictInfo.text;
+            vEl.style.color = verdictInfo.color;
+
+            const gateEl = document.getElementById('dash-qual-gate');
+            const gateSubEl = document.getElementById('dash-qual-gate-sub');
+            if (gateEl) {
+                const g = reportData.qualGate;
+                if (g.high > 0) {
+                    gateEl.innerText = `${g.high} High Flag${g.high > 1 ? 's' : ''}`;
+                    gateEl.style.color = '#dc2626';
+                    if (gateSubEl) gateSubEl.innerText = 'Overrides quant score — review required';
+                } else if (g.medium > 0) {
+                    gateEl.innerText = `${g.medium} Medium Flag${g.medium > 1 ? 's' : ''}`;
+                    gateEl.style.color = '#c2410c';
+                    if (gateSubEl) gateSubEl.innerText = 'Worth a closer look';
+                } else {
+                    gateEl.innerText = 'Clear';
+                    gateEl.style.color = '#15803d';
+                    if (gateSubEl) gateSubEl.innerText = 'No red flags rated';
+                }
+            }
+
+            const categories = ['Liquidity', 'Profitability', 'Leverage', 'Efficiency', 'Growth', 'Cash Flow'];
+            const catScores = {};
+            categories.forEach(c => {
+                const catRows = reportData.rows.filter(r => r.category === c);
+                const sumW = catRows.reduce((a, b) => a + b.weight, 0);
+                const sumWS = catRows.reduce((a, b) => a + b.weightedScore, 0);
+                catScores[c] = sumW > 0 ? sumWS / sumW : 0;
+            });
+
+            let bestCat = categories[0], worstCat = categories[0];
+            categories.forEach(c => {
+                if (catScores[c] > catScores[bestCat]) bestCat = c;
+                if (catScores[c] < catScores[worstCat]) worstCat = c;
+            });
+
+            document.getElementById('dash-strength-area').innerText = `${bestCat} (${catScores[bestCat].toFixed(1)})`;
+            document.getElementById('dash-risk-area').innerText = `${worstCat} (${catScores[worstCat].toFixed(1)})`;
+
+            const sortedByScore = [...reportData.rows].sort((a, b) => b.score - a.score || Math.abs(b.variancePct) - Math.abs(a.variancePct));
+            const strengths = sortedByScore.filter(r => r.score >= 4).slice(0, 4);
+            const risks = sortedByScore.filter(r => r.score <= 2).reverse().slice(0, 4);
+
+            const sList = document.getElementById('dash-strengths-list');
+            sList.innerHTML = strengths.length ? '' : '<li>No major score strengths (>4.0) identified.</li>';
+            strengths.forEach(s => {
+                sList.innerHTML += `<li><strong>${s.name}</strong> (${formatValByUnit(s.companyVal, s.unit)} vs ${s.benchmarkVal} target): ${s.comment}</li>`;
+            });
+
+            const rList = document.getElementById('dash-risks-list');
+            rList.innerHTML = risks.length ? '' : '<li>No critical risk indicators (<=2.0) flagged.</li>';
+            risks.forEach(r => {
+                rList.innerHTML += `<li><strong>${r.name}</strong> (${formatValByUnit(r.companyVal, r.unit)} vs ${r.benchmarkVal} target): ${r.comment}</li>`;
+            });
+
+            const compName = document.getElementById('inp-comp-name').value || 'The target entity';
+            const gateNote = reportData.qualGate.high > 0
+                ? ` However, the Qualitative Checklist flags <strong>${reportData.qualGate.high} High-risk item${reportData.qualGate.high > 1 ? 's' : ''}</strong>, which overrides the quantitative score — this evaluation should not proceed without a manual review of the flagged item(s).`
+                : (reportData.qualGate.medium > 0 ? ` The Qualitative Checklist flags ${reportData.qualGate.medium} Medium-risk item(s) worth a closer look before committing.` : '');
+            document.getElementById('dash-synthesis-text').innerHTML = `
+                <strong>${compName}</strong> achieves a Weighted Financial Readiness Score of <strong>${overallScore.toFixed(2)} out of 5.00</strong> under the Aggarwal Abhishek & Co. institutional evaluation model.
+                The primary operational driver is <strong>${bestCat}</strong> (score: ${catScores[bestCat].toFixed(2)}), while <strong>${worstCat}</strong> (score: ${catScores[worstCat].toFixed(2)}) requires active board oversight.
+                Free Cash Flow generation for the evaluation period stands at <strong>${formatCurrencyValue(d.fcf)}</strong> against an EBIT of <strong>${formatCurrencyValue(d.ebit)}</strong>, using the denomination supplied in the company profile.${gateNote}
+            `;
+
+            renderCanvasCharts(catScores, reportData);
+        }
+
+        function renderCanvasCharts(catScores, reportData) {
+            // Bar Chart
+            const cBar = document.getElementById('chart-categories');
+            if (!cBar) return;
+            const ctxBar = cBar.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            
+            const rectBar = cBar.parentElement.getBoundingClientRect();
+            cBar.width = rectBar.width * dpr;
+            cBar.height = rectBar.height * dpr;
+            ctxBar.scale(dpr, dpr);
+
+            const width = rectBar.width;
+            const height = rectBar.height;
+            ctxBar.clearRect(0, 0, width, height);
+
+            const categories = Object.keys(catScores);
+            const barWidth = (width - 60) / categories.length - 10;
+            const maxHeight = height - 50;
+
+            ctxBar.strokeStyle = '#e2e8f0';
+            ctxBar.lineWidth = 1;
+            for (let i = 1; i <= 5; i++) {
+                const y = height - 25 - (i / 5) * maxHeight;
+                ctxBar.beginPath();
+                ctxBar.moveTo(35, y);
+                ctxBar.lineTo(width - 15, y);
+                ctxBar.stroke();
+
+                ctxBar.fillStyle = '#94a3b8';
+                ctxBar.font = '10px Segoe UI, sans-serif';
+                ctxBar.fillText(i.toString(), 15, y + 3);
+            }
+
+            categories.forEach((cat, idx) => {
+                const score = catScores[cat];
+                const barH = (score / 5) * maxHeight;
+                const x = 40 + idx * (barWidth + 10);
+                const y = height - 25 - barH;
+
+                let fillColor = '#002b49';
+                if (score >= 4.0) fillColor = '#10b981';
+                else if (score >= 3.0) fillColor = '#0284c7';
+                else if (score >= 2.0) fillColor = '#f59e0b';
+                else fillColor = '#ef4444';
+
+                ctxBar.fillStyle = fillColor;
+                ctxBar.beginPath();
+                if (ctxBar.roundRect) ctxBar.roundRect(x, y, barWidth, barH, [4, 4, 0, 0]);
+                else ctxBar.rect(x, y, barWidth, barH);
+                ctxBar.fill();
+
+                ctxBar.fillStyle = '#002b49';
+                ctxBar.font = '700 10px Segoe UI, sans-serif';
+                ctxBar.textAlign = 'center';
+                ctxBar.fillText(cat.substring(0, 7), x + barWidth / 2, height - 8);
+
+                if (barH > 16) {
+                    ctxBar.fillStyle = '#ffffff';
+                    ctxBar.font = 'bold 10px Segoe UI, sans-serif';
+                    ctxBar.fillText(score.toFixed(1), x + barWidth / 2, y + 12);
+                }
+            });
+
+            // Radar Chart
+            const cRadar = document.getElementById('chart-radar');
+            if (!cRadar) return;
+            const ctxRadar = cRadar.getContext('2d');
+            const rectRadar = cRadar.parentElement.getBoundingClientRect();
+            cRadar.width = rectRadar.width * dpr;
+            cRadar.height = rectRadar.height * dpr;
+            ctxRadar.scale(dpr, dpr);
+
+            const rW = rectRadar.width;
+            const rH = rectRadar.height;
+            const centerX = rW / 2;
+            const centerY = rH / 2;
+            const radius = Math.min(rW, rH) / 2 - 38;
+
+            ctxRadar.clearRect(0, 0, rW, rH);
+
+            const numVars = categories.length;
+            const angleStep = (Math.PI * 2) / numVars;
+
+            for (let level = 1; level <= 5; level++) {
+                const r = (level / 5) * radius;
+                ctxRadar.beginPath();
+                ctxRadar.strokeStyle = '#e2e8f0';
+                for (let i = 0; i < numVars; i++) {
+                    const angle = i * angleStep - Math.PI / 2;
+                    const x = centerX + r * Math.cos(angle);
+                    const y = centerY + r * Math.sin(angle);
+                    if (i === 0) ctxRadar.moveTo(x, y);
+                    else ctxRadar.lineTo(x, y);
+                }
+                ctxRadar.closePath();
+                ctxRadar.stroke();
+            }
+
+            categories.forEach((cat, i) => {
+                const angle = i * angleStep - Math.PI / 2;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+
+                ctxRadar.beginPath();
+                ctxRadar.strokeStyle = '#cbd5e1';
+                ctxRadar.moveTo(centerX, centerY);
+                ctxRadar.lineTo(x, y);
+                ctxRadar.stroke();
+
+                const lx = centerX + (radius + 18) * Math.cos(angle);
+                const ly = centerY + (radius + 10) * Math.sin(angle);
+                ctxRadar.fillStyle = '#475569';
+                ctxRadar.font = '700 10px Segoe UI, sans-serif';
+                ctxRadar.textAlign = 'center';
+                ctxRadar.fillText(cat, lx, ly);
+            });
+
+            ctxRadar.beginPath();
+            categories.forEach((cat, i) => {
+                const score = catScores[cat];
+                const r = (score / 5) * radius;
+                const angle = i * angleStep - Math.PI / 2;
+                const x = centerX + r * Math.cos(angle);
+                const y = centerY + r * Math.sin(angle);
+                if (i === 0) ctxRadar.moveTo(x, y);
+                else ctxRadar.lineTo(x, y);
+            });
+            ctxRadar.closePath();
+            ctxRadar.fillStyle = 'rgba(0, 43, 73, 0.2)';
+            ctxRadar.fill();
+            ctxRadar.strokeStyle = '#002b49';
+            ctxRadar.lineWidth = 2.5;
+            ctxRadar.stroke();
+        }
+
+        function getDashboardSummary(reportData) {
+            const categories = ['Liquidity', 'Profitability', 'Leverage', 'Efficiency', 'Growth', 'Cash Flow'];
+            const catScores = {};
+            categories.forEach(c => {
+                const catRows = reportData.rows.filter(r => r.category === c);
+                const sumW = catRows.reduce((a, b) => a + b.weight, 0);
+                const sumWS = catRows.reduce((a, b) => a + b.weightedScore, 0);
+                catScores[c] = sumW > 0 ? sumWS / sumW : 0;
+            });
+            let bestCat = categories[0], worstCat = categories[0];
+            categories.forEach(c => {
+                if (catScores[c] > catScores[bestCat]) bestCat = c;
+                if (catScores[c] < catScores[worstCat]) worstCat = c;
+            });
+            const score = reportData.totalWeightedScore;
+            const verdictInfo = getVerdict(score, reportData.qualGate);
+            return { categories, catScores, bestCat, worstCat, verdict: verdictInfo.text, score, qualGate: reportData.qualGate };
+        }
+
+        function buildPdfReport() {
+            const d = getInputs();
+            const reportData = calculateReportData(d);
+            const summary = getDashboardSummary(reportData);
+            const unit = getUnitLabel();
+            const company = document.getElementById('inp-comp-name').value.trim() || 'Target Company';
+            const industry = document.getElementById('inp-comp-industry').value.trim() || 'Not specified';
+            const fy = document.getElementById('inp-comp-fy').value.trim() || 'Not specified';
+            const now = new Date();
+            const reportDate = now.toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'});
+
+            const financialRows = [
+                ['Gross Revenue', d.revenue, d.revenuePrior],
+                ['Gross Profit', d.grossProfit, d.grossProfitPrior],
+                ['EBITDA', d.ebitda, d.ebitdaPrior],
+                ['EBIT / Operating Income', d.ebit, d.ebitPrior],
+                ['Pre-Tax Income (EBT)', d.ebt, d.ebtPrior],
+                ['Net Income', d.netIncome, d.netIncomePrior]
+            ];
+            const balanceRows = [
+                ['Cash & Cash Equivalents', d.cash], ['Accounts Receivable', d.ar], ['Inventories', d.inventory],
+                ['Other Current Assets', d.oca], ['Total Current Assets', d.tca], ['Net PP&E', d.nppe],
+                ['Other Non-Current Assets', d.olta], ['Total Assets', d.totalAssets], ['Accounts Payable', d.ap],
+                ['Short-Term Borrowings', d.stdebt], ['Other Current Liabilities', d.ocl], ['Total Current Liabilities', d.tcl],
+                ['Long-Term Debt', d.ltdebt], ['Other Non-Current Liabilities', d.oltl], ['Total Liabilities', d.totalLiabilities],
+                ["Shareholders' Equity", d.equity]
+            ];
+            const ratioRows = reportData.rows;
+            const scoreRows = reportData.rows;
+            const strengthRows = [...reportData.rows].filter(r => r.score >= 4).sort((a,b)=>b.score-a.score).slice(0,5);
+            const riskRows = [...reportData.rows].filter(r => r.score <= 2).sort((a,b)=>a.score-b.score).slice(0,5);
+
+            const scoreColorClass = score => `s${Math.max(1, Math.min(5, score))}`;
+            const financialTable = financialRows.map(r => `<tr><td><strong>${escapeHtml(r[0])}</strong></td><td class="num">${formatCurrencyValue(r[1])}</td><td class="num">${formatCurrencyValue(r[2])}</td><td class="num">${r[2] ? ((r[1]-r[2])/Math.abs(r[2])*100).toFixed(1)+'%' : '-'}</td></tr>`).join('');
+            const balanceTable = balanceRows.map(r => `<tr><td>${escapeHtml(r[0])}</td><td class="num">${formatCurrencyValue(r[1])}</td></tr>`).join('');
+            const ratioTable = ratioRows.map(r => `<tr><td>${escapeHtml(r.category)}</td><td><strong>${escapeHtml(r.name)}</strong></td><td class="num">${formatValByUnit(r.companyVal,r.unit)}</td><td class="num">${r.unit==='percent' ? r.benchmarkVal.toFixed(1)+'%' : r.unit==='days' ? r.benchmarkVal.toFixed(1)+' days' : r.benchmarkVal.toFixed(2)+'x'}</td><td class="num">${(r.variancePct>=0?'+':'')+r.variancePct.toFixed(1)}%</td><td class="center"><span class="pdf-score ${scoreColorClass(r.score)}">${r.score}</span></td><td class="num">${(r.weight*100).toFixed(0)}%</td></tr>`).join('');
+            const scoreTable = scoreRows.map(r => `<tr><td>${escapeHtml(r.category)}</td><td>${escapeHtml(r.name)}</td><td class="num">${r.score.toFixed(0)}/5</td><td class="num">${r.weightedScore.toFixed(2)}</td><td>${escapeHtml(r.comment)}</td></tr>`).join('');
+            const barRows = summary.categories.map(c => `<div class="pdf-bar-row"><span>${escapeHtml(c)}</span><div class="pdf-bar-track"><div class="pdf-bar-fill" style="width:${Math.max(0,Math.min(100,(summary.catScores[c]/5)*100))}%"></div></div><span class="pdf-bar-value">${summary.catScores[c].toFixed(1)}</span></div>`).join('');
+            const strengthsHtml = strengthRows.length ? strengthRows.map(r => `<li><strong>${escapeHtml(r.name)}</strong> — ${formatValByUnit(r.companyVal,r.unit)} vs target; ${escapeHtml(r.comment)}</li>`).join('') : '<li>No score-4-or-5 indicators identified.</li>';
+            const risksHtml = riskRows.length ? riskRows.map(r => `<li><strong>${escapeHtml(r.name)}</strong> — ${formatValByUnit(r.companyVal,r.unit)} vs target; ${escapeHtml(r.comment)}</li>`).join('') : '<li>No score-1-or-2 indicators identified.</li>';
+
+            const memoIds = ['fin_debt_equity', 'roa_avg', 'roe_avg', 'asset_turnover_avg', 'receivables_turnover_avg'];
+            const memoTable = UNSCORED_RATIOS_CONFIG.filter(r => memoIds.includes(r.id)).map(r => `<tr><td>${escapeHtml(r.category)}</td><td>${escapeHtml(r.name)}</td><td class="num">${formatValByUnit(r.calc(d), r.unit)}</td></tr>`).join('');
+
+            const qualGate = reportData.qualGate;
+            const qualRatingClass = rating => rating === 'High' ? 's1' : (rating === 'Medium' ? 's3' : 's5');
+            const qualTable = qualGate.details.map(item => `<tr><td>${escapeHtml(item.label)}</td><td class="center"><span class="pdf-score ${qualRatingClass(item.rating)}">${escapeHtml(item.rating)}</span></td></tr>`).join('');
+            const qualGateBanner = qualGate.high > 0
+                ? `<div class="pdf-disclaimer" style="border-left-color:#dc2626; background:#fef2f2; color:#7f1d1d;"><strong>Qualitative gate triggered:</strong> ${qualGate.high} item(s) rated High risk. This overrides the quantitative score above — the model verdict is downgraded to CAUTION / MANUAL REVIEW REQUIRED regardless of the ratio-based score.</div>`
+                : (qualGate.medium > 0 ? `<div class="pdf-callout"><strong>Note:</strong> ${qualGate.medium} item(s) rated Medium risk on the Qualitative Checklist — worth a closer look before committing.</div>` : `<div class="pdf-callout"><strong>Qualitative Checklist:</strong> no High or Medium risk items flagged at the time of this report.</div>`);
+
+            document.getElementById('pdf-report-content').innerHTML = `
+                <div class="pdf-report-shell">
+                    <div class="pdf-page pdf-cover">
+                        <div>
+                            <div class="pdf-brand"><h1>Aggarwal Abhishek &amp; Co.</h1><p>Chartered Accountants</p></div>
+                            <div class="pdf-cover-title"><h2>Financial Health Screener Report</h2><p>Educational financial ratio screening report generated from the information entered in this self-assessment tool. Presentation-ready format — not a certified valuation, audit opinion or investment recommendation.</p></div>
+                            <div class="pdf-meta-grid" style="margin-top:22mm;">
+                                <div class="pdf-meta"><span>Target company</span><strong>${escapeHtml(company)}</strong></div>
+                                <div class="pdf-meta"><span>Industry</span><strong>${escapeHtml(industry)}</strong></div>
+                                <div class="pdf-meta"><span>Evaluation period</span><strong>${escapeHtml(fy)}</strong></div>
+                                <div class="pdf-meta"><span>Denomination</span><strong>${escapeHtml(unit)}</strong></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="pdf-metric-grid">
+                                <div class="pdf-meta"><span>Weighted score</span><strong>${summary.score.toFixed(2)} / 5.00</strong></div>
+                                <div class="pdf-meta"><span>Key strength</span><strong>${escapeHtml(summary.bestCat)}</strong></div>
+                                <div class="pdf-meta"><span>Primary focus</span><strong>${escapeHtml(summary.worstCat)}</strong></div>
+                                <div class="pdf-meta"><span>Report date</span><strong>${reportDate}</strong></div>
+                            </div>
+                            <div class="pdf-footer" style="margin-top:16mm;"><span>Prepared by Aggarwal Abhishek &amp; Co.</span><span>Confidential • For information purposes</span></div>
+                        </div>
+                    </div>
+
+                    <div class="pdf-page">
+                        <div class="pdf-section-title"><h2>Executive financial snapshot</h2><span>${escapeHtml(company)} • ${escapeHtml(fy)}</span></div>
+                        <div class="pdf-metric-grid" style="margin-bottom:12px;">
+                            <div class="pdf-metric"><div class="k">Revenue</div><div class="v">${formatCurrencyValue(d.revenue)}</div><div class="s">Current period</div></div>
+                            <div class="pdf-metric"><div class="k">EBITDA</div><div class="v">${formatCurrencyValue(d.ebitda)}</div><div class="s">Current period</div></div>
+                            <div class="pdf-metric"><div class="k">Net income</div><div class="v">${formatCurrencyValue(d.netIncome)}</div><div class="s">Current period</div></div>
+                            <div class="pdf-metric"><div class="k">Free cash flow</div><div class="v">${formatCurrencyValue(d.fcf)}</div><div class="s">CFO less CapEx</div></div>
+                        </div>
+                        <div class="pdf-two-col">
+                            <div class="pdf-card"><h3>Income statement highlights <span class="dynamic-unit-label">${escapeHtml(unit)}</span></h3><table class="pdf-table"><thead><tr><th>Line item</th><th class="num">Current</th><th class="num">Prior</th><th class="num">YoY</th></tr></thead><tbody>${financialTable}</tbody></table></div>
+                            <div class="pdf-card"><h3>Balance sheet highlights <span class="dynamic-unit-label">${escapeHtml(unit)}</span></h3><table class="pdf-table"><thead><tr><th>Line item</th><th class="num">Amount</th></tr></thead><tbody>${balanceTable}</tbody></table></div>
+                        </div>
+                        <div class="pdf-card"><h3>Operating profile</h3><div class="pdf-two-col"><div class="pdf-callout"><strong>Capital structure:</strong> Total assets of ${formatCurrencyValue(d.totalAssets)} are supported by liabilities of ${formatCurrencyValue(d.totalLiabilities)} and equity of ${formatCurrencyValue(d.equity)}.</div><div class="pdf-callout"><strong>Cash generation:</strong> CFO is ${formatCurrencyValue(d.cfo)}, CapEx is ${formatCurrencyValue(d.capex)}, producing FCF of ${formatCurrencyValue(d.fcf)}.</div></div></div>
+                        <div class="pdf-note">All monetary figures are presented without a hard-coded currency symbol. The denomination displayed in this report is taken directly from the Company Profile input.</div>
+                    </div>
+
+                    <div class="pdf-page">
+                        <div class="pdf-section-title"><h2>Financial ratio &amp; benchmark analysis</h2><span>Live model output</span></div>
+                        <div class="pdf-card"><table class="pdf-table"><thead><tr><th style="width:14%">Category</th><th style="width:25%">Metric</th><th class="num" style="width:13%">Company</th><th class="num" style="width:13%">Benchmark</th><th class="num" style="width:11%">Variance</th><th class="center" style="width:9%">Score</th><th class="num" style="width:8%">Weight</th></tr></thead><tbody>${ratioTable}</tbody></table></div>
+                        <div class="pdf-two-col">
+                            <div class="pdf-card"><h3>Category score profile</h3>${barRows}</div>
+                            <div class="pdf-card"><h3>Key indicators</h3><div class="pdf-metric-grid" style="grid-template-columns:1fr 1fr;">${summary.categories.map(c=>`<div class="pdf-metric"><div class="k">${escapeHtml(c)}</div><div class="v">${summary.catScores[c].toFixed(2)}</div><div class="s">out of 5.00</div></div>`).join('')}</div></div>
+                        </div>
+                        <div class="pdf-card"><h3>Methodology note</h3><p class="pdf-note">The report uses the live ratio configuration and benchmark inputs in the website tool. Weighted scores are calculated from the configured ratio weights and benchmark comparison rules. The report is descriptive of the entered data and model outputs; it is not a certification of the underlying figures.</p></div>
+                    </div>
+
+                    <div class="pdf-page">
+                        <div class="pdf-section-title"><h2>Decision matrix &amp; advisory dashboard</h2><span>Boardroom view</span></div>
+                        <div class="pdf-metric-grid" style="margin-bottom:12px;">
+                            <div class="pdf-metric"><div class="k">Overall weighted score</div><div class="v">${summary.score.toFixed(2)} / 5.00</div><div class="s">${((summary.score/5)*100).toFixed(1)}% of maximum</div></div>
+                            <div class="pdf-metric"><div class="k">Model summary</div><div class="v" style="font-size:11px;">${escapeHtml(summary.verdict)}</div><div class="s">Configured score band</div></div>
+                            <div class="pdf-metric"><div class="k">Key pillar strength</div><div class="v" style="font-size:13px;">${escapeHtml(summary.bestCat)}</div><div class="s">${summary.catScores[summary.bestCat].toFixed(2)} / 5</div></div>
+                            <div class="pdf-metric"><div class="k">Primary advisory concern</div><div class="v" style="font-size:13px;">${escapeHtml(summary.worstCat)}</div><div class="s">${summary.catScores[summary.worstCat].toFixed(2)} / 5</div></div>
+                        </div>
+                        <div class="pdf-card"><h3>Scoring detail</h3><table class="pdf-table"><thead><tr><th>Category</th><th>Ratio metric</th><th class="num">Score</th><th class="num">Weighted</th><th>Interpretation</th></tr></thead><tbody>${scoreTable}</tbody><tfoot><tr><td colspan="2"><strong>Overall weighted financial score</strong></td><td class="num"><strong>${summary.score.toFixed(2)}</strong></td><td class="num"><strong>${summary.score.toFixed(2)}</strong></td><td><span class="pdf-pill">${escapeHtml(summary.verdict)}</span></td></tr></tfoot></table></div>
+                        <div class="pdf-two-col">
+                            <div class="pdf-card"><h3>Key strengths</h3><ul class="pdf-note" style="padding-left:15px; line-height:1.65;">${strengthsHtml}</ul></div>
+                            <div class="pdf-card"><h3>Primary risk factors</h3><ul class="pdf-note" style="padding-left:15px; line-height:1.65;">${risksHtml}</ul></div>
+                        </div>
+                        <div class="pdf-card"><h3>Executive synthesis</h3><p style="font-size:9px; line-height:1.6; color:#334155;"><strong>${escapeHtml(company)}</strong> records a weighted financial score of <strong>${summary.score.toFixed(2)} out of 5.00</strong> under the configured evaluation model. ${escapeHtml(summary.bestCat)} is the highest-scoring category at ${summary.catScores[summary.bestCat].toFixed(2)}, while ${escapeHtml(summary.worstCat)} is the lowest-scoring category at ${summary.catScores[summary.worstCat].toFixed(2)}. Free cash flow is ${formatCurrencyValue(d.fcf)} against EBIT of ${formatCurrencyValue(d.ebit)} in the stated denomination.</p></div>
+                        <div class="pdf-disclaimer"><strong>Disclaimer:</strong> This report is based on data provided to us and is for information purposes only. We are not certifying any figures in this report. The output should be considered together with source documents, management representations, industry context and professional judgement.</div>
+                    </div>
+
+                    <div class="pdf-page">
+                        <div class="pdf-section-title"><h2>Qualitative checklist &amp; memo ratios</h2><span>Due diligence gate</span></div>
+                        ${qualGateBanner}
+                        <div class="pdf-two-col" style="margin-top:10px;">
+                            <div class="pdf-card"><h3>Due-diligence checklist</h3><table class="pdf-table"><thead><tr><th style="width:75%">Item</th><th class="center" style="width:25%">Rating</th></tr></thead><tbody>${qualTable}</tbody></table></div>
+                            <div class="pdf-card"><h3>Memo ratios <span style="font-weight:400; color:#64748b;">(not scored)</span></h3><table class="pdf-table"><thead><tr><th>Category</th><th>Metric</th><th class="num">Value</th></tr></thead><tbody>${memoTable}</tbody></table>
+                                <p class="pdf-note" style="margin-top:6px;">Financial Debt-to-Equity uses interest-bearing debt only, unlike the scored Debt-to-Equity above which uses Total Liabilities. Average-balance ratios use AVERAGE(current, prior) instead of period-end figures where a Prior FY-End value was supplied.</p>
+                            </div>
+                        </div>
+                        <div class="pdf-disclaimer"><strong>Reminder:</strong> No spreadsheet or web tool can substitute for real due diligence. Verify source figures against audited statements, confirm benchmarks match the correct industry and period, and consult a licensed advisor before any material investment decision. Never invest solely on the strength of this score.</div>
+                    </div>
+                </div>`;
+        }
+
+        function setupEventListeners() {
+            document.querySelectorAll('#analysis-tool .tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#analysis-tool .tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#analysis-tool .tab-panel').forEach(p => p.classList.remove('active'));
+
+                    btn.classList.add('active');
+                    const target = btn.getAttribute('data-tab');
+                    document.getElementById(target).classList.add('active');
+
+                    if (target === 'tab-dashboard') {
+                        setTimeout(updateApp, 50);
+                    }
+                });
+            });
+
+            document.querySelectorAll('#analysis-tool input').forEach(inp => {
+                inp.addEventListener('input', updateApp);
+            });
+            document.querySelectorAll('#analysis-tool select').forEach(sel => {
+                sel.addEventListener('change', updateApp);
+            });
+
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                if (confirm("Reset inputs to standard default values?")) {
+                    window.location.reload();
+                }
+            });
+
+            document.getElementById('btn-export').addEventListener('click', () => {
+                const inputs = {};
+                document.querySelectorAll('#analysis-tool input[id], #analysis-tool select[id]').forEach(inp => {
+                    inputs[inp.id] = inp.value;
+                });
+                document.querySelectorAll('#analysis-tool .weight-input[data-id], #analysis-tool .benchmark-input[data-id], #analysis-tool .source-input[data-id]').forEach(inp => {
+                    const key = `${inp.classList.contains('weight-input') ? 'w_' : inp.classList.contains('source-input') ? 's_' : 'b_'}${inp.dataset.id}`;
+                    inputs[key] = inp.value;
+                });
+                const blob = new Blob([JSON.stringify(inputs, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Aggarwal_Abhishek_Co_Analysis_${document.getElementById('inp-comp-name').value.replace(/\s+/g, '_')}.json`;
+                a.click();
+            });
+
+            document.getElementById('btn-import-trigger').addEventListener('click', () => {
+                document.getElementById('file-import').click();
+            });
+
+            document.getElementById('file-import').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (evt) => {
+                    try {
+                        const data = JSON.parse(evt.target.result);
+                        Object.keys(data).forEach(key => {
+                            if (key.startsWith('w_')) {
+                                const el = document.querySelector(`.weight-input[data-id="${key.slice(2)}"]`);
+                                if (el) el.value = data[key];
+                            } else if (key.startsWith('s_')) {
+                                const el = document.querySelector(`.source-input[data-id="${key.slice(2)}"]`);
+                                if (el) el.value = data[key];
+                            } else if (key.startsWith('b_')) {
+                                const el = document.querySelector(`.benchmark-input[data-id="${key.slice(2)}"]`);
+                                if (el) el.value = data[key];
+                            } else {
+                                const el = document.getElementById(key);
+                                if (el) el.value = data[key];
+                            }
+                        });
+                        updateApp();
+                        alert("Analysis profile imported successfully!");
+                    } catch(err) {
+                        alert("Invalid JSON data file.");
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            document.getElementById('btn-print').addEventListener('click', () => {
+                buildPdfReport();
+                document.body.classList.add('printing-pdf-report');
+                window.print();
+            });
+
+            window.addEventListener('afterprint', () => {
+                document.body.classList.remove('printing-pdf-report');
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initTab3();
+            initQualitativeTab();
+            setupEventListeners();
+            updateApp();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

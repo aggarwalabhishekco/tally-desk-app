@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDS Rate &amp; Calculation Finder (Income Tax Act 2025) | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free TDS rate finder and calculator for FY 2026-27 — covers old sections 194A, 194C, 194H, 194-I, 194J, 194Q, 194K and more, mapped to their new Section 393 reference under the Income Tax Act, 2025, with threshold checks and PAN/no-PAN rates. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / TDS Rate &amp; Calculation Finder</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">TDS Rate &amp; Calculation Finder</h2>
+        <p class="section-subtitle">Pick the nature of payment to see the applicable TDS section, threshold and rate for FY 2025-26 — and calculate the exact TDS to deduct on a specific payment. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">TDS Rate Finder &amp; Calculator — FY 2025-26 (AY 2026-27)</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Educational tool — not a substitute for professional advice.</strong> TDS is now governed by the <strong>Income Tax Act, 2025</strong>, in force from FY 2026-27 (1 April 2026), which consolidates almost all non-salary TDS into a single <strong>Section 393</strong> — the old section numbers (194A, 194C, 194J, etc.) still map cleanly onto it and are shown alongside the new Section 393 reference and TDS reporting code below. Thresholds and rates carry over largely unchanged from the position under the old Income-tax Act, 1961 (as last amended by Budget 2024 and Budget 2025). <strong>The specific numeric TDS reporting codes and Table Sl. No. sub-references shown could not be independently confirmed against a primary CBDT source at the time this tool was built</strong> — verify these specific codes against the actual TRACES/e-filing return utility before using them in a filing; the section, threshold and rate figures are more reliably sourced than the codes. Always confirm with us before deducting, especially for large or unusual payments — this is still a very new law and some fine print is still being clarified by the department.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="TDS Rate &amp; Calculation Finder">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help with TDS compliance, returns or reconciliation. <strong>No payment or financial data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the payment figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Nature of Payment</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group" style="grid-column: 1 / -1;">
+                            <label class="tool-form-label">Select Section / Nature of Payment</label>
+                            <select class="tool-form-control" id="inp-section"></select>
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Amount of This Payment (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-amount" value="60000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Total Paid to This Payee in FY So Far, Including This Payment (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-aggregate" value="60000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Does the Payee Have a Valid PAN?</label>
+                            <select class="tool-form-control" id="inp-pan">
+                                <option value="yes" selected>Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group" id="group-category" style="display:none;">
+                            <label class="tool-form-label">Payee Category</label>
+                            <select class="tool-form-control" id="inp-category">
+                                <option value="individual" selected>Individual / HUF</option>
+                                <option value="other">Company / Firm / Other</option>
+                            </select>
+                        </div>
+                        <div class="tool-form-group" id="group-senior" style="display:none;">
+                            <label class="tool-form-label">Is the Payee a Senior Citizen (60+)?</label>
+                            <select class="tool-form-control" id="inp-senior">
+                                <option value="no" selected>No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Result</div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Quick-Reference: TDS Sections Covered
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-tds-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="reference-table-wrap"></div>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help reference and calculation aid, not a certified TDS determination. It covers common resident-payee sections only — payments to non-residents (Section 195 under the old Act), TDS on salary (Section 192 / new Section 392, slab-based), and TDS on immovable property (Section 194-IA) are not covered here. Old-Act thresholds and rates reflect our understanding following Budget 2024 and Budget 2025 changes; the new Section 393 references and TDS codes reflect the Income Tax Act, 2025 as understood shortly after it took effect for FY 2026-27, and a few Table Sl. No./code mappings (flagged above) are still being confirmed as CBDT issues further clarifications. Aggarwal Abhishek &amp; Co. does not certify these figures — please confirm with us before deducting or filing your TDS return.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        // Old-Act rates reflect Budget 2024 (rate cuts effective 1 Oct 2024) and
+        // Budget 2025 (threshold hikes effective 1 Apr 2025). New-Act references
+        // reflect the Income Tax Act, 2025, in force from FY 2026-27 (1 Apr 2026),
+        // which consolidates almost all non-salary TDS into Section 393 with
+        // Table/Sl. No. sub-references and numeric TDS reporting codes in place
+        // of section-wise returns. Thresholds and rates are carried over
+        // unchanged into the new Act unless noted otherwise below.
+        const SECTIONS = [
+            {
+                id: '194A_bank', label: '194A — Interest (Bank / Co-op Bank / Post Office deposits)',
+                thresholdType: 'annual', threshold: 50000, seniorThreshold: 100000,
+                rate: 0.10, noPanRate: 0.20, hasSenior: true, hasCategory: false,
+                newSection: 'Sec 393(1), Sl. 5(ii)', newCode: '1020 / 1021',
+                note: 'Threshold: ₹50,000/year (₹1,00,000/year for a senior-citizen depositor). New Act: Section 393(1), Table Sl. No. 5(ii) — code 1020 (senior) / 1021 (non-senior).'
+            },
+            {
+                id: '194A_other', label: '194A — Interest (other than securities, non-bank e.g. loans from firms/individuals)',
+                thresholdType: 'annual', threshold: 10000,
+                rate: 0.10, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1) — Interest table', newCode: '—',
+                note: 'Threshold: ₹10,000/year. New Act: Section 393(1), same Interest table as bank deposits.'
+            },
+            {
+                id: '194C', label: '194C — Payment to Contractor / Sub-contractor',
+                thresholdType: 'singleOrAggregate', threshold: 30000, aggregateThreshold: 100000,
+                rateIndividual: 0.01, rateOther: 0.02, noPanRate: 0.20, hasSenior: false, hasCategory: true,
+                newSection: 'Sec 393(1), Sl. 6(i)', newCode: '1023 / 1024',
+                note: 'Threshold: ₹30,000 for a single payment, or ₹1,00,000 aggregate in the year. Rate: 1% (Individual/HUF contractor) or 2% (other contractors). New Act: Section 393(1), Table Sl. No. 6(i) — code 1023 (individual/HUF) / 1024 (others).'
+            },
+            {
+                id: '194D', label: '194D — Insurance Commission',
+                thresholdType: 'annual', threshold: 20000,
+                rate: 0.02, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1)', newCode: '1005',
+                note: 'Threshold: ₹20,000/year. Rate reduced to 2% w.e.f. 1 Oct 2024, carried into the new Act. New Act: Section 393(1) — code 1005.'
+            },
+            {
+                id: '194H', label: '194H — Commission or Brokerage',
+                thresholdType: 'annual', threshold: 20000,
+                rate: 0.02, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1), Sl. 1(ii)', newCode: '1006',
+                note: 'Threshold: ₹20,000/year. Rate reduced to 2% w.e.f. 1 Oct 2024, carried into the new Act. New Act: Section 393(1), Table Sl. No. 1(ii) — code 1006.'
+            },
+            {
+                id: '194I_pm', label: '194-I(a) — Rent of Plant &amp; Machinery',
+                thresholdType: 'annual', threshold: 600000,
+                rate: 0.02, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1), Sl. 2', newCode: '1008',
+                note: 'Threshold raised to ₹6,00,000/year (≈₹50,000/month) w.e.f. FY 2025-26, carried into the new Act. New Act: Section 393(1), Table Sl. No. 2 — code 1008.'
+            },
+            {
+                id: '194I_land', label: '194-I(b) — Rent of Land, Building or Furniture',
+                thresholdType: 'annual', threshold: 600000,
+                rate: 0.10, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1), Sl. 2', newCode: '1009',
+                note: 'Threshold raised to ₹6,00,000/year (≈₹50,000/month) w.e.f. FY 2025-26, carried into the new Act. New Act: Section 393(1), Table Sl. No. 2 — code 1009.'
+            },
+            {
+                id: '194J_prof', label: '194J(a) — Professional Fees',
+                thresholdType: 'annual', threshold: 50000,
+                rate: 0.10, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1), Sl. 6(iii)', newCode: '1027',
+                note: 'Threshold raised to ₹50,000/year w.e.f. FY 2025-26, carried into the new Act. New Act: Section 393(1), Table Sl. No. 6(iii) — code 1027.'
+            },
+            {
+                id: '194J_tech', label: '194J(b) — Technical Services / Call Centre Payments',
+                thresholdType: 'annual', threshold: 50000,
+                rate: 0.02, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1), Sl. 6(iii)', newCode: '1026',
+                note: 'Threshold raised to ₹50,000/year w.e.f. FY 2025-26, carried into the new Act. New Act: Section 393(1), Table Sl. No. 6(iii) — code 1026.'
+            },
+            {
+                id: '194M', label: '194M — Contract / Professional Fee / Commission paid by an Individual/HUF not liable to tax audit',
+                thresholdType: 'annual', threshold: 5000000,
+                rate: 0.02, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1)', newCode: 'Not yet confirmed',
+                note: 'Threshold: ₹50,00,000/year in aggregate. Rate reduced to 2% w.e.f. 1 Oct 2024. New Act: consolidated into Section 393(1) — the exact Table Sl. No./code for this specific payment hadn\'t been confirmed from our sources at the time of writing; please double-check before relying on it.'
+            },
+            {
+                id: '194Q', label: '194Q — Purchase of Goods (buyer\'s turnover exceeded ₹10 crore in the preceding FY)',
+                thresholdType: 'annual', threshold: 5000000,
+                rate: 0.001, noPanRate: 0.05, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1), Sl. 8(ii)', newCode: '1031',
+                note: 'Threshold: ₹50,00,000/year in aggregate from one seller. No-PAN rate is capped at 5% for this section (not the usual 20%). New Act: Section 393(1), Table Sl. No. 8(ii) — code 1031.'
+            },
+            {
+                id: '194', label: '194 — Dividend',
+                thresholdType: 'annual', threshold: 10000,
+                rate: 0.10, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1)', newCode: '1029',
+                note: 'Threshold: ₹10,000/year. New Act: Section 393(1) — code 1029.'
+            },
+            {
+                id: '194K', label: '194K — Income from Mutual Fund Units',
+                thresholdType: 'annual', threshold: 10000,
+                rate: 0.10, noPanRate: 0.20, hasSenior: false, hasCategory: false,
+                newSection: 'Sec 393(1)', newCode: '1013',
+                note: 'Threshold: ₹10,000/year. New Act: Section 393(1) — code 1013.'
+            }
+        ];
+
+        function populateSectionSelect() {
+            const sel = document.getElementById('inp-section');
+            sel.innerHTML = SECTIONS.map(s => `<option value="${s.id}">${s.label}</option>`).join('');
+            sel.value = '194C';
+        }
+
+        function getSection(id) { return SECTIONS.find(s => s.id === id); }
+
+        function computeTds(section, amount, aggregate, hasPan, category, isSenior) {
+            let thresholdBreached = false;
+            let effectiveThreshold = section.threshold;
+            if (section.id === '194A_bank' && isSenior) effectiveThreshold = section.seniorThreshold;
+
+            if (section.thresholdType === 'singleOrAggregate') {
+                thresholdBreached = amount >= section.threshold || aggregate >= section.aggregateThreshold;
+            } else {
+                thresholdBreached = aggregate >= effectiveThreshold;
+            }
+
+            let rate = 0;
+            if (section.hasCategory) {
+                rate = category === 'individual' ? section.rateIndividual : section.rateOther;
+            } else {
+                rate = section.rate;
+            }
+            if (!hasPan) rate = section.noPanRate;
+
+            const tdsAmount = thresholdBreached ? amount * rate : 0;
+            return { thresholdBreached, rate, tdsAmount, effectiveThreshold };
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+
+        function updateFieldVisibility() {
+            const section = getSection(document.getElementById('inp-section').value);
+            document.getElementById('group-category').style.display = section.hasCategory ? '' : 'none';
+            document.getElementById('group-senior').style.display = section.hasSenior ? '' : 'none';
+        }
+
+        function render() {
+            updateFieldVisibility();
+            const section = getSection(document.getElementById('inp-section').value);
+            const amount = Math.max(0, Number(document.getElementById('inp-amount').value) || 0);
+            const aggregate = Math.max(amount, Number(document.getElementById('inp-aggregate').value) || 0);
+            const hasPan = document.getElementById('inp-pan').value === 'yes';
+            const category = document.getElementById('inp-category').value;
+            const isSenior = document.getElementById('inp-senior').value === 'yes';
+
+            const result = computeTds(section, amount, aggregate, hasPan, category, isSenior);
+            lastResult = { section, amount, aggregate, hasPan, category, isSenior, result };
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['TDS Applicable?', result.thresholdBreached ? 'Yes' : 'No', result.thresholdBreached ? 'Threshold has been crossed' : `Threshold: ${fmtMoneyWhole(result.effectiveThreshold)}`, result.thresholdBreached ? '#dc2626' : '#10b981'],
+                ['Applicable Rate', (result.rate * 100).toFixed(2).replace(/\.?0+$/, '') + '%', hasPan ? 'PAN available' : 'No PAN — higher rate applied', '#0ea5e9'],
+                ['TDS to Deduct', fmtMoneyWhole(result.tdsAmount), 'On this payment', '#f59e0b'],
+                ['Net Payment After TDS', fmtMoneyWhole(amount - result.tdsAmount), 'Amount payable to the payee', '#002b49'],
+                ['New Act Reference', section.newSection, 'Income Tax Act, 2025', '#7c3aed'],
+                ['TDS Reporting Code', section.newCode, 'For the new-Act return', '#64748b']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights());
+        }
+
+        function buildInsights() {
+            if (!lastResult) return [];
+            const { section, amount, aggregate, hasPan, result } = lastResult;
+            const insights = [];
+
+            if (!result.thresholdBreached) {
+                insights.push({ level: 'info', text: `No TDS is required yet — the threshold for ${section.label.split(' — ')[0]} is ${fmtMoneyWhole(result.effectiveThreshold)}, and your aggregate payments so far are ${fmtMoneyWhole(aggregate)}. Keep tracking cumulative payments to this payee across the year.` });
+            } else {
+                insights.push({ level: 'warning', text: `Deduct ${fmtMoneyWhole(result.tdsAmount)} as TDS before releasing this payment, and deposit it by the 7th of the following month (30th April for March payments).` });
+                if (aggregate - amount < result.effectiveThreshold) {
+                    insights.push({ level: 'critical', text: `This payment is what pushes the payee over the threshold — you may also owe TDS on the earlier payments to this payee that weren't deducted yet. Please review the full-year total with us.` });
+                }
+            }
+
+            if (!hasPan) {
+                insights.push({ level: 'critical', text: 'No PAN on record means TDS applies at the higher rate under Section 206AA (often 20%, or the section\'s own capped no-PAN rate where one applies). Collect the payee\'s PAN as soon as possible to avoid over-deduction disputes.' });
+            }
+
+            insights.push({ level: 'info', text: 'A TDS return (Form 26Q for most resident payments) is due quarterly, and a TDS certificate (Form 16A) must be issued to the payee after each quarter\'s return is filed.' });
+
+            insights.push({ level: 'info', text: `Under the Income Tax Act, 2025 (effective FY 2026-27), this payment is reported under ${section.newSection}${section.newCode !== '—' && section.newCode !== 'Not yet confirmed' ? ` using TDS code ${section.newCode}` : ''} — check your TDS software has been updated to the new section/code, since some older tools still default to the pre-2026 section numbers.` });
+
+            return insights;
+        }
+
+        function renderReferenceTable() {
+            const wrap = document.getElementById('reference-table-wrap');
+            wrap.innerHTML = `<table class="tool-table">
+                <thead><tr><th>Old Section (Income-tax Act, 1961)</th><th>Threshold</th><th>Rate (PAN)</th><th>Rate (No PAN)</th><th>New Act Reference (Income Tax Act, 2025)</th><th>TDS Code</th></tr></thead>
+                <tbody>${SECTIONS.map(s => {
+                    const rateStr = s.hasCategory ? `${(s.rateIndividual*100)}% / ${(s.rateOther*100)}%` : `${(s.rate*100)}%`;
+                    const thStr = s.thresholdType === 'singleOrAggregate'
+                        ? `${fmtMoneyWhole(s.threshold)} single / ${fmtMoneyWhole(s.aggregateThreshold)} aggregate`
+                        : (s.hasSenior ? `${fmtMoneyWhole(s.threshold)} (${fmtMoneyWhole(s.seniorThreshold)} senior)` : fmtMoneyWhole(s.threshold));
+                    return `<tr><td>${s.label}</td><td>${thStr}</td><td>${rateStr}</td><td>${(s.noPanRate*100)}%</td><td>${s.newSection}</td><td>${s.newCode}</td></tr>`;
+                }).join('')}</tbody>
+            </table>`;
+        }
+
+        document.getElementById('btn-tds-csv').addEventListener('click', () => {
+            const lines = [['Old Section (1961 Act)', 'Threshold', 'Rate (PAN)', 'Rate (No PAN)', 'New Act Reference (2025 Act)', 'TDS Code', 'Note'].map(csvEscape).join(',')];
+            SECTIONS.forEach(s => {
+                const rateStr = s.hasCategory ? `${(s.rateIndividual*100)}% / ${(s.rateOther*100)}%` : `${(s.rate*100)}%`;
+                const thStr = s.thresholdType === 'singleOrAggregate'
+                    ? `${s.threshold} single / ${s.aggregateThreshold} aggregate`
+                    : (s.hasSenior ? `${s.threshold} (${s.seniorThreshold} senior)` : s.threshold);
+                lines.push([s.label.replace(/&amp;/g, '&'), thStr, rateStr, (s.noPanRate*100) + '%', s.newSection, s.newCode, s.note].map(csvEscape).join(','));
+            });
+            if (lastResult) {
+                lines.push('');
+                lines.push(['Your Calculation'].map(csvEscape).join(','));
+                lines.push(['Section', lastResult.section.label.replace(/&amp;/g, '&')].map(csvEscape).join(','));
+                lines.push(['New Act Reference', lastResult.section.newSection].map(csvEscape).join(','));
+                lines.push(['TDS Code', lastResult.section.newCode].map(csvEscape).join(','));
+                lines.push(['Payment Amount', lastResult.amount].map(csvEscape).join(','));
+                lines.push(['Aggregate in FY', lastResult.aggregate].map(csvEscape).join(','));
+                lines.push(['TDS Applicable', lastResult.result.thresholdBreached ? 'Yes' : 'No'].map(csvEscape).join(','));
+                lines.push(['Rate Applied', (lastResult.result.rate*100) + '%'].map(csvEscape).join(','));
+                lines.push(['TDS Amount', lastResult.result.tdsAmount.toFixed(2)].map(csvEscape).join(','));
+            }
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `TDS_Reference_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        ['inp-section', 'inp-amount', 'inp-aggregate', 'inp-pan', 'inp-category', 'inp-senior'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            populateSectionSelect();
+            renderReferenceTable();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

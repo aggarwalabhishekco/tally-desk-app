@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Valuation &amp; Dilution Simulator | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free cap table dilution simulator for founders — model how your equity dilutes across up to 3 funding rounds, including the effect of an ESOP pool top-up. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Valuation &amp; Dilution Simulator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Startup Valuation &amp; Dilution Simulator</h2>
+        <p class="section-subtitle">Model how your founder equity dilutes across up to 3 funding rounds — including the ESOP pool top-up most founders don't see coming. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Startup Suite</span>
+                    </h3>
+                    <div class="sub-caption">Valuation &amp; Dilution Simulator</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Planning aid, not a term-sheet model.</strong> This uses standard priced-round dilution math (New Investor % = Amount Raised ÷ Post-Money Valuation) and models an ESOP pool top-up as happening pre-money (the common market practice, where the pool expansion dilutes existing shareholders, not the incoming investor). It does not model convertible notes/SAFEs, liquidation preferences, anti-dilution protection, or secondary sales — real term sheets can change outcomes materially.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Valuation & Dilution Simulator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help with cap table structuring or fundraise-readiness. <strong>No cap table data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the valuation figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Starting Cap Table</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Founders' Current Ownership (%)</label>
+                            <input type="number" class="tool-form-control" id="inp-founder-pct" value="100" min="1" max="100" step="1">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Existing ESOP Pool, if any (%) — the rest is assumed to be Founders</label>
+                            <input type="number" class="tool-form-control" id="inp-esop-start" value="0" min="0" max="99" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Round 1</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Round Name</label>
+                            <input type="text" class="tool-form-control" id="inp-r1-name" value="Seed">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Amount Raised (₹) — leave 0 to skip this round</label>
+                            <input type="number" class="tool-form-control" id="inp-r1-amount" value="10000000" min="0" step="100000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Pre-Money Valuation (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-r1-premoney" value="40000000" min="0" step="100000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">ESOP Pool Top-Up (%, pre-money)</label>
+                            <input type="number" class="tool-form-control" id="inp-r1-esop" value="10" min="0" max="30" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Round 2 (optional)</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Round Name</label>
+                            <input type="text" class="tool-form-control" id="inp-r2-name" value="Series A">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Amount Raised (₹) — leave 0 to skip this round</label>
+                            <input type="number" class="tool-form-control" id="inp-r2-amount" value="40000000" min="0" step="100000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Pre-Money Valuation (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-r2-premoney" value="200000000" min="0" step="100000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">ESOP Pool Top-Up (%, pre-money)</label>
+                            <input type="number" class="tool-form-control" id="inp-r2-esop" value="5" min="0" max="30" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Round 3 (optional)</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Round Name</label>
+                            <input type="text" class="tool-form-control" id="inp-r3-name" value="Series B">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Amount Raised (₹) — leave 0 to skip this round</label>
+                            <input type="number" class="tool-form-control" id="inp-r3-amount" value="0" min="0" step="100000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Pre-Money Valuation (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-r3-premoney" value="0" min="0" step="100000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">ESOP Pool Top-Up (%, pre-money)</label>
+                            <input type="number" class="tool-form-control" id="inp-r3-esop" value="0" min="0" max="30" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Result
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;" disabled>📸 Get My Shareable Verdict Card</button>
+                        </div>
+                    </div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Download a shareable image of your result. No data is uploaded; the image is drawn entirely in your browser.</p>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Ownership by Round</div>
+                    <div id="cap-table-bars"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Full Breakdown
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-vd-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="breakdown-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">How to Use This Number</div>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a simplified planning aid, not a term-sheet model or legal cap table. It assumes simple priced equity rounds only — convertible notes, SAFEs, warrants, liquidation preferences, anti-dilution ratchets and secondary transactions are not modeled, and any of these can change your actual dilution meaningfully. Aggarwal Abhishek &amp; Co. does not certify these figures — please have us (and your legal counsel) review the actual term sheet before signing.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+        const ROUND_COLORS = ['#0ea5e9', '#f59e0b', '#8b5cf6'];
+
+        function getRoundInputs(n) {
+            return {
+                name: document.getElementById(`inp-r${n}-name`).value.trim() || `Round ${n}`,
+                amount: Math.max(0, Number(document.getElementById(`inp-r${n}-amount`).value) || 0),
+                premoney: Math.max(0, Number(document.getElementById(`inp-r${n}-premoney`).value) || 0),
+                esopTopUp: Math.min(30, Math.max(0, Number(document.getElementById(`inp-r${n}-esop`).value) || 0))
+            };
+        }
+
+        function render() {
+            const founderStartPct = Math.min(100, Math.max(1, Number(document.getElementById('inp-founder-pct').value) || 100));
+            const esopStartPct = Math.min(99, Math.max(0, Number(document.getElementById('inp-esop-start').value) || 0));
+
+            const rounds = [getRoundInputs(1), getRoundInputs(2), getRoundInputs(3)].filter(r => r.amount > 0 && r.premoney > 0);
+
+            if (rounds.length === 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#64748b; padding:10px;">Enter at least one round (amount raised + pre-money valuation, both greater than 0) to see results.</p>';
+                document.getElementById('breakdown-table-wrap').innerHTML = '';
+                document.getElementById('cap-table-bars').innerHTML = '';
+                document.getElementById('insights-card').style.display = 'none';
+                document.getElementById('btn-verdict-card').disabled = true;
+                lastResult = null;
+                return;
+            }
+            document.getElementById('btn-verdict-card').disabled = false;
+
+            // remaining founder-controlled pool at start
+            let founders = Math.max(0, founderStartPct - 0); // founders own founderStartPct; remainder assumed pre-existing ESOP
+            let esop = esopStartPct;
+            // Normalize: founders + esop should be <=100; if founders+esop>100, scale down esop
+            if (founders + esop > 100) esop = 100 - founders;
+
+            const investors = []; // { name, pct }
+            const history = [];
+
+            rounds.forEach(r => {
+                // Step 1: ESOP top-up dilutes everyone pre-money
+                if (r.esopTopUp > 0) {
+                    const scale1 = (100 - r.esopTopUp) / 100;
+                    founders *= scale1;
+                    esop = esop * scale1 + r.esopTopUp;
+                    investors.forEach(inv => inv.pct *= scale1);
+                }
+                // Step 2: new investor money dilutes everyone
+                const postMoney = r.premoney + r.amount;
+                const newInvestorPct = (r.amount / postMoney) * 100;
+                const scale2 = (100 - newInvestorPct) / 100;
+                founders *= scale2;
+                esop *= scale2;
+                investors.forEach(inv => inv.pct *= scale2);
+                investors.push({ name: r.name, pct: newInvestorPct });
+
+                history.push({
+                    name: r.name, amount: r.amount, premoney: r.premoney, postMoney,
+                    newInvestorPct, founders, esop, investors: investors.map(i => ({ ...i })),
+                    founderValue: (founders / 100) * postMoney
+                });
+            });
+
+            const finalPostMoney = history[history.length - 1].postMoney;
+            const finalFounderPct = founders;
+            const finalFounderValue = (founders / 100) * finalPostMoney;
+            const totalDilutionPct = founderStartPct - finalFounderPct;
+
+            lastResult = { founderStartPct, esopStartPct, history, finalPostMoney, finalFounderPct, finalFounderValue, totalDilutionPct };
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['Founders\' Ownership After All Rounds', finalFounderPct.toFixed(1) + '%', `started at ${founderStartPct}%`, '#002b49'],
+                ['Final Post-Money Valuation', fmtMoneyWhole(finalPostMoney), `after ${history.length} round(s)`, '#0ea5e9'],
+                ['Founders\' Stake Value', fmtMoneyWhole(finalFounderValue), 'on paper, at final valuation', '#10b981'],
+                ['Total Dilution', totalDilutionPct.toFixed(1) + ' pts', 'percentage points given up', '#f59e0b']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights());
+            renderCapTableBars();
+            renderBreakdownTable();
+        }
+
+        function buildInsights() {
+            if (!lastResult) return [];
+            const r = lastResult;
+            const insights = [];
+            const last = r.history[r.history.length - 1];
+
+            insights.push({ level: 'info', text: `Across ${r.history.length} round(s), founders go from ${r.founderStartPct}% to ${r.finalFounderPct.toFixed(1)}% — a total of ${r.totalDilutionPct.toFixed(1)} percentage points given up, but at a post-money valuation of ${fmtMoneyWhole(r.finalPostMoney)}, that remaining stake is worth ${fmtMoneyWhole(r.finalFounderValue)} on paper.` });
+
+            const totalEsopTopUps = r.history.reduce((sum, h, i) => sum + (i === 0 ? 0 : 0), 0);
+            const esopRounds = [document.getElementById('inp-r1-esop'), document.getElementById('inp-r2-esop'), document.getElementById('inp-r3-esop')]
+                .map(el => Number(el.value) || 0);
+            const anyEsopTopUp = esopRounds.some(v => v > 0);
+            if (anyEsopTopUp) {
+                insights.push({ level: 'warning', text: 'You\'ve modeled ESOP pool top-ups happening pre-money — in practice, this means the pool expansion dilutes YOU (the existing shareholders), not the incoming investor. It\'s standard market practice, but it\'s worth negotiating the pool SIZE, since an oversized pool dilutes founders more than necessary.' });
+            }
+
+            if (r.finalFounderPct < 30) {
+                insights.push({ level: 'warning', text: `At ${r.finalFounderPct.toFixed(1)}% combined founder ownership, it's worth thinking ahead to how future rounds and an eventual ESOP refresh will affect control and economics — many founders aim to stay above 20-25% through to a Series B or so, though this varies a lot by sector and story.` });
+            } else {
+                insights.push({ level: 'good', text: `At ${r.finalFounderPct.toFixed(1)}%, founders retain a substantial stake through these rounds — a healthy position relative to many comparable cap tables at this stage.` });
+            }
+
+            insights.push({ level: 'info', text: 'This model treats "Pre-Money Valuation" as already agreed with the investor. In practice, whether the ESOP top-up is included in the pre-money or post-money number is itself a heavily negotiated point — always confirm which convention a term sheet is using before comparing valuations across rounds.' });
+
+            return insights;
+        }
+
+        function renderCapTableBars() {
+            const wrap = document.getElementById('cap-table-bars');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rowsHtml = [
+                { name: 'Starting Cap Table', founders: r.founderStartPct, esop: r.esopStartPct, investors: [] },
+                ...r.history
+            ].map((row, idx) => {
+                const segments = [
+                    { label: 'Founders', pct: row.founders, color: '#002b49' },
+                    { label: 'ESOP Pool', pct: row.esop, color: '#94a3b8' },
+                    ...row.investors.map((inv, i) => ({ label: inv.name, pct: inv.pct, color: ROUND_COLORS[i % ROUND_COLORS.length] }))
+                ].filter(s => s.pct > 0.05);
+                const bar = segments.map(s => `<div style="width:${s.pct}%; background:${s.color}; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.7rem; font-weight:700; overflow:hidden; white-space:nowrap; min-width: ${s.pct > 6 ? 'auto' : '0'};" title="${s.label}: ${s.pct.toFixed(1)}%">${s.pct > 8 ? s.pct.toFixed(0) + '%' : ''}</div>`).join('');
+                const legend = segments.map(s => `<span style="display:inline-flex; align-items:center; gap:4px; margin-right:14px; font-size:0.78rem; color:#475569;"><span style="width:10px; height:10px; border-radius:2px; background:${s.color}; display:inline-block;"></span>${s.label} (${s.pct.toFixed(1)}%)</span>`).join('');
+                return `
+                    <div style="margin-bottom:18px;">
+                        <div style="font-weight:700; color:#002b49; margin-bottom:6px; font-size:0.9rem;">${row.name}</div>
+                        <div style="display:flex; width:100%; height:28px; border-radius:6px; overflow:hidden; border:1px solid #e2e8f0;">${bar}</div>
+                        <div style="margin-top:6px;">${legend}</div>
+                    </div>
+                `;
+            }).join('');
+            wrap.innerHTML = rowsHtml;
+        }
+
+        function renderBreakdownTable() {
+            const wrap = document.getElementById('breakdown-table-wrap');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rows = [];
+            r.history.forEach(h => {
+                rows.push([`<strong>${h.name}</strong>`, '']);
+                rows.push(['Amount Raised', fmtMoneyWhole(h.amount)]);
+                rows.push(['Pre-Money Valuation', fmtMoneyWhole(h.premoney)]);
+                rows.push(['Post-Money Valuation', fmtMoneyWhole(h.postMoney)]);
+                rows.push(['New Investor Ownership', h.newInvestorPct.toFixed(1) + '%']);
+                rows.push(['Founders\' Ownership After This Round', h.founders.toFixed(1) + '%']);
+                rows.push(['ESOP Pool After This Round', h.esop.toFixed(1) + '%']);
+                rows.push(['Founders\' Stake Value After This Round', fmtMoneyWhole(h.founderValue)]);
+            });
+            wrap.innerHTML = `<table class="tool-table">
+                <thead><tr><th>Component</th><th>Value</th></tr></thead>
+                <tbody>${rows.map(([label, val]) => `<tr><td>${label}</td><td>${val}</td></tr>`).join('')}</tbody>
+            </table>`;
+        }
+
+        document.getElementById('btn-vd-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const r = lastResult;
+            const lines = [['Round', 'Amount Raised', 'Pre-Money', 'Post-Money', 'New Investor %', 'Founders % After', 'ESOP % After', 'Founders Value After'].map(csvEscape).join(',')];
+            r.history.forEach(h => {
+                lines.push([h.name, h.amount, h.premoney, h.postMoney, h.newInvestorPct.toFixed(2), h.founders.toFixed(2), h.esop.toFixed(2), h.founderValue.toFixed(2)].map(csvEscape).join(','));
+            });
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Dilution_Simulation_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        const HOW_TO_USE_ITEMS = [
+            'Pre-Money Valuation is what the company is worth before the new investor\'s cash comes in — Post-Money is Pre-Money + Amount Raised.',
+            'An ESOP pool top-up before a round dilutes existing shareholders (including founders), not the incoming investor — it\'s worth negotiating the pool size, not just the valuation.',
+            'A lower headline valuation with no ESOP top-up can sometimes leave founders with more ownership than a higher valuation that comes with a large pool expansion.',
+            'Run this again whenever a term sheet changes — small shifts in valuation or pool size compound noticeably by the time you reach Series B or C.',
+            'This model doesn\'t account for liquidation preferences — in a downside exit, preferred investors are often paid before common/founder shares, regardless of the ownership percentage shown here.'
+        ];
+        function renderDocChecklist() {
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = HOW_TO_USE_ITEMS.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            HOW_TO_USE_ITEMS.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        ['inp-founder-pct', 'inp-esop-start',
+         'inp-r1-name', 'inp-r1-amount', 'inp-r1-premoney', 'inp-r1-esop',
+         'inp-r2-name', 'inp-r2-amount', 'inp-r2-premoney', 'inp-r2-esop',
+         'inp-r3-name', 'inp-r3-amount', 'inp-r3-premoney', 'inp-r3-esop'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => {
+            if (!lastResult) return null;
+            const r = lastResult;
+            return {
+                eyebrow: 'My Dilution Simulation',
+                headline: r.finalFounderPct.toFixed(1) + '% Founder Ownership',
+                resultLine: `after ${r.history.length} round(s)`,
+                resultSub: `Stake worth ~${fmtMoneyWhole(r.finalFounderValue)} at ${fmtMoneyWhole(r.finalPostMoney)} valuation`,
+                footerNote: 'Estimate only — real term sheets vary.',
+                toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+            };
+        }, 'My_Dilution_Simulation');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDocChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

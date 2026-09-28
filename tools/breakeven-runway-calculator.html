@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break-Even &amp; Cash Runway Calculator | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free Break-Even and Cash Runway Calculator for startups — find your break-even units/revenue, contribution margin, monthly burn rate and exactly how many months of cash you have left. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Break-Even &amp; Cash Runway Calculator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Break-Even &amp; Cash Runway Calculator</h2>
+        <p class="section-subtitle">Two numbers every founder should know cold: how many units (or how much revenue) you need to break even, and how many months of cash you have left at your current burn rate. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Startup Suite</span>
+                    </h3>
+                    <div class="sub-caption">Break-Even &amp; Cash Runway Calculator</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Planning aid, not an audited metric.</strong> Break-even uses the standard contribution-margin formula (Fixed Costs ÷ (Price − Variable Cost per Unit)). Runway assumes your current net monthly burn rate stays constant — real burn usually changes as revenue and costs grow, so treat this as a snapshot, not a fixed forecast.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Break-Even & Runway Calculator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like help with cash-flow planning or Virtual CFO support. <strong>No business data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the business figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Break-Even Inputs</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Total Fixed Costs per Month (₹) — rent, salaries, subscriptions, etc.</label>
+                            <input type="number" class="tool-form-control" id="inp-fixed-costs" value="400000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Selling Price per Unit (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-price" value="1000" min="0" step="10">
+                        </div>
+                        <div class="tool-form-group" style="grid-column: 1 / -1;">
+                            <label class="tool-form-label">Variable Cost per Unit (₹) — raw material, packaging, payment gateway fee, etc.</label>
+                            <input type="number" class="tool-form-control" id="inp-var-cost" value="400" min="0" step="10">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Cash Runway Inputs</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Current Cash in Bank (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-cash" value="2500000" min="0" step="10000">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Total Monthly Operating Expenses / Outflow (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-monthly-expenses" value="600000" min="0" step="1000">
+                        </div>
+                        <div class="tool-form-group" style="grid-column: 1 / -1;">
+                            <label class="tool-form-label">Current Monthly Revenue (₹)</label>
+                            <input type="number" class="tool-form-control" id="inp-monthly-revenue" value="250000" min="0" step="1000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Result
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;" disabled>📸 Get My Shareable Verdict Card</button>
+                        </div>
+                    </div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Download a shareable image of your result. No data is uploaded; the image is drawn entirely in your browser.</p>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Full Breakdown
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-be-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="breakdown-table-wrap"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">How to Use This Number</div>
+                    <ul class="tool-checklist" id="doc-checklist"></ul>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not an audited or certified metric. Break-even assumes a single product/price point and constant unit economics; runway assumes your current monthly net burn stays flat, which rarely holds exactly — as revenue or costs move, your real runway will move with them. Aggarwal Abhishek &amp; Co. does not certify these figures — for a proper cash-flow model and MIS tailored to your business, please get in touch.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function fmtMoneyWhole(n) {
+            return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+        }
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastResult = null;
+
+        function render() {
+            const fixedCosts = Math.max(0, Number(document.getElementById('inp-fixed-costs').value) || 0);
+            const price = Math.max(0, Number(document.getElementById('inp-price').value) || 0);
+            const varCost = Math.max(0, Number(document.getElementById('inp-var-cost').value) || 0);
+            const cash = Math.max(0, Number(document.getElementById('inp-cash').value) || 0);
+            const monthlyExpenses = Math.max(0, Number(document.getElementById('inp-monthly-expenses').value) || 0);
+            const monthlyRevenue = Math.max(0, Number(document.getElementById('inp-monthly-revenue').value) || 0);
+
+            const contributionMargin = price - varCost;
+
+            if (price <= 0 || contributionMargin <= 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#dc2626; padding:10px;">Your selling price must be greater than your variable cost per unit for break-even to be mathematically possible — please check these two figures.</p>';
+                document.getElementById('breakdown-table-wrap').innerHTML = '';
+                document.getElementById('insights-card').style.display = 'none';
+                document.getElementById('btn-verdict-card').disabled = true;
+                lastResult = null;
+                return;
+            }
+            document.getElementById('btn-verdict-card').disabled = false;
+
+            const breakEvenUnits = fixedCosts / contributionMargin;
+            const breakEvenRevenue = breakEvenUnits * price;
+            const contributionMarginPct = (contributionMargin / price) * 100;
+
+            const netBurn = monthlyExpenses - monthlyRevenue;
+            const isProfitable = netBurn <= 0;
+            const runwayMonths = isProfitable ? Infinity : cash / netBurn;
+
+            lastResult = { fixedCosts, price, varCost, contributionMargin, contributionMarginPct, breakEvenUnits, breakEvenRevenue, cash, monthlyExpenses, monthlyRevenue, netBurn, isProfitable, runwayMonths };
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['Break-Even Units / Month', Math.ceil(breakEvenUnits).toLocaleString('en-IN'), 'units to cover fixed costs', '#002b49'],
+                ['Break-Even Revenue / Month', fmtMoneyWhole(breakEvenRevenue), `at ${contributionMarginPct.toFixed(1)}% contribution margin`, '#0ea5e9'],
+                ['Net Monthly Burn', isProfitable ? fmtMoneyWhole(Math.abs(netBurn)) + ' surplus' : fmtMoneyWhole(netBurn), isProfitable ? 'Cash-flow positive' : 'Cash outflow per month', isProfitable ? '#10b981' : '#dc2626'],
+                ['Cash Runway', runwayMonths === Infinity ? '∞' : runwayMonths.toFixed(1) + ' months', isProfitable ? 'No burn — runway not a constraint' : 'at current burn rate', runwayMonths !== Infinity && runwayMonths < 6 ? '#dc2626' : '#f59e0b']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights());
+            renderBreakdownTable();
+        }
+
+        function buildInsights() {
+            if (!lastResult) return [];
+            const r = lastResult;
+            const insights = [];
+
+            insights.push({ level: 'info', text: `At a contribution margin of ${fmtMoneyWhole(r.contributionMargin)} per unit (${r.contributionMarginPct.toFixed(1)}% of price), you need to sell about ${Math.ceil(r.breakEvenUnits).toLocaleString('en-IN')} units a month just to cover your fixed costs — anything beyond that starts adding to profit.` });
+
+            if (r.isProfitable) {
+                insights.push({ level: 'good', text: `Your monthly revenue currently covers your monthly expenses, so cash runway isn't a live constraint right now — though it's still worth tracking as you scale spend.` });
+            } else if (r.runwayMonths < 3) {
+                insights.push({ level: 'critical', text: `At ${r.runwayMonths.toFixed(1)} months of runway, this needs urgent attention — either cut burn, close incremental revenue fast, or have a fundraise/bridge conversation lined up well before cash runs out.` });
+            } else if (r.runwayMonths < 6) {
+                insights.push({ level: 'warning', text: `${r.runwayMonths.toFixed(1)} months of runway is inside the zone where most founders start actively fundraising or cutting costs — six months tends to disappear faster than expected once a raise process begins.` });
+            } else {
+                insights.push({ level: 'good', text: `${r.runwayMonths.toFixed(1)} months of runway gives you reasonable breathing room — still worth revisiting this monthly, since burn rate rarely stays perfectly flat.` });
+            }
+
+            if (r.monthlyRevenue > 0 && r.monthlyRevenue < r.breakEvenRevenue) {
+                insights.push({ level: 'info', text: `Your current monthly revenue (${fmtMoneyWhole(r.monthlyRevenue)}) is below your break-even revenue (${fmtMoneyWhole(r.breakEvenRevenue)}) — that gap is exactly what your runway is funding right now.` });
+            }
+
+            insights.push({ level: 'info', text: 'This is a single-product simplification — if you sell multiple products at different margins, break-even is really a blended average across your actual sales mix.' });
+
+            return insights;
+        }
+
+        function renderBreakdownTable() {
+            const wrap = document.getElementById('breakdown-table-wrap');
+            if (!lastResult) { wrap.innerHTML = ''; return; }
+            const r = lastResult;
+            const rows = [
+                ['Selling Price per Unit', fmtMoneyWhole(r.price)],
+                ['Variable Cost per Unit', fmtMoneyWhole(r.varCost)],
+                ['Contribution Margin per Unit', fmtMoneyWhole(r.contributionMargin)],
+                ['Contribution Margin %', r.contributionMarginPct.toFixed(1) + '%'],
+                ['Total Fixed Costs / Month', fmtMoneyWhole(r.fixedCosts)],
+                ['<strong>Break-Even Units / Month</strong>', `<strong>${Math.ceil(r.breakEvenUnits).toLocaleString('en-IN')}</strong>`],
+                ['<strong>Break-Even Revenue / Month</strong>', `<strong>${fmtMoneyWhole(r.breakEvenRevenue)}</strong>`],
+                ['Current Cash in Bank', fmtMoneyWhole(r.cash)],
+                ['Monthly Operating Expenses', fmtMoneyWhole(r.monthlyExpenses)],
+                ['Current Monthly Revenue', fmtMoneyWhole(r.monthlyRevenue)],
+                ['Net Monthly Burn (Expenses − Revenue)', r.isProfitable ? fmtMoneyWhole(Math.abs(r.netBurn)) + ' (surplus)' : fmtMoneyWhole(r.netBurn)],
+                ['<strong>Cash Runway</strong>', `<strong>${r.runwayMonths === Infinity ? 'No burn — not applicable' : r.runwayMonths.toFixed(1) + ' months'}</strong>`]
+            ];
+            wrap.innerHTML = `<table class="tool-table">
+                <thead><tr><th>Component</th><th>Value</th></tr></thead>
+                <tbody>${rows.map(([label, val]) => `<tr><td>${label}</td><td>${val}</td></tr>`).join('')}</tbody>
+            </table>`;
+        }
+
+        document.getElementById('btn-be-csv').addEventListener('click', () => {
+            if (!lastResult) return;
+            const r = lastResult;
+            const lines = [
+                ['Component', 'Value'].map(csvEscape).join(','),
+                ['Selling Price per Unit', r.price].map(csvEscape).join(','),
+                ['Variable Cost per Unit', r.varCost].map(csvEscape).join(','),
+                ['Contribution Margin per Unit', r.contributionMargin.toFixed(2)].map(csvEscape).join(','),
+                ['Contribution Margin %', r.contributionMarginPct.toFixed(2)].map(csvEscape).join(','),
+                ['Total Fixed Costs / Month', r.fixedCosts].map(csvEscape).join(','),
+                ['Break-Even Units / Month', Math.ceil(r.breakEvenUnits)].map(csvEscape).join(','),
+                ['Break-Even Revenue / Month', r.breakEvenRevenue.toFixed(2)].map(csvEscape).join(','),
+                ['Current Cash in Bank', r.cash].map(csvEscape).join(','),
+                ['Monthly Operating Expenses', r.monthlyExpenses].map(csvEscape).join(','),
+                ['Current Monthly Revenue', r.monthlyRevenue].map(csvEscape).join(','),
+                ['Net Monthly Burn', r.netBurn.toFixed(2)].map(csvEscape).join(','),
+                ['Cash Runway (months)', r.runwayMonths === Infinity ? 'Infinity' : r.runwayMonths.toFixed(2)].map(csvEscape).join(',')
+            ];
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Breakeven_Runway_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        const HOW_TO_USE_ITEMS = [
+            'Below 3 months of runway — this is urgent; either a bridge, a fast cost cut, or a revenue jump needs to happen now.',
+            '3–6 months of runway — start fundraising or restructuring costs now; a raise process alone can eat 3-4 months.',
+            '6+ months of runway — healthier ground, but keep re-checking monthly since burn rarely stays perfectly flat.',
+            'Selling below break-even units consistently means every extra sale is currently subsidised by your cash reserves, not by profit.',
+            'A higher contribution margin (price minus variable cost) lowers your break-even point faster than cutting fixed costs usually does.',
+            'Re-run this every month with actuals, not just plan numbers — burn rate has a way of creeping up quietly.'
+        ];
+        function renderDocChecklist() {
+            const ul = document.getElementById('doc-checklist');
+            ul.innerHTML = HOW_TO_USE_ITEMS.map((text, i) => `
+                <li id="doc-chk-item-${i}">
+                    <input type="checkbox" id="doc-chk-${i}">
+                    <label for="doc-chk-${i}">${text}</label>
+                </li>
+            `).join('');
+            HOW_TO_USE_ITEMS.forEach((_, i) => {
+                document.getElementById(`doc-chk-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`doc-chk-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        ['inp-fixed-costs', 'inp-price', 'inp-var-cost', 'inp-cash', 'inp-monthly-expenses', 'inp-monthly-revenue'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => {
+            if (!lastResult) return null;
+            const r = lastResult;
+            return {
+                eyebrow: 'My Break-Even & Runway Verdict',
+                headline: r.runwayMonths === Infinity ? 'Cash-Flow Positive' : `${r.runwayMonths.toFixed(1)} Months Runway`,
+                resultLine: `${Math.ceil(r.breakEvenUnits).toLocaleString('en-IN')} units/mo to break even`,
+                resultSub: `Break-even revenue ${fmtMoneyWhole(r.breakEvenRevenue)}/month`,
+                footerNote: 'Estimate only — based on figures entered by the user.',
+                toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+            };
+        }, 'My_Breakeven_Runway_Verdict');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDocChecklist();
+            render();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Document Checklist from Tally Data | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Upload your Tally Trial Balance and Day Book export to get a primary audit document requirement checklist, tailored to your actual ledgers. No login, entirely processed in your browser.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Audit Document Checklist</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Audit Document Checklist from Tally Data</h2>
+        <p class="section-subtitle">Upload your Tally Trial Balance (and, ideally, a Day Book) export to get a primary document requirement list tailored to your actual ledgers — entirely processed in your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Self-Assessment Suite</span>
+                    </h3>
+                    <div class="sub-caption">Tally-Based Audit Document Requirement List</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Upload an EXPORTED REPORT only — never your raw Tally company data or login/Vault password.</strong> This tool reads a Trial Balance and/or Day Book <strong>Excel export</strong> from Tally (Gateway of Tally → the report → <strong>Alt+E → Export → Excel</strong>). It cannot open, and will never ask for, your raw Tally company data folder, your Tally login, or a Vault password — those never leave your computer, and there is no legitimate way for any web tool to read Vault-encrypted data without them. Nothing you upload here is sent to our server; parsing happens entirely in your browser.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Audit Document Checklist">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like professional help with your audit. <strong>Your Trial Balance and Day Book data are never sent to us</strong> — they're read and matched entirely in your browser, exactly as described above. Only the contact details below leave your device, and only if you submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the ledgers or figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Step 1 — Export From Tally</div>
+                    <p style="font-size:0.9rem; color:#334155; margin-bottom:10px;">In Tally: open the company → <strong>Gateway of Tally → Display More Reports → Trial Balance</strong> (and separately, <strong>Day Book</strong>) → press <strong>Alt+E</strong> → Export → Format: <strong>Excel (Spreadsheet)</strong> → save the file.</p>
+                    <p style="font-size:0.85rem; color:#64748b;">The Day Book is optional but recommended — it lets the tool list your actual debtor/creditor/vendor names and flag large cash transactions, which the Trial Balance alone (just group totals) can't show.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Step 2 — Upload Your Export(s)</div>
+                    <div class="tool-grid-2">
+                        <div>
+                            <label class="tool-form-label">Trial Balance Excel Export (required)</label>
+                            <div class="upload-zone" id="zone-tb">
+                                <div class="uz-icon">📊</div>
+                                <div class="uz-title">Click or drop your Trial Balance .xlsx file</div>
+                                <div class="uz-sub">Exported from Tally, unedited</div>
+                                <div class="uz-filename" id="fname-tb"></div>
+                            </div>
+                            <input type="file" id="file-tb" accept=".xlsx,.xls" style="display:none;">
+                        </div>
+                        <div>
+                            <label class="tool-form-label">Day Book Excel Export (optional, recommended)</label>
+                            <div class="upload-zone" id="zone-daybook">
+                                <div class="uz-icon">📖</div>
+                                <div class="uz-title">Click or drop your Day Book .xlsx file</div>
+                                <div class="uz-sub">Adds party names and transaction-level flags</div>
+                                <div class="uz-filename" id="fname-daybook"></div>
+                            </div>
+                            <input type="file" id="file-daybook" accept=".xlsx,.xls" style="display:none;">
+                        </div>
+                    </div>
+                    <div id="upload-status" style="margin-top:16px; font-size:0.85rem; color:#dc2626; font-weight:600;"></div>
+                    <div style="margin-top:18px;">
+                        <button id="btn-generate" class="btn-tool-gold" disabled style="opacity:0.5; cursor:not-allowed;">📋 Generate Document Checklist</button>
+                    </div>
+                </div>
+
+                <div id="results-wrap" style="display:none;">
+                    <div class="tool-card">
+                        <div class="tool-card-title">
+                            Overview
+                            <div class="tool-controls">
+                                <button class="btn-tool-outline" id="btn-checklist-csv" style="background:#002b49;">⬇️ CSV</button>
+                            </div>
+                        </div>
+                        <div class="widget-grid" id="overview-cards"></div>
+                    </div>
+
+                    <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49;">
+                        <div class="tool-card-title">💡 Smart Insights — Audit Focus Areas</div>
+                        <div id="smart-insights"></div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-card-title">General / Entity-Level Documents</div>
+                        <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">Needed for essentially every audit, regardless of what's in the ledgers. Tick items off as you collect them — nothing here is saved or sent anywhere.</p>
+                        <ul class="tool-checklist" id="general-checklist"></ul>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-card-title">Documents Needed — Based on Your Trial Balance</div>
+                        <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">Each section below only appears because at least one matching ledger was found in your file — shown as evidence next to the section title.</p>
+                        <div id="dynamic-sections"></div>
+                    </div>
+
+                    <div class="tool-card" id="daybook-card" style="display:none;">
+                        <div class="tool-card-title">Transaction-Level Observations (from Day Book)</div>
+                        <div id="daybook-section"></div>
+                    </div>
+
+                    <div class="disclaimer-box">
+                        <strong>Disclaimer:</strong> This is a self-help planning aid that generates a <em>preliminary</em> document list from ledger names and voucher patterns using general keyword rules — it is not an audit program, not a substitute for professional judgment, and does not cover every situation (e.g. foreign transactions, related-party structuring, industry-specific requirements, or fraud risk indicators). Section references shown (40A(3), 269SS, 269T, 269ST) are the well-known Income-tax Act, 1961 numbers; the Income-tax Act, 2025 (effective 1 April 2026) has renumbered many provisions, so confirm the corresponding current section number before citing it in any formal correspondence — the underlying thresholds and rules themselves are unchanged. Aggarwal Abhishek &amp; Co. does not certify this list's completeness or accuracy for your specific engagement — please have your actual audit documentation requirements finalized by a qualified professional.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        // ==========================================================================
+        // Shared helpers
+        // ==========================================================================
+        function fmtMoney(n) {
+            return '₹' + Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function fmtDateShort(d) {
+            if (!d) return '—';
+            return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+        function parseAmount(v) {
+            if (v === undefined || v === null || v === '') return 0;
+            if (typeof v === 'number') return v;
+            const s = String(v).replace(/[₹,\s]/g, '');
+            const n = parseFloat(s);
+            return isNaN(n) ? 0 : n;
+        }
+        function parseDate(v) {
+            if (!v) return null;
+            if (v instanceof Date) return v;
+            if (typeof v === 'number') {
+                const epoch = new Date(Date.UTC(1899, 11, 30));
+                return new Date(epoch.getTime() + v * 86400000);
+            }
+            const s = String(v).trim();
+            let m = s.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/);
+            if (m) return new Date(Date.UTC(+m[3], +m[2] - 1, +m[1]));
+            m = s.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})$/);
+            if (m) return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+            const d = new Date(s);
+            return isNaN(d.getTime()) ? null : d;
+        }
+        function sheetToAoa(worksheet) {
+            return XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: true, defval: '' });
+        }
+
+        // ==========================================================================
+        // Trial Balance parsing — deliberately flat, not hierarchy-aware: every
+        // row's Particulars text (whether it's a Tally group subtotal like
+        // "Sundry Debtors" or a leaf ledger like "AXIS BANK-7231") is kept and
+        // later matched by keyword. This sidesteps relying on cell-level
+        // indent/bold formatting, which browser-side Excel libraries often
+        // don't expose reliably, while still catching most real ledgers since
+        // either the group name or the leaf name (or both) is descriptive.
+        // ==========================================================================
+        function parseTrialBalance(workbook) {
+            const sheetName = workbook.SheetNames.find(n => /trial\s*balance/i.test(n)) || workbook.SheetNames[0];
+            const aoa = sheetToAoa(workbook.Sheets[sheetName]);
+
+            // Company name: first non-blank row that isn't a report-title line
+            let companyName = '';
+            for (const row of aoa.slice(0, 6)) {
+                const text = String(row[0] || '').trim();
+                if (text && !/^trial\s*balance$/i.test(text)) { companyName = text; break; }
+            }
+            // Period: a row matching "D-Mon-YY to D-Mon-YY" (or similar) anywhere in the first 8 rows
+            let period = '';
+            for (const row of aoa.slice(0, 8)) {
+                const text = String(row[0] || '').trim();
+                if (/\d{1,2}[-\s]\w{3,}[-\s]\d{2,4}\s*to\s*\d{1,2}[-\s]\w{3,}[-\s]\d{2,4}/i.test(text)) { period = text; break; }
+            }
+
+            // Find the header anchor: the row whose first cell is exactly "Particulars"
+            let anchorRow = -1;
+            for (let r = 0; r < Math.min(aoa.length, 20); r++) {
+                if (/^particulars$/i.test(String(aoa[r][0] || '').trim())) { anchorRow = r; break; }
+            }
+            if (anchorRow === -1) {
+                throw new Error("Couldn't find a \"Particulars\" header row in this file. Make sure this is an unedited Trial Balance Excel export from Tally (Alt+E → Export → Excel from the Trial Balance report).");
+            }
+
+            // Column headers can span up to 2 rows below the anchor (e.g. "Opening" / "Balance").
+            // Scan those rows (plus the anchor row itself) for column keywords.
+            const cols = {};
+            for (let r = anchorRow; r <= Math.min(anchorRow + 2, aoa.length - 1); r++) {
+                (aoa[r] || []).forEach((cell, i) => {
+                    const text = String(cell || '').trim().toLowerCase();
+                    if (!text) return;
+                    if (cols.opening === undefined && /open/.test(text)) cols.opening = i;
+                    if (cols.debit === undefined && /^debit$/.test(text)) cols.debit = i;
+                    if (cols.credit === undefined && /^credit$/.test(text)) cols.credit = i;
+                    if (cols.closing === undefined && /clos/.test(text)) cols.closing = i;
+                });
+            }
+            if (cols.debit === undefined && cols.credit === undefined && cols.closing === undefined) {
+                throw new Error("Found a \"Particulars\" row but couldn't identify Opening/Debit/Credit/Closing columns. This may not be a standard Trial Balance export — please re-export from Tally without changing column headers.");
+            }
+            const dataStart = anchorRow + 3; // anchor + up to 2 sub-header rows
+
+            const ledgers = [];
+            let grandTotalDebit = null, grandTotalCredit = null;
+            for (let r = dataStart; r < aoa.length; r++) {
+                const row = aoa[r] || [];
+                const name = String(row[0] || '').trim();
+                if (!name) continue;
+                const opening = cols.opening !== undefined ? parseAmount(row[cols.opening]) : 0;
+                const debit = cols.debit !== undefined ? parseAmount(row[cols.debit]) : 0;
+                const credit = cols.credit !== undefined ? parseAmount(row[cols.credit]) : 0;
+                const closing = cols.closing !== undefined ? parseAmount(row[cols.closing]) : 0;
+
+                if (/^grand\s*total$/i.test(name)) {
+                    grandTotalDebit = debit;
+                    grandTotalCredit = credit;
+                    continue;
+                }
+                if (opening === 0 && debit === 0 && credit === 0 && closing === 0) continue; // fully blank row
+                ledgers.push({ name, opening, debit, credit, closing });
+            }
+
+            if (ledgers.length === 0) {
+                throw new Error('No ledger rows with any figures were found below the header. Please make sure this is the unedited Trial Balance export for the correct period.');
+            }
+
+            return { companyName, period, ledgers, grandTotalDebit, grandTotalCredit };
+        }
+
+        // ==========================================================================
+        // Day Book parsing
+        // ==========================================================================
+        function parseDayBook(workbook) {
+            const sheetName = workbook.SheetNames.find(n => /day\s*book/i.test(n)) || workbook.SheetNames[0];
+            const aoa = sheetToAoa(workbook.Sheets[sheetName]);
+
+            let anchorRow = -1;
+            const cols = {};
+            for (let r = 0; r < Math.min(aoa.length, 20); r++) {
+                const row = aoa[r] || [];
+                const idx = {};
+                row.forEach((cell, i) => {
+                    const text = String(cell || '').trim().toLowerCase();
+                    if (!text) return;
+                    if (/^date$/.test(text)) idx.date = i;
+                    if (/particulars/.test(text)) idx.particulars = i;
+                    if (/vch\s*type|voucher\s*type/.test(text)) idx.vchType = i;
+                    if (/vch\s*no|voucher\s*no/.test(text)) idx.vchNo = i;
+                    if (/debit/.test(text)) idx.debit = i;
+                    if (/credit/.test(text)) idx.credit = i;
+                });
+                if (idx.date !== undefined && idx.particulars !== undefined && idx.vchType !== undefined) {
+                    anchorRow = r;
+                    Object.assign(cols, idx);
+                    break;
+                }
+            }
+            if (anchorRow === -1) {
+                throw new Error("Couldn't find Date/Particulars/Vch Type columns in this file. Make sure this is an unedited Day Book Excel export from Tally (Alt+E → Export → Excel from the Day Book report).");
+            }
+
+            const entries = [];
+            for (let r = anchorRow + 1; r < aoa.length; r++) {
+                const row = aoa[r] || [];
+                const date = parseDate(row[cols.date]);
+                const vchType = String(row[cols.vchType] || '').trim();
+                if (!date || !vchType) continue; // skips the Qty sub-header row and blank spacer rows
+                entries.push({
+                    date,
+                    particulars: String(row[cols.particulars] || '').trim(),
+                    vchType,
+                    vchNo: cols.vchNo !== undefined ? String(row[cols.vchNo] || '').trim() : '',
+                    debit: cols.debit !== undefined ? parseAmount(row[cols.debit]) : 0,
+                    credit: cols.credit !== undefined ? parseAmount(row[cols.credit]) : 0
+                });
+            }
+            if (entries.length === 0) {
+                throw new Error('No transaction rows were found below the header. Please make sure this is the unedited Day Book export for the correct period.');
+            }
+            return { entries };
+        }
+
+        // ==========================================================================
+        // Document-requirement rule engine. Each rule is matched against every
+        // Trial Balance row's Particulars text (both Tally group-subtotal rows
+        // like "Sundry Debtors" and individual leaf ledgers like "AXIS BANK-7231"
+        // are checked — see the parseTrialBalance comment for why).
+        // ==========================================================================
+        const RULES = [
+            {
+                key: 'bank', title: 'Bank Accounts', icon: '🏦',
+                match: /\bbank\b/i, exclude: /bank\s*charges|bank\s*od|cash\s*credit/i,
+                docs: [
+                    'Bank statements for the full financial year, for every bank account',
+                    'Bank Reconciliation Statement (BRS) as on the balance sheet date',
+                    'Latest cancelled cheque or passbook copy for each account',
+                    'Confirmation/statement of any fixed deposit or bank guarantee held'
+                ]
+            },
+            {
+                key: 'bankod', title: 'Secured Loans / Bank OD / Cash Credit', icon: '🏦',
+                match: /secured\s*loans?|bank\s*od|cash\s*credit/i,
+                docs: [
+                    'Loan sanction letter and terms',
+                    'Hypothecation/mortgage/charge documents',
+                    'Latest stock and debtor statement submitted to the bank',
+                    'Interest certificate from the bank for the year',
+                    'Charge registration (Form CHG-1/CHG-9) filed with ROC, if applicable'
+                ]
+            },
+            {
+                key: 'cash', title: 'Cash-in-Hand', icon: '💵',
+                match: /cash[-\s]*in[-\s]*hand|^cash$/i,
+                docs: [
+                    'Cash book for the full financial year',
+                    'Physical cash verification certificate as on the balance sheet date',
+                    'Explanation/justification for any cash balance beyond a reasonable operating limit'
+                ]
+            },
+            {
+                key: 'debtors', title: 'Sundry Debtors / Trade Receivables', icon: '📥',
+                match: /sundry\s*debtors|trade\s*receivable/i,
+                docs: [
+                    'Party-wise debtors ageing schedule as on the balance sheet date',
+                    'Balance confirmation letters from major debtors',
+                    'Sample sales invoices supporting outstanding balances',
+                    'Working/basis for any provision for doubtful debts'
+                ]
+            },
+            {
+                key: 'creditors', title: 'Sundry Creditors / Trade Payables', icon: '📤',
+                match: /sundry\s*creditors|trade\s*payable/i,
+                docs: [
+                    'Party-wise creditors ageing schedule as on the balance sheet date',
+                    'Balance confirmation letters from major creditors',
+                    'Sample purchase invoices/bills and goods-receipt notes supporting outstanding balances'
+                ]
+            },
+            {
+                key: 'loans', title: 'Loans (Liability) — Secured / Unsecured', icon: '💰',
+                match: /\bloan\b/i, exclude: /loans?\s*&?\s*advances|bank\s*od|cash\s*credit/i,
+                docs: [
+                    'Loan agreement / sanction letter / confirmation from each lender',
+                    'Balance confirmation as on the balance sheet date',
+                    'Interest computation and TDS deduction under Section 194A, if applicable',
+                    'Compliance check under Section 269SS/269T — loans/deposits of ₹20,000 or more must be taken/repaid only through an account payee cheque, bank draft or ECS',
+                    'Related-party disclosure, if the lender is a director, partner or their relative'
+                ]
+            },
+            {
+                key: 'loansadv', title: 'Loans & Advances (Asset)', icon: '💸',
+                match: /loans?\s*&?\s*advances|advance\s*to\b/i,
+                docs: [
+                    'Confirmation of balance from the recipient',
+                    'Recoverability assessment / ageing',
+                    'Documentation of business purpose for the advance'
+                ]
+            },
+            {
+                key: 'capital', title: 'Capital Account / Partner\'s or Director\'s Capital', icon: '🏛️',
+                match: /capital\s*account|director.*capital|partner.*capital|proprietor.*capital/i,
+                docs: [
+                    'Board resolution / partner consent authorizing capital introduction or withdrawal',
+                    'Proof of source of funds for capital introduced during the year',
+                    'MOA & AOA (company) or Partnership Deed / LLP Agreement, as applicable'
+                ]
+            },
+            {
+                key: 'fixedassets', title: 'Fixed Assets', icon: '🏗️',
+                match: /fixed\s*assets?|\bmachine\b|\bmachinery\b|\bvehicle\b|\bfurniture\b|\bbuilding\b|\bcomputer\b|\bequipment\b|mobile\s*phone/i,
+                docs: [
+                    'Fixed Asset Register',
+                    'Purchase invoices for all additions during the year',
+                    'Depreciation working (Companies Act Schedule II and/or Income Tax Act rates, as applicable)',
+                    'Physical verification report for major assets',
+                    'Insurance policy copies, where assets are insured'
+                ]
+            },
+            {
+                key: 'gst', title: 'GST / Duties & Taxes', icon: '🧾',
+                match: /\bgst\b|cgst|sgst|igst|electronic\s*credit\s*ledger|duties\s*&?\s*taxes|mismatch/i,
+                docs: [
+                    'GSTR-1 and GSTR-3B for every period in the year',
+                    'GSTR-2B / annual GSTR-9 (and GSTR-9C, if applicable) for the year',
+                    'GST payment challans',
+                    'Electronic cash and credit ledger statements from the GST portal',
+                    'Reconciliation of books vs. GST returns — see our GSTR-2B Reconciliation tool',
+                    'Explanation for any ledger showing a "mismatch" balance'
+                ]
+            },
+            {
+                key: 'tds', title: 'TDS Receivable / Payable', icon: '📑',
+                match: /\btds\b/i,
+                docs: [
+                    'Form 26AS / AIS for the year',
+                    'TDS certificates received (Form 16A) and issued (Form 16/16A)',
+                    'TDS returns filed (24Q/26Q/27Q) with challans',
+                    'Reconciliation of TDS receivable/payable against 26AS'
+                ]
+            },
+            {
+                key: 'sales', title: 'Sales Accounts', icon: '📈',
+                match: /sales\s*accounts?|^sale$|^sales$/i,
+                docs: [
+                    'Sales register for the full year',
+                    'Sample sales invoices',
+                    'E-way bills for goods movement, where applicable',
+                    'Reconciliation with GSTR-1/GSTR-3B outward supplies'
+                ]
+            },
+            {
+                key: 'purchase', title: 'Purchase Accounts', icon: '📉',
+                match: /purchase\s*accounts?|^purchase$/i,
+                docs: [
+                    'Purchase register for the full year',
+                    'Sample purchase invoices/bills',
+                    'E-way bills, where applicable',
+                    'Reconciliation with GSTR-2B for ITC matching'
+                ]
+            },
+            {
+                key: 'salary', title: 'Salary / Wages / Remuneration', icon: '👥',
+                match: /salary|remuneration|\bwages\b/i,
+                docs: [
+                    'Salary register / payroll workings for the year',
+                    'Form 16 issued to employees',
+                    'PF/ESI challans and returns, if applicable',
+                    'Professional tax challans, if applicable',
+                    'Employment/appointment letters',
+                    'Board resolution approving director remuneration, if a company'
+                ]
+            },
+            {
+                key: 'retained', title: 'Retained Earnings / Reserves & Surplus / P&L A/c', icon: '📒',
+                match: /retained\s*earnings|reserves\s*&?\s*surplus|profit\s*&?\s*loss\s*a\/?c/i,
+                docs: [
+                    'Prior year\'s audited financial statements',
+                    'Prior year\'s board-approved accounts / AGM-adopted accounts',
+                    'Working for the current year\'s profit transfer to reserves'
+                ]
+            },
+            {
+                key: 'depreciation', title: 'Depreciation', icon: '📉',
+                match: /depreciation/i,
+                docs: [
+                    'Cross-check against the Fixed Asset Register',
+                    'Confirm depreciation rates used and consistency with the prior year'
+                ]
+            },
+            {
+                key: 'investments', title: 'Investments', icon: '📊',
+                match: /investment/i,
+                docs: [
+                    'Investment certificates / account statements',
+                    'Broker contract notes, where applicable',
+                    'Valuation as on the balance sheet date (cost or market value, as applicable)'
+                ]
+            },
+            {
+                key: 'provisions', title: 'Provisions', icon: '📋',
+                match: /provision/i,
+                docs: [
+                    'Basis/working for each provision recognized',
+                    'Supporting documentation (e.g. actuarial valuation for gratuity, if applicable)'
+                ]
+            },
+            {
+                key: 'stock', title: 'Stock / Inventory', icon: '📦',
+                match: /stock[-\s]*in[-\s]*hand|inventory|closing\s*stock/i,
+                docs: [
+                    'Stock register',
+                    'Physical verification / stock-take sheet as on the balance sheet date',
+                    'Stock valuation method and working (FIFO/Weighted Average/Cost-or-NRV, as adopted)',
+                    'Latest stock statement submitted to the bank, if a cash credit/OD facility exists'
+                ]
+            },
+            {
+                key: 'statutorydues', title: 'PF / ESI / Statutory Dues', icon: '🏢',
+                match: /\bpf\b|provident\s*fund|\besi\b|employee\s*state\s*insurance/i,
+                docs: [
+                    'PF and ESI registration certificates',
+                    'Monthly challans and returns for the year',
+                    'Reconciliation against the salary register'
+                ]
+            },
+            {
+                key: 'related', title: 'Related-Party Ledgers', icon: '🔗',
+                match: /\bdirector\b|\bpartner\b|proprietor|relative\s*of\s*director/i,
+                docs: [
+                    'Related-party transaction disclosure (AS-18 / Ind AS 24, as applicable)',
+                    'Board/committee approval for related-party contracts, per Section 188 of the Companies Act, where applicable',
+                    'Basis for arm\'s-length pricing, where relevant'
+                ]
+            }
+        ];
+
+        const GENERAL_DOCS = [
+            'Certificate of Incorporation / Registration, and PAN & TAN copies',
+            'MOA & AOA (company), Partnership Deed (firm), or LLP Agreement (LLP)',
+            'GST registration certificate',
+            'Prior year\'s Income Tax Return acknowledgment, computation, and audit report (if applicable)',
+            'Board/partner meeting minutes for the year, including approval of financial statements',
+            'List of directors/partners/designated partners with DIN/DPIN and KYC status',
+            'Statutory registers maintained during the year (as applicable to the entity type)',
+            'Any show-cause notices, assessment orders, or litigation correspondence received during the year'
+        ];
+
+        function matchLedgers(rule, ledgerNames) {
+            return ledgerNames.filter(name => rule.match.test(name) && !(rule.exclude && rule.exclude.test(name)));
+        }
+
+        function buildDynamicSections(ledgers) {
+            const names = ledgers.map(l => l.name);
+            const sections = [];
+            RULES.forEach(rule => {
+                const matched = matchLedgers(rule, names);
+                if (matched.length) sections.push({ rule, matched: Array.from(new Set(matched)) });
+            });
+            return sections;
+        }
+
+        // ==========================================================================
+        // Day Book-driven observations
+        // ==========================================================================
+        const CASH_FLAG_THRESHOLD = 10000;
+
+        function buildDayBookObservations(dayBook) {
+            const vchTypeCounts = {};
+            const cashFlags = [];
+            const debtorNames = new Set();
+            const creditorNames = new Set();
+            const otherPartyTotals = new Map(); // name -> total amount, for Payment/Receipt not already a known bank/loan/salary ledger
+
+            // Matches Tally's own bookkeeping/group-total lines (ledger group
+            // names, cancelled-voucher markers) that are not real trading
+            // parties and should never show up as a "party" of any kind.
+            const NOT_A_PARTY = /^\(cancelled\)$/i;
+            const KNOWN_INTERNAL = /bank|cash|gst|tds|salary|payable|loan|capital|depreciation|round\s*off|electronic\s*credit|sundry\s*(debtors|creditors)/i;
+
+            // Pass 1: voucher-type counts, cash flags, and debtor/creditor
+            // names (from Sales/Purchase vouchers — the authoritative source).
+            dayBook.entries.forEach(e => {
+                vchTypeCounts[e.vchType] = (vchTypeCounts[e.vchType] || 0) + 1;
+                const amount = Math.max(e.debit, e.credit);
+
+                if (/^cash$/i.test(e.particulars) || /cash[-\s]*in[-\s]*hand/i.test(e.particulars)) {
+                    if (amount >= CASH_FLAG_THRESHOLD) {
+                        cashFlags.push({ date: e.date, particulars: e.particulars, vchType: e.vchType, vchNo: e.vchNo, amount });
+                    }
+                }
+
+                if (!e.particulars || NOT_A_PARTY.test(e.particulars.trim())) return;
+
+                if (/^sales$/i.test(e.vchType)) debtorNames.add(e.particulars);
+                if (/^purchase$/i.test(e.vchType)) creditorNames.add(e.particulars);
+            });
+
+            // Pass 2: "other parties" from Payment/Receipt vouchers — run
+            // after debtor/creditor names are known, so a party already
+            // identified as a debtor or creditor (e.g. a customer who also
+            // shows up receiving a Receipt voucher) isn't double-listed here
+            // as if it were a separate, unrecognized payee needing TDS review.
+            dayBook.entries.forEach(e => {
+                if (!/^payment$|^receipt$/i.test(e.vchType) || !e.particulars) return;
+                if (NOT_A_PARTY.test(e.particulars.trim())) return;
+                if (KNOWN_INTERNAL.test(e.particulars)) return;
+                if (debtorNames.has(e.particulars) || creditorNames.has(e.particulars)) return;
+
+                const amount = Math.max(e.debit, e.credit);
+                otherPartyTotals.set(e.particulars, (otherPartyTotals.get(e.particulars) || 0) + amount);
+            });
+
+            cashFlags.sort((a, b) => b.amount - a.amount);
+            const otherParties = Array.from(otherPartyTotals.entries())
+                .map(([name, total]) => ({ name, total }))
+                .sort((a, b) => b.total - a.total);
+
+            const dates = dayBook.entries.map(e => e.date).filter(Boolean);
+            const minDate = dates.length ? new Date(Math.min(...dates)) : null;
+            const maxDate = dates.length ? new Date(Math.max(...dates)) : null;
+
+            return { vchTypeCounts, cashFlags, debtorNames: Array.from(debtorNames), creditorNames: Array.from(creditorNames), otherParties, minDate, maxDate, count: dayBook.entries.length };
+        }
+
+        // ==========================================================================
+        // Upload wiring
+        // ==========================================================================
+        let tbData = null;
+        let dayBookData = null;
+
+        function wireUploadZone(zoneId, inputId, filenameId, onFile) {
+            const zone = document.getElementById(zoneId);
+            const input = document.getElementById(inputId);
+            const fname = document.getElementById(filenameId);
+
+            zone.addEventListener('click', () => input.click());
+            zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+            zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+            });
+            input.addEventListener('change', e => {
+                if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+            });
+
+            function handleFile(file) {
+                fname.textContent = '';
+                document.getElementById('upload-status').textContent = '';
+                const reader = new FileReader();
+                reader.onload = evt => {
+                    try {
+                        const data = new Uint8Array(evt.target.result);
+                        const workbook = XLSX.read(data, { type: 'array', cellDates: false });
+                        const result = onFile(workbook);
+                        zone.classList.add('file-loaded');
+                        fname.textContent = `✓ ${file.name}`;
+                        checkReady();
+                    } catch (err) {
+                        zone.classList.remove('file-loaded');
+                        document.getElementById('upload-status').textContent = `${file.name}: ${err.message}`;
+                    }
+                };
+                reader.onerror = () => {
+                    document.getElementById('upload-status').textContent = `Could not read ${file.name}. If it's password- or Vault-protected, please export a fresh copy without protection.`;
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        }
+
+        function checkReady() {
+            const btn = document.getElementById('btn-generate');
+            if (tbData) {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            }
+        }
+
+        wireUploadZone('zone-tb', 'file-tb', 'fname-tb', workbook => {
+            tbData = parseTrialBalance(workbook);
+            return tbData;
+        });
+        wireUploadZone('zone-daybook', 'file-daybook', 'fname-daybook', workbook => {
+            dayBookData = parseDayBook(workbook);
+            return dayBookData;
+        });
+
+        // ==========================================================================
+        // Rendering
+        // ==========================================================================
+        function renderChecklistInto(elId, items) {
+            const ul = document.getElementById(elId);
+            ul.innerHTML = items.map((text, i) => `
+                <li id="${elId}-item-${i}">
+                    <input type="checkbox" id="${elId}-${i}">
+                    <label for="${elId}-${i}">${text}</label>
+                </li>
+            `).join('');
+            items.forEach((_, i) => {
+                document.getElementById(`${elId}-${i}`).addEventListener('change', (e) => {
+                    document.getElementById(`${elId}-item-${i}`).classList.toggle('checked', e.target.checked);
+                });
+            });
+        }
+
+        // ==========================================================================
+        // Smart Insights — a rule-based (not live-AI) narrative that turns
+        // the parsed Trial Balance / Day Book into prioritized audit-focus
+        // observations. Deterministic, free to run, no data leaves the browser.
+        // ==========================================================================
+        function buildSmartInsights(tbData, dynamicSections, dayBookObs, dayBookRaw) {
+            const insights = [];
+            const tbTallies = tbData.grandTotalDebit !== null && tbData.grandTotalCredit !== null
+                ? Math.abs(tbData.grandTotalDebit - tbData.grandTotalCredit) < 1
+                : null;
+
+            if (tbTallies === false) {
+                insights.push({
+                    level: 'critical',
+                    text: `The Trial Balance does not tally — Debit total ${fmtMoney(tbData.grandTotalDebit)} vs Credit total ${fmtMoney(tbData.grandTotalCredit)}, a difference of ${fmtMoney(Math.abs(tbData.grandTotalDebit - tbData.grandTotalCredit))}. Resolve this with the client before proceeding with substantive testing — a non-tallying TB usually means an export/period issue or an unposted entry.`
+                });
+            }
+
+            if (dayBookObs && dayBookObs.cashFlags.length > 0) {
+                const totalCash = dayBookObs.cashFlags.reduce((s, f) => s + f.amount, 0);
+                insights.push({
+                    level: 'critical',
+                    text: `${dayBookObs.cashFlags.length} cash transaction${dayBookObs.cashFlags.length === 1 ? '' : 's'} of ₹${CASH_FLAG_THRESHOLD.toLocaleString('en-IN')} or more (totaling ${fmtMoney(totalCash)}) were found. Review each against Section 40A(3) (cash expense disallowance), 269SS/269T (cash loans/deposits) and 269ST (cash receipts) — these are common disallowance/penalty triggers and should be a priority checkpoint.`
+                });
+            }
+
+            if (dayBookObs && dayBookObs.otherParties.length > 0) {
+                const top = dayBookObs.otherParties[0];
+                insights.push({
+                    level: 'warning',
+                    text: `${dayBookObs.otherParties.length} payment/receipt part${dayBookObs.otherParties.length === 1 ? 'y' : 'ies'} in the Day Book ${dayBookObs.otherParties.length === 1 ? "doesn't" : "don't"} match any known ledger category — the largest is "${top.name}" at ${fmtMoney(top.total)}. Review these for TDS applicability (Section 194J/194C and similar) and ensure supporting bills exist.`
+                });
+            }
+
+            // Debtor/creditor concentration: a single customer or vendor
+            // accounting for the bulk of sales/purchase value is a real
+            // audit-relevant observation (going-concern dependency, and a
+            // flag worth checking against the related-party ledgers too).
+            if (dayBookRaw && dayBookRaw.entries) {
+                const concByName = (vchType) => {
+                    const totals = new Map();
+                    dayBookRaw.entries.forEach(e => {
+                        if (!e.particulars || e.vchType !== vchType) return;
+                        const amt = Math.max(e.debit, e.credit);
+                        totals.set(e.particulars, (totals.get(e.particulars) || 0) + amt);
+                    });
+                    return totals;
+                };
+                const flagConcentration = (vchType, label) => {
+                    const totals = concByName(vchType);
+                    if (totals.size < 2) return; // need at least 2 parties for "concentration" to mean anything
+                    const grand = Array.from(totals.values()).reduce((a, b) => a + b, 0);
+                    if (grand <= 0) return;
+                    const [topName, topAmt] = Array.from(totals.entries()).sort((a, b) => b[1] - a[1])[0];
+                    const pct = (topAmt / grand) * 100;
+                    if (pct >= 60) {
+                        insights.push({
+                            level: 'info',
+                            text: `"${topName}" accounts for ${pct.toFixed(0)}% of ${label} value in the Day Book (${fmtMoney(topAmt)} of ${fmtMoney(grand)}). High concentration in a single ${label === 'sales' ? 'customer' : 'vendor'} is worth flagging — check whether they're a related party and consider the going-concern implications if this dependency is new or worsening.`
+                        });
+                    }
+                };
+                flagConcentration('Sales', 'sales');
+                flagConcentration('Purchase', 'purchase');
+            }
+
+            if (!dayBookObs) {
+                insights.push({
+                    level: 'info',
+                    text: `Only the Trial Balance was uploaded. Add the Day Book export as well for cash-transaction flags, debtor/creditor identification and TDS-review candidates — the Trial Balance alone can't show individual transactions.`
+                });
+            }
+
+            if (dynamicSections.length >= 8) {
+                insights.push({
+                    level: 'info',
+                    text: `${dynamicSections.length} distinct ledger categories were matched, indicating a reasonably active set of books to audit — plan document collection accordingly rather than treating this as a light-touch engagement.`
+                });
+            }
+
+            if (!insights.some(i => i.level === 'critical')) {
+                insights.push({ level: 'good', text: tbTallies ? `The Trial Balance tallies and no cash-transaction red flags were found — a reasonable starting position, though the checklist below should still be worked through in full.` : `No cash-transaction red flags were found in the Day Book.` });
+            }
+
+            return insights;
+        }
+
+        function renderSmartInsights(insights) {
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        let lastPlan = null;
+
+        function generate() {
+            if (!tbData) return;
+
+            const dynamicSections = buildDynamicSections(tbData.ledgers);
+            const dayBookObs = dayBookData ? buildDayBookObservations(dayBookData) : null;
+            const smartInsights = buildSmartInsights(tbData, dynamicSections, dayBookObs, dayBookData);
+            renderSmartInsights(smartInsights);
+            lastPlan = { tbData, dynamicSections, dayBookObs, smartInsights };
+
+            // Overview cards
+            const tbTallies = tbData.grandTotalDebit !== null && tbData.grandTotalCredit !== null
+                ? Math.abs(tbData.grandTotalDebit - tbData.grandTotalCredit) < 1
+                : null;
+            const cards = [
+                ['Company', tbData.companyName || '—', tbData.period || 'Period not detected', '#002b49'],
+                ['Ledger/Group Lines Scanned', tbData.ledgers.length, 'From the Trial Balance', '#0ea5e9'],
+                tbTallies === null
+                    ? ['Trial Balance Check', 'Not verified', 'Grand Total row not found', '#f59e0b']
+                    : tbTallies
+                        ? ['Trial Balance Check', '✓ Tallies', `Dr = Cr = ${fmtMoney(tbData.grandTotalDebit)}`, '#10b981']
+                        : ['Trial Balance Check', '⚠ Does Not Tally', `Dr ${fmtMoney(tbData.grandTotalDebit)} ≠ Cr ${fmtMoney(tbData.grandTotalCredit)}`, '#dc2626'],
+                dayBookObs
+                    ? ['Day Book Transactions', dayBookObs.count, dayBookObs.minDate && dayBookObs.maxDate ? `${fmtDateShort(dayBookObs.minDate)} – ${fmtDateShort(dayBookObs.maxDate)}` : '', '#7c3aed']
+                    : ['Day Book', 'Not uploaded', 'Upload one for party names & cash flags', '#94a3b8']
+            ];
+            document.getElementById('overview-cards').innerHTML = cards.map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value" style="font-size:${String(val).length > 14 ? '1.05rem' : '1.5rem'};">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderChecklistInto('general-checklist', GENERAL_DOCS);
+
+            document.getElementById('dynamic-sections').innerHTML = dynamicSections.length
+                ? dynamicSections.map(s => `
+                    <div style="margin-bottom:22px; padding-bottom:18px; border-bottom:1px solid #e2e8f0;">
+                        <div style="font-weight:700; color:#002b49; margin-bottom:6px; font-size:0.98rem;">${s.rule.icon} ${s.rule.title}</div>
+                        <div style="margin-bottom:10px;">${s.matched.map(m => `<span class="score-badge badge-score-3" style="margin:0 6px 6px 0; display:inline-block;">${m}</span>`).join('')}</div>
+                        <ul class="tool-checklist" id="dyn-${s.rule.key}"></ul>
+                    </div>
+                `).join('')
+                : '<p style="color:#64748b; padding:10px;">No specific ledger categories were matched — only the general entity-level documents above apply.</p>';
+            dynamicSections.forEach(s => renderChecklistInto(`dyn-${s.rule.key}`, s.rule.docs));
+
+            // Day Book section
+            const daybookCard = document.getElementById('daybook-card');
+            if (dayBookObs) {
+                daybookCard.style.display = 'block';
+                const vchRows = Object.entries(dayBookObs.vchTypeCounts).sort((a, b) => b[1] - a[1])
+                    .map(([type, count]) => `<tr><td>${type}</td><td class="text-right">${count}</td></tr>`).join('');
+
+                const cashRows = dayBookObs.cashFlags.length
+                    ? dayBookObs.cashFlags.map(f => `<tr><td>${fmtDateShort(f.date)}</td><td>${f.particulars}</td><td>${f.vchType}</td><td>${f.vchNo}</td><td class="text-right">${fmtMoney(f.amount)}</td></tr>`).join('')
+                    : `<tr><td colspan="5" class="text-center" style="color:#94a3b8; padding:16px;">No cash transactions of ₹${CASH_FLAG_THRESHOLD.toLocaleString('en-IN')} or more found.</td></tr>`;
+
+                const debtorChips = dayBookObs.debtorNames.length ? dayBookObs.debtorNames.map(n => `<span class="score-badge badge-score-3" style="margin:0 6px 6px 0; display:inline-block;">${n}</span>`).join('') : '<span style="color:#94a3b8;">None found (no Sales vouchers in the Day Book)</span>';
+                const creditorChips = dayBookObs.creditorNames.length ? dayBookObs.creditorNames.map(n => `<span class="score-badge badge-score-4" style="margin:0 6px 6px 0; display:inline-block;">${n}</span>`).join('') : '<span style="color:#94a3b8;">None found (no Purchase vouchers in the Day Book)</span>';
+
+                const otherPartyRows = dayBookObs.otherParties.length
+                    ? dayBookObs.otherParties.slice(0, 25).map(p => `<tr><td>${p.name}</td><td class="text-right">${fmtMoney(p.total)}</td></tr>`).join('')
+                    : `<tr><td colspan="2" class="text-center" style="color:#94a3b8; padding:16px;">None found.</td></tr>`;
+
+                document.getElementById('daybook-section').innerHTML = `
+                    <div style="margin-bottom:20px;">
+                        <div style="font-weight:700; color:#002b49; margin-bottom:8px; font-size:0.95rem;">Voucher Type Breakdown</div>
+                        <div class="tool-table-container"><table class="tool-table">
+                            <thead><tr><th>Voucher Type</th><th class="text-right">Count</th></tr></thead>
+                            <tbody>${vchRows}</tbody>
+                        </table></div>
+                    </div>
+
+                    <div style="margin-bottom:20px;">
+                        <div style="font-weight:700; color:#002b49; margin-bottom:8px; font-size:0.95rem;">Cash Transactions ≥ ₹${CASH_FLAG_THRESHOLD.toLocaleString('en-IN')}</div>
+                        <p style="font-size:0.8rem; color:#64748b; margin-bottom:8px;">Flagged for review against Section 40A(3) (cash expense disallowance), Section 269SS/269T (cash loans/deposits) and Section 269ST (cash receipts), as applicable.</p>
+                        <div class="tool-table-container"><table class="tool-table">
+                            <thead><tr><th>Date</th><th>Ledger</th><th>Vch Type</th><th>Vch No.</th><th class="text-right">Amount</th></tr></thead>
+                            <tbody>${cashRows}</tbody>
+                        </table></div>
+                    </div>
+
+                    <div style="margin-bottom:20px;">
+                        <div style="font-weight:700; color:#002b49; margin-bottom:8px; font-size:0.95rem;">Debtors / Customers Found (Sales Vouchers) — obtain balance confirmation from each</div>
+                        <div>${debtorChips}</div>
+                    </div>
+
+                    <div style="margin-bottom:20px;">
+                        <div style="font-weight:700; color:#002b49; margin-bottom:8px; font-size:0.95rem;">Creditors / Vendors Found (Purchase Vouchers) — obtain balance confirmation from each</div>
+                        <div>${creditorChips}</div>
+                    </div>
+
+                    <div>
+                        <div style="font-weight:700; color:#002b49; margin-bottom:8px; font-size:0.95rem;">Other Parties Paid/Received (not matched to a known ledger category)</div>
+                        <p style="font-size:0.8rem; color:#64748b; margin-bottom:8px;">Review these for TDS applicability (e.g. professional/contractor payments under Section 194J/194C) and supporting bills.</p>
+                        <div class="tool-table-container"><table class="tool-table">
+                            <thead><tr><th>Party</th><th class="text-right">Total Amount</th></tr></thead>
+                            <tbody>${otherPartyRows}</tbody>
+                        </table></div>
+                    </div>
+                `;
+            } else {
+                daybookCard.style.display = 'none';
+            }
+
+            document.getElementById('results-wrap').style.display = 'block';
+            document.getElementById('results-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        document.getElementById('btn-generate').addEventListener('click', generate);
+
+        // ==========================================================================
+        // CSV export of the full document list
+        // ==========================================================================
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+        document.getElementById('btn-checklist-csv').addEventListener('click', () => {
+            if (!lastPlan) return;
+            const lines = [['Section', 'Matched Ledgers / Context', 'Document Required'].map(csvEscape).join(',')];
+            (lastPlan.smartInsights || []).forEach(i => lines.push(['Smart Insight', i.level, i.text].map(csvEscape).join(',')));
+            GENERAL_DOCS.forEach(doc => lines.push(['General / Entity-Level', '', doc].map(csvEscape).join(',')));
+            lastPlan.dynamicSections.forEach(s => {
+                s.rule.docs.forEach(doc => lines.push([s.rule.title, s.matched.join('; '), doc].map(csvEscape).join(',')));
+            });
+            if (lastPlan.dayBookObs) {
+                lastPlan.dayBookObs.cashFlags.forEach(f => {
+                    lines.push(['Cash Transaction Flag', `${fmtDateShort(f.date)} | ${f.particulars} | ${f.vchType} ${f.vchNo}`, `Review ${fmtMoney(f.amount)} cash transaction against Sec. 40A(3)/269SS/269T/269ST`].map(csvEscape).join(','));
+                });
+                lastPlan.dayBookObs.debtorNames.forEach(n => lines.push(['Debtor Confirmation', n, 'Obtain balance confirmation letter'].map(csvEscape).join(',')));
+                lastPlan.dayBookObs.creditorNames.forEach(n => lines.push(['Creditor Confirmation', n, 'Obtain balance confirmation letter'].map(csvEscape).join(',')));
+                lastPlan.dayBookObs.otherParties.forEach(p => lines.push(['Other Party — TDS Review', `${p.name} (${fmtMoney(p.total)})`, 'Review TDS applicability and obtain supporting bills'].map(csvEscape).join(',')));
+            }
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Audit_Document_Checklist_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>

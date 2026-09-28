@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly MIS Report Generator | Aggarwal Abhishek &amp; Co.</title>
+    <meta name="description" content="Free Monthly MIS Report Generator for startups — enter a few months of revenue and expenses to get a one-page MIS: margin trends, expense breakdown, growth flags, and a printable PDF report. No login required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/tools-style.css">
+    <script src="../assets/lead-gate.js"></script>
+    <script src="../assets/verdict-card.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="../logo.png" alt="CA Logo" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo">
+                <h1>Aggarwal Abhishek &amp; Co.</h1>
+                <p>CHARTERED ACCOUNTANTS</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="index.html" class="active">Free Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Free Tools</a> / Monthly MIS Report Generator</div>
+
+    <section id="analysis-tool">
+        <h2 class="section-title">Monthly MIS Report Generator</h2>
+        <p class="section-subtitle">Enter a few months of revenue and expenses to get a one-page MIS: margin trends, an expense breakdown, and the flags worth a founder's attention — with a printable PDF report. No password, and nothing you enter ever leaves your browser.</p>
+
+        <div class="tool-wrapper">
+            <div class="tool-header">
+                <div>
+                    <h3>
+                        Aggarwal Abhishek &amp; Co.
+                        <span class="firm-badge">Startup Suite</span>
+                    </h3>
+                    <div class="sub-caption">Monthly MIS Report Generator</div>
+                </div>
+            </div>
+
+            <div class="tool-notice-banner">
+                <strong>Self-assessment tool, not an audited report.</strong> This tool computes standard MIS metrics (gross margin, net margin, month-on-month growth) directly from the figures you type in — it doesn't verify them against your books. Treat it as a fast way to spot trends and flags, not as a substitute for a properly maintained MIS built from your actual ledgers.
+            </div>
+
+            <div class="tool-body">
+                <!-- Lead-capture gate: shown once per device before the tool unlocks -->
+                <div id="lead-gate" class="tool-card lead-gate" data-tool-name="Monthly MIS Report Generator">
+                    <div class="lead-gate-header">
+                        <span class="lg-icon">🔒</span>
+                        <div class="tool-card-title" style="border:none; margin:0; padding:0;">Quick details before you begin</div>
+                    </div>
+                    <p class="lead-gate-sub">This tool is free to use. We just ask for a few contact details first, so our team can follow up if you'd like an actual monthly MIS set up and run for your business under our Virtual CFO service. <strong>No financial data is ever sent to us</strong> — only the contact details below, and only if you choose to submit them.</p>
+                    <form name="lead-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="lead-capture">
+                        <p class="lead-gate-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+                        <div class="lead-gate-grid">
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Full Name</label>
+                                <input type="text" name="name" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Email</label>
+                                <input type="email" name="email" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Phone / WhatsApp</label>
+                                <input type="tel" name="phone" class="tool-form-control" required>
+                            </div>
+                            <div class="tool-form-group">
+                                <label class="tool-form-label">Business / Firm Name (optional)</label>
+                                <input type="text" name="firm" class="tool-form-control">
+                            </div>
+                        </div>
+                        <div class="lead-gate-consent">
+                            <input type="checkbox" name="consent" id="lg-consent" required>
+                            <label for="lg-consent">I agree to be contacted by Aggarwal Abhishek &amp; Co. about my query. My details will be used only for this purpose and not shared with anyone else.</label>
+                        </div>
+                        <div class="lead-gate-error"></div>
+                        <button type="submit" class="btn-tool-gold">Continue to Tool →</button>
+                        <p class="lead-gate-note">We collect only the contact details above — never the financial figures you use inside the tool.</p>
+                    </form>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Business Details</div>
+                    <div class="tool-grid-2">
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Business Name (for the report header)</label>
+                            <input type="text" class="tool-form-control" id="inp-business-name" value="My Startup Pvt. Ltd.">
+                        </div>
+                        <div class="tool-form-group">
+                            <label class="tool-form-label">Currency Unit</label>
+                            <select class="tool-form-control" id="inp-unit">
+                                <option value="1" selected>Actuals (₹)</option>
+                                <option value="1000">₹ Thousands</option>
+                                <option value="100000">₹ Lakhs</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Monthly Figures
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-add-month" style="background:#002b49;">+ Add Month</button>
+                            <button class="btn-tool-outline" id="btn-remove-month" style="background:#64748b;">− Remove Last Month</button>
+                        </div>
+                    </div>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">Enter figures for each month — revenue, cost of goods/services sold (COGS), and your main expense categories. Add or remove months as needed (up to 12).</p>
+                    <div id="months-table-wrap" class="tool-table-container"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Result
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-print" style="background:#002b49;">🖨️ Print / Save PDF Report</button>
+                            <button class="btn-tool-outline" id="btn-verdict-card" style="background:#d4af37; color:#002b49;" disabled>📸 Get My Shareable Verdict Card</button>
+                        </div>
+                    </div>
+                    <div class="widget-grid" id="summary-cards"></div>
+                </div>
+
+                <div class="tool-card" id="insights-card" style="border-left:4px solid #002b49; display:none;">
+                    <div class="tool-card-title">💡 Smart Insights &amp; Flags</div>
+                    <div id="smart-insights"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Revenue vs Net Profit Trend</div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-bottom:6px;">Hover a bar for the exact figure.</p>
+                    <div id="trend-chart"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Margin Trend</div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-bottom:6px;">Hover a point for that month's exact margin.</p>
+                    <div id="margin-trend-chart"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Expense Composition — Every Month</div>
+                    <p style="font-size:0.8rem; color:#64748b; margin-bottom:6px;">Hover a segment for that category's amount and share of the month.</p>
+                    <div id="expense-trend-chart"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">Expense Breakdown — Latest Month</div>
+                    <div id="expense-breakdown"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-card-title">
+                        Full Computed Metrics
+                        <div class="tool-controls">
+                            <button class="btn-tool-outline" id="btn-mis-csv" style="background:#002b49;">⬇️ CSV</button>
+                        </div>
+                    </div>
+                    <div id="metrics-table-wrap" class="tool-table-container"></div>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This is a self-help planning aid, not an audited MIS or management report. All figures and computed metrics come directly from what you type in — this tool does not reconcile them against your books, bank statements, or GST/TDS filings. Aggarwal Abhishek &amp; Co. does not certify these figures — for an actual monthly MIS built from your real ledgers under our Virtual CFO service, please get in touch.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden PDF report content, shown only when printing -->
+    <section id="pdf-report" aria-hidden="true">
+        <div id="pdf-report-content"></div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918383866560" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <svg class="icon"><use href="../assets/icons.svg#whatsapp"></use></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Home</a> · <a href="../about.html">About Us</a> · <a href="../services.html">Services</a> · <a href="index.html">Free Tools</a> · <a href="../contact.html">Contact</a>
+        </div>
+        <p>&copy; 2026 Aggarwal Abhishek &amp; Co., Chartered Accountants. All Rights Reserved.</p>
+        <p class="footer-disclaimer">This tool is provided for general informational and educational purposes only and does not constitute investment, legal, tax, audit or other professional advice. No advisor-client relationship is created by its use.</p>
+    </footer>
+
+    <script>
+        function escapeHtml(s) {
+            return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        // ---- Shared interactive-chart tooltip (used by every chart on this page) ----
+        let _chartTooltipEl = null;
+        function ensureChartTooltip() {
+            if (!_chartTooltipEl) {
+                _chartTooltipEl = document.createElement('div');
+                _chartTooltipEl.id = 'chart-tooltip';
+                _chartTooltipEl.style.cssText = 'position:fixed; pointer-events:none; z-index:9999; background:#002b49; color:#fff; padding:7px 11px; border-radius:6px; font-size:0.78rem; line-height:1.45; box-shadow:0 6px 16px rgba(0,0,0,0.22); display:none; max-width:240px; white-space:nowrap;';
+                document.body.appendChild(_chartTooltipEl);
+            }
+            return _chartTooltipEl;
+        }
+        function showChartTooltip(html, clientX, clientY) {
+            const el = ensureChartTooltip();
+            el.innerHTML = html;
+            el.style.display = 'block';
+            const vw = window.innerWidth;
+            let left = clientX + 16;
+            if (left + 240 > vw) left = clientX - 240 - 16;
+            el.style.left = Math.max(4, left) + 'px';
+            el.style.top = (clientY + 16) + 'px';
+        }
+        function hideChartTooltip() {
+            if (_chartTooltipEl) _chartTooltipEl.style.display = 'none';
+        }
+        function attachTooltip(el, htmlOrFn) {
+            el.addEventListener('mousemove', (e) => {
+                const html = typeof htmlOrFn === 'function' ? htmlOrFn() : htmlOrFn;
+                showChartTooltip(html, e.clientX, e.clientY);
+            });
+            el.addEventListener('mouseleave', hideChartTooltip);
+        }
+
+        function csvEscape(v) {
+            const s = String(v === undefined || v === null ? '' : v);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }
+
+        let unitDivisor = 1;
+        function fmtMoney(n) {
+            const v = Number(n || 0) / unitDivisor;
+            return '₹' + v.toLocaleString('en-IN', { maximumFractionDigits: unitDivisor === 1 ? 0 : 2 });
+        }
+        function fmtPct(n) {
+            if (n === null || n === undefined || !isFinite(n)) return '—';
+            return (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
+        }
+
+        const CATEGORY_FIELDS = [
+            { key: 'revenue', label: 'Revenue' },
+            { key: 'cogs', label: 'COGS' },
+            { key: 'payroll', label: 'Payroll' },
+            { key: 'rent', label: 'Rent / Admin' },
+            { key: 'marketing', label: 'Marketing' },
+            { key: 'other', label: 'Other Expenses' }
+        ];
+
+        let monthsData = [
+            { label: 'Month 1', revenue: 700000, cogs: 280000, payroll: 220000, rent: 60000, marketing: 70000, other: 30000 },
+            { label: 'Month 2', revenue: 760000, cogs: 300000, payroll: 225000, rent: 60000, marketing: 85000, other: 32000 },
+            { label: 'Month 3', revenue: 810000, cogs: 320000, payroll: 230000, rent: 62000, marketing: 90000, other: 35000 },
+            { label: 'Month 4', revenue: 790000, cogs: 315000, payroll: 235000, rent: 62000, marketing: 110000, other: 34000 },
+            { label: 'Month 5', revenue: 860000, cogs: 340000, payroll: 240000, rent: 64000, marketing: 95000, other: 36000 },
+            { label: 'Month 6', revenue: 910000, cogs: 355000, payroll: 245000, rent: 64000, marketing: 100000, other: 38000 }
+        ];
+
+        function computeMetrics() {
+            let prevRevenue = null, prevNetProfit = null, prevTotalCost = null;
+            return monthsData.map((m) => {
+                const revenue = Number(m.revenue) || 0;
+                const cogs = Number(m.cogs) || 0;
+                const payroll = Number(m.payroll) || 0;
+                const rent = Number(m.rent) || 0;
+                const marketing = Number(m.marketing) || 0;
+                const other = Number(m.other) || 0;
+                const grossProfit = revenue - cogs;
+                const grossMarginPct = revenue > 0 ? (grossProfit / revenue) * 100 : 0;
+                const totalOpex = payroll + rent + marketing + other;
+                const totalCost = cogs + totalOpex;
+                const netProfit = grossProfit - totalOpex;
+                const netMarginPct = revenue > 0 ? (netProfit / revenue) * 100 : 0;
+                const revenueGrowthPct = (prevRevenue !== null && prevRevenue !== 0) ? ((revenue - prevRevenue) / Math.abs(prevRevenue)) * 100 : null;
+                const netProfitGrowthPct = (prevNetProfit !== null && prevNetProfit !== 0) ? ((netProfit - prevNetProfit) / Math.abs(prevNetProfit)) * 100 : null;
+                const costGrowthPct = (prevTotalCost !== null && prevTotalCost !== 0) ? ((totalCost - prevTotalCost) / Math.abs(prevTotalCost)) * 100 : null;
+                const marketingPctOfRevenue = revenue > 0 ? (marketing / revenue) * 100 : 0;
+                const row = { label: m.label, revenue, cogs, payroll, rent, marketing, other, grossProfit, grossMarginPct, totalOpex, totalCost, netProfit, netMarginPct, revenueGrowthPct, netProfitGrowthPct, costGrowthPct, marketingPctOfRevenue };
+                prevRevenue = revenue; prevNetProfit = netProfit; prevTotalCost = totalCost;
+                return row;
+            });
+        }
+
+        function buildMonthsTableDOM() {
+            const wrap = document.getElementById('months-table-wrap');
+            let thead = '<tr><th>Field</th>' + monthsData.map((m, i) => `<th><input type="text" class="tool-form-control" style="font-weight:700; text-align:center; padding:4px;" data-idx="${i}" data-field="label" value="${escapeHtml(m.label)}"></th>`).join('') + '</tr>';
+            let rows = CATEGORY_FIELDS.map(f => {
+                const cells = monthsData.map((m, i) => `<td><input type="number" class="tool-form-control" style="text-align:right;" data-idx="${i}" data-field="${f.key}" value="${m[f.key]}" min="0" step="1000"></td>`).join('');
+                return `<tr><td><strong>${f.label}</strong></td>${cells}</tr>`;
+            }).join('');
+            wrap.innerHTML = `<table class="tool-table"><thead>${thead}</thead><tbody>${rows}</tbody></table>`;
+
+            wrap.querySelectorAll('input[data-field]').forEach(inp => {
+                inp.addEventListener('input', (e) => {
+                    const idx = Number(e.target.dataset.idx);
+                    const field = e.target.dataset.field;
+                    const val = field === 'label' ? e.target.value : (Number(e.target.value) || 0);
+                    monthsData[idx][field] = val;
+                    renderResults();
+                });
+            });
+        }
+
+        function renderResults() {
+            unitDivisor = Number(document.getElementById('inp-unit').value) || 1;
+            const metrics = computeMetrics();
+            window._lastMetrics = metrics;
+            const latest = metrics[metrics.length - 1];
+            const businessName = document.getElementById('inp-business-name').value.trim() || 'Your Business';
+
+            if (metrics.length === 0 || latest.revenue <= 0) {
+                document.getElementById('summary-cards').innerHTML = '<p style="color:#64748b; padding:10px;">Enter at least one month of revenue to see results.</p>';
+                document.getElementById('insights-card').style.display = 'none';
+                document.getElementById('trend-chart').innerHTML = '';
+                document.getElementById('margin-trend-chart').innerHTML = '';
+                document.getElementById('expense-trend-chart').innerHTML = '';
+                document.getElementById('expense-breakdown').innerHTML = '';
+                document.getElementById('metrics-table-wrap').innerHTML = '';
+                document.getElementById('btn-verdict-card').disabled = true;
+                return;
+            }
+            document.getElementById('btn-verdict-card').disabled = false;
+
+            document.getElementById('summary-cards').innerHTML = [
+                ['Latest Month Revenue', fmtMoney(latest.revenue), latest.label, '#002b49'],
+                ['Net Margin', latest.netMarginPct.toFixed(1) + '%', latest.netProfit >= 0 ? 'Profitable' : 'Loss-making', latest.netProfit >= 0 ? '#10b981' : '#dc2626'],
+                ['Revenue Growth (MoM)', fmtPct(latest.revenueGrowthPct), 'vs previous month', latest.revenueGrowthPct === null ? '#64748b' : (latest.revenueGrowthPct >= 0 ? '#10b981' : '#dc2626')],
+                ['Net Profit', fmtMoney(latest.netProfit), latest.label, latest.netProfit >= 0 ? '#0ea5e9' : '#dc2626']
+            ].map(([label, val, sub, color]) => `
+                <div class="metric-card" style="border-top-color:${color};">
+                    <div class="label">${label}</div>
+                    <div class="value">${val}</div>
+                    <div class="subtext" style="color:${color};">${sub}</div>
+                </div>
+            `).join('');
+
+            renderSmartInsights(buildInsights(metrics));
+            renderTrendChart(metrics);
+            renderMarginTrendChart(metrics);
+            renderExpenseTrendChart(metrics);
+            renderExpenseBreakdown(latest);
+            renderMetricsTable(metrics);
+        }
+
+        function renderSmartInsights(insights) {
+            const card = document.getElementById('insights-card');
+            if (!insights || insights.length === 0) { card.style.display = 'none'; return; }
+            card.style.display = 'block';
+            const styles = {
+                critical: { icon: '🔴', color: '#dc2626', bg: '#fef2f2' },
+                warning: { icon: '🟡', color: '#b45309', bg: '#fffbeb' },
+                info: { icon: '🔵', color: '#0369a1', bg: '#f0f9ff' },
+                good: { icon: '✅', color: '#047857', bg: '#f0fdf4' }
+            };
+            document.getElementById('smart-insights').innerHTML = insights.map(i => {
+                const s = styles[i.level];
+                return `<div style="display:flex; gap:10px; align-items:flex-start; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${s.bg}; border-left:3px solid ${s.color};">
+                    <span style="font-size:1.1rem;">${s.icon}</span>
+                    <span style="color:#1e293b; font-size:0.92rem; line-height:1.5;">${i.text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        function buildInsights(metrics) {
+            const insights = [];
+            const latest = metrics[metrics.length - 1];
+            const prev = metrics.length > 1 ? metrics[metrics.length - 2] : null;
+
+            if (latest.netProfit < 0) {
+                insights.push({ level: 'critical', text: `${latest.label} closed with a net loss of ${fmtMoney(Math.abs(latest.netProfit))} — worth understanding whether this is a one-off (e.g. a big one-time expense) or a trend before the next month closes.` });
+            } else {
+                insights.push({ level: 'good', text: `${latest.label} closed profitable, with a net margin of ${latest.netMarginPct.toFixed(1)}%.` });
+            }
+
+            if (prev && latest.revenueGrowthPct !== null && latest.revenueGrowthPct < 0) {
+                insights.push({ level: 'warning', text: `Revenue declined ${Math.abs(latest.revenueGrowthPct).toFixed(1)}% from ${prev.label} to ${latest.label} — worth a quick look at whether this is seasonal, a lost customer, or a pipeline issue.` });
+            }
+
+            if (metrics.length >= 3) {
+                const lastThree = metrics.slice(-3);
+                const marginsDeclining = lastThree[2].netMarginPct < lastThree[1].netMarginPct && lastThree[1].netMarginPct < lastThree[0].netMarginPct;
+                if (marginsDeclining) {
+                    insights.push({ level: 'warning', text: `Net margin has declined for 3 straight months (${lastThree[0].label} → ${lastThree[2].label}) — even if each month is individually profitable, a consistent downward trend is usually worth investigating before it compounds further.` });
+                }
+            }
+
+            if (latest.costGrowthPct !== null && latest.revenueGrowthPct !== null && latest.costGrowthPct > latest.revenueGrowthPct) {
+                insights.push({ level: 'warning', text: `Total costs grew faster (${fmtPct(latest.costGrowthPct)}) than revenue (${fmtPct(latest.revenueGrowthPct)}) in ${latest.label} — if this continues, margins will keep shrinking even as the top line grows.` });
+            }
+
+            if (latest.marketingPctOfRevenue > 30) {
+                insights.push({ level: 'warning', text: `Marketing spend is ${latest.marketingPctOfRevenue.toFixed(1)}% of revenue in ${latest.label} — above the rough 30% rule-of-thumb ceiling many early-stage businesses use as a sanity check (this varies a lot by business model, so treat it as a prompt to double-check ROI, not a hard rule).` });
+            }
+
+            if (latest.grossMarginPct < 30) {
+                insights.push({ level: 'info', text: `Gross margin is ${latest.grossMarginPct.toFixed(1)}% in ${latest.label} — on the thinner side for most product/service businesses; worth checking whether pricing or COGS is the bigger lever to improve it.` });
+            }
+
+            insights.push({ level: 'info', text: 'These flags are simple rule-of-thumb checks on the numbers you\'ve entered — they\'re a starting point for a conversation, not a diagnosis.' });
+
+            return insights;
+        }
+
+        function renderTrendChart(metrics) {
+            const wrap = document.getElementById('trend-chart');
+            const maxVal = Math.max(1, ...metrics.map(m => Math.max(m.revenue, Math.abs(m.netProfit))));
+            wrap.innerHTML = `
+                <div style="display:flex; gap:10px; margin-bottom:12px; font-size:0.8rem; color:#475569;">
+                    <span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; background:#002b49; display:inline-block; border-radius:2px;"></span> Revenue</span>
+                    <span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; background:#10b981; display:inline-block; border-radius:2px;"></span> Net Profit</span>
+                </div>
+                <div id="trend-chart-bars" style="display:flex; align-items:flex-end; gap:8px; overflow-x:auto; padding-bottom:4px;"></div>
+            `;
+            const barsWrap = document.getElementById('trend-chart-bars');
+            metrics.forEach(m => {
+                const revH = Math.max(2, (m.revenue / maxVal) * 160);
+                const npH = Math.max(2, (Math.abs(m.netProfit) / maxVal) * 160);
+                const npColor = m.netProfit >= 0 ? '#10b981' : '#dc2626';
+                const col = document.createElement('div');
+                col.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; min-width:44px;';
+                col.innerHTML = `
+                    <div style="display:flex; align-items:flex-end; gap:3px; height:170px;">
+                        <div class="bar-rev" style="width:14px; height:${revH}px; background:#002b49; border-radius:2px 2px 0 0; cursor:pointer;"></div>
+                        <div class="bar-np" style="width:14px; height:${npH}px; background:${npColor}; border-radius:2px 2px 0 0; cursor:pointer;"></div>
+                    </div>
+                    <div style="font-size:0.68rem; color:#64748b; text-align:center; white-space:nowrap;">${escapeHtml(m.label)}</div>
+                `;
+                attachTooltip(col.querySelector('.bar-rev'), () => `<strong>${escapeHtml(m.label)}</strong><br>Revenue: ${fmtMoney(m.revenue)}`);
+                attachTooltip(col.querySelector('.bar-np'), () => `<strong>${escapeHtml(m.label)}</strong><br>Net Profit: ${fmtMoney(m.netProfit)}`);
+                barsWrap.appendChild(col);
+            });
+        }
+
+        function renderMarginTrendChart(metrics) {
+            const wrap = document.getElementById('margin-trend-chart');
+            if (metrics.length < 1) { wrap.innerHTML = ''; return; }
+            const W = 640, H = 200, padL = 40, padR = 16, padT = 16, padB = 28;
+            const plotW = W - padL - padR, plotH = H - padT - padB;
+            const allVals = metrics.flatMap(m => [m.grossMarginPct, m.netMarginPct]);
+            let minY = Math.min(0, ...allVals) - 5;
+            let maxY = Math.max(...allVals) + 5;
+            if (maxY - minY < 10) { maxY += 5; minY -= 5; }
+            const xFor = i => metrics.length === 1 ? padL + plotW / 2 : padL + (i / (metrics.length - 1)) * plotW;
+            const yFor = v => padT + (1 - (v - minY) / (maxY - minY)) * plotH;
+            const zeroY = yFor(0);
+
+            function pointsFor(key) {
+                return metrics.map((m, i) => `${xFor(i)},${yFor(m[key])}`).join(' ');
+            }
+
+            const gridLine = `<line x1="${padL}" y1="${zeroY}" x2="${W - padR}" y2="${zeroY}" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3" />`;
+            const axisLabels = `
+                <text x="${padL - 6}" y="${padT + 4}" text-anchor="end" font-size="9" fill="#94a3b8">${maxY.toFixed(0)}%</text>
+                <text x="${padL - 6}" y="${zeroY + 3}" text-anchor="end" font-size="9" fill="#94a3b8">0%</text>
+                <text x="${padL - 6}" y="${H - padB + 2}" text-anchor="end" font-size="9" fill="#94a3b8">${minY.toFixed(0)}%</text>
+            `;
+            const monthLabels = metrics.map((m, i) => `<text x="${xFor(i)}" y="${H - 8}" text-anchor="middle" font-size="9" fill="#64748b">${escapeHtml(m.label.length > 8 ? m.label.slice(0,7)+'…' : m.label)}</text>`).join('');
+
+            const grossLine = `<polyline points="${pointsFor('grossMarginPct')}" fill="none" stroke="#0ea5e9" stroke-width="2" />`;
+            const netLine = `<polyline points="${pointsFor('netMarginPct')}" fill="none" stroke="#d4af37" stroke-width="2" />`;
+
+            const grossCircles = metrics.map((m, i) => `<circle class="mtc-pt" data-i="${i}" data-series="gross" cx="${xFor(i)}" cy="${yFor(m.grossMarginPct)}" r="4" fill="#0ea5e9" stroke="#fff" stroke-width="1.5" style="cursor:pointer;" />`).join('');
+            const netCircles = metrics.map((m, i) => `<circle class="mtc-pt" data-i="${i}" data-series="net" cx="${xFor(i)}" cy="${yFor(m.netMarginPct)}" r="4" fill="#d4af37" stroke="#fff" stroke-width="1.5" style="cursor:pointer;" />`).join('');
+
+            wrap.innerHTML = `
+                <div style="display:flex; gap:10px; margin-bottom:8px; font-size:0.8rem; color:#475569;">
+                    <span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; background:#0ea5e9; display:inline-block; border-radius:2px;"></span> Gross Margin %</span>
+                    <span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; background:#d4af37; display:inline-block; border-radius:2px;"></span> Net Margin %</span>
+                </div>
+                <svg viewBox="0 0 ${W} ${H}" style="width:100%; height:auto; display:block;">
+                    ${gridLine}${axisLabels}${monthLabels}${grossLine}${netLine}${grossCircles}${netCircles}
+                </svg>
+            `;
+            wrap.querySelectorAll('.mtc-pt').forEach(pt => {
+                const i = Number(pt.dataset.i);
+                const series = pt.dataset.series;
+                const m = metrics[i];
+                attachTooltip(pt, () => series === 'gross'
+                    ? `<strong>${escapeHtml(m.label)}</strong><br>Gross Margin: ${m.grossMarginPct.toFixed(1)}%`
+                    : `<strong>${escapeHtml(m.label)}</strong><br>Net Margin: ${m.netMarginPct.toFixed(1)}%`);
+            });
+        }
+
+        function renderExpenseTrendChart(metrics) {
+            const wrap = document.getElementById('expense-trend-chart');
+            const cats = [
+                { key: 'cogs', label: 'COGS', color: '#0ea5e9' },
+                { key: 'payroll', label: 'Payroll', color: '#002b49' },
+                { key: 'rent', label: 'Rent / Admin', color: '#f59e0b' },
+                { key: 'marketing', label: 'Marketing', color: '#8b5cf6' },
+                { key: 'other', label: 'Other', color: '#94a3b8' }
+            ];
+            wrap.innerHTML = `
+                <div style="display:flex; gap:12px; margin-bottom:10px; font-size:0.78rem; color:#475569; flex-wrap:wrap;">
+                    ${cats.map(c => `<span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; background:${c.color}; display:inline-block; border-radius:2px;"></span>${c.label}</span>`).join('')}
+                </div>
+                <div id="expense-trend-bars" style="display:flex; align-items:flex-end; gap:10px; overflow-x:auto; padding-bottom:4px;"></div>
+            `;
+            const maxTotal = Math.max(1, ...metrics.map(m => m.cogs + m.payroll + m.rent + m.marketing + m.other));
+            const barsWrap = document.getElementById('expense-trend-bars');
+            metrics.forEach(m => {
+                const total = m.cogs + m.payroll + m.rent + m.marketing + m.other;
+                const totalH = Math.max(2, (total / maxTotal) * 180);
+                const col = document.createElement('div');
+                col.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; min-width:36px;';
+                const stackWrap = document.createElement('div');
+                stackWrap.style.cssText = `display:flex; flex-direction:column-reverse; width:22px; height:${totalH}px; border-radius:2px; overflow:hidden;`;
+                cats.forEach(c => {
+                    const val = m[c.key];
+                    if (val <= 0) return;
+                    const segH = Math.max(1, (val / total) * totalH);
+                    const seg = document.createElement('div');
+                    seg.style.cssText = `width:100%; height:${segH}px; background:${c.color}; cursor:pointer;`;
+                    attachTooltip(seg, () => `<strong>${escapeHtml(m.label)} — ${c.label}</strong><br>${fmtMoney(val)} (${((val/total)*100).toFixed(1)}% of expenses)`);
+                    stackWrap.appendChild(seg);
+                });
+                col.appendChild(stackWrap);
+                const labelEl = document.createElement('div');
+                labelEl.style.cssText = 'font-size:0.68rem; color:#64748b; text-align:center; white-space:nowrap;';
+                labelEl.textContent = m.label;
+                col.appendChild(labelEl);
+                barsWrap.appendChild(col);
+            });
+        }
+
+        function renderExpenseBreakdown(latest) {
+            const wrap = document.getElementById('expense-breakdown');
+            const cats = [
+                { label: 'COGS', val: latest.cogs, color: '#0ea5e9' },
+                { label: 'Payroll', val: latest.payroll, color: '#002b49' },
+                { label: 'Rent / Admin', val: latest.rent, color: '#f59e0b' },
+                { label: 'Marketing', val: latest.marketing, color: '#8b5cf6' },
+                { label: 'Other', val: latest.other, color: '#94a3b8' }
+            ];
+            const total = cats.reduce((s, c) => s + c.val, 0) || 1;
+            wrap.innerHTML = `
+                <div id="expense-breakdown-bar" style="display:flex; width:100%; height:24px; border-radius:6px; overflow:hidden; border:1px solid #e2e8f0; margin-bottom:12px;"></div>
+                <div>${cats.map(c => `<div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #f1f5f9; font-size:0.85rem;"><span style="display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; border-radius:2px; background:${c.color}; display:inline-block;"></span>${c.label}</span><span>${fmtMoney(c.val)} <span style="color:#94a3b8;">(${((c.val/total)*100).toFixed(1)}%)</span></span></div>`).join('')}</div>
+            `;
+            const barWrap = document.getElementById('expense-breakdown-bar');
+            cats.filter(c => c.val > 0).forEach(c => {
+                const seg = document.createElement('div');
+                seg.style.cssText = `width:${(c.val/total)*100}%; background:${c.color}; cursor:pointer;`;
+                attachTooltip(seg, () => `<strong>${c.label}</strong><br>${fmtMoney(c.val)} (${((c.val/total)*100).toFixed(1)}%)`);
+                barWrap.appendChild(seg);
+            });
+        }
+
+        function renderMetricsTable(metrics) {
+            const wrap = document.getElementById('metrics-table-wrap');
+            const headerRow = '<tr><th>Metric</th>' + metrics.map(m => `<th>${escapeHtml(m.label)}</th>`).join('') + '</tr>';
+            const metricRows = [
+                ['Revenue', m => fmtMoney(m.revenue)],
+                ['COGS', m => fmtMoney(m.cogs)],
+                ['Gross Profit', m => fmtMoney(m.grossProfit)],
+                ['Gross Margin %', m => m.grossMarginPct.toFixed(1) + '%'],
+                ['Total Opex', m => fmtMoney(m.totalOpex)],
+                ['Net Profit', m => fmtMoney(m.netProfit)],
+                ['Net Margin %', m => m.netMarginPct.toFixed(1) + '%'],
+                ['Revenue Growth (MoM)', m => fmtPct(m.revenueGrowthPct)],
+                ['Net Profit Growth (MoM)', m => fmtPct(m.netProfitGrowthPct)]
+            ].map(([label, fn]) => `<tr><td><strong>${label}</strong></td>${metrics.map(m => `<td>${fn(m)}</td>`).join('')}</tr>`).join('');
+            wrap.innerHTML = `<table class="tool-table"><thead>${headerRow}</thead><tbody>${metricRows}</tbody></table>`;
+        }
+
+        document.getElementById('btn-add-month').addEventListener('click', () => {
+            if (monthsData.length >= 12) { alert('Maximum of 12 months.'); return; }
+            const last = monthsData[monthsData.length - 1];
+            monthsData.push({ ...last, label: `Month ${monthsData.length + 1}` });
+            buildMonthsTableDOM();
+            renderResults();
+        });
+        document.getElementById('btn-remove-month').addEventListener('click', () => {
+            if (monthsData.length <= 1) { alert('At least one month is required.'); return; }
+            monthsData.pop();
+            buildMonthsTableDOM();
+            renderResults();
+        });
+        document.getElementById('inp-unit').addEventListener('change', renderResults);
+        document.getElementById('inp-business-name').addEventListener('input', renderResults);
+
+        document.getElementById('btn-mis-csv').addEventListener('click', () => {
+            const metrics = window._lastMetrics;
+            if (!metrics || metrics.length === 0) return;
+            const fields = [
+                ['Revenue', m => m.revenue.toFixed(2)],
+                ['COGS', m => m.cogs.toFixed(2)],
+                ['Gross Profit', m => m.grossProfit.toFixed(2)],
+                ['Gross Margin %', m => m.grossMarginPct.toFixed(2)],
+                ['Payroll', m => m.payroll.toFixed(2)],
+                ['Rent/Admin', m => m.rent.toFixed(2)],
+                ['Marketing', m => m.marketing.toFixed(2)],
+                ['Other Expenses', m => m.other.toFixed(2)],
+                ['Total Opex', m => m.totalOpex.toFixed(2)],
+                ['Net Profit', m => m.netProfit.toFixed(2)],
+                ['Net Margin %', m => m.netMarginPct.toFixed(2)],
+                ['Revenue Growth % (MoM)', m => m.revenueGrowthPct === null ? '' : m.revenueGrowthPct.toFixed(2)],
+                ['Net Profit Growth % (MoM)', m => m.netProfitGrowthPct === null ? '' : m.netProfitGrowthPct.toFixed(2)]
+            ];
+            const lines = [['Metric', ...metrics.map(m => m.label)].map(csvEscape).join(',')];
+            fields.forEach(([label, fn]) => {
+                lines.push([label, ...metrics.map(fn)].map(csvEscape).join(','));
+            });
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Monthly_MIS_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        function buildPdfReport() {
+            const metrics = window._lastMetrics || computeMetrics();
+            const latest = metrics[metrics.length - 1];
+            const businessName = document.getElementById('inp-business-name').value.trim() || 'Your Business';
+            const reportDate = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+            // Transposed: one row PER MONTH, fixed set of metric columns — this is what keeps the
+            // table within the printed page width no matter how many months (up to 12) are entered.
+            // (Months-as-columns would keep adding columns sideways and run off the page.)
+            const pdfColumns = [
+                ['Month', m => escapeHtml(m.label)],
+                ['Revenue', m => fmtMoney(m.revenue)],
+                ['COGS', m => fmtMoney(m.cogs)],
+                ['Gross Margin %', m => m.grossMarginPct.toFixed(1) + '%'],
+                ['Total Opex', m => fmtMoney(m.totalOpex)],
+                ['Net Profit', m => fmtMoney(m.netProfit)],
+                ['Net Margin %', m => m.netMarginPct.toFixed(1) + '%'],
+                ['Rev. Growth', m => fmtPct(m.revenueGrowthPct)]
+            ];
+            const metricRows = metrics.map(m => `<tr>${pdfColumns.map(([, fn]) => `<td class="num">${fn(m)}</td>`).join('')}</tr>`).join('');
+
+            const insights = buildInsights(metrics).map(i => `<li>${i.text}</li>`).join('');
+
+            // Small static SVG charts for the printed page (no interactivity needed on paper).
+            const chartW = 720, chartH = 170, padL = 38, padR = 10, padT = 10, padB = 22;
+            const plotW = chartW - padL - padR, plotH = chartH - padT - padB;
+            const maxRN = Math.max(1, ...metrics.map(m => Math.max(m.revenue, Math.abs(m.netProfit))));
+            const n = metrics.length;
+            const barSlot = plotW / n;
+            const revNetBars = metrics.map((m, i) => {
+                const x = padL + i * barSlot + barSlot * 0.15;
+                const bw = barSlot * 0.3;
+                const revH = Math.max(1, (m.revenue / maxRN) * plotH);
+                const npH = Math.max(1, (Math.abs(m.netProfit) / maxRN) * plotH);
+                return `<rect x="${x}" y="${padT + plotH - revH}" width="${bw}" height="${revH}" fill="#002b49" />
+                        <rect x="${x + bw}" y="${padT + plotH - npH}" width="${bw}" height="${npH}" fill="${m.netProfit >= 0 ? '#10b981' : '#dc2626'}" />`;
+            }).join('');
+            const revNetLabels = metrics.map((m, i) => `<text x="${padL + i * barSlot + barSlot/2}" y="${chartH - 6}" text-anchor="middle" font-size="8" fill="#64748b">${escapeHtml(m.label.length > 7 ? m.label.slice(0,6)+'…' : m.label)}</text>`).join('');
+
+            const marginVals = metrics.flatMap(m => [m.grossMarginPct, m.netMarginPct]);
+            let minY = Math.min(0, ...marginVals) - 5, maxY = Math.max(...marginVals) + 5;
+            if (maxY - minY < 10) { maxY += 5; minY -= 5; }
+            const xForM = i => n === 1 ? padL + plotW/2 : padL + (i/(n-1)) * plotW;
+            const yForM = v => padT + (1 - (v - minY)/(maxY - minY)) * plotH;
+            const grossPts = metrics.map((m,i) => `${xForM(i)},${yForM(m.grossMarginPct)}`).join(' ');
+            const netPts = metrics.map((m,i) => `${xForM(i)},${yForM(m.netMarginPct)}`).join(' ');
+            const marginLabels = metrics.map((m, i) => `<text x="${xForM(i)}" y="${chartH - 6}" text-anchor="middle" font-size="8" fill="#64748b">${escapeHtml(m.label.length > 7 ? m.label.slice(0,6)+'…' : m.label)}</text>`).join('');
+
+            document.getElementById('pdf-report-content').innerHTML = `
+                <div class="pdf-report-shell">
+                    <div class="pdf-page">
+                        <div class="pdf-section-title"><h2>Monthly MIS Report — ${escapeHtml(businessName)}</h2><span>Generated ${reportDate}</span></div>
+                        <div class="pdf-metric-grid" style="margin-bottom:16px;">
+                            <div class="pdf-metric"><div class="k">Latest Revenue</div><div class="v">${fmtMoney(latest.revenue)}</div><div class="s">${escapeHtml(latest.label)}</div></div>
+                            <div class="pdf-metric"><div class="k">Net Margin</div><div class="v">${latest.netMarginPct.toFixed(1)}%</div><div class="s">${escapeHtml(latest.label)}</div></div>
+                            <div class="pdf-metric"><div class="k">Revenue Growth</div><div class="v">${fmtPct(latest.revenueGrowthPct)}</div><div class="s">month-on-month</div></div>
+                            <div class="pdf-metric"><div class="k">Net Profit</div><div class="v">${fmtMoney(latest.netProfit)}</div><div class="s">${escapeHtml(latest.label)}</div></div>
+                        </div>
+
+                        <div class="pdf-section-title" style="margin-top:6px;"><h2 style="font-size:14px;">Revenue vs Net Profit</h2></div>
+                        <svg viewBox="0 0 ${chartW} ${chartH}" style="width:100%; height:auto; display:block; margin-bottom:10px;">${revNetBars}${revNetLabels}</svg>
+
+                        <div class="pdf-section-title" style="margin-top:6px;"><h2 style="font-size:14px;">Margin Trend</h2></div>
+                        <svg viewBox="0 0 ${chartW} ${chartH}" style="width:100%; height:auto; display:block; margin-bottom:14px;">
+                            <polyline points="${grossPts}" fill="none" stroke="#0ea5e9" stroke-width="2" />
+                            <polyline points="${netPts}" fill="none" stroke="#d4af37" stroke-width="2" />
+                            ${marginLabels}
+                        </svg>
+                    </div>
+
+                    <!-- Page 2: a separate physical page, so the month table + insights never get clipped
+                         by page 1's fixed height, however many months (up to 12) are entered. -->
+                    <div class="pdf-page">
+                        <div class="pdf-section-title"><h2 style="font-size:15px;">Month-by-Month Metrics — ${escapeHtml(businessName)}</h2></div>
+                        <table class="tool-table" style="font-size:10px; margin-bottom:16px; table-layout:fixed; width:100%;">
+                            <thead><tr>${pdfColumns.map(([label]) => `<th>${label}</th>`).join('')}</tr></thead>
+                            <tbody>${metricRows}</tbody>
+                        </table>
+
+                        <div class="pdf-section-title" style="margin-top:10px;"><h2 style="font-size:15px;">Smart Insights &amp; Flags</h2></div>
+                        <ul style="font-size:11px; line-height:1.6; padding-left:18px;">${insights}</ul>
+                        <div class="pdf-disclaimer" style="margin-top:16px;">Self-assessment report generated from figures entered in this free tool. Not an audited MIS or certified financial statement. Prepared for informational purposes by Aggarwal Abhishek &amp; Co., Chartered Accountants.</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('btn-print').addEventListener('click', () => {
+            buildPdfReport();
+            document.body.classList.add('printing-pdf-report');
+            window.print();
+        });
+        window.addEventListener('afterprint', () => {
+            document.body.classList.remove('printing-pdf-report');
+        });
+
+        window.wireVerdictCardButton('btn-verdict-card', () => {
+            const metrics = window._lastMetrics;
+            if (!metrics || metrics.length === 0) return null;
+            const latest = metrics[metrics.length - 1];
+            return {
+                eyebrow: 'My Monthly MIS Snapshot',
+                headline: `${latest.netMarginPct.toFixed(1)}% Net Margin`,
+                resultLine: fmtMoney(latest.revenue) + ' revenue',
+                resultSub: `Revenue ${fmtPct(latest.revenueGrowthPct)} MoM · ${latest.label}`,
+                footerNote: 'Estimate only — based on figures entered by the user.',
+                toolLabel: 'Free Tools · Aggarwal Abhishek & Co.'
+            };
+        }, 'My_Monthly_MIS_Snapshot');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            buildMonthsTableDOM();
+            renderResults();
+        });
+    </script>
+
+    <script src="../assets/easter-egg.js"></script>
+</body>
+</html>
