@@ -34,7 +34,7 @@
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallDirectory": true
+      "allowToChangeInstallationDirectory": true
     },
     "mac": {
       "target": ["zip"],
